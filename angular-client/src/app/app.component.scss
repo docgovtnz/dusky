@@ -1,0 +1,30 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+@import 'bootstrap/scss/mixins';
+
+nav.navbar {
+  .navbar-brand {
+    img {
+      height: $dusky-brand-img-height;
+    }
+  }
+
+  .application-status-short {
+    display: inline-block;
+    font-size: $font-size-sm * 0.9;
+    color: $gray-400;
+    margin: 0;
+    transform: rotate(90deg);
+  }
+
+  .dropdown-menu .application-status {
+    margin: $dropdown-item-padding-y $dropdown-item-padding-x;
+    font-size: $font-size-sm;
+  }
+
+  @include media-breakpoint-down(md) {
+    .nav-link {
+      padding: $nav-link-padding-y/2 $nav-link-padding-x;
+    }
+  }
+}

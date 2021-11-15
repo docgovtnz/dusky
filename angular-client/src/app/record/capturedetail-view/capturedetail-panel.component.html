@@ -1,0 +1,32 @@
+<ng-container *ngIf="capturedetailRevision">
+  <div class="row">
+    <app-controlblock
+      title="Capture Details"
+      class="col-md-6"
+      [noOffset]="true"
+    >
+      <dl class="data-group">
+        <dt>Capture Method</dt>
+        <dd>
+          <span class="data-tag">{{
+            capturedetailRevision.captureMethod
+          }}</span>
+        </dd>
+        <dt>Response</dt>
+        <dd>
+          <span class="data-tag">{{ capturedetailRevision.response }}</span>
+        </dd>
+        <dt>Handling Duration</dt>
+        <dd>
+          <span class="data-tag">{{
+            capturedetailRevision.duration | addUnits: 'mins'
+          }}</span>
+        </dd>
+        <dt>Reaction</dt>
+        <dd>
+          <span class="data-tag">{{ capturedetailRevision.reaction }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

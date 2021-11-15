@@ -1,0 +1,139 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/buttons';
+
+$body-top-padding: $dusky-brand-img-height + ($navbar-brand-padding-y * 2); // Compensating for fixed navbar
+$dusky-btn-collapse-margin: -0.5rem;
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  padding-top: $body-top-padding;
+}
+
+.vertical-spacer {
+  padding-top: $dusky-vertical-spacer;
+  padding-bottom: $dusky-vertical-spacer;
+}
+
+.btn-action {
+  @extend .btn-outline-light;
+  margin-left: map-get($spacers, 1);
+
+  .ng-fa-icon {
+    margin-right: map-get($spacers, 1);
+  }
+}
+
+.btn-collapse {
+  @extend .btn-light;
+  @extend .btn-sm;
+
+  margin: $dusky-btn-collapse-margin auto;
+  display: block;
+}
+
+.btn-record {
+  @extend .btn-secondary;
+  @extend .btn-sm;
+}
+
+legend {
+  font-size: $h4-font-size;
+}
+
+.result-count {
+  font-size: $font-size-sm;
+  text-align: right;
+}
+
+.table-sm {
+  font-size: $font-size-sm;
+}
+
+.data-tag {
+  background-color: $info;
+  color: $white;
+  padding: $dusky-data-tag-padding-y 0.3rem;
+  font-size: $font-size-base - $dusky-data-tag-padding-y * 2;
+  display: inline-block;
+  vertical-align: top;
+  &:empty {
+    display: none;
+  }
+}
+
+// Old code below this point
+
+.table-striped tbody tr:nth-of-type(even):hover,
+.table-striped tbody tr:nth-of-type(odd):hover {
+  background-color: rgba(0,0,0,.15);
+  cursor: pointer;
+}
+
+.nav-tabs {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  border: none;
+  border-bottom: 5px solid #ecedf2;
+  border-radius: 0;
+
+  .nav-item {
+    margin-bottom: 0;
+  }
+
+  .nav-link {
+    color: #4d4d4d;
+    text-decoration: none;
+    padding: 0.8rem;
+    border: none;
+  }
+
+  .nav-item.show .nav-link,
+  .nav-link.active {
+    color: #1280a1;
+    background-color: #fff;
+    box-shadow: 0 5px 0 0 #1280a1;
+  }
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f6f6f9;
+}
+
+
+app-date-editor {
+  .form-control {
+    border-right: 0;
+  }
+
+  .input-group-text {
+    color: #1280a1;
+    background: #fff;
+    padding: 0.375rem 0.5rem;
+  }
+
+  i {
+    font-size: 17px !important;
+  }
+
+  .btn-link {
+    font-size: 11px;
+    line-height: 1.3;
+    color: #1280a1;
+    border-radius: 5px;
+
+    &:focus,
+    &:hover {
+      font-size: 11px;
+      line-height: 1.3;
+      background-color: #1280a1;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}

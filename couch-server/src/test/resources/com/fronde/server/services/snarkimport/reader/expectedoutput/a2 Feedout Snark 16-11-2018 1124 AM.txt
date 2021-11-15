@@ -1,0 +1,57 @@
+SnarkFileTimeRecord{dateTime=2018-11-13T13:01}
+SnarkFileLockRecord{time=13:04, count=2}
+SnarkFileTimeRecord{dateTime=2018-11-13T17:00}
+SnarkFileArrivalRecord{time=21:15, channel=19}
+SnarkFileTimeRecord{dateTime=2018-11-14T00:00}
+SnarkFileDepartureRecord{time=00:48, channel=19}
+SnarkFileArrivalRecord{time=00:53, channel=19}
+SnarkFileDepartureRecord{time=00:54, channel=19}
+SnarkFileArrivalRecord{time=01:15, channel=19}
+SnarkFileDepartureRecord{time=04:00, channel=19}
+SnarkFileArrivalRecord{time=04:04, channel=19}
+SnarkFileDepartureRecord{time=05:23, channel=19}
+SnarkFileTimeRecord{dateTime=2018-11-14T10:08}
+SnarkFileTimeRecord{dateTime=2018-11-14T17:00}
+SnarkFileArrivalRecord{time=22:29, channel=24}
+SnarkFileArrivalRecord{time=22:33, channel=19}
+SnarkFileDepartureRecord{time=22:33, channel=24}
+SnarkFileDepartureRecord{time=23:51, channel=19}
+SnarkFileArrivalRecord{time=23:59, channel=19}
+SnarkFileTimeRecord{dateTime=2018-11-15T00:00}
+SnarkFileDepartureRecord{time=00:48, channel=19}
+SnarkFileArrivalRecord{time=01:06, channel=19}
+SnarkFileDepartureRecord{time=01:09, channel=19}
+SnarkFileArrivalRecord{time=01:22, channel=19}
+SnarkFileDepartureRecord{time=01:22, channel=19}
+SnarkFileArrivalRecord{time=01:38, channel=19}
+SnarkFileDepartureRecord{time=02:50, channel=19}
+SnarkFileArrivalRecord{time=02:56, channel=19}
+SnarkFileDepartureRecord{time=02:59, channel=19}
+SnarkFileArrivalRecord{time=03:07, channel=19}
+SnarkFileDepartureRecord{time=03:09, channel=19}
+SnarkFileArrivalRecord{time=03:14, channel=19}
+SnarkFileDepartureRecord{time=03:18, channel=19}
+SnarkFileArrivalRecord{time=03:22, channel=19}
+SnarkFileDepartureRecord{time=04:57, channel=19}
+SnarkFileArrivalRecord{time=05:02, channel=19}
+SnarkFileDepartureRecord{time=05:40, channel=19}
+SnarkFileArrivalRecord{time=05:49, channel=19}
+SnarkFileDepartureRecord{time=05:53, channel=19}
+SnarkFileTimeRecord{dateTime=2018-11-15T10:08}
+SnarkFileTimeRecord{dateTime=2018-11-15T17:00}
+SnarkFileArrivalRecord{time=21:55, channel=19}
+SnarkFileDepartureRecord{time=22:01, channel=19}
+SnarkFileArrivalRecord{time=22:52, channel=19}
+SnarkFileDepartureRecord{time=22:52, channel=19}
+SnarkFileArrivalRecord{time=23:07, channel=19}
+SnarkFileArrivalRecord{time=23:11, channel=67}
+SnarkFileDepartureRecord{time=23:10, channel=19}
+SnarkFileDepartureRecord{time=23:21, channel=67}
+SnarkFileTimeRecord{dateTime=2018-11-16T00:00}
+SnarkFileArrivalRecord{time=04:05, channel=9}
+SnarkFileDepartureRecord{time=04:25, channel=9}
+SnarkFileArrivalRecord{time=05:26, channel=67}
+SnarkFileDepartureRecord{time=05:56, channel=67}
+SnarkFileArrivalRecord{time=06:36, channel=67}
+SnarkFileDepartureRecord{time=06:36, channel=67}
+SnarkFileTimeRecord{dateTime=2018-11-16T10:08}

@@ -1,0 +1,66 @@
+<ng-container *ngIf="nestdetailsRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Nest Type</dt>
+        <dd>
+          <span class="data-tag">{{ nestdetailsRevision.nestType }}</span>
+        </dd>
+        <dt>Clutch</dt>
+        <dd>{{ nestdetailsRevision.clutch }}</dd>
+        <dt>Entrance Height</dt>
+        <dd>
+          {{ nestdetailsRevision.entranceHeight | addUnits: 'mm' }}
+        </dd>
+        <dt>Entrance Width</dt>
+        <dd>
+          {{ nestdetailsRevision.entranceWidth | addUnits: 'mm' }}
+        </dd>
+        <dt>Entrance Rise</dt>
+        <dd>
+          {{ nestdetailsRevision.entranceRise | addUnits: 'mm' }}
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock
+      title="Chamber Dimensions"
+      class="col-md-4"
+      [noOffset]="true"
+    >
+      <dl class="data-group">
+        <dt>Chamber Height</dt>
+        <dd>
+          {{ nestdetailsRevision.chamberHeight | addUnits: 'mm' }}
+        </dd>
+        <dt>Chamber Width</dt>
+        <dd>
+          {{ nestdetailsRevision.chamberWidth | addUnits: 'mm' }}
+        </dd>
+        <dt>Chamber Length</dt>
+        <dd>
+          {{ nestdetailsRevision.chamberLength | addUnits: 'mm' }}
+        </dd>
+        <dt>Chamber Rise</dt>
+        <dd>
+          {{ nestdetailsRevision.chamberRise | addUnits: 'mm' }}
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Other" class="col-md-4" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Nest box</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="nestBox"
+            [(ngModel)]="nestdetailsRevision.nestBox"
+          />
+        </dd>
+        <dt>Date Added</dt>
+        <dd>{{ nestdetailsRevision.nestBoxDateAdded | date: 'dd/MM/yyyy' }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

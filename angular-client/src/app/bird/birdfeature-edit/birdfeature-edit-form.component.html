@@ -1,0 +1,73 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Body part</th>
+            <th scope="col">Description</th>
+            <th></th>
+            <!-- empty column for edit buttons -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('bodyPart')">
+                <select
+                  class="custom-select"
+                  id="bodyPart"
+                  formControlName="bodyPart"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('BodyPartOptions')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('description')">
+                <input
+                  class="form-control"
+                  id="description"
+                  formControlName="description"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button class="btn btn-record" (click)="removeItem(i)">
+                <fa-icon icon="minus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Remove</span>
+              </button>
+              <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+              <button class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

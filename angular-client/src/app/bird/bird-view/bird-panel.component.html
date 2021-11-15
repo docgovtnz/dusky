@@ -1,0 +1,162 @@
+<ng-container *ngIf="birdRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <dl class="data-group">
+            <dt>House Name</dt>
+            <dd>{{ birdRevision.birdName }}</dd>
+            <dt>House ID</dt>
+            <dd>{{ birdRevision.houseID }}</dd>
+            <dt>Stud Book Number</dt>
+            <dd>{{ birdRevision.studbookno }}</dd>
+            <dt>GAN</dt>
+            <dd>{{ birdRevision.gan }}</dd>
+            <dt>Current Island</dt>
+            <dd>{{ birdRevision.currentIsland }}</dd>
+            <dt>Current Location</dt>
+            <dd>
+              <app-location-name-label
+                [locationID]="birdRevision.currentLocationID"
+              ></app-location-name-label>
+            </dd>
+            <dt>Transmitter group</dt>
+            <dd>{{ birdRevision.transmitterGroup }}</dd>
+          </dl>
+        </div>
+        <div class="col-md-6">
+          <dl class="data-group">
+            <dt>Sex</dt>
+            <dd>
+              <span class="data-tag">{{ birdRevision.sex }}</span>
+            </dd>
+            <dt>Age</dt>
+            <dd>
+              <app-bird-age-label
+                [birdID]="birdRevision?.id"
+              ></app-bird-age-label>
+            </dd>
+            <dt>Age Class</dt>
+            <dd>
+              <app-bird-age-class-label
+                [birdID]="birdRevision?.id"
+              ></app-bird-age-class-label>
+            </dd>
+            <dt>Plumage colour</dt>
+            <dd>
+              <span class="data-tag">{{ birdRevision.plumageColour }}</span>
+            </dd>
+            <dt>Leg colour</dt>
+            <dd>
+              <span class="data-tag">{{ birdRevision.legColour }}</span>
+            </dd>
+            <dt>Mother</dt>
+            <dd>
+              <app-bird-name-label
+                [birdID]="birdRevision.mother"
+              ></app-bird-name-label>
+            </dd>
+            <dt>Father</dt>
+            <dd>
+              <app-bird-name-label
+                [birdID]="birdRevision.father"
+              ></app-bird-name-label>
+            </dd>
+            <dt>Definite father</dt>
+            <dd>
+              <input
+                class="form-check"
+                type="checkbox"
+                disabled
+                id="definiteFather"
+                [(ngModel)]="birdRevision.definiteFather"
+              />
+            </dd>
+            <dt>Nest mother</dt>
+            <dd>
+              <app-bird-name-label
+                [birdID]="birdRevision.nestMother"
+              ></app-bird-name-label>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Egg Details" class="col-md-3">
+      <dl class="data-group">
+        <dt>Egg Name</dt>
+        <dd>{{ birdRevision.eggName }}</dd>
+        <dt>Lay Island</dt>
+        <dd>{{ birdRevision.layIsland }}</dd>
+        <dt>Lay Year</dt>
+        <dd>{{ birdRevision.layYear }}</dd>
+        <dt>Lay Location</dt>
+        <dd>
+          <app-location-name-label
+            [locationID]="birdRevision.layLocationID"
+          ></app-location-name-label>
+        </dd>
+        <dt>Clutch</dt>
+        <dd>{{ birdRevision.clutch }}</dd>
+        <dt>Clutch Order</dt>
+        <dd>{{ birdRevision.clutchOrder }}</dd>
+        <dt>Viable</dt>
+        <dd>
+          <span class="data-tag">{{ birdRevision.viable }}</span>
+        </dd>
+        <dt>Fertility Confirmed by Microscopy</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="fertilityConfirmed"
+            [(ngModel)]="birdRevision.fertilityConfirmed"
+          />
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Milestones" class="col-md-3">
+      <dl class="data-group">
+        <dt>Alive</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="alive"
+            [(ngModel)]="birdRevision.alive"
+          />
+        </dd>
+        <dt>Date Laid</dt>
+        <dd>
+          {{ birdRevision.dateLaid | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+        <dt>Date Hatched</dt>
+        <dd>
+          {{ birdRevision.dateHatched | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+        <dt>Date Fledged</dt>
+        <dd>
+          {{ birdRevision.dateFledged | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+        <dt>Date Weaned</dt>
+        <dd>
+          {{ birdRevision.dateWeaned | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+        <dt>Date Independent</dt>
+        <dd>
+          {{ birdRevision.dateIndependent | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+        <dt>Discovery date</dt>
+        <dd>
+          {{ birdRevision.discoveryDate | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+        <dt>Demise</dt>
+        <dd>
+          {{ birdRevision.demise | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

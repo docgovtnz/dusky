@@ -1,0 +1,44 @@
+<ng-container *ngIf="personRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4">
+      <dl class="data-group">
+        <dt>Name</dt>
+        <dd>{{ personRevision.name }}</dd>
+        <dt>Current Capacity</dt>
+        <dd>{{ personRevision.currentCapacity }}</dd>
+        <dt>Phone Number</dt>
+        <dd>{{ personRevision.phoneNumber }}</dd>
+        <dt>Email Address</dt>
+        <dd>{{ personRevision.emailAddress }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Account" class="col-md-4">
+      <dl class="data-group">
+        <dt>Create a User Account for this person</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="hasAccount"
+            [(ngModel)]="personRevision.hasAccount"
+          />
+        </dd>
+        <dt>Username</dt>
+        <dd>{{ personRevision.userName }}</dd>
+        <dt>Role</dt>
+        <dd>
+          <span class="data-tag">{{ personRevision.personRole }}</span>
+        </dd>
+        <dt>Account Expiry</dt>
+        <dd>{{ personRevision.accountExpiry | date: 'dd/MM/yyyy' }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Comments" class="col-md-4">
+      <dl class="data-group">
+        <dt>Comments</dt>
+        <dd>{{ personRevision.comments }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

@@ -1,0 +1,168 @@
+<section>
+  <app-banner title="Check Sheet" subtitle="Report"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="checksheetreportCriteria">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Filter" class="col-md-4">
+            <div class="form-group">
+              <label for="island">
+                Island
+                <span class="text-danger"><strong>&nbsp;*</strong></span>
+              </label>
+              <app-type-ahead
+                id="island"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="checksheetreportCriteria.island"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="sex"> Sex </label>
+              <select
+                class="custom-select"
+                id="sex"
+                [(ngModel)]="checksheetreportCriteria.sex"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('SexOptions') | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Dates" class="col-md-4">
+            <div class="form-group">
+              <label for="fromDate">
+                First Date
+                <span class="text-danger"><strong>&nbsp;*</strong></span>
+              </label>
+              <app-date-editor
+                id="fromDate"
+                [editorCfg]="'none'"
+                [(dateValue)]="checksheetreportCriteria.fromDate"
+              ></app-date-editor>
+            </div>
+            <div class="form-group">
+              <label for="numDays">
+                Reporting Time Blocks
+                <span class="text-danger"><strong>&nbsp;*</strong></span>
+              </label>
+              <select
+                class="custom-select"
+                id="numDays"
+                [(ngModel)]="checksheetreportCriteria.numDays"
+              >
+                <option
+                  *ngFor="let opt of reportingPeriodOptions"
+                  [ngValue]="opt.value"
+                >
+                  {{ opt.label }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="toDate">
+                Last Date
+                <span class="text-danger"><strong>&nbsp;*</strong></span>
+              </label>
+              <app-date-editor
+                id="toDate"
+                [editorCfg]="'none'"
+                [(dateValue)]="checksheetreportCriteria.toDate"
+              ></app-date-editor>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Legend" class="col-md-4">
+            <dl class="row my-0">
+              <dt class="col-3">X</dt>
+              <dd class="col-9">Transfer</dd>
+              <dt class="col-3">C</dt>
+              <dd class="col-9">Capture / Release</dd>
+              <dt class="col-3">CM</dt>
+              <dd class="col-9">Transmitter -> CheckMate</dd>
+              <dt class="col-3">ET</dt>
+              <dd class="col-9">Transmitter -> Egg Timer</dd>
+              <dt class="col-3">ST</dt>
+              <dd class="col-9">Transmitter -> Standard</dd>
+              <dt class="col-3">TA</dt>
+              <dd class="col-9">Transmitter -> Tx Activity</dd>
+              <dt class="col-3">&#35;</dt>
+              <dd class="col-9">NoraNet Detection</dd>
+              <dt class="col-3">&#9651;</dt>
+              <dd class="col-9">Triangulation</dd>
+              <dt class="col-3">EB</dt>
+              <dd class="col-9">Encounter / Sighting (Eyeball)</dd>
+              <dt class="col-3">SN</dt>
+              <dd class="col-9">Snark (Feed-Out or Nest snark)</dd>
+              <dt class="col-3">SO</dt>
+              <dd class="col-9">Signal Only</dd>
+            </dl>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!report || report.records.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <ng-container *ngIf="!report"> Report not yet executed. </ng-container>
+    <ng-container *ngIf="report">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Bird</th>
+              <th scope="col" *ngFor="let col of report.dateColumns">
+                {{ col }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="report.records.length === 0">
+            <tr>
+              <td [attr.colspan]="report.dateColumns.length + 1">
+                No results.
+              </td>
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="report.records.length > 0">
+            <tr *ngFor="let row of report.records">
+              <td>
+                <app-bird-name-label
+                  [birdID]="row.birdID"
+                ></app-bird-name-label>
+              </td>
+              <td *ngFor="let col of report.dateColumns; let i = index">
+                {{ row.interactionsByDate[col] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</section>

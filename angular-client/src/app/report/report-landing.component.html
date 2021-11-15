@@ -1,0 +1,40 @@
+<section>
+  <app-banner title="Reports"></app-banner>
+</section>
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="row">
+      <app-controlblock title="General" class="col-md-4" [noBody]="true">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a routerLink="/report/location">Where Are They?</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/report/checksheet">Check Sheet</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/report/latestweight">Latest Weights</a>
+          </li>
+        </ul>
+      </app-controlblock>
+      <app-controlblock
+        title="Breeding Season"
+        class="col-md-4"
+        [noBody]="true"
+      >
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a routerLink="/report/mating">Mating Report</a>
+          </li>
+        </ul>
+      </app-controlblock>
+      <app-controlblock title="NoraNet" class="col-md-4" [noBody]="true">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a routerLink="/report/noraneterror">File Import Errors</a>
+          </li>
+        </ul>
+      </app-controlblock>
+    </div>
+  </div>
+</section>

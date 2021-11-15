@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="TransmitterEntity">
+  <Property name="channel" label="Channel" javaType="Integer" jsonType="number"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="frequency" label="Frequency" javaType="Float" jsonType="number"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="island" label="Island" javaType="String" jsonType="string"/>
+  <Property name="lastRecordId" label="Recent Record" javaType="String" jsonType="string"/>
+  <Property name="lifeExpectancy" label="Life Expectancy" javaType="Integer" jsonType="number"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="oldTxMortId" label="Transmitter Mortality" javaType="Integer" jsonType="number"/>
+  <Property name="origLifeExpectancyWeeks" label="Orig Life Expectancy Weeks" javaType="Integer"
+    jsonType="number"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="rigging" label="Rigging" javaType="String" jsonType="string"/>
+  <Property name="software" label="Software" javaType="String" jsonType="string"/>
+  <Property name="status" label="Status" javaType="String" jsonType="string"/>
+  <Property name="txFineTune" label="Tx Fine Tune" javaType="String" jsonType="string"/>
+  <Property name="txId" label="Tx Id" javaType="String" jsonType="string"/>
+  <Property name="txMortalityId" label="Transmitter Mortality" javaType="String" jsonType="string"/>
+  <Property name="uhfId" label="UHF ID for Transmitters" javaType="Integer" jsonType="number"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="txId"/>
+      <DisplayProperty name="uhfId"/>
+      <DisplayProperty name="channel"/>
+      <DisplayProperty name="frequency"/>
+      <DisplayProperty name="txFineTune"/>
+      <DisplayProperty name="rigging"/>
+      <DisplayProperty name="software"/>
+      <DisplayProperty name="status"/>
+      <DisplayProperty name="island"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="txMortalityId"/>
+      <DisplayProperty name="lifeExpectancy"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

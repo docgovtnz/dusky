@@ -1,0 +1,44 @@
+<!-- Not binding to the (typeaheadOnSelect) event, but just using the setter of selectedOption to propagate the
+value change to parent components -->
+<input
+  *ngIf="!autofocus"
+  class="form-control"
+  [typeahead]="allBirdNames"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="100"
+  [disabled]="disabled"
+  [(ngModel)]="birdNameSelected"
+  (keyup.escape)="onEscape($event)"
+  (keyup.enter)="onEnter($event)"
+  (typeaheadOnSelect)="onSelect($event)"
+/>
+<input
+  *ngIf="autofocus"
+  class="form-control"
+  [typeahead]="allBirdNames"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="100"
+  [disabled]="disabled"
+  [(ngModel)]="birdNameSelected"
+  (keyup.escape)="onEscape($event)"
+  (keyup.enter)="onEnter($event)"
+  (typeaheadOnSelect)="onSelect($event)"
+/>
+
+<span
+  class="badge badge-secondary m-1"
+  *ngFor="let selOpt of _selectedBirds; index as index"
+  [attr.data-index]="index"
+>
+  {{ selOpt }}
+  <a
+    href="#"
+    class="bg-secondary text-light"
+    (click)="onRemoveOptionAction(index)"
+  >
+    <fa-icon icon="times" aria-hidden="true"></fa-icon
+    ><span class="sr-only">Remove</span>
+  </a>
+</span>

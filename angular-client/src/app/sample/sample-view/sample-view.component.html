@@ -1,0 +1,213 @@
+<section>
+  <app-banner title="Sample">
+    <button
+      *appPermission="'SAMPLE_EDIT'"
+      id="editBtn"
+      class="btn btn-action"
+      (click)="onEdit()"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+    <button
+      *appPermission="'SAMPLE_DELETE'"
+      id="deleteBtn"
+      class="btn btn-action"
+      [disabled]="!isDeleteOk()"
+      (click)="deleteConfirmationPopup.show()"
+    >
+      <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+    </button>
+    <app-revision-list-view
+      [entity]="sampleEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-sample-panel
+          [sampleRevision]="revision"
+          [recordID]="recordEntity?.id"
+        ></app-sample-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <tabset #sampleTabs>
+      <tab *ngIf="revision" [heading]="'Comments'">
+        <app-comments-view [revision]="revision"></app-comments-view>
+      </tab>
+      <tab *ngIf="revision?.bloodDetail" [heading]="'Blood Detail'">
+        <app-blooddetail-panel
+          [blooddetailRevision]="revision.bloodDetail"
+        ></app-blooddetail-panel>
+      </tab>
+      <tab *ngIf="revision?.swabDetail" [heading]="'Swab Detail'">
+        <app-swabdetail-panel
+          [swabdetailRevision]="revision.swabDetail"
+        ></app-swabdetail-panel>
+      </tab>
+      <tab *ngIf="revision?.otherDetail" [heading]="'Other Detail'">
+        <app-otherdetail-panel
+          [otherdetailRevision]="revision.otherDetail"
+        ></app-otherdetail-panel>
+      </tab>
+      <tab *ngIf="revision?.spermDetail" [heading]="'Sperm Detail'">
+        <app-spermdetail-panel
+          [spermdetailRevision]="revision.spermDetail"
+        ></app-spermdetail-panel>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.haematologyTestList ||
+          revision?.haematologyComments ||
+          revision?.smudgeCells
+        "
+        [heading]="'Haematology'"
+      >
+        <div *ngIf="revision?.haematologyTestList" class="row">
+          <ng-container *ngIf="revision?.sampleCategory === 'Blood'">
+            <div class="col-md">
+              <app-haematologytest-panel
+                [haematologytestList]="revision.haematologyTestList"
+              ></app-haematologytest-panel>
+            </div>
+            <div class="col-md-auto">
+              <app-haematologyteststats-panel
+                [type]="revision.sampleType"
+                [testList]="revision.haematologyTestList"
+              ></app-haematologyteststats-panel>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              !revision?.sampleCategory || revision?.sampleCategory !== 'Blood'
+            "
+          >
+            <div class="col-md-12">
+              <app-haematologytest-panel
+                [haematologytestList]="revision.haematologyTestList"
+              ></app-haematologytest-panel>
+            </div>
+          </ng-container>
+        </div>
+        <app-controlblock [noOffset]="true" [withSpacer]="true">
+          <div class="form-check form-check-inline">
+            <!--  onclick="return false; to make the checkbox read only - see https://stackoverflow.com/a/6905050 -->
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="smudgeCells"
+              [(ngModel)]="revision.smudgeCells"
+              onclick="return false;"
+            />
+            <label class="form-check-label" for="smudgeCells"
+              >Smudge cells</label
+            >
+          </div>
+        </app-controlblock>
+        <app-comments-view
+          [revision]="revision"
+          field="haematologyComments"
+        ></app-comments-view>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.chemistryAssayList ||
+          revision?.bloodChemistryComments ||
+          revision?.haemolysed
+        "
+        [heading]="'Blood Chemistry'"
+      >
+        <div *ngIf="revision?.chemistryAssayList" class="row">
+          <ng-container *ngIf="revision?.sampleCategory === 'Blood'">
+            <div class="col-md">
+              <app-chemistryassay-panel
+                [chemistryassayList]="revision.chemistryAssayList"
+              ></app-chemistryassay-panel>
+            </div>
+            <div class="col-md-auto">
+              <app-chemistryassaystats-panel
+                [type]="revision.sampleType"
+                [assayList]="revision.chemistryAssayList"
+              ></app-chemistryassaystats-panel>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              !revision?.sampleCategory || revision?.sampleCategory !== 'Blood'
+            "
+          >
+            <div class="col-md-12">
+              <app-chemistryassay-panel
+                [chemistryassayList]="revision.chemistryAssayList"
+              ></app-chemistryassay-panel>
+            </div>
+          </ng-container>
+        </div>
+        <app-controlblock [noOffset]="true" [withSpacer]="true">
+          <div class="form-check form-check-inline">
+            <!--  onclick="return false; to make the checkbox read only - see https://stackoverflow.com/a/6905050 -->
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="haemolysed"
+              [(ngModel)]="revision.haemolysed"
+              onclick="return false;"
+            />
+            <label class="form-check-label" for="haemolysed">Haemolysed</label>
+          </div>
+        </app-controlblock>
+        <app-comments-view
+          [revision]="revision"
+          field="bloodChemistryComments"
+        ></app-comments-view>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.microbiologyAndParasitologyTestList ||
+          revision?.microbiologyAndParasitologyComments
+        "
+        [heading]="'Microbiology & Parasitology'"
+      >
+        <ng-container *ngIf="revision?.microbiologyAndParasitologyTestList">
+          <app-microbiologyandparasitologytest-panel
+            [microbiologyandparasitologytestList]="
+              revision.microbiologyAndParasitologyTestList
+            "
+          ></app-microbiologyandparasitologytest-panel>
+        </ng-container>
+        <app-comments-view
+          [revision]="revision"
+          field="microbiologyAndParasitologyComments"
+        ></app-comments-view>
+      </tab>
+      <tab
+        *ngIf="revision?.spermMeasureList || revision?.spermComments"
+        [heading]="'Sperm'"
+      >
+        <ng-container *ngIf="revision?.spermMeasureList">
+          <app-spermmeasure-panel
+            [spermmeasureList]="revision.spermMeasureList"
+          ></app-spermmeasure-panel>
+        </ng-container>
+        <app-comments-view
+          [revision]="revision"
+          field="spermComments"
+        ></app-comments-view>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

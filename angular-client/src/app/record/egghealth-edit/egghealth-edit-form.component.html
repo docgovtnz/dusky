@@ -1,0 +1,98 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Measurements" [noOffset]="true" class="col-md-6">
+      <div class="form-group">
+        <app-widget
+          [label]="'Length (mm)'"
+          [propertyName]="'lengthInMms'"
+          [myFormControl]="myFormGroup.get('lengthInMms')"
+        >
+          <input
+            class="form-control"
+            id="lengthInMms"
+            formControlName="lengthInMms"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Width (mm)'"
+          [propertyName]="'widthInMms'"
+          [myFormControl]="myFormGroup.get('widthInMms')"
+        >
+          <input
+            class="form-control"
+            id="widthInMms"
+            formControlName="widthInMms"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Candling Age Estimate (days)'"
+          [propertyName]="'candlingAgeEstimateInDays'"
+          [myFormControl]="myFormGroup.get('candlingAgeEstimateInDays')"
+        >
+          <input
+            class="form-control"
+            id="candlingAgeEstimateInDays"
+            formControlName="candlingAgeEstimateInDays"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Temperature (°C)'"
+          [propertyName]="'temperature'"
+          [myFormControl]="myFormGroup.get('temperature')"
+        >
+          <input
+            class="form-control"
+            id="temperature"
+            formControlName="temperature"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Heart Rate (bpm)'"
+          [propertyName]="'heartRate'"
+          [myFormControl]="myFormGroup.get('heartRate')"
+        >
+          <input
+            class="form-control"
+            id="heartRate"
+            formControlName="heartRate"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Embryo Moving'"
+          [propertyName]="'embryoMoving'"
+          [myFormControl]="myFormGroup.get('embryoMoving')"
+        >
+          <select
+            class="custom-select"
+            id="embryoMoving"
+            formControlName="embryoMoving"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('YesNoOptions') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

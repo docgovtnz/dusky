@@ -1,0 +1,90 @@
+
+Replicate Production to Development
+
+This is a procedure for how to replicate a Dusky Production Database into a Dusky Development environment. It works by
+taking a fully synched Production Laptop (or other environment) and switches a few key settings so that the application
+starts replicating with a new environment.
+
+!!! THIS IS A DANGEROUS PROCEDURE - EXTREME CARE SHOULD BE TAKEN !!!
+!!! THIS IS A DANGEROUS PROCEDURE - EXTREME CARE SHOULD BE TAKEN !!!
+!!! THIS IS A DANGEROUS PROCEDURE - EXTREME CARE SHOULD BE TAKEN !!!
+!!! THIS IS A DANGEROUS PROCEDURE - EXTREME CARE SHOULD BE TAKEN !!!
+!!! THIS IS A DANGEROUS PROCEDURE - EXTREME CARE SHOULD BE TAKEN !!!
+
+...it's ok going from Production to Development, the danger comes from accidentally doing in in the other direction.
+
+
+Overview
+
+1. Notify all Developers and Developer Testers that this is happening and to discard their databases [!!!IMPORTANT!!!]
+2. Start with a fully synched Production laptop
+3. Create an Empty Development database
+4. Stop the Laptop Dusky service, and Laptop Synch Gateway
+5. Switch various settings files
+6. Start the Laptop Dusky service, and Laptop Synch Gateway
+7. Wait for the Synch to happen
+
+
+Details
+
+1. Notify all Developers and Developer Testers that this is happening and to discard their databases. It wouldn't be the
+same kind of disaster as replicating development data into production but you also don't want the old development data to
+come back into the new copy of production data.
+
+Don't forget to notify non developers who are using a Development environment (Testers, BA's, etc..) These people will
+need to delete and recreate their local Development environments see step 3 below.
+
+2. Start with a fully synched Production laptop. This should be a normal production install. The database needs to be
+fully up to date. Once the Laptop is switched from one environment to another it won't receive updates from the old
+environment anymore.
+
+The AWS environment doesn't initiate connections to the Laptops, and even if it did or another Laptop was connected
+manually the application contains a rule to check the environment name of the target server. Since
+the environment name of this Laptop will be changed in the steps below this Laptop will no longer be a Production Laptop.
+
+3. Create an Empty Development database. The current Dev database needs to be wiped so that it can receive the copy of
+production data.
+
+a. Stop the Dev Dusky application server
+b. In the Development Couchbase server delete the 'kakapo-bird' bucket
+c. Create a new 'kakapo-bird bucket' with the following settings. These are the standard settings at the time of writing
+but over time the "standard" settings may change and these may drift out of alignment.
+  - bucket name 'kakapo-bird'
+  - memory 1024 MB
+  - Replicas Enabled = false (unchecked)
+  - defaults ok for everything esle
+d. Start the Dev Dusky application server
+e. Wait for the indexes to rebuild
+f. Login to the Dusky application with the Admin credentials and ensure that the application is working and it only
+contains the starting data (no Birds, and only a few Settings documents)
+
+The Development environment is now ready to receive the data.
+
+* Potentially it would be a good idea to wait at this point and make sure that nothing is still replicating with this
+environment. The hard part is knowing how long to wait, not all Developers are necessarily running their environments
+all of the time.
+
+
+4. Stop the Laptop Dusky service, and Laptop Synch Gateway.
+
+5. Switch various settings files. To switch the Laptop environment from one environment to another you need to replace
+the following files on the Laptop with the files for the new target environment. You can grab these files from the
+package distributables on the FTP server. In this case use the files from the "dusky-dev-laptop.zip"
+
+- "Dusky\application.properties"
+- "Dusky\service.config"
+
+The development environment may have crept ahead of the production release number, so check that the version number in
+application.properties matches the current version of the Development environment.
+
+The SSL certificates and keys are only for the Laptop itself, these don't need to be changed because the Development
+environment isn't expecting any particular Client SSL certificates.
+
+
+6. Start the Laptop Dusky service, and Laptop Synch Gateway.
+
+7. Wait for the Synch to happen. You should be able to see the data coming into the Dev environment relatively quickly
+by using the application or looking at the Couchbase console. It's ok to do searches in the application but viewing
+documents or editing them probably isn't always safe until all the data has been replicated.
+
+

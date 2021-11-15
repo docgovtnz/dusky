@@ -1,0 +1,206 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <app-controlblock title="Details" [noOffset]="true">
+    <div class="form-row row-cols-md-2 row-cols-sm-1">
+      <div class="col form-group">
+        <app-widget
+          [label]="'Egg Length (mm)'"
+          [propertyName]="'eggLength'"
+          [myFormControl]="myFormGroup.get('eggLength')"
+        >
+          <input
+            class="form-control"
+            id="eggLength"
+            formControlName="eggLength"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Egg Width (mm)'"
+          [propertyName]="'eggWidth'"
+          [myFormControl]="myFormGroup.get('eggWidth')"
+        >
+          <input
+            class="form-control"
+            id="eggWidth"
+            formControlName="eggWidth"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Fresh Weight Coefficient (x10^4)'"
+          [propertyName]="'fwCoefficientX104'"
+          [myFormControl]="myFormGroup.get('fwCoefficientX104')"
+        >
+          <input
+            class="form-control"
+            id="fwCoefficientX104"
+            formControlName="fwCoefficientX104"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Calculated Fresh Weight (g)'"
+          [propertyName]="'calculatedFreshWeight'"
+          [myFormControl]="myFormGroup.get('calculatedFreshWeight')"
+        >
+          <input
+            class="form-control"
+            id="calculatedFreshWeight"
+            formControlName="calculatedFreshWeight"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Weight Before Filling with Water (g)'"
+          [propertyName]="'eggWeightBeforeFillingWithWater'"
+          [myFormControl]="myFormGroup.get('eggWeightBeforeFillingWithWater')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'eggWeightBeforeFillingWithWater'"
+            formControlName="eggWeightBeforeFillingWithWater"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Weight With Water Filled Aircell (g)'"
+          [propertyName]="'weightWithWaterInGrams'"
+          [myFormControl]="myFormGroup.get('weightWithWaterInGrams')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'weightWithWaterInGrams'"
+            formControlName="weightWithWaterInGrams"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Germinal Disc Diameter (mm)'"
+          [propertyName]="'germinalDiscDiameterInMms'"
+          [myFormControl]="myFormGroup.get('germinalDiscDiameterInMms')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'germinalDiscDiameterInMms'"
+            formControlName="germinalDiscDiameterInMms"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Yolk Weight (g)'"
+          [propertyName]="'yolkWeightInGrams'"
+          [myFormControl]="myFormGroup.get('yolkWeightInGrams')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'yolkWeightInGrams'"
+            formControlName="yolkWeightInGrams"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Albumen Weight (g)'"
+          [propertyName]="'albumenWeightInGrams'"
+          [myFormControl]="myFormGroup.get('albumenWeightInGrams')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'albumenWeightInGrams'"
+            formControlName="albumenWeightInGrams"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Shell Thickness (mm)'"
+          [propertyName]="'shellThicknessInMms'"
+          [myFormControl]="myFormGroup.get('shellThicknessInMms')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'shellThicknessInMms'"
+            formControlName="shellThicknessInMms"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Shell & Waste Weight (Hatched) (g)'"
+          [propertyName]="'shellWasteWeightHatched'"
+          [myFormControl]="myFormGroup.get('shellWasteWeightHatched')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'shellWasteWeightHatched'"
+            formControlName="shellWasteWeightHatched"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Dry Shell Weight (Hatched) (g)'"
+          [propertyName]="'dryShellWeightHatched'"
+          [myFormControl]="myFormGroup.get('dryShellWeightHatched')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'dryShellWeightHatched'"
+            formControlName="dryShellWeightHatched"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Dry Shell Weight (Unhatched) (g)'"
+          [propertyName]="'dryShellWeightUnhatched'"
+          [myFormControl]="myFormGroup.get('dryShellWeightUnhatched')"
+        >
+          <input
+            class="form-control"
+            [id]="idPrefix + 'dryShellWeightUnhatched'"
+            formControlName="dryShellWeightUnhatched"
+            type="number"
+          />
+        </app-widget>
+      </div>
+
+      <div class="col form-group">
+        <div>Addled</div>
+        <app-widget
+          [propertyName]="'addled'"
+          [myFormControl]="myFormGroup.get('addled')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input mt-1"
+            [id]="idPrefix + 'addled'"
+            formControlName="addled"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+    </div>
+  </app-controlblock>
+</form>

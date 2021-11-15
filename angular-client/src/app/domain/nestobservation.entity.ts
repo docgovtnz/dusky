@@ -1,0 +1,78 @@
+import { ChickRecordReferenceEntity } from './chickrecordreference.entity';
+import { EggRecordReferenceEntity } from './eggrecordreference.entity';
+import { MotherTripEntity } from './mothertrip.entity';
+import { MotherTripSummaryEntity } from './mothertripsummary.entity';
+import { NestChamberEntity } from './nestchamber.entity';
+import { NestChickEntity } from './nestchick.entity';
+import { NestEggEntity } from './nestegg.entity';
+import { ObservationTimesEntity } from './observationtimes.entity';
+import { ObserverEntity } from './observer.entity';
+import { BaseEntity } from './base-entity';
+
+export class NestObservationEntity extends BaseEntity {
+  activeDayMinutes: number;
+  activeNightMinutes: number;
+  birdID: string;
+  breathingrate1: number;
+  breathingrate2: number;
+  chick1id: string;
+  chick1NumberFeeds: number;
+  chick1TimeFed: number;
+  chick2id: string;
+  chick2NumberFeeds: number;
+  chick2TimeFed: number;
+  chickfirstfeed1: Date;
+  chickfirstfeed2: Date;
+  chickfirstfeed3: Date;
+  chickfirstfeed4: Date;
+  comments: string;
+  date: Date;
+  dateTime: Date;
+  finishObservationTime: Date;
+  firstTimeOff: Date;
+  hatchDate: Date;
+  heatpad1: boolean;
+  heatpad2: boolean;
+  heatpad3: boolean;
+  heatpad4: boolean;
+  heatPadTime: number;
+  layDate: Date;
+  locationID: string;
+  maxTimeOff: number;
+  mumback1: Date;
+  mumback2: Date;
+  mumback3: Date;
+  mumback4: Date;
+  nestObsId: string;
+  notes: string;
+  numberOfChicks: number;
+  numberOfEggs: number;
+  numberOfTimesOff: number;
+  oldBirdId: string;
+  oldLocationName: string;
+  percentageOfDayActive: number;
+  percentageOfNightActive: number;
+  rolls: number;
+  scratches: number;
+  startObservationTime: Date;
+  timeOnNestDuringDaylight: number;
+  timeOnNestDuringNight: number;
+  totalTimeOff: number;
+  unknownChickNumberFeeds: number;
+  unknownChickTimeFed: number;
+  weighMethod: string;
+  chickRecordReferenceList: ChickRecordReferenceEntity[];
+  eggRecordReferenceList: EggRecordReferenceEntity[];
+  motherTripList: MotherTripEntity[];
+  motherTripSummary: MotherTripSummaryEntity;
+  nestChamber: NestChamberEntity;
+  nestChickList: NestChickEntity[];
+  nestEggList: NestEggEntity[];
+  observationTimes: ObservationTimesEntity;
+  observerList: ObserverEntity[];
+
+  constructor() {
+    super();
+    this.docType = 'NestObservation';
+  }
+}

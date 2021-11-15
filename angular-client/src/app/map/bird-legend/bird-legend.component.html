@@ -1,0 +1,27 @@
+<div class="row mx-1 my-1">
+  <div class="col-auto">
+    <button type="button" class="btn btn-info mr-3" (click)="selectAll()">
+      All
+    </button>
+    <button type="button" class="btn btn-info" (click)="unselectAll()">
+      None
+    </button>
+  </div>
+</div>
+
+<table>
+  <tr *ngFor="let bird of birdList">
+    <td
+      class="bird-color-square"
+      [ngStyle]="{ background: getColorForBird(bird) }"
+      (click)="toggleSelected(bird)"
+    ></td>
+    <td
+      class="bird-legend-text"
+      [ngClass]="{ selected: bird.selected, unselected: !bird.selected }"
+      (click)="toggleSelected(bird)"
+    >
+      {{ bird.birdName }}
+    </td>
+  </tr>
+</table>

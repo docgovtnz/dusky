@@ -1,0 +1,72 @@
+import { BirdFeatureEntity } from './birdfeature.entity';
+import { EggMeasurementsEntity } from './eggmeasurements.entity';
+import { EmbryoMeasurementsEntity } from './embryomeasurements.entity';
+import { BaseEntity } from './base-entity';
+
+export class BirdEntity extends BaseEntity {
+  actualFreshWeight: number;
+  ageClassOverride: string;
+  alive: boolean;
+  birdName: string;
+  clutch: string;
+  clutchOrder: number;
+  comments: string;
+  currentBandId: string;
+  currentBandLeg: string;
+  currentChipId: string;
+  currentIsland: string;
+  currentLocationID: string;
+  currentTxRecordId: string;
+  dateFirstFound: Date;
+  dateFledged: Date;
+  dateHatched: Date;
+  dateIndependent: Date;
+  dateLaid: Date;
+  datesMated: string;
+  dateWeaned: Date;
+  daysOnNest: string;
+  deadEmbryo: string;
+  definiteFather: boolean;
+  demise: Date;
+  discoveryDate: Date;
+  eggName: string;
+  estAgeWhen1stFound: number;
+  father: string;
+  firstDayAtOrVeryCloseToNest: string;
+  fledged: boolean;
+  gan: string;
+  houseID: string;
+  incubationPeriod: number;
+  interClutchLayingInterval: number;
+  lastDateMated: string;
+  lastTxChangeId: string;
+  layDateIsEstimate: boolean;
+  layIsland: string;
+  layLocationID: string;
+  layYear: number;
+  legColour: string;
+  matedWith: string;
+  matingToLaying: number;
+  matingToNestingDays: number;
+  modifiedByRecordId: string;
+  mother: string;
+  nestingToLaying: number;
+  nestMother: string;
+  oldBirdID: string;
+  plumageColour: string;
+  results: string;
+  sex: string;
+  studbookno: number;
+  transmitterGroup: string;
+  viable: string;
+  historicDataFirstEggWeight: number;
+  birdFeatureList: BirdFeatureEntity[];
+  eggMeasurements: EggMeasurementsEntity;
+  embryoMeasurements: EmbryoMeasurementsEntity;
+  fertilityConfirmed: boolean;
+
+  constructor() {
+    super();
+    this.docType = 'Bird';
+  }
+}

@@ -1,0 +1,15 @@
+<div
+  [ngClass]="{
+    controlblock: true,
+    card: true,
+    'offset-controlblocks': !noOffset,
+    'with-spacer': withSpacer
+  }"
+>
+  <div class="card-header" *ngIf="title">
+    <h2>{{ title }}</h2>
+  </div>
+  <div [ngClass]="{ 'card-body': !noBody }">
+    <ng-content></ng-content>
+  </div>
+</div>

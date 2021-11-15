@@ -1,0 +1,151 @@
+<section>
+  <app-banner title="Sample"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-sample-edit-form
+          [myFormGroup]="myFormGroup"
+        ></app-sample-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer" *ngIf="sampleEntity">
+  <div class="container">
+    <tabset>
+      <tab [heading]="'Comments'">
+        <app-comments-edit
+          [entity]="sampleEntity"
+          field="comments"
+        ></app-comments-edit>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('bloodDetail')" [heading]="'Blood Detail'">
+        <app-blooddetail-edit-form
+          [myFormGroup]="myFormGroup?.get('bloodDetail')"
+        ></app-blooddetail-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('swabDetail')" [heading]="'Swab Detail'">
+        <app-swabdetail-edit-form
+          [myFormGroup]="myFormGroup?.get('swabDetail')"
+        ></app-swabdetail-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('otherDetail')" [heading]="'Other Detail'">
+        <app-otherdetail-edit-form
+          [myFormGroup]="myFormGroup?.get('otherDetail')"
+        ></app-otherdetail-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('spermDetail')" [heading]="'Sperm Detail'">
+        <app-spermdetail-edit-form
+          [myFormGroup]="myFormGroup?.get('spermDetail')"
+        ></app-spermdetail-edit-form>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('haematologyTestList') ||
+          myFormGroup?.get('haematologyComments') ||
+          myFormGroup?.get('smudgeCells')?.value
+        "
+        [heading]="'Haematology'"
+      >
+        <app-haematologytest-edit-form
+          [myFormArray]="myFormGroup?.get('haematologyTestList')"
+        ></app-haematologytest-edit-form>
+        <app-controlblock [noOffset]="true" [withSpacer]="true">
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="smudgeCells"
+              [(ngModel)]="sampleEntity.smudgeCells"
+            />
+            <label class="form-check-label" for="smudgeCells"
+              >Smudge cells</label
+            >
+          </div>
+        </app-controlblock>
+        <app-comments-edit
+          [entity]="sampleEntity"
+          field="haematologyComments"
+        ></app-comments-edit>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('chemistryAssayList') ||
+          myFormGroup?.get('bloodChemistryComments') ||
+          myFormGroup?.get('haemolysed')?.value
+        "
+        [heading]="'Blood Chemistry'"
+      >
+        <app-chemistryassay-edit-form
+          [myFormArray]="myFormGroup?.get('chemistryAssayList')"
+        ></app-chemistryassay-edit-form>
+        <app-controlblock [noOffset]="true" [withSpacer]="true">
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="haemolysed"
+              [(ngModel)]="sampleEntity.haemolysed"
+            />
+            <label class="form-check-label" for="haemolysed">Haemolysed</label>
+          </div>
+        </app-controlblock>
+        <app-comments-edit
+          [entity]="sampleEntity"
+          field="bloodChemistryComments"
+        ></app-comments-edit>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('microbiologyAndParasitologyTestList') ||
+          myFormGroup?.get('microbiologyAndParasitologyComments')
+        "
+        [heading]="'Microbiology & Parasitology'"
+      >
+        <app-microbiologyandparasitologytest-edit-form
+          [myFormArray]="
+            myFormGroup?.get('microbiologyAndParasitologyTestList')
+          "
+        ></app-microbiologyandparasitologytest-edit-form>
+        <app-comments-edit
+          [entity]="sampleEntity"
+          field="microbiologyAndParasitologyComments"
+        ></app-comments-edit>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('spermMeasureList') ||
+          myFormGroup?.get('spermComments')
+        "
+        [heading]="'Sperm'"
+      >
+        <app-spermmeasure-edit-form
+          [myFormArray]="myFormGroup?.get('spermMeasureList')"
+        ></app-spermmeasure-edit-form>
+
+        <app-comments-edit
+          [entity]="sampleEntity"
+          field="spermComments"
+        ></app-comments-edit>
+      </tab>
+    </tabset>
+  </div>
+</section>

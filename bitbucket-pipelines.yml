@@ -1,0 +1,36 @@
+image: ubuntu:20.04
+
+pipelines:
+  custom:
+    build:
+      - parallel:
+        - step:
+            name: Build and Test
+            size: 2x
+            caches:
+              - gradle
+              - angular-client-node
+            script:
+              - apt-get update && apt-get install -y openjdk-11-jdk curl sudo
+              - curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+              - apt-get install -y nodejs
+              - cd angular-client
+              - npm install
+              - cd ..
+              - ./gradlew -PencryptionPassword="`echo $ENCRYPTION_KEY`" clean :couch-server:packageDistribution
+            artifacts:
+              - couch-server/build/dist/dusky-dev-laptop.zip
+              - couch-server/build/dist/dusky-dev-server.zip
+              - couch-server/build/dist/dusky-test-laptop.zip
+              - couch-server/build/dist/dusky-test-server.zip
+              - couch-server/build/dist/dusky-prod-laptop.zip
+              - couch-server/build/dist/dusky-prod-server.zip
+            after-script:
+              - pipe: atlassian/checkstyle-report:0.2.0
+        - step:
+            name: Security Scan
+            script:
+              - pipe: atlassian/git-secrets-scan:0.4.3
+definitions:
+  caches:
+    angular-client-node: angular-client/node_modules

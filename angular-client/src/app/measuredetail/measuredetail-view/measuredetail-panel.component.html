@@ -1,0 +1,60 @@
+<ng-container *ngIf="measuredetailRevision">
+  <div class="row">
+    <app-controlblock
+      title="Head, Body and Wing"
+      class="col-md-4"
+      [noOffset]="true"
+    >
+      <dl class="data-group">
+        <dt>Tail Length</dt>
+        <dd>{{ measuredetailRevision.tailLength | addUnits: 'mm' }}</dd>
+        <dt>Wing Length</dt>
+        <dd>{{ measuredetailRevision.wingLength | addUnits: 'mm' }}</dd>
+        <dt>Sternum-shoulder</dt>
+        <dd>{{ measuredetailRevision.sternumshoulder | addUnits: 'mm' }}</dd>
+        <dt>Culmen And Cere</dt>
+        <dd>{{ measuredetailRevision.culmenAndCere | addUnits: 'mm' }}</dd>
+        <dt>Culmen Length</dt>
+        <dd>{{ measuredetailRevision.culmenLength | addUnits: 'mm' }}</dd>
+        <dt>Culmen Width</dt>
+        <dd>{{ measuredetailRevision.culmenWidth | addUnits: 'mm' }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Femur and Foot" class="col-md-4" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Leg</dt>
+        <dd>
+          <span class="data-tag">{{ measuredetailRevision.leg }}</span>
+        </dd>
+        <dt>Longest Toe</dt>
+        <dd>{{ measuredetailRevision.longestToe | addUnits: 'mm' }}</dd>
+        <dt>Femur</dt>
+        <dd>{{ measuredetailRevision.femur | addUnits: 'mm' }}</dd>
+        <dt>Long Toe Claw</dt>
+        <dd>{{ measuredetailRevision.longToeClaw | addUnits: 'mm' }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Tarsus" class="col-md-4" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Tarsus Depth Squashed</dt>
+        <dd>
+          {{ measuredetailRevision.tarsusDepthSquashed | addUnits: 'mm' }}
+        </dd>
+        <dt>Tarsus Depth Unsquashed</dt>
+        <dd>
+          {{ measuredetailRevision.tarsusDepthUnsquashed | addUnits: 'mm' }}
+        </dd>
+        <dt>Tarsus Length</dt>
+        <dd>{{ measuredetailRevision.tarsusLength | addUnits: 'mm' }}</dd>
+        <dt>Tarsus Width Squashed</dt>
+        <dd>
+          {{ measuredetailRevision.tarsusWidthSquashed | addUnits: 'mm' }}
+        </dd>
+        <dt>Tarsus Width Unsquashed</dt>
+        <dd>
+          {{ measuredetailRevision.tarsusWidthUnsquashed | addUnits: 'mm' }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

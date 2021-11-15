@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="OptionListEntity">
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="name" label="Name" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="optionListItemList" label="Option List Item List"
+    javaType="List&lt;OptionListItemEntity&gt;" jsonType="OptionListItemEntity[]">
+    <Class name="OptionListItemEntity">
+      <Property name="text" label="Text" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel">
+        <DisplayGroup>
+          <DisplayProperty name="text"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel">
+    <DisplayGroup>
+      <DisplayProperty name="docType"/>
+      <DisplayProperty name="id"/>
+      <DisplayProperty name="modifiedByPersonId"/>
+      <DisplayProperty name="modifiedTime"/>
+      <DisplayProperty name="name"/>
+      <DisplayProperty name="revision"/>
+      <DisplayProperty name="optionListItemList"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

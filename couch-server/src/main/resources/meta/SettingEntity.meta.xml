@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="SettingEntity">
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="name" label="Name" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="type" label="Name" javaType="String" jsonType="string"/>
+  <Property name="value" label="Value" javaType="Object" jsonType="Object"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="name"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

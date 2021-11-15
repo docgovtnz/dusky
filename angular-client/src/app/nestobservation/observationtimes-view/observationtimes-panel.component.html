@@ -1,0 +1,25 @@
+<ng-container *ngIf="observationtimesRevision">
+  <div class="row">
+    <app-controlblock
+      title="Observation Times"
+      class="col-md-6"
+      [noOffset]="true"
+    >
+      <dl class="data-group">
+        <dt>Finish observation time</dt>
+        <dd>
+          {{
+            observationtimesRevision.finishObservationTime
+              | date: 'dd/MM/yyyy HH:mm'
+          }}
+        </dd>
+        <dt>Inspection time</dt>
+        <dd>
+          {{
+            observationtimesRevision.inspectionTime | date: 'dd/MM/yyyy HH:mm'
+          }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

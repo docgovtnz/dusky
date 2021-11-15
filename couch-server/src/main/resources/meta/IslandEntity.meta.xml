@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="IslandEntity">
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="lowerEasting" label="Lower easting" javaType="Float" jsonType="number"/>
+  <Property name="lowerNorthing" label="Lower northing" javaType="Float" jsonType="number"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="name" label="Name" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="upperEasting" label="Upper easting" javaType="Float" jsonType="number"/>
+  <Property name="upperNorthing" label="Upper northing" javaType="Float" jsonType="number"/>
+  <Property name="magneticDeclination" label="Magnetic Declination" javaType="Float"
+    jsonType="number"/>
+  <Property name="magneticDeclinationAsOfYear" label="Magnetic Declination As Of Year"
+    javaType="Integer" jsonType="number"/>
+  <Property name="islandId" label="ID" javaType="Integer" jsonType="number"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="name"/>
+      <DisplayProperty name="islandId"/>
+      <DisplayProperty name="lowerEasting"/>
+      <DisplayProperty name="lowerNorthing"/>
+      <DisplayProperty name="upperEasting"/>
+      <DisplayProperty name="upperNorthing"/>
+      <DisplayProperty name="magneticDeclination"/>
+      <DisplayProperty name="magneticDeclinationAsOfYear"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

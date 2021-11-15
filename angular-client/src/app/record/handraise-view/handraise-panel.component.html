@@ -1,0 +1,67 @@
+<ng-container *ngIf="handraiseRevision">
+  <div class="row">
+    <app-controlblock
+      title="Hand Feed"
+      [noOffset]="true"
+      class="col-md-4"
+      [withSpacer]="true"
+    >
+      <dl class="data-group">
+        <dt>Crop Status</dt>
+        <dd>
+          <span class="data-tag">{{ handraiseRevision.cropStatus }}</span>
+        </dd>
+        <dt>Volume Fed</dt>
+        <dd>
+          {{ handraiseRevision.amountFed | addUnits: 'ml' }}
+        </dd>
+        <dt>Percent Solids</dt>
+        <dd>
+          {{ handraiseRevision.percentSolids | addUnits: '%' }}
+        </dd>
+        <dt>Number of Feeds</dt>
+        <dd>
+          {{ handraiseRevision.numberOfFeeds }}
+        </dd>
+        <dt>Relative Humidity</dt>
+        <dd>
+          {{ handraiseRevision.relativeHumidity | addUnits: '%' }}
+        </dd>
+        <dt>Hand-Feeding Formula</dt>
+        <dd>
+          <span class="data-tag">{{
+            handraiseRevision.handRearingFormula
+          }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-4">
+      <dl class="data-group">
+        <dt>Largest Meal</dt>
+        <dd>{{ handraiseRevision.largestMeal | addUnits: 'ml' }}</dd>
+        <dt>Dietary Fibre</dt>
+        <dd>{{ handraiseRevision.dietaryFibre | addUnits: '%' }}</dd>
+        <dt>Temperature</dt>
+        <dd>{{ handraiseRevision.temp | addUnits: '°C' }}</dd>
+        <dt>Brooder Type</dt>
+        <dd>
+          <span class="data-tag">{{ handraiseRevision.brooderType }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Medication" [noOffset]="true" class="col-md-4">
+      <dl class="data-group">
+        <dt>Medication</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="medication"
+            [(ngModel)]="handraiseRevision.medication"
+          />
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

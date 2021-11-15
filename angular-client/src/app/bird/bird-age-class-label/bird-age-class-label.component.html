@@ -1,0 +1,31 @@
+<div>
+  <span class="data-tag" *ngIf="ageClass">{{ ageClass }}</span>
+
+  <span *appPermission="'LIFESTAGE_EDIT'">
+    <div class="btn-group ml-3" role="group" *ngIf="ageClass && !pastRevision">
+      <button
+        class="btn btn-primary btn-age-class"
+        (click)="onChangeAgeClass(-1)"
+      >
+        <fa-icon icon="minus" aria-hidden="true"></fa-icon>
+        <span class="sr-only">Decrease</span>
+      </button>
+      <button
+        class="btn btn-primary btn-age-class"
+        (click)="onChangeAgeClass(+1)"
+      >
+        <fa-icon icon="plus" aria-hidden="true"></fa-icon>
+        <span class="sr-only">Increase</span>
+      </button>
+    </div>
+  </span>
+
+  <img
+    *ngIf="!pastRevision && !ageClass"
+    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+  />
+
+  <div *ngIf="pastRevision" class="text-secondary text-sm-left">
+    <em>Not available for revisions</em>
+  </div>
+</div>

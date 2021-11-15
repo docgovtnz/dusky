@@ -1,0 +1,20 @@
+{
+  "/api": {
+    "target": "https://localhost:8443",
+    "secure": false
+  },
+
+  "/esri": {
+    "target": "https://localhost:8443",
+    "secure": false
+  },
+
+  "/MapIcons": {
+    "target": "https://localhost:8443",
+    "secure": false
+  },
+
+  "/arcgis": {
+    "target": "https://services.arcgisonline.co.nz"
+  }
+}

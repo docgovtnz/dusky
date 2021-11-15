@@ -1,0 +1,260 @@
+<section>
+  <app-banner title="Birds"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="birdCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Details" class="col-md-6">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="birdNames"> Bird Names </label>
+                  <app-bird-name-select-multi
+                    id="birdNames"
+                    [(selectedBirds)]="birdCriteria.birdNames"
+                    [autofocus]="true"
+                    (selectedBirdsChange)="onBirdSelectionChanged()"
+                  ></app-bird-name-select-multi>
+                </div>
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="showAlive"
+                      [(ngModel)]="birdCriteria.showAlive"
+                    />
+                    <label class="form-check-label" for="showAlive">
+                      Alive
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="showDead"
+                      [(ngModel)]="birdCriteria.showDead"
+                    />
+                    <label class="form-check-label" for="showDead">
+                      Dead
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="sex"> Sex </label>
+                  <select
+                    class="custom-select"
+                    id="sex"
+                    [(ngModel)]="birdCriteria.sex"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('SexOptions')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="ageClass"> Age Class </label>
+                  <select
+                    class="custom-select"
+                    id="ageClass"
+                    [(ngModel)]="birdCriteria.ageClass"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('AgeClasses')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Locations" class="col-md-3">
+            <div class="form-group">
+              <label for="currentIsland"> Current Island </label>
+              <app-type-ahead
+                id="currentIsland"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="birdCriteria.currentIsland"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="currentLocationID"> Location </label>
+              <app-location-name-id-select
+                id="currentLocationID"
+                [(locationID)]="birdCriteria.currentLocationID"
+                (locationIDChange)="doSearch()"
+                (keyup.enter)="prevent($event)"
+              ></app-location-name-id-select>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Transmitter" class="col-md-3">
+            <div class="form-group">
+              <label for="transmitterGroup"> Transmitter group </label>
+              <select
+                class="custom-select"
+                id="transmitterGroup"
+                [(ngModel)]="birdCriteria.transmitterGroup"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('TransmitterGroups')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <div class="btn-group btn-block" dropdown>
+          <button
+            id="graphsBtn"
+            dropdownToggle
+            type="button"
+            class="dropdown-toggle"
+            aria-controls="dropdown-basic"
+          >
+            Graphs&nbsp;<span class="caret"></span>
+          </button>
+          <ul
+            id="dropdown-basic"
+            *dropdownMenu
+            class="dropdown-menu"
+            role="menu"
+            aria-labelledby="button-basic"
+          >
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="birdEggWeightGraph($event)"
+                >Egg Weight</a
+              >
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="birdWeightGraph($event)"
+                >Bird Weight
+              </a>
+            </li>
+          </ul>
+        </div>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">House Name</th>
+            <th scope="col">House ID</th>
+            <th scope="col">Current Island</th>
+            <th scope="col">Current Location</th>
+            <th scope="col">Sex</th>
+            <th scope="col">Alive</th>
+            <th scope="col">Age Class</th>
+            <th scope="col">Age</th>
+            <th scope="col">Transmitter group</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="12">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="12">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.birdName }}</td>
+            <td>{{ item.houseID }}</td>
+            <td>{{ item.currentIsland }}</td>
+            <td>{{ item.currentLocation }}</td>
+            <td>{{ item.sex }}</td>
+            <td>
+              <ng-container *ngIf="item.alive"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Alive</span></ng-container
+              >
+            </td>
+            <td>{{ item.ageClass }}</td>
+            <td>
+              <app-age-label [ageInDays]="item.ageInDays"></app-age-label>
+            </td>
+            <td>{{ item.transmitterGroup }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="birdCriteria.pageSize"
+          [(ngModel)]="birdCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

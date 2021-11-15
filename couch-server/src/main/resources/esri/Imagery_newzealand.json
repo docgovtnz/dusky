@@ -1,0 +1,170 @@
+{
+  "currentVersion": 10.5,
+  "serviceDescription": "This map was last updated in 2018 representing a range of content from the last few years. It includes New Zealand's most current publicly owned aerial imagery, covering 95 per cent of the country. Map service representing imagery footprints can be accessed here: https://services.arcgisonline.co.nz/arcgis/rest/services/Imagery/newzealand/MapServer/0 This service can be accessed as an OGC WMTS service here: http://services.arcgisonline.co.nz/arcgis/rest/services/Imagery/newzealand/MapServer/WMTS/1.0.0/WMTSCapabilities.xml The Scheduled November 2016 update features 20 new imagery sets put into the basemap. To see an app that shows the new updates : http://www.arcgis.com/apps/MapTools/index.html?appid=4668b5198e7d4680bc03abe4a553a5e1 To see the most recent imagery released by LINZ: http://data.linz.govt.nz/data/category/aerial-photos/?s=n List of new scheduled updates courtesy of Land Information New Zealand: Northland 0.1m Urban Aerial Photos (2014-15) http://data.linz.govt.nz/layer/3399-northland-01m-urban-aerial-photos-2014-15 Auckland 0.075 Urban 2015 Waikato District 0.1m Urban_2014 http://data.linz.govt.nz/layer/2603-waikato-district-01m-urban-aerial-photos-2014/ Hamilton 0.1m Urban_2015 http://data.linz.govt.nz/layer/3398-hamilton-01m-urban-aerial-photos-2015/ Hawkes Bay 0.3m Rural Aerial Photos (2014-15) Wairoa 0.1m Urban Aerial Photos (2014-15) http://data.linz.govt.nz/layer/3400-wairoa-01m-urban-aerial-photos-2014-15/ Hastings 0.1m urban aerial photos (2014-15) Whanganui 0.1m Urban Aerial Photos (2015-16) Palmerston North City 0.125m Urban Aerial Photos (2014-15) Marlborough 0.2m Rural Aerial Photos (2015-2016) Tasman 0.3m Rural Aerial Photos (2015-16) West Coast 0.3m Rural Aerial Photos (2015-16) Canterbury 0.3m Rural Aerial Photos (2014-2015) http://data.linz.govt.nz/layer/2602-canterbury-03m-rural-aerial-photos-2014-15/ Waimakariri 0.075m Urban Aerial Photos (2015-16) http://data.linz.govt.nz/layer/3452-waimakariri-0075m-urban-aerial-photos-2015-16/ Christchurch City 0.075m Urban Aerial Photos (2015-16) http://data.linz.govt.nz/layer/3451-christchurch-0075m-urban-aerial-photos-2015-16/ Canterbury 0.3m Rural Aerial Photos (2015-16) Southland & Central Otago 0.4m Rural (2014) http://data.linz.govt.nz/layer/2344-southland-central-otago-04m-rural-aerial-photos-2013-14/ Southland & Central Otago Rural 2015 http://data.linz.govt.nz/layer/2601-southland-central-otago-04m-rural-aerial-photos-2015/ Invercargill 0.1m Urban Aerial Photos (2015-16) Invercargill 0.05m Urban Aerial Photos (2015-16)",
+  "mapName": "Layers",
+  "description": "",
+  "copyrightText": "Sourced from the LINZ Data Service and licensed for re-use under the Creative Commons Attribution 4.0 New Zealand licence ",
+  "supportsDynamicLayers": false,
+  "layers": [
+    {
+      "id": 0,
+      "name": "Metadata Footprints",
+      "parentLayerId": -1,
+      "defaultVisibility": false,
+      "subLayerIds": null,
+      "minScale": 0,
+      "maxScale": 0
+    }
+  ],
+  "tables": [],
+  "spatialReference": {
+    "wkid": 2193,
+    "latestWkid": 2193
+  },
+  "singleFusedMapCache": true,
+  "tileInfo": {
+    "rows": 256,
+    "cols": 256,
+    "dpi": 96,
+    "format": "MIXED",
+    "compressionQuality": 90,
+    "origin": {
+      "x": -4020900,
+      "y": 19998100
+    },
+    "spatialReference": {
+      "wkid": 2193,
+      "latestWkid": 2193
+    },
+    "lods": [
+      {
+        "level": 0,
+        "resolution": 4891.96981024998,
+        "scale": 1.8489297737236E7
+      },
+      {
+        "level": 1,
+        "resolution": 2445.98490512499,
+        "scale": 9244648.868618
+      },
+      {
+        "level": 2,
+        "resolution": 1222.992452562495,
+        "scale": 4622324.434309
+      },
+      {
+        "level": 3,
+        "resolution": 611.4962262813797,
+        "scale": 2311162.217155
+      },
+      {
+        "level": 4,
+        "resolution": 305.74811314055756,
+        "scale": 1155581.108577
+      },
+      {
+        "level": 5,
+        "resolution": 152.87405657041106,
+        "scale": 577790.554289
+      },
+      {
+        "level": 6,
+        "resolution": 76.43702828507324,
+        "scale": 288895.277144
+      },
+      {
+        "level": 7,
+        "resolution": 38.21851414253662,
+        "scale": 144447.638572
+      },
+      {
+        "level": 8,
+        "resolution": 19.10925707126831,
+        "scale": 72223.819286
+      },
+      {
+        "level": 9,
+        "resolution": 9.554628535634155,
+        "scale": 36111.909643
+      },
+      {
+        "level": 10,
+        "resolution": 4.77731426794937,
+        "scale": 18055.954822
+      },
+      {
+        "level": 11,
+        "resolution": 2.388657133974685,
+        "scale": 9027.977411
+      },
+      {
+        "level": 12,
+        "resolution": 1.1943285668550503,
+        "scale": 4513.988705
+      },
+      {
+        "level": 13,
+        "resolution": 0.5971642835598172,
+        "scale": 2256.994353
+      },
+      {
+        "level": 14,
+        "resolution": 0.29858214164761665,
+        "scale": 1128.497176
+      },
+      {
+        "level": 15,
+        "resolution": 0.14929107082380833,
+        "scale": 564.248588
+      },
+      {
+        "level": 16,
+        "resolution": 0.07464553541190416,
+        "scale": 282.124294
+      }
+    ]
+  },
+  "initialExtent": {
+    "xmin": -3489392.318121234,
+    "ymin": 2845019.1581744337,
+    "xmax": 6679382.260785056,
+    "ymax": 8128346.553244411,
+    "spatialReference": {
+      "wkid": 2193,
+      "latestWkid": 2193
+    }
+  },
+  "fullExtent": {
+    "xmin": 215459.48484141752,
+    "ymin": 4670946.889850238,
+    "xmax": 2974530.4578224057,
+    "ymax": 6302418.821568606,
+    "spatialReference": {
+      "wkid": 2193,
+      "latestWkid": 2193
+    }
+  },
+  "minScale": 1.8489297737236E7,
+  "maxScale": 282.124294,
+  "units": "esriMeters",
+  "supportedImageFormatTypes": "PNG32,PNG24,PNG,JPG,DIB,TIFF,EMF,PS,PDF,GIF,SVG,SVGZ,BMP",
+  "documentInfo": {
+    "Title": "",
+    "Author": "",
+    "Comments": "New Imagery",
+    "Subject": "New Imagery",
+    "Category": "",
+    "AntialiasingMode": "None",
+    "TextAntialiasingMode": "Force",
+    "Keywords": "Imagery,Basemap"
+  },
+  "capabilities": "Map,Query,Data",
+  "supportedQueryFormats": "JSON, AMF, geoJSON",
+  "exportTilesAllowed": true,
+  "maxExportTilesCount": 100000,
+  "supportsDatumTransformation": true,
+  "maxRecordCount": 1000,
+  "maxImageHeight": 4096,
+  "maxImageWidth": 4096,
+  "supportedExtensions": ""
+}

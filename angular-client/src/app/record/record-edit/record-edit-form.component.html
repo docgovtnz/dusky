@@ -1,0 +1,286 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Bird'"
+          [propertyName]="'birdID'"
+          [myFormControl]="myFormGroup.get('birdID')"
+        >
+          <app-bird-name-id-select-control
+            id="birdID"
+            formControlName="birdID"
+            [autofocus]="true"
+          ></app-bird-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="
+            myFormGroup.get('transferDetail') ? 'Transfer to Island' : 'Island'
+          "
+          [propertyName]="'island'"
+          [myFormControl]="myFormGroup.get('island')"
+        >
+          <app-type-ahead-control
+            id="island"
+            formControlName="island"
+            [optionType]="'IslandName'"
+          ></app-type-ahead-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Mapping Method'"
+          [propertyName]="'mappingMethod'"
+          [myFormControl]="myFormGroup.get('mappingMethod')"
+        >
+          <select
+            class="custom-select"
+            id="mappingMethod"
+            formControlName="mappingMethod"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('MappingMethods') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div
+        *ngIf="recordEntity.recordType != 'Triangulation'"
+        class="form-group"
+      >
+        <app-widget
+          [label]="'Signal Received From Location'"
+          [propertyName]="'signalRcvdLocation'"
+          [myFormControl]="myFormGroup.get('signalRcvdLocation')"
+        >
+          <app-location-name-id-select-control
+            id="signalRcvdLocation"
+            formControlName="signalRcvdLocation"
+          ></app-location-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="
+            myFormGroup.get('transferDetail')
+              ? 'Transfer to Location'
+              : 'Bird Location'
+          "
+          [propertyName]="'locationID'"
+          [myFormControl]="myFormGroup.get('locationID')"
+        >
+          <app-location-name-id-select-control
+            id="locationID"
+            formControlName="locationID"
+          ></app-location-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Easting'"
+          [propertyName]="'easting'"
+          [myFormControl]="myFormGroup.get('easting')"
+        >
+          <input
+            class="form-control"
+            id="easting"
+            formControlName="easting"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Northing'"
+          [propertyName]="'northing'"
+          [myFormControl]="myFormGroup.get('northing')"
+        >
+          <input
+            class="form-control"
+            id="northing"
+            formControlName="northing"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div
+        *ngIf="recordEntity.recordType == 'Triangulation'"
+        class="form-group"
+      >
+        <app-widget
+          [label]="'Magnetic Declination (°)'"
+          [propertyName]="'magneticDeclination'"
+          [myFormControl]="myFormGroup.get('magneticDeclination')"
+        >
+          <input
+            class="form-control"
+            id="magneticDeclination"
+            formControlName="magneticDeclination"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div
+        *ngIf="recordEntity.recordType == 'Triangulation'"
+        class="form-group"
+      >
+        <app-widget
+          [label]="'Magnetic Declination Year'"
+          [propertyName]="'magneticDeclinationAsOfYear'"
+          [myFormControl]="myFormGroup.get('magneticDeclinationAsOfYear')"
+        >
+          <input
+            class="form-control"
+            id="magneticDeclinationAsOfYear"
+            formControlName="magneticDeclinationAsOfYear"
+            type="number"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Event" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Date Time'"
+          [propertyName]="'dateTime'"
+          [myFormControl]="myFormGroup.get('dateTime')"
+        >
+          <app-date-time-control
+            id="dateTime"
+            formControlName="dateTime"
+            [mandatoryTime]="true"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Activity'"
+          [propertyName]="'activity'"
+          [myFormControl]="myFormGroup.get('activity')"
+        >
+          <select
+            class="custom-select"
+            id="activity"
+            formControlName="activity"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('RecordActivitySelect')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Reason'"
+          [propertyName]="'reason'"
+          [myFormControl]="myFormGroup.get('reason')"
+        >
+          <select class="custom-select" id="reason" formControlName="reason">
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions(
+                  'RecordReasonSelect',
+                  myFormGroup.get('reason').value,
+                  { recordType: recordEntity.recordType }
+                ) | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Sub Reason'"
+          [propertyName]="'subReason'"
+          [myFormControl]="myFormGroup.get('subReason')"
+        >
+          <select
+            class="custom-select"
+            id="subReason"
+            formControlName="subReason"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions(
+                  'RecordSubReasonSelect',
+                  myFormGroup.get('subReason').value,
+                  {
+                    recordType: recordEntity.recordType,
+                    reason: myFormGroup.get('reason').value
+                  }
+                ) | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Significant Event'"
+          [propertyName]="'significantEvent'"
+          [myFormControl]="myFormGroup.get('significantEvent')"
+          [isCheckBox]="true"
+          class="form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="significantEvent"
+            formControlName="significantEvent"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Errol'"
+          [propertyName]="'errol'"
+          [myFormControl]="myFormGroup.get('errol')"
+          [isCheckBox]="true"
+          class="form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="errol"
+            formControlName="errol"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Observer Record" class="col-md-6">
+      <div class="form-group">
+        <app-widget
+          [label]="'Observer List'"
+          [propertyName]="'observerList'"
+          [myFormControl]="myFormGroup.get('observerList')"
+        >
+          <app-observer-edit
+            id="observerList"
+            [myFormArray]="myFormGroup.get('observerList')"
+            [recordType]="recordEntity.recordType"
+          ></app-observer-edit>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

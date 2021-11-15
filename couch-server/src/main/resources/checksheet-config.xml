@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ChecksheetConfig>
+  <mappings>
+    <mapping recordType="Capture" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Abandoned" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Banding" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Captivity" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Dead" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Discovery" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Ex-handraise &lt;150 days" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="First tx fitting" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Handraise" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Harness check" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Health" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="In captivity" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Microchip" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Nest check" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Sample" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Transfer" checksheetSymbol="C"/>
+    <mapping recordType="Capture" reason="Tx change" checksheetSymbol="C"/>
+    <mapping recordType="Encounter" checksheetSymbol="EB"/>
+    <mapping recordType="Encounter" reason="Fledged" checksheetSymbol="EB"/>
+    <mapping recordType="Encounter" reason="Home range" checksheetSymbol="EB"/>
+    <mapping recordType="Encounter" reason="Independent" checksheetSymbol="EB"/>
+    <mapping recordType="Encounter" reason="Outside nest at night (1st night)"
+      checksheetSymbol="EB"/>
+    <mapping recordType="Encounter" reason="Radio Tracking" checksheetSymbol="EB"/>
+    <mapping recordType="Encounter" reason="Sighting" checksheetSymbol="EB"/>
+    <mapping recordType="Encounter" reason="Visit" checksheetSymbol="EB"/>
+    <mapping recordType="Nest found" checksheetSymbol="EB"/>
+    <mapping recordType="Signal only" checksheetSymbol="SO"/>
+    <mapping recordType="Signal only" reason="Sky Ranger" checksheetSymbol="SO"/>
+    <mapping recordType="Signal only" reason="Manual" checksheetSymbol="SO"/>
+    <mapping recordType="Snark" checksheetSymbol="SN"/>
+    <mapping recordType="Snark" reason="Autoweigh" checksheetSymbol="SN"/>
+    <mapping recordType="Snark" reason="Snark at hopper" checksheetSymbol="SN"/>
+    <mapping recordType="Snark" reason="Snark at nest" checksheetSymbol="SN"/>
+    <mapping recordType="Snark" reason="Snark at roost" checksheetSymbol="SN"/>
+    <mapping recordType="Snark" reason="Snark at T&amp;B" checksheetSymbol="SN"/>
+    <mapping recordType="Transfer" checksheetSymbol="X"/>
+    <mapping recordType="Transfer" reason="Advocacy" checksheetSymbol="X"/>
+    <mapping recordType="Transfer" reason="Hand-rearing" checksheetSymbol="X"/>
+    <mapping recordType="Transfer" reason="Health" checksheetSymbol="X"/>
+    <mapping recordType="Transfer" reason="Population management" checksheetSymbol="X"/>
+    <mapping recordType="Transfer" reason="Release" checksheetSymbol="X"/>
+    <mapping recordType="Transfer" reason="Released from captivity" checksheetSymbol="X"/>
+    <mapping recordType="Transmitter" checksheetSymbol="SO"/>
+    <mapping recordType="Transmitter" reason="Checkmate" checksheetSymbol="CM"/>
+    <mapping recordType="Transmitter" reason="Egg timer" checksheetSymbol="ET"/>
+    <mapping recordType="Transmitter" reason="Standard" checksheetSymbol="ST"/>
+    <mapping recordType="Transmitter" reason="Tx activity" checksheetSymbol="TA"/>
+    <mapping recordType="Triangulation" checksheetSymbol="&#9651;"/>
+    <mapping recordType="NoraNet Detection" checksheetSymbol="&#35;"/>
+  </mappings>
+  <symbolPriorities>
+    <entry>
+      <key>C</key>
+      <value>9</value>
+    </entry>
+    <entry>
+      <key>CM</key>
+      <value>5</value>
+    </entry>
+    <entry>
+      <key>ET</key>
+      <value>5</value>
+    </entry>
+    <entry>
+      <key>ST</key>
+      <value>5</value>
+    </entry>
+    <entry>
+      <key>TA</key>
+      <value>4</value>
+    </entry>
+    <entry>
+      <key>SN</key>
+      <value>1</value>
+    </entry>
+    <entry>
+      <key>SO</key>
+      <value>3</value>
+    </entry>
+    <entry>
+      <key>&#9651;</key>
+      <value>6</value>
+    </entry>
+    <entry>
+      <key>EB</key>
+      <value>7</value>
+    </entry>
+    <entry>
+      <key>X</key>
+      <value>8</value>
+    </entry>
+    <entry>
+      <key>&#35;</key>
+      <value>2</value>
+    </entry>
+  </symbolPriorities>
+</ChecksheetConfig>

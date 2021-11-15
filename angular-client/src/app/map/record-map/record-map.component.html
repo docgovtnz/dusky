@@ -1,0 +1,7 @@
+<ng-container *ngIf="recordSearchResults">
+  <app-esri-map
+    [displayLocationTypeCheckBoxes]="false"
+    [birdLocations]="recordSearchResults"
+    [selectedIslandName]="firstIslandSearchResult"
+  ></app-esri-map>
+</ng-container>

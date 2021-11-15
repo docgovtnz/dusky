@@ -1,0 +1,14 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+
+.exclude {
+  text-decoration: line-through;
+  background-color: $gray-300;
+}
+.duplicate {
+  background-color: lighten($info, 0.5);
+}
+.lockRecord {
+  color: lightslategrey;
+  font-weight: bold;
+}

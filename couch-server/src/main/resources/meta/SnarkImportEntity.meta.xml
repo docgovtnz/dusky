@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="SnarkImportEntity">
+  <Property name="activityType" label="Activity Type" javaType="String" jsonType="string"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="island" label="Island" javaType="String" jsonType="string"/>
+  <Property name="locationID" label="Location ID" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="observerPersonID" label="Observer Person ID" javaType="String" jsonType="string"/>
+  <Property name="qualityOverride" label="Quality Override" javaType="Integer" jsonType="number"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="snarkFileContent" label="Snark File Content" javaType="String" jsonType="string"/>
+  <Property name="snarkFileHash" label="Snark File" javaType="String" jsonType="string"/>
+  <Property name="snarkFileName" label="Snark File Name" javaType="String" jsonType="string"/>
+  <Property name="showLockRecords" label="Show Lock Records" javaType="Boolean" jsonType="boolean"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="locationID"/>
+      <DisplayProperty name="island"/>
+      <DisplayProperty name="observerPersonID"/>
+      <DisplayProperty name="activityType"/>
+      <DisplayProperty name="qualityOverride"/>
+      <DisplayProperty name="snarkFileContent"/>
+      <DisplayProperty name="snarkFileName"/>
+      <DisplayProperty name="showLockRecords"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

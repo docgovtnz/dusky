@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="FeedOutEntity" context="Save">
+
+  <Property name="locationID">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="dateIn">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="dateOut">
+    <RequiredRule/>
+    <FeedOutRule/>
+    <DatePastRule/>
+  </Property>
+
+  <Property name="foodTallyList">
+    <Class targetClassName="FoodTallyEntity">
+      <Property name="name">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="targetBirdList">
+    <Class targetClassName="TargetBirdEntity">
+      <Property name="birdID">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+</Class>

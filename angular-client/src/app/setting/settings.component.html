@@ -1,0 +1,239 @@
+<section>
+  <app-banner title="Settings"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <app-controlblock
+        title="Configurable Lists"
+        class="col-md-3"
+        [noBody]="true"
+      >
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a routerLink="/settings/island">Islands</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings/txmortality">Tx Mortalities</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings/optionlist/DrugNames">Medication/Drugs</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings/optionlist/HandRearingFormula"
+              >Hand-Feeding Formula</a
+            >
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings/optionlist/SupplementaryFeedingFoodType"
+              >Feed-Out Food Type</a
+            >
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings/optionlist/RiggingList">Tx Rigging</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings/optionlist/SoftwareList">Tx Software</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings/optionlist/BodyPartOptions"
+              >Bird Features</a
+            >
+          </li>
+        </ul>
+      </app-controlblock>
+      <app-controlblock title="Global Settings" class="col-md-3">
+        <fieldset>
+          <legend>Age Class</legend>
+          <div class="form-group">
+            <label for="AGE_CLASS_JUVENILE_THRESHOLD_DAYS">
+              Juvenile Threshold (days)
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="AGE_CLASS_JUVENILE_THRESHOLD_DAYS"
+              [(ngModel)]="settings['AGE_CLASS_JUVENILE_THRESHOLD_DAYS']"
+            />
+          </div>
+          <div class="form-group">
+            <label for="AGE_CLASS_ADULT_THRESHOLD_YEARS">
+              Adult Threshold (years)
+            </label>
+            <input
+              type="number"
+              step="any"
+              class="form-control"
+              id="AGE_CLASS_ADULT_THRESHOLD_YEARS"
+              [(ngModel)]="settings['AGE_CLASS_ADULT_THRESHOLD_YEARS']"
+              numeric
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Mating Quality</legend>
+          <div class="form-group">
+            <label for="MATING_QUALITY_MEDIUM_THRESHOLD">
+              Medium Threshold
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="MATING_QUALITY_MEDIUM_THRESHOLD"
+              [(ngModel)]="settings['MATING_QUALITY_MEDIUM_THRESHOLD']"
+            />
+          </div>
+          <div class="form-group">
+            <label for="MATING_QUALITY_HIGH_THRESHOLD"> High Threshold </label>
+            <input
+              type="number"
+              class="form-control"
+              id="MATING_QUALITY_HIGH_THRESHOLD"
+              [(ngModel)]="settings['MATING_QUALITY_HIGH_THRESHOLD']"
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Weight Graph Settings</legend>
+          <div class="form-group">
+            <label for="WEIGHT_GRAPH_PC_FROM_MEAN_HIGH">
+              Weight graph % from mean (high)
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="WEIGHT_GRAPH_PC_FROM_MEAN_HIGH"
+              [(ngModel)]="settings['WEIGHT_GRAPH_PC_FROM_MEAN_HIGH']"
+            />
+          </div>
+          <div class="form-group">
+            <label for="WEIGHT_GRAPH_PC_FROM_MEAN_LOW">
+              Weight graph % from mean (low)
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="WEIGHT_GRAPH_PC_FROM_MEAN_LOW"
+              [(ngModel)]="settings['WEIGHT_GRAPH_PC_FROM_MEAN_LOW']"
+            />
+          </div>
+          <div class="form-group">
+            <label for="WEIGHT_DELTA_ROLLING_MIN_WINDOW_HRS">
+              Weight delta rolling minimum window (hrs)
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="WEIGHT_DELTA_ROLLING_MIN_WINDOW_HRS"
+              [(ngModel)]="settings['WEIGHT_DELTA_ROLLING_MIN_WINDOW_HRS']"
+            />
+          </div>
+          <div class="form-group">
+            <label for="DEFAULT_FRESH_WEIGHT_COEFFICIENT">
+              Default fresh weight coefficient x10<sup>4</sup>
+            </label>
+            <input
+              type="number"
+              step="any"
+              class="form-control"
+              id="DEFAULT_FRESH_WEIGHT_COEFFICIENT"
+              [(ngModel)]="settings['DEFAULT_FRESH_WEIGHT_COEFFICIENT']"
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Help Settings</legend>
+          <div class="form-group">
+            <label for="HELP"> Help Link </label>
+            <input
+              class="form-control"
+              id="HELP"
+              [(ngModel)]="settings['HELP']"
+            />
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <button
+            id="saveBtn"
+            class="btn btn-info btn-block"
+            (click)="onSave()"
+          >
+            Save
+          </button>
+        </div>
+      </app-controlblock>
+      <app-controlblock
+        title="Environment Properties"
+        class="col-md-3"
+        *ngIf="serverMode === 'Client'"
+      >
+        <ng-container *appPermission="'COUCHBASE_PASSWORD_VIEW'">
+          <app-password-toggle
+            label="Couchbase Administrator Password"
+            passwordType="COUCHBASE"
+          ></app-password-toggle>
+          <app-password-toggle
+            label="Couchbase Bucket Password"
+            passwordType="BUCKET"
+          ></app-password-toggle>
+        </ng-container>
+      </app-controlblock>
+      <app-controlblock title="Caching" class="col-md-3">
+        <button
+          type="button"
+          class="btn btn-info btn-block"
+          (click)="refreshCache()"
+        >
+          Refresh Cache
+        </button>
+      </app-controlblock>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  bsModal
+  #refreshCacheModal="bs-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-static-name"
+>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        Refreshing Cache
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="refreshCacheModal.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Refreshing caches</p>
+        <progressbar [max]="max" [value]="done">
+          <span class="text-nowrap">{{ done }} / {{ max }}</span>
+        </progressbar>
+        <br />
+        <button
+          type="button"
+          class="btn btn-info btn-block"
+          (click)="refreshCacheModal.hide()"
+        >
+          Close
+          <span style="font-size: xx-small">{{
+            done < max ? '(refresh will continue in background)' : ''
+          }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

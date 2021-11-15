@@ -1,0 +1,348 @@
+<ng-progress [spinner]="false"></ng-progress>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <span
+      class="navbar-text application-status-short"
+      *ngIf="applicationStatus"
+    >
+      {{ applicationStatus.version
+      }}{{ applicationStatus.environment | slice: 0:1 }}
+    </span>
+    <a class="navbar-brand" [routerLink]="" (click)="onClickLogo()">
+      <img src="/assets/images/logo-kakapo.png" alt="Kākāpō Database" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- Nav (left) -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link"
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            title="Home"
+          >
+            <fa-icon icon="home" aria-hidden="true"></fa-icon>
+            <span class="sr-only">Home</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a class="nav-link" routerLink="/bird" routerLinkActive="active">
+            Bird
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a class="nav-link" routerLink="/idsearch" routerLinkActive="active">
+            ID
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a class="nav-link" routerLink="/record" routerLinkActive="active">
+            <span class="d-lg-none d-xl-inline">Record</span
+            ><span class="d-none d-lg-inline d-xl-none">Rec</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a class="nav-link" routerLink="/location" routerLinkActive="active">
+            <span class="d-lg-none d-xl-inline">Location</span
+            ><span class="d-none d-lg-inline d-xl-none">Loc</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link"
+            routerLink="/transmitter"
+            routerLinkActive="active"
+          >
+            <span class="d-lg-none d-xl-inline">Transmitter</span
+            ><span class="d-none d-lg-inline d-xl-none">Tx</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a class="nav-link" routerLink="/person" routerLinkActive="active">
+            <span class="d-lg-none d-xl-inline">People</span
+            ><span class="d-none d-lg-inline d-xl-none">Peop</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a class="nav-link" routerLink="/feedout" routerLinkActive="active">
+            <span class="d-lg-none d-xl-inline">Feed&nbsp;Out</span
+            ><span class="d-none d-lg-inline d-xl-none">Feed&nbsp;O</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link"
+            routerLink="/snarkactivity"
+            routerLinkActive="active"
+          >
+            <span class="d-lg-none d-xl-inline">Snark</span
+            ><span class="d-none d-lg-inline d-xl-none">Sna</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link"
+            routerLink="/nestobservation"
+            routerLinkActive="active"
+          >
+            Nest
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a class="nav-link" routerLink="/sample" routerLinkActive="active">
+            <span class="d-lg-none d-xl-inline">Sample</span
+            ><span class="d-none d-lg-inline d-xl-none">Samp</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link dropdown-toggle"
+            id="noranetDropdown"
+            *ngIf="isDisplayMenuItems()"
+            (click)="(false)"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            [class.active]="router.isActive('/noranet')"
+          >
+            <span class="d-lg-none d-xl-inline">NoraNet</span
+            ><span class="d-none d-lg-inline d-xl-none">Nora</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <a
+              class="dropdown-item"
+              routerLink="/noranet"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Birds
+            </a>
+            <a
+              class="dropdown-item"
+              routerLink="/noranet/snark"
+              routerLinkActive="active"
+            >
+              Snarks
+            </a>
+            <a
+              class="dropdown-item"
+              routerLink="/noranet/station"
+              routerLinkActive="active"
+            >
+              Stations
+            </a>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link"
+            routerLink="/report"
+            routerLinkActive="active"
+            title="Reports"
+          >
+            <fa-icon icon="chart-bar" aria-hidden="true"></fa-icon>
+            <span class="sr-only">Reports</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link"
+            routerLink="/map"
+            routerLinkActive="active"
+            title="All Locations Map"
+          >
+            <fa-icon icon="map" aria-hidden="true"></fa-icon>
+            <span class="sr-only">All Locations Map</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link"
+            routerLink="/cluster-view"
+            routerLinkActive="active"
+            title="Replication Status"
+          >
+            <app-replication-status></app-replication-status>
+            <span class="sr-only">Replication Status</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Nav right -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link dropdown-toggle"
+            id="addDropdown"
+            *ngIf="isDisplayMenuItems()"
+            (click)="(false)"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <fa-icon icon="plus-square" aria-hidden="true"></fa-icon>
+            <span class="pl-1"
+              >Add<span class="d-lg-none d-xl-inline">/Create</span></span
+            >
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            aria-labelledby="addDropdown"
+          >
+            <ng-container *appPermission="'BIRD_EDIT'">
+              <button
+                class="dropdown-item"
+                (click)="onNewItem('bird')"
+                *ngIf="isDisplayMenuItems()"
+              >
+                Bird
+              </button>
+            </ng-container>
+            <ng-container *appPermission="'RECORD_EDIT'">
+              <button
+                class="dropdown-item"
+                (click)="selectRecordTypeComponent.startSelect()"
+                *ngIf="isDisplayMenuItems()"
+              >
+                Record
+              </button>
+            </ng-container>
+            <ng-container *appPermission="'LOCATION_EDIT'">
+              <button
+                class="dropdown-item"
+                (click)="onNewItem('location')"
+                *ngIf="isDisplayMenuItems()"
+              >
+                Location
+              </button>
+            </ng-container>
+            <ng-container *appPermission="'PERSON_EDIT'">
+              <button
+                class="dropdown-item"
+                (click)="onNewItem('person')"
+                *ngIf="isDisplayMenuItems()"
+              >
+                Person
+              </button>
+            </ng-container>
+            <ng-container *appPermission="'TRANSMITTER_EDIT'">
+              <button
+                class="dropdown-item"
+                (click)="onNewItem('transmitter')"
+                *ngIf="isDisplayMenuItems()"
+              >
+                Transmitter
+              </button>
+            </ng-container>
+            <ng-container *appPermission="'SNARKIMPORT_EDIT'">
+              <button
+                class="dropdown-item"
+                (click)="onNewItem('snarkimport')"
+                *ngIf="isDisplayMenuItems()"
+              >
+                Snark Import
+              </button>
+            </ng-container>
+            <ng-container *appPermission="'NESTOBSERVATION_EDIT'">
+              <button
+                class="dropdown-item"
+                (click)="onNewItem('nestobservation')"
+                *ngIf="isDisplayMenuItems()"
+              >
+                Nest Observation
+              </button>
+            </ng-container>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isDisplayMenuItems()">
+          <a
+            class="nav-link dropdown-toggle"
+            id="userDropdown"
+            *ngIf="isDisplayMenuItems()"
+            (click)="(false)"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <fa-icon icon="user-circle" aria-hidden="true"></fa-icon>
+            <span class="sr-only">User</span>
+            <span class="d-lg-none d-xl-inline pl-1">{{
+              currentUserName
+            }}</span>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            aria-labelledby="userDropdown"
+          >
+            <a
+              class="dropdown-item"
+              routerLink="/settings"
+              routerLinkActive="active"
+            >
+              <fa-icon icon="cog" aria-hidden="true"></fa-icon>
+              <span class="pl-1">Global Settings</span>
+            </a>
+            <a class="dropdown-item" target="_blank" [attr.href]="helpLink">
+              <fa-icon icon="question-circle" aria-hidden="true"></fa-icon>
+              <span class="pl-1">Help</span>
+            </a>
+            <a
+              class="dropdown-item"
+              routerLink="/upgrade"
+              routerLinkActive="active"
+            >
+              <fa-icon icon="angle-double-up" aria-hidden="true"></fa-icon>
+              <span class="pl-1">Upgrade</span>
+            </a>
+            <a
+              class="dropdown-item"
+              [routerLink]=""
+              (click)="onLogout()"
+              *ngIf="isLogoutLinkVisible()"
+            >
+              <fa-icon icon="sign-out-alt" aria-hidden="true"></fa-icon>
+              <span class="pl-1">Logout</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <p class="application-status" *ngIf="applicationStatus">
+              v. {{ applicationStatus.version }} /
+              {{ applicationStatus.environment }}
+            </p>
+          </div>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoginLinkVisible()">
+          <a class="nav-link" [routerLink]="" (click)="onLogin()">
+            <fa-icon icon="sign-in-alt" aria-hidden="true"></fa-icon>
+            <span class="pl-1">Login</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main role="main">
+  <router-outlet></router-outlet>
+</main>
+
+<app-login #loginComponent (loginEvent)="onLogin()"></app-login>
+<app-upgrade-check-dialog></app-upgrade-check-dialog>
+<app-select-record-type #selectRecordTypeComponent></app-select-record-type>
+<app-error-dialog></app-error-dialog>

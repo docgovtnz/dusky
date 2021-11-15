@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="RecordEntity">
+  <Property name="activity" label="Activity" javaType="String" jsonType="string"/>
+  <Property name="birdCert" label="Bird Cert" javaType="String" jsonType="string"/>
+  <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+  <Property name="booming" label="Booming" javaType="Integer" jsonType="number"/>
+  <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+  <Property name="dateTime" label="Date Time" javaType="Date" jsonType="Date"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="duration" label="Duration" javaType="Integer" jsonType="number"/>
+  <Property name="easting" label="Easting" javaType="Float" jsonType="number"/>
+  <Property name="entryDateTime" label="Entry Date Time" javaType="Date" jsonType="Date"/>
+  <Property name="errol" label="Errol" javaType="Boolean" jsonType="boolean"/>
+  <Property name="firstArriveTime" label="First arrive time" javaType="Date" jsonType="Date"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="island" label="Island" javaType="String" jsonType="string"/>
+  <Property name="lastDepartTime" label="Last depart time" javaType="Date" jsonType="Date"/>
+  <Property name="locationID" label="LocationID" javaType="String" jsonType="string"/>
+  <Property name="mappingMethod" label="Mapping Method" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="nesting" label="Nesting" javaType="Integer" jsonType="number"/>
+  <Property name="northing" label="Northing" javaType="Float" jsonType="number"/>
+  <Property name="numberOfVisits" label="Number of visits" javaType="Integer" jsonType="number"/>
+  <Property name="obsQuality" label="Obs Quality" javaType="String" jsonType="string"/>
+  <Property name="oldBirdID" label="Old BirdID" javaType="String" jsonType="string"/>
+  <Property name="oldBoomingIntensity" label="Old Booming Intensity" javaType="Integer"
+    jsonType="number"/>
+  <Property name="oldHealthStatus" label="Old Health Status" javaType="String" jsonType="string"/>
+  <Property name="oldLocationDescription" label="Old Location Description" javaType="String"
+    jsonType="string"/>
+  <Property name="oldLocationName" label="Old Location Name" javaType="String" jsonType="string"/>
+  <Property name="oldObserver" label="Old Observer" javaType="String" jsonType="string"/>
+  <Property name="reason" label="Reason" javaType="String" jsonType="string"/>
+  <Property name="recordID" label="Record ID" javaType="String" jsonType="string"/>
+  <Property name="recordType" label="Record Type" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="signalRcvdLocation" label="Signal Received From Location" javaType="String"
+    jsonType="string"/>
+  <Property name="significantEvent" label="Significant Event" javaType="Boolean"
+    jsonType="boolean"/>
+  <Property name="subReason" label="Sub Reason" javaType="String" jsonType="string"/>
+  <Property name="supFed" label="Sup fed" javaType="Integer" jsonType="number"/>
+  <Property name="transmitterId" label="transmitterID" javaType="String" jsonType="string"/>
+  <Property name="bands" label="Bands" javaType="BandsEntity" jsonType="BandsEntity">
+    <Class name="BandsEntity">
+      <Property name="newBandNumber" label="Band Number" javaType="String" jsonType="string"/>
+      <Property name="leg" label="Leg" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="newBandNumber"/>
+          <DisplayProperty name="leg"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="batteryLife" label="Battery Life" javaType="BatteryLifeEntity"
+    jsonType="BatteryLifeEntity">
+    <Class name="BatteryLifeEntity">
+      <Property name="battLifeWeeks" label="Batt Life Weeks" javaType="Integer" jsonType="number"/>
+      <Property name="batteryLife1" label="Battery life 1" javaType="Integer" jsonType="number"/>
+      <Property name="batteryLife2" label="Battery life 2" javaType="Integer" jsonType="number"/>
+      <Property name="recoveryid" label="Recoveryid" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="battLifeWeeks"/>
+          <DisplayProperty name="batteryLife1"/>
+          <DisplayProperty name="batteryLife2"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="bloodSampleDetail" label="Blood Sample Detail" javaType="BloodSampleDetailEntity"
+    jsonType="BloodSampleDetailEntity">
+    <Class name="BloodSampleDetailEntity">
+      <Property name="totalBloodVolumeInMl" label="Total Volume (ml)" javaType="Float"
+        jsonType="number"/>
+      <Property name="veinSite" label="Vein Site" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <Property name="bloodSampleList" label="Blood Sample List"
+        javaType="List&lt;BloodSampleEntity&gt;" jsonType="BloodSampleEntity[]">
+        <Class name="BloodSampleEntity">
+          <Property name="sampleID" label="Sample ID" javaType="String" jsonType="string"/>
+          <Property name="sampleName" label="Sample ID" javaType="String" jsonType="string"/>
+          <Property name="type" label="Type" javaType="String" jsonType="string"/>
+          <Property name="storageMedium" label="Storage Medium" javaType="String"
+            jsonType="string"/>
+          <Property name="container" label="Container" javaType="String" jsonType="string"/>
+          <Property name="storageConditions" label="Storage Conditions" javaType="String"
+            jsonType="string"/>
+          <Property name="volumeInMl" label="Volume" javaType="Float" jsonType="number"/>
+          <Property name="sampleTakenBy" label="Sample Taken By" javaType="String"
+            jsonType="string"/>
+          <Property name="chemistryHeaderID" label="Chemistry Header ID" javaType="String"
+            jsonType="string"/>
+          <Property name="oldChemistryComments" label="Old Chemistry Comments" javaType="String"
+            jsonType="string"/>
+          <Property name="chemistryMethod" label="Chemistry Method" javaType="String"
+            jsonType="string"/>
+          <Property name="plasmaOrSerum" label="Plasma Or Serum" javaType="String"
+            jsonType="string"/>
+          <Property name="timeOfCentrifuge" label="Time Of Centrifuge" javaType="Date"
+            jsonType="Date"/>
+          <Property name="bloodRecordID" label="Blood Record ID" javaType="String"
+            jsonType="string"/>
+          <Property name="timeAtCollectionOrCentrifugingOfReplicates"
+            label="Time At Collection Or Centrifuging Of Replicates" javaType="String"
+            jsonType="string"/>
+          <Property name="dateProcessedInLab" label="Date Processed In Lab" javaType="Date"
+            jsonType="Date"/>
+          <Property name="caseNumber" label="Case Number" javaType="String" jsonType="string"/>
+          <Property name="haematology" label="Haematology" javaType="String" jsonType="string"/>
+          <Property name="sampleStatus" label="Sample Status" javaType="String" jsonType="string"/>
+          <Property name="oldHct" label="oldHct" javaType="Float" jsonType="number"/>
+          <Property name="oldHB" label="oldHB" javaType="Float" jsonType="number"/>
+          <Property name="oldWBC" label="oldWBC" javaType="Float" jsonType="number"/>
+          <Property name="oldBandHeterophils" label="oldBandHeterophils" javaType="Float"
+            jsonType="number"/>
+          <Property name="oldHeterophils" label="oldHeterophils" javaType="Float"
+            jsonType="number"/>
+          <Property name="oldLymphocytes" label="oldLymphocytes" javaType="Float"
+            jsonType="number"/>
+          <Property name="oldMonocytes" label="oldMonocytes" javaType="Float" jsonType="number"/>
+          <Property name="oldEosinophils" label="oldEosinophils" javaType="Float"
+            jsonType="number"/>
+          <Property name="oldBasophils" label="oldBasophils" javaType="Float" jsonType="number"/>
+          <Property name="oldMyelocytes" label="oldMyelocytes" javaType="Float" jsonType="number"/>
+          <Property name="oldFibrinogen" label="oldFibrinogen" javaType="Float" jsonType="number"/>
+          <Property name="oldRedCellMorphology" label="oldRedCellMorphology" javaType="String"
+            jsonType="string"/>
+          <Property name="oldMetarubricytes" label="oldMetarubricytes" javaType="String"
+            jsonType="string"/>
+          <Property name="oldPolychromasia" label="oldPolychromasia" javaType="String"
+            jsonType="string"/>
+          <Property name="oldAnisocytosis" label="oldAnisocytosis" javaType="String"
+            jsonType="string"/>
+          <Property name="oldHypochromasia" label="oldHypochromasia" javaType="String"
+            jsonType="string"/>
+          <Property name="oldMacrocytosis" label="oldMacrocytosis" javaType="String"
+            jsonType="string"/>
+          <Property name="oldMicrocytosis" label="oldMicrocytosis" javaType="String"
+            jsonType="string"/>
+          <Property name="oldPoikilocytosis" label="oldPoikilocytosis" javaType="String"
+            jsonType="string"/>
+          <Property name="oldStippledCells" label="oldStippledCells" javaType="String"
+            jsonType="string"/>
+          <Property name="oldThrombocyteMorphology" label="oldThrombocyteMorphology"
+            javaType="String"
+            jsonType="string"/>
+          <Property name="oldBloodParasites" label="oldBloodParasites" javaType="String"
+            jsonType="string"/>
+          <Property name="oldWhiteCellMorphology" label="oldWhiteCellMorphology" javaType="String"
+            jsonType="string"/>
+          <Property name="oldToxicChanges" label="oldToxicChanges" javaType="String"
+            jsonType="string"/>
+          <Property name="oldReactiveLymphocytes" label="oldReactiveLymphocytes" javaType="String"
+            jsonType="string"/>
+          <Property name="reasonForSample" label="Reason for Sample" javaType="String"
+            jsonType="string"/>
+          <DisplayModel layoutType="Table">
+            <DisplayGroup>
+              <DisplayProperty name="type"/>
+              <DisplayProperty name="storageMedium"/>
+              <DisplayProperty name="container"/>
+              <DisplayProperty name="storageConditions"/>
+              <DisplayProperty name="volumeInMl"/>
+              <DisplayProperty name="sampleTakenBy"/>
+              <DisplayProperty name="sampleName"/>
+              <DisplayProperty name="reasonForSample"/>
+            </DisplayGroup>
+          </DisplayModel>
+        </Class>
+      </Property>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="totalBloodVolumeInMl"/>
+          <DisplayProperty name="veinSite"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="captureDetail" label="Capture Detail" javaType="CaptureDetailEntity"
+    jsonType="CaptureDetailEntity">
+    <Class name="CaptureDetailEntity">
+      <Property name="captureMethod" label="Capture Method" javaType="String" jsonType="string"/>
+      <Property name="duration" label="Duration" javaType="Float" jsonType="number"/>
+      <Property name="eyesClosed" label="Eyes Closed" javaType="Boolean" jsonType="boolean"/>
+      <Property name="headDown" label="Head Down" javaType="Boolean" jsonType="boolean"/>
+      <Property name="oldHolder" label="Old Holder" javaType="String" jsonType="string"/>
+      <Property name="oldReaction" label="Old Reaction" javaType="Integer" jsonType="number"/>
+      <Property name="oldRecorder1" label="Old Recorder 1" javaType="String" jsonType="string"/>
+      <Property name="oldRecorder2" label="Old Recorder 2" javaType="String" jsonType="string"/>
+      <Property name="reaction" label="Reaction" javaType="String" jsonType="string"/>
+      <Property name="recoveryID" label="Recovery ID" javaType="String" jsonType="string"/>
+      <Property name="response" label="Response" javaType="String" jsonType="string"/>
+      <Property name="shivered" label="Shivered" javaType="Boolean" jsonType="boolean"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="captureMethod"/>
+          <DisplayProperty name="response"/>
+          <DisplayProperty name="duration"/>
+          <DisplayProperty name="reaction"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="checkmate" label="Checkmate" javaType="CheckmateEntity"
+    jsonType="CheckmateEntity">
+    <Class name="CheckmateEntity">
+      <Property name="battery1" label="Battery 1" javaType="Integer" jsonType="number"/>
+      <Property name="battery2" label="Battery 2" javaType="Integer" jsonType="number"/>
+      <Property name="last24hourActivity" label="Last 24 Hours Activity" javaType="Integer"
+        jsonType="number"/>
+      <Property name="last24hourActivity1" label="Activity 2" javaType="Integer" jsonType="number"/>
+      <Property name="last24hourActivity2" label="Activity 2" javaType="Integer" jsonType="number"/>
+      <Property name="dataCaptureType" label="Data Capture Type" javaType="String"
+        jsonType="string"/>
+      <Property name="pulseRate" label="Pulse Rate" javaType="String" jsonType="string"/>
+      <Property name="recoveryid" label="Recoveryid" javaType="String" jsonType="string"/>
+      <Property name="checkmateDataList" label="Checkmate Data List"
+        javaType="List&lt;CheckmateDataEntity&gt;" jsonType="CheckmateDataEntity[]">
+        <Class name="CheckmateDataEntity">
+          <Property name="recoveryid" label="Recovery ID" javaType="String" jsonType="string"/>
+          <Property name="femaleTx1" label="Female Tx 1" javaType="Integer" jsonType="number"/>
+          <Property name="femaleTx2" label="Female Tx 2" javaType="Integer" jsonType="number"/>
+          <Property name="femaleTx" label="Female Tx" javaType="Integer" jsonType="number"/>
+          <Property name="time1" label="Time 1" javaType="Integer" jsonType="number"/>
+          <Property name="time2" label="Time 2" javaType="Integer" jsonType="number"/>
+          <Property name="time" label="Time of Mating" javaType="Date" jsonType="Date"/>
+          <Property name="duration1" label="Duration 1" javaType="Integer" jsonType="number"/>
+          <Property name="duration2" label="Duration 2" javaType="Integer" jsonType="number"/>
+          <Property name="duration" label="Duration" javaType="Integer" jsonType="number"/>
+          <Property name="quality1" label="Quality 1" javaType="Integer" jsonType="number"/>
+          <Property name="quality2" label="Quality 2" javaType="Integer" jsonType="number"/>
+          <Property name="quality" label="Quality" javaType="Integer" jsonType="number"/>
+          <Property name="birdId" label="Female Bird" javaType="String" jsonType="string"/>
+          <Property name="errolLoc" label="Errol Loc" javaType="Integer" jsonType="number"/>
+          <DisplayModel layoutType="Table">
+            <DisplayGroup>
+              <DisplayProperty name="recoveryid"/>
+              <DisplayProperty name="femaleTx1"/>
+              <DisplayProperty name="femaleTx2"/>
+              <DisplayProperty name="time1"/>
+              <DisplayProperty name="time2"/>
+              <DisplayProperty name="duration1"/>
+              <DisplayProperty name="duration2"/>
+              <DisplayProperty name="quality1"/>
+              <DisplayProperty name="quality2"/>
+              <DisplayProperty name="birdId"/>
+              <DisplayProperty name="femaleTx"/>
+              <DisplayProperty name="time"/>
+              <DisplayProperty name="duration"/>
+              <DisplayProperty name="quality"/>
+              <DisplayProperty name="errolLoc"/>
+            </DisplayGroup>
+          </DisplayModel>
+        </Class>
+      </Property>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="dataCaptureType"/>
+          <DisplayProperty name="pulseRate"/>
+          <DisplayProperty name="battery1"/>
+          <DisplayProperty name="battery2"/>
+          <DisplayProperty name="last24hourActivity"/>
+          <DisplayProperty name="last24hourActivity1"/>
+          <DisplayProperty name="last24hourActivity2"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="standard" label="Standard" javaType="StandardEntity"
+    jsonType="StandardEntity">
+    <Class name="StandardEntity">
+      <Property name="battery1" label="Battery 1" javaType="Integer" jsonType="number"/>
+      <Property name="battery2" label="Battery 2" javaType="Integer" jsonType="number"/>
+      <Property name="dataCaptureType" label="Data Capture Type" javaType="String"
+        jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="dataCaptureType"/>
+          <DisplayProperty name="battery1"/>
+          <DisplayProperty name="battery2"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="chickHealth" label="Chick Health" javaType="ChickHealthEntity"
+    jsonType="ChickHealthEntity">
+    <Class name="ChickHealthEntity">
+      <Property name="cropStatus" label="Crop Status" javaType="String" jsonType="string"/>
+      <Property name="respiratoryRate" label="Respiratory Rate" javaType="Integer"
+        jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="cropStatus"/>
+          <DisplayProperty name="respiratoryRate"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="chips" label="Chips" javaType="ChipsEntity" jsonType="ChipsEntity">
+    <Class name="ChipsEntity">
+      <Property name="microchip" label="Microchip" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="microchip"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="eggHealth" label="Egg Health" javaType="EggHealthEntity"
+    jsonType="EggHealthEntity">
+    <Class name="EggHealthEntity">
+      <Property name="lengthInMms" label="Length (mm)" javaType="Float" jsonType="number"/>
+      <Property name="widthInMms" label="Width (mm)" javaType="Float" jsonType="number"/>
+      <Property name="candlingAgeEstimateInDays" label="Candling Age Estimate (days)"
+        javaType="Integer" jsonType="number"/>
+      <Property name="temperature" label="Temperature" javaType="Float" jsonType="number"/>
+      <Property name="heartRate" label="Heart Rate" javaType="Integer" jsonType="number"/>
+      <Property name="embryoMoving" label="Embryo Moving" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="lengthInMms"/>
+          <DisplayProperty name="widthInMms"/>
+          <DisplayProperty name="candlingAgeEstimateInDays"/>
+          <DisplayProperty name="temperature"/>
+          <DisplayProperty name="heartRate"/>
+          <DisplayProperty name="embryoMoving"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="eggTimer" label="Egg Timer" javaType="EggTimerEntity" jsonType="EggTimerEntity">
+    <Class name="EggTimerEntity">
+      <Property name="activity2DaysAgo" label="Activity 2 days ago" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity2DaysAgo1" label="Activity 2 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity2DaysAgo2" label="Activity 2 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity3DaysAgo" label="Activity 3 days ago" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity3DaysAgo1" label="Activity 3 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity3DaysAgo2" label="Activity 3 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity4DaysAgo" label="Activity 4 days ago" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity4DaysAgo1" label="Activity 4 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity4DaysAgo2" label="Activity 4 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity5DaysAgo" label="Activity 5 days ago" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity5DaysAgo1" label="Activity 5 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity5DaysAgo2" label="Activity 5 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity6DaysAgo" label="Activity 6 days ago" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity6DaysAgo1" label="Activity 6 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity6DaysAgo2" label="Activity 6 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity7DaysAgo" label="Activity 7 days ago" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity7DaysAgo1" label="Activity 7 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activity7DaysAgo2" label="Activity 7 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activityYesterday" label="Activity yesterday" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activityYesterday1" label="Activity yesterday 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="activityYesterday2" label="Activity yesterday 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="batteryLife1" label="Battery life 1" javaType="Integer" jsonType="number"/>
+      <Property name="batteryLife2" label="Battery life 2" javaType="Integer" jsonType="number"/>
+      <Property name="dataCaptureType" label="Data Capture Type" javaType="String"
+        jsonType="string"/>
+      <Property name="daysSinceChange" label="Days since change of status" javaType="Integer"
+        jsonType="number"/>
+      <Property name="daysSinceChange1" label="Days since change 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="daysSinceChange2" label="Days since change 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="durationOfPrevious" label="Duration of previous incubation" javaType="Integer"
+        jsonType="number"/>
+      <Property name="durationOfPrevious1" label="Duration of previous 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="durationOfPrevious2" label="Duration of Previous 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="errolActivity1Day" label="Activity 1 Day" javaType="Integer"
+        jsonType="number"/>
+      <Property name="errolActivity7Days" label="Activity 7 days" javaType="Integer"
+        jsonType="number"/>
+      <Property name="errolDaysSinceChange" label="Days since change of status" javaType="Integer"
+        jsonType="number"/>
+      <Property name="errolID" label="Errol ID" javaType="Integer" jsonType="number"/>
+      <Property name="meanActivity" label="Mean Activity" javaType="Integer" jsonType="number"/>
+      <Property name="meanActivity1" label="Mean activity 1" javaType="Integer" jsonType="number"/>
+      <Property name="meanActivity2" label="Mean activity 2" javaType="Integer" jsonType="number"/>
+      <Property name="oldPulseRate" label="Old Pulse Rate" javaType="Integer" jsonType="number"/>
+      <Property name="pulseRate" label="Pulse Rate" javaType="String" jsonType="string"/>
+      <Property name="recoveryid" label="Recoveryid" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="pulseRate"/>
+          <DisplayProperty name="dataCaptureType"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="batteryLife1"/>
+          <DisplayProperty name="batteryLife2"/>
+          <DisplayProperty name="daysSinceChange"/>
+          <DisplayProperty name="daysSinceChange1"/>
+          <DisplayProperty name="daysSinceChange2"/>
+          <DisplayProperty name="durationOfPrevious"/>
+          <DisplayProperty name="durationOfPrevious1"/>
+          <DisplayProperty name="durationOfPrevious2"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="activityYesterday"/>
+          <DisplayProperty name="activityYesterday1"/>
+          <DisplayProperty name="activityYesterday2"/>
+          <DisplayProperty name="activity2DaysAgo"/>
+          <DisplayProperty name="activity2DaysAgo1"/>
+          <DisplayProperty name="activity2DaysAgo2"/>
+          <DisplayProperty name="activity3DaysAgo"/>
+          <DisplayProperty name="activity3DaysAgo1"/>
+          <DisplayProperty name="activity3DaysAgo2"/>
+          <DisplayProperty name="activity4DaysAgo"/>
+          <DisplayProperty name="activity4DaysAgo1"/>
+          <DisplayProperty name="activity4DaysAgo2"/>
+          <DisplayProperty name="activity5DaysAgo"/>
+          <DisplayProperty name="activity5DaysAgo1"/>
+          <DisplayProperty name="activity5DaysAgo2"/>
+          <DisplayProperty name="activity6DaysAgo"/>
+          <DisplayProperty name="activity6DaysAgo1"/>
+          <DisplayProperty name="activity6DaysAgo2"/>
+          <DisplayProperty name="activity7DaysAgo"/>
+          <DisplayProperty name="activity7DaysAgo1"/>
+          <DisplayProperty name="activity7DaysAgo2"/>
+          <DisplayProperty name="meanActivity"/>
+          <DisplayProperty name="meanActivity1"/>
+          <DisplayProperty name="meanActivity2"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="errolID"/>
+          <DisplayProperty name="errolDaysSinceChange"/>
+          <DisplayProperty name="errolActivity1Day"/>
+          <DisplayProperty name="errolActivity7Days"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="handRaise" label="Hand Feed" javaType="HandRaiseEntity"
+    jsonType="HandRaiseEntity">
+    <Class name="HandRaiseEntity">
+      <Property name="amountFed" label="Volume Fed" javaType="Integer" jsonType="number"/>
+      <Property name="brooderType" label="Brooder Type" javaType="String" jsonType="string"/>
+      <Property name="cropStatus" label="Crop Status" javaType="String" jsonType="string"/>
+      <Property name="dietaryFibre" label="% Dietary Fibre" javaType="Integer" jsonType="number"/>
+      <Property name="handRearingFormula" label="Hand-Feeding Formula" javaType="String"
+        jsonType="string"/>
+      <Property name="largestMeal" label="Largest Meal" javaType="Integer" jsonType="number"/>
+      <Property name="medication" label="Medication" javaType="Boolean" jsonType="boolean"/>
+      <Property name="newRecord" label="New record" javaType="String" jsonType="string"/>
+      <Property name="numberOfFeeds" label="Number of Feeds" javaType="Integer" jsonType="number"/>
+      <Property name="percentSolids" label="Percent Solids" javaType="Integer" jsonType="number"/>
+      <Property name="recoveryid" label="Recoveryid" javaType="String" jsonType="string"/>
+      <Property name="relativeHumidity" label="Relative Humidity" javaType="Integer"
+        jsonType="number"/>
+      <Property name="temp" label="Temp" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="cropStatus"/>
+          <DisplayProperty name="amountFed"/>
+          <DisplayProperty name="percentSolids"/>
+          <DisplayProperty name="numberOfFeeds"/>
+          <DisplayProperty name="relativeHumidity"/>
+          <DisplayProperty name="handRearingFormula"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="largestMeal"/>
+          <DisplayProperty name="dietaryFibre"/>
+          <DisplayProperty name="temp"/>
+          <DisplayProperty name="brooderType"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="medication"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="harnessChange" label="Harness Change" javaType="HarnessChangeEntity"
+    jsonType="HarnessChangeEntity">
+    <Class name="HarnessChangeEntity">
+      <Property name="newHarnessLength" label="New harness length" javaType="Integer"
+        jsonType="number"/>
+      <Property name="oldHarnessLengthRight" label="Old harness length right" javaType="Integer"
+        jsonType="number"/>
+      <Property name="oldHarnessLengthLeft" label="Old harness length left" javaType="Integer"
+        jsonType="number"/>
+      <Property name="txtranstype" label="Txtranstype" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="newHarnessLength"/>
+          <DisplayProperty name="oldHarnessLengthRight"/>
+          <DisplayProperty name="oldHarnessLengthLeft"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="healthCheck" label="Health Check" javaType="HealthCheckEntity"
+    jsonType="HealthCheckEntity">
+    <Class name="HealthCheckEntity">
+      <Property name="band" label="Band" javaType="Integer" jsonType="number"/>
+      <Property name="bill" label="Bill" javaType="Integer" jsonType="number"/>
+      <Property name="billNotes" label="Bill notes" javaType="String" jsonType="string"/>
+
+      <Property name="patagia" label="Patagia" javaType="Integer" jsonType="number"/>
+      <Property name="patagiaNotes" label="Patagia notes" javaType="String" jsonType="string"/>
+      <Property name="wings" label="Wings" javaType="Integer" jsonType="number"/>
+      <Property name="wingsNotes" label="Wings notes" javaType="String" jsonType="string"/>
+      <Property name="back" label="Back" javaType="Integer" jsonType="number"/>
+      <Property name="backNotes" label="Back notes" javaType="String" jsonType="string"/>
+      <Property name="chest" label="Chest" javaType="Integer" jsonType="number"/>
+      <Property name="chestNotes" label="Chest notes" javaType="String" jsonType="string"/>
+
+      <Property name="boomSac" label="Boom Sac" javaType="Boolean" jsonType="boolean"/>
+      <Property name="broodPatch" label="Brood Patch" javaType="Boolean" jsonType="boolean"/>
+      <Property name="cereAndNostrils" label="Cere and nostrils" javaType="Integer"
+        jsonType="number"/>
+      <Property name="cereNotes" label="Cere notes" javaType="String" jsonType="string"/>
+      <Property name="cloaca" label="Cloaca" javaType="Integer" jsonType="number"/>
+      <Property name="cloacaNotes" label="Cloaca notes" javaType="String" jsonType="string"/>
+      <Property name="cloacaScore" label="Cloaca score" javaType="Float" jsonType="number"/>
+      <Property name="ears" label="Ears" javaType="Integer" jsonType="number"/>
+      <Property name="earsNotes" label="Ears notes" javaType="String" jsonType="string"/>
+      <Property name="eyes" label="Eyes" javaType="Integer" jsonType="number"/>
+      <Property name="eyesNotes" label="Eyes notes" javaType="String" jsonType="string"/>
+      <Property name="feetAndToes" label="Feet and toes" javaType="Integer" jsonType="number"/>
+      <Property name="feetNotes" label="Feet notes" javaType="String" jsonType="string"/>
+      <Property name="inMoult" label="In Moult" javaType="Boolean" jsonType="boolean"/>
+      <Property name="legs" label="Legs" javaType="Integer" jsonType="number"/>
+      <Property name="legsNotes" label="Legs notes" javaType="String" jsonType="string"/>
+      <Property name="microchip" label="Microchip" javaType="Integer" jsonType="number"/>
+      <Property name="microchipNotes" label="Microchip notes" javaType="String" jsonType="string"/>
+      <Property name="microchipNumber" label="Microchip number" javaType="Integer"
+        jsonType="number"/>
+      <Property name="plumage" label="Plumage" javaType="Integer" jsonType="number"/>
+      <Property name="plumageNotes" label="Plumage notes" javaType="String" jsonType="string"/>
+      <Property name="recoveryid" label="Recoveryid" javaType="String" jsonType="string"/>
+      <Property name="transmitter" label="Transmitter" javaType="Integer" jsonType="number"/>
+      <Property name="transmitterNotes" label="Transmitter notes" javaType="String"
+        jsonType="string"/>
+      <Property name="vent" label="Vent" javaType="Integer" jsonType="number"/>
+      <Property name="ventNotes" label="Vent notes" javaType="String" jsonType="string"/>
+      <Property name="ventScore" label="Vent score" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="band"/>
+          <DisplayProperty name="bill"/>
+          <DisplayProperty name="billNotes"/>
+
+          <DisplayProperty name="patagia"/>
+          <DisplayProperty name="patagiaNotes"/>
+          <DisplayProperty name="wings"/>
+          <DisplayProperty name="wingsNotes"/>
+          <DisplayProperty name="back"/>
+          <DisplayProperty name="backNotes"/>
+          <DisplayProperty name="chest"/>
+          <DisplayProperty name="chestNotes"/>
+
+          <DisplayProperty name="cereAndNostrils"/>
+          <DisplayProperty name="cereNotes"/>
+          <DisplayProperty name="cloaca"/>
+          <DisplayProperty name="cloacaNotes"/>
+          <DisplayProperty name="ears"/>
+          <DisplayProperty name="earsNotes"/>
+          <DisplayProperty name="eyes"/>
+          <DisplayProperty name="eyesNotes"/>
+          <DisplayProperty name="feetAndToes"/>
+          <DisplayProperty name="feetNotes"/>
+          <DisplayProperty name="legs"/>
+          <DisplayProperty name="legsNotes"/>
+          <DisplayProperty name="microchip"/>
+          <DisplayProperty name="microchipNotes"/>
+          <DisplayProperty name="microchipNumber"/>
+          <DisplayProperty name="recoveryid"/>
+          <DisplayProperty name="transmitter"/>
+          <DisplayProperty name="transmitterNotes"/>
+          <DisplayProperty name="cloacaScore"/>
+          <DisplayProperty name="vent"/>
+          <DisplayProperty name="ventNotes"/>
+          <DisplayProperty name="plumage"/>
+          <DisplayProperty name="plumageNotes"/>
+          <DisplayProperty name="inMoult"/>
+          <DisplayProperty name="broodPatch"/>
+          <DisplayProperty name="ventScore"/>
+          <DisplayProperty name="boomSac"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="healthStatus" label="Health Status" javaType="HealthStatusEntity"
+    jsonType="HealthStatusEntity">
+    <Class name="HealthStatusEntity">
+      <Property name="healthStatus" label="Health Status" javaType="String" jsonType="string"/>
+      <Property name="boomingIntensity" label="Booming Intensity" javaType="Integer"
+        jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="healthStatus"/>
+          <DisplayProperty name="boomingIntensity"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="locationBearingList" label="Location Bearing List"
+    javaType="List&lt;LocationBearingEntity&gt;" jsonType="LocationBearingEntity[]">
+    <Class name="LocationBearingEntity">
+      <Property name="locationID" label="Location" javaType="String" jsonType="string"/>
+      <Property name="easting" label="Easting" javaType="Float" jsonType="number"/>
+      <Property name="northing" label="Northing" javaType="Float" jsonType="number"/>
+      <Property name="compassBearing" label="Compass Bearing" javaType="Float" jsonType="number"/>
+      <Property name="active" label="Active" javaType="Boolean" jsonType="boolean"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="locationID"/>
+          <DisplayProperty name="easting"/>
+          <DisplayProperty name="northing"/>
+          <DisplayProperty name="compassBearing"/>
+          <DisplayProperty name="active"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="measureDetail" label="Measure Detail" javaType="MeasureDetailEntity"
+    jsonType="MeasureDetailEntity">
+    <Class name="MeasureDetailEntity">
+      <Property name="culmenAndCere" label="Culmen And Cere" javaType="Float" jsonType="number"/>
+      <Property name="culmenLength" label="Culmen Length" javaType="Float" jsonType="number"/>
+      <Property name="culmenWidth" label="Culmen Width" javaType="Float" jsonType="number"/>
+      <Property name="femur" label="Femur" javaType="Integer" jsonType="number"/>
+      <Property name="leg" label="Leg" javaType="String" jsonType="string"/>
+      <Property name="longestToe" label="Longest Toe" javaType="Float" jsonType="number"/>
+      <Property name="longToeClaw" label="Long Toe Claw" javaType="Float" jsonType="number"/>
+      <Property name="recoveryID" label="Recovery ID" javaType="String" jsonType="string"/>
+      <Property name="sternumshoulder" label="Sternum-shoulder" javaType="Integer"
+        jsonType="number"/>
+      <Property name="tailLength" label="Tail Length" javaType="Float" jsonType="number"/>
+      <Property name="tarsusDepthSquashed" label="Tarsus Depth Squashed" javaType="Float"
+        jsonType="number"/>
+      <Property name="tarsusDepthUnsquashed" label="Tarsus Depth Unsquashed" javaType="Float"
+        jsonType="number"/>
+      <Property name="tarsusLength" label="Tarsus Length" javaType="Float" jsonType="number"/>
+      <Property name="tarsusWidthSquashed" label="Tarsus Width Squashed" javaType="Float"
+        jsonType="number"/>
+      <Property name="tarsusWidthUnsquashed" label="Tarsus Width Unsquashed" javaType="Float"
+        jsonType="number"/>
+      <Property name="wingLength" label="Wing Length" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="tailLength"/>
+          <DisplayProperty name="wingLength"/>
+          <DisplayProperty name="sternumshoulder"/>
+          <DisplayProperty name="culmenAndCere"/>
+          <DisplayProperty name="culmenLength"/>
+          <DisplayProperty name="culmenWidth"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="leg"/>
+          <DisplayProperty name="longestToe"/>
+          <DisplayProperty name="femur"/>
+          <DisplayProperty name="longToeClaw"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="tarsusDepthSquashed"/>
+          <DisplayProperty name="tarsusDepthUnsquashed"/>
+          <DisplayProperty name="tarsusLength"/>
+          <DisplayProperty name="tarsusWidthSquashed"/>
+          <DisplayProperty name="tarsusWidthUnsquashed"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="medicationList" label="Medication List" javaType="List&lt;MedicationEntity&gt;"
+    jsonType="MedicationEntity[]">
+    <Class name="MedicationEntity">
+      <Property name="concentrationUnits" label="Concentration units" javaType="String"
+        jsonType="string"/>
+      <Property name="concentrationValue" label="Concentration value" javaType="Float"
+        jsonType="number"/>
+      <Property name="courseLength" label="Course length" javaType="Integer" jsonType="number"/>
+      <Property name="dayNumber" label="Day number" javaType="Integer" jsonType="number"/>
+      <Property name="doseRateUnits" label="Dose rate units" javaType="String" jsonType="string"/>
+      <Property name="doseRateValue" label="Dose rate value" javaType="Float" jsonType="number"/>
+      <Property name="drug" label="Drug" javaType="String" jsonType="string"/>
+      <Property name="recoveryid" label="Recoveryid" javaType="String" jsonType="string"/>
+      <Property name="route" label="Route" javaType="String" jsonType="string"/>
+      <Property name="timesPerDay" label="Times per day" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="drug"/>
+          <DisplayProperty name="concentrationValue"/>
+          <DisplayProperty name="concentrationUnits"/>
+          <DisplayProperty name="doseRateValue"/>
+          <DisplayProperty name="doseRateUnits"/>
+          <DisplayProperty name="route"/>
+          <DisplayProperty name="timesPerDay"/>
+          <DisplayProperty name="dayNumber"/>
+          <DisplayProperty name="courseLength"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="observerList" label="Observer List" javaType="List&lt;ObserverEntity&gt;"
+    jsonType="ObserverEntity[]">
+    <Class name="ObserverEntity">
+      <Property name="personID" label="Person ID" javaType="String" jsonType="string"/>
+      <Property name="observerCapacity" label="Observer Capacity" javaType="String"
+        jsonType="string"/>
+      <Property name="observationRoles" label="Observation Roles" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="personID"/>
+          <DisplayProperty name="observerCapacity"/>
+          <DisplayProperty name="observationRoles"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="otherSampleList" label="Other Sample List"
+    javaType="List&lt;OtherSampleEntity&gt;" jsonType="OtherSampleEntity[]">
+    <Class name="OtherSampleEntity">
+      <Property name="sampleID" label="Sample ID" javaType="String" jsonType="string"/>
+      <Property name="sampleName" label="Sample ID" javaType="String" jsonType="string"/>
+      <Property name="type" label="Type" javaType="String" jsonType="string"/>
+      <Property name="storageMedium" label="Storage Medium" javaType="String" jsonType="string"/>
+      <Property name="container" label="Container" javaType="String" jsonType="string"/>
+      <Property name="storageConditions" label="Storage Conditions" javaType="String"
+        jsonType="string"/>
+      <Property name="amount" label="Amount" javaType="Float" jsonType="number"/>
+      <Property name="units" label="Units" javaType="String" jsonType="string"/>
+      <Property name="sampleTakenBy" label="Sample Taken By" javaType="String" jsonType="string"/>
+      <Property name="reasonForSample" label="Reason for Sample" javaType="String"
+        jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="type"/>
+          <DisplayProperty name="storageMedium"/>
+          <DisplayProperty name="container"/>
+          <DisplayProperty name="storageConditions"/>
+          <DisplayProperty name="amount"/>
+          <DisplayProperty name="units"/>
+          <DisplayProperty name="sampleTakenBy"/>
+          <DisplayProperty name="sampleName"/>
+          <DisplayProperty name="reasonForSample"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="snarkData" label="Snark Data" javaType="SnarkDataEntity"
+    jsonType="SnarkDataEntity">
+    <Class name="SnarkDataEntity">
+      <Property name="arriveDateTime" label="Arrive Date Time" javaType="Date" jsonType="Date"/>
+      <Property name="departDateTime" label="Depart Date Time" javaType="Date" jsonType="Date"/>
+      <Property name="mating" label="Mating" javaType="Boolean" jsonType="boolean"/>
+      <Property name="oldSnarkRecId" label="Old Snark Rec Id" javaType="String" jsonType="string"/>
+      <Property name="oldTAndBRecId" label="Old T And B Rec Id" javaType="String"
+        jsonType="string"/>
+      <Property name="snarkActivityID" label="Snark Activity ID" javaType="String"
+        jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="arriveDateTime"/>
+          <DisplayProperty name="departDateTime"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="spermSampleList" label="Sperm Sample List"
+    javaType="List&lt;SpermSampleEntity&gt;" jsonType="SpermSampleEntity[]">
+    <Class name="SpermSampleEntity">
+      <Property name="sampleID" label="Sample ID" javaType="String" jsonType="string"/>
+      <Property name="sampleName" label="Sample ID" javaType="String" jsonType="string"/>
+      <Property name="diluent" label="Diluent" javaType="String" jsonType="string"/>
+      <Property name="container" label="Container" javaType="String" jsonType="string"/>
+      <Property name="storageConditions" label="Storage Conditions" javaType="String"
+        jsonType="string"/>
+      <Property name="volumeInMicroL" label="Volume" javaType="Float" jsonType="number"/>
+      <Property name="collectionMethod" label="Collection Method" javaType="String"
+        jsonType="string"/>
+      <Property name="papillaSwelling" label="Papilla Swelling" javaType="String"
+        jsonType="string"/>
+      <Property name="stimulation" label="Stimulation" javaType="String" jsonType="string"/>
+      <Property name="stress" label="Stress" javaType="String" jsonType="string"/>
+      <Property name="sampleTakenBy" label="Sample Taken By" javaType="String" jsonType="string"/>
+      <Property name="spermHeaderID" label="Sperm Header ID" javaType="String" jsonType="string"/>
+      <Property name="reasonForSample" label="Reason for Sperm" javaType="String"
+        jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="diluent"/>
+          <DisplayProperty name="container"/>
+          <DisplayProperty name="storageConditions"/>
+          <DisplayProperty name="volumeInMicroL"/>
+          <DisplayProperty name="collectionMethod"/>
+          <DisplayProperty name="papillaSwelling"/>
+          <DisplayProperty name="stimulation"/>
+          <DisplayProperty name="stress"/>
+          <DisplayProperty name="sampleTakenBy"/>
+          <DisplayProperty name="sampleName"/>
+          <DisplayProperty name="reasonForSample"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="supplementaryFeeding" label="Supplementary Feeding"
+    javaType="SupplementaryFeedingEntity" jsonType="SupplementaryFeedingEntity">
+    <Class name="SupplementaryFeedingEntity">
+      <Property name="feedingRegime" label="Feeding Regime" javaType="String" jsonType="string"/>
+      <Property name="foodTypes" label="Food Types" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <Property name="oldFoodType" label="Old Food Type" javaType="String" jsonType="string"/>
+      <Property name="recoveryId" label="Recovery Id" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="feedingRegime"/>
+          <DisplayProperty name="foodTypes"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="swabSampleList" label="Swab Sample List" javaType="List&lt;SwabSampleEntity&gt;"
+    jsonType="SwabSampleEntity[]">
+    <Class name="SwabSampleEntity">
+      <Property name="sampleID" label="Sample ID" javaType="String" jsonType="string"/>
+      <Property name="sampleName" label="Sample ID" javaType="String" jsonType="string"/>
+      <Property name="swabSite" label="Swab Site" javaType="String" jsonType="string"/>
+      <Property name="storageMedium" label="Storage Medium" javaType="String" jsonType="string"/>
+      <Property name="container" label="Container" javaType="String" jsonType="string"/>
+      <Property name="storageConditions" label="Storage Conditions" javaType="String"
+        jsonType="string"/>
+      <Property name="quantity" label="Quantity" javaType="Integer" jsonType="number"/>
+      <Property name="sampleTakenBy" label="Sample Taken By" javaType="String" jsonType="string"/>
+      <Property name="headerUniqueTestSwabSiteCount" label="Header Unique Test Swab Site Count"
+        javaType="Integer" jsonType="number"/>
+      <Property name="microbiologyHeaderID" label="Microbiology Header ID" javaType="String"
+        jsonType="string"/>
+      <Property name="oldCaseNumber" label="Old Case Number" javaType="String" jsonType="string"/>
+      <Property name="oldComments" label="Old Comments" javaType="String" jsonType="string"/>
+      <Property name="oldDateProcessed" label="Old Date Processed" javaType="Date" jsonType="Date"/>
+      <Property name="oldHeaderSwabSite" label="Old Header Swab Site" javaType="String"
+        jsonType="string"/>
+      <Property name="oldTestSwabSite" label="Old Test Swab Site" javaType="String"
+        jsonType="string"/>
+      <Property name="reasonForSample" label="Reason for Sample" javaType="String"
+        jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="swabSite"/>
+          <DisplayProperty name="storageMedium"/>
+          <DisplayProperty name="container"/>
+          <DisplayProperty name="storageConditions"/>
+          <DisplayProperty name="quantity"/>
+          <DisplayProperty name="sampleTakenBy"/>
+          <DisplayProperty name="sampleName"/>
+          <DisplayProperty name="reasonForSample"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="transferDetail" label="Transfer Detail" javaType="TransferDetailEntity"
+    jsonType="TransferDetailEntity">
+    <Class name="TransferDetailEntity">
+      <Property name="transferFromIsland" label="Transfer From Island" javaType="String"
+        jsonType="string"/>
+      <Property name="transferToIsland" label="Transfer To Island" javaType="String"
+        jsonType="string"/>
+      <Property name="transferFromLocationID" label="Transfer From Location" javaType="String"
+        jsonType="string"/>
+      <Property name="transferToLocationID" label="Transfer To Location" javaType="String"
+        jsonType="string"/>
+      <Property name="transferFromNestMother" label="Transfer From Nest Mother" javaType="String"
+        jsonType="string"/>
+      <Property name="transferToNestMother" label="Transfer To Nest Mother" javaType="String"
+        jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="transferFromIsland"/>
+          <DisplayProperty name="transferToIsland"/>
+          <DisplayProperty name="transferFromLocationID"/>
+          <DisplayProperty name="transferToLocationID"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="transmitterChange" label="Transmitter Change" javaType="TransmitterChangeEntity"
+    jsonType="TransmitterChangeEntity">
+    <Class name="TransmitterChangeEntity">
+      <Property name="addedTxFromLastRecordID" label="Added Tx From Last Record ID"
+        javaType="String" jsonType="string"/>
+      <Property name="addedTxFromStatus" label="Added Tx From Status" javaType="String"
+        jsonType="string"/>
+      <Property name="addedTxFromTxFineTune" label="Added Tx From Tx Fine Tune" javaType="String"
+        jsonType="string"/>
+      <Property name="harnessChangeOnly" label="Harness change only" javaType="Boolean"
+        jsonType="boolean"/>
+      <Property name="hoursOff" label="Hours off" javaType="Float" jsonType="number"/>
+      <Property name="hoursOn" label="Hours on" javaType="Float" jsonType="number"/>
+      <Property name="newStatus" label="New Status" javaType="String" jsonType="string"/>
+      <Property name="newTxFineTune" label="New Tx Fine Tune" javaType="String" jsonType="string"/>
+      <Property name="prox" label="Prox" javaType="Boolean" jsonType="boolean"/>
+      <Property name="proxOn" label="Prox on" javaType="Boolean" jsonType="boolean"/>
+      <Property name="recoveryID" label="Recovery ID" javaType="String" jsonType="string"/>
+      <Property name="removed" label="Removed" javaType="Boolean" jsonType="boolean"/>
+      <Property name="removedTxFromLastRecordID" label="Removed Tx From Last Record ID"
+        javaType="String" jsonType="string"/>
+      <Property name="removedTxFromStatus" label="Removed Tx From Status" javaType="String"
+        jsonType="string"/>
+      <Property name="starttime" label="Start Time" javaType="Date" jsonType="Date"/>
+      <Property name="txchangeid" label="Txchangeid" javaType="String" jsonType="string"/>
+      <Property name="txDocId" label="Transmitter Doc ID" javaType="String" jsonType="string"/>
+      <Property name="txFrom" label="Tx From" javaType="String" jsonType="string"/>
+      <Property name="txFromStatus" label="Removed Tx Status" javaType="String" jsonType="string"/>
+      <Property name="txId" label="Tx Id" javaType="String" jsonType="string"/>
+      <Property name="txLifeExpectancyWeeks" label="Tx Life Expectancy Weeks" javaType="Integer"
+        jsonType="number"/>
+      <Property name="txMortality" label="Tx Mortality" javaType="Float" jsonType="number"/>
+      <Property name="txTo" label="Tx To" javaType="String" jsonType="string"/>
+      <Property name="uhfId" label="UHF ID for Transmitters" javaType="Integer" jsonType="number"/>
+      <Property name="vhfHoursOn" label="Vhf hours on" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="txTo"/>
+          <DisplayProperty name="newTxFineTune"/>
+          <DisplayProperty name="oldHarnessLengthRight"/>
+          <DisplayProperty name="oldHarnessLengthLeft"/>
+          <DisplayProperty name="newHarnessLength"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="txActivity" label="Tx Activity" javaType="TxActivityEntity"
+    jsonType="TxActivityEntity">
+    <Class name="TxActivityEntity">
+      <Property name="alg1Activity2DaysAgo1" label="1st Activity 2 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity2DaysAgo2" label="1st Activity 2 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity3DaysAgo1" label="1st Activity 3 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity3DaysAgo2" label="1st Activity 3 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity4DaysAgo1" label="1st Activity 4 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity4DaysAgo2" label="1st Activity 4 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity5DaysAgo1" label="1st Activity 5 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity5DaysAgo2" label="1st Activity 5 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity6DaysAgo1" label="1st Activity 6 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1Activity6DaysAgo2" label="1st Activity 6 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1ActivityYesterday1" label="1st Activity yesterday 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg1ActivityYesterday2" label="1st Activity yesterday 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity2DaysAgo1" label="2nd Activity 2 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity2DaysAgo2" label="2nd Activity 2 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity3DaysAgo1" label="2nd Activity 3 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity3DaysAgo2" label="2nd Activity 3 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity4DaysAgo1" label="2nd Activity 4 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity4DaysAgo2" label="2nd Activity 4 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity5DaysAgo1" label="2nd Activity 5 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity5DaysAgo2" label="2nd Activity 5 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity6DaysAgo1" label="2nd Activity 6 days ago 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2Activity6DaysAgo2" label="2nd Activity 6 days ago 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2ActivityYesterday1" label="2nd Activity yesterday 1" javaType="Integer"
+        jsonType="number"/>
+      <Property name="alg2ActivityYesterday2" label="2nd Activity yesterday 2" javaType="Integer"
+        jsonType="number"/>
+      <Property name="batteryLife1" label="Battery life 1" javaType="Integer" jsonType="number"/>
+      <Property name="batteryLife2" label="Battery life 2" javaType="Integer" jsonType="number"/>
+      <Property name="hairTrigger1" label="Hair trigger 1" javaType="Integer" jsonType="number"/>
+      <Property name="hairTrigger2" label="Hair trigger 2" javaType="Integer" jsonType="number"/>
+      <Property name="longTrigger1" label="Long trigger 1" javaType="Integer" jsonType="number"/>
+      <Property name="longTrigger2" label="Long trigger 2" javaType="Integer" jsonType="number"/>
+      <Property name="recoveryid" label="Recoveryid" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel">
+        <DisplayGroup>
+          <DisplayProperty name="alg1Activity2DaysAgo1"/>
+          <DisplayProperty name="alg1Activity2DaysAgo2"/>
+          <DisplayProperty name="alg1Activity3DaysAgo1"/>
+          <DisplayProperty name="alg1Activity3DaysAgo2"/>
+          <DisplayProperty name="alg1Activity4DaysAgo1"/>
+          <DisplayProperty name="alg1Activity4DaysAgo2"/>
+          <DisplayProperty name="alg1Activity5DaysAgo1"/>
+          <DisplayProperty name="alg1Activity5DaysAgo2"/>
+          <DisplayProperty name="alg1Activity6DaysAgo1"/>
+          <DisplayProperty name="alg1Activity6DaysAgo2"/>
+          <DisplayProperty name="alg1ActivityYesterday1"/>
+          <DisplayProperty name="alg1ActivityYesterday2"/>
+          <DisplayProperty name="alg2Activity2DaysAgo1"/>
+          <DisplayProperty name="alg2Activity2DaysAgo2"/>
+          <DisplayProperty name="alg2Activity3DaysAgo1"/>
+          <DisplayProperty name="alg2Activity3DaysAgo2"/>
+          <DisplayProperty name="alg2Activity4DaysAgo1"/>
+          <DisplayProperty name="alg2Activity4DaysAgo2"/>
+          <DisplayProperty name="alg2Activity5DaysAgo1"/>
+          <DisplayProperty name="alg2Activity5DaysAgo2"/>
+          <DisplayProperty name="alg2Activity6DaysAgo1"/>
+          <DisplayProperty name="alg2Activity6DaysAgo2"/>
+          <DisplayProperty name="alg2ActivityYesterday1"/>
+          <DisplayProperty name="alg2ActivityYesterday2"/>
+          <DisplayProperty name="batteryLife1"/>
+          <DisplayProperty name="batteryLife2"/>
+          <DisplayProperty name="hairTrigger1"/>
+          <DisplayProperty name="hairTrigger2"/>
+          <DisplayProperty name="longTrigger1"/>
+          <DisplayProperty name="longTrigger2"/>
+          <DisplayProperty name="recoveryid"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="weight" label="Weight" javaType="WeightEntity" jsonType="WeightEntity">
+    <Class name="WeightEntity">
+      <Property name="method" label="Method" javaType="String" jsonType="string"/>
+      <Property name="n" label="N" javaType="Integer" jsonType="number"/>
+      <Property name="recoveryID" label="Recovery ID" javaType="String" jsonType="string"/>
+      <Property name="sdDev" label="Sd Dev" javaType="Float" jsonType="number"/>
+      <Property name="weight" label="Weight" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="method"/>
+          <DisplayProperty name="weight"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="magneticDeclination" label="Magnetic Declination" javaType="Integer" jsonType="number"/>
+  <Property name="magneticDeclinationAsOfYear" label="Magnetic Declination Year" javaType="Integer" jsonType="number"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="birdID"/>
+      <DisplayProperty name="island"/>
+      <DisplayProperty name="mappingMethod"/>
+      <DisplayProperty name="signalRcvdLocation"/>
+      <DisplayProperty name="locationID"/>
+      <DisplayProperty name="easting"/>
+      <DisplayProperty name="northing"/>
+      <DisplayProperty name="magneticDeclination"/>
+      <DisplayProperty name="magneticDeclinationAsOfYear"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="dateTime"/>
+      <DisplayProperty name="activity"/>
+      <DisplayProperty name="reason"/>
+      <DisplayProperty name="subReason"/>
+      <DisplayProperty name="significantEvent"/>
+      <DisplayProperty name="errol"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="observerList"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

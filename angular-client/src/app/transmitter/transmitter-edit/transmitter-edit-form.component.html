@@ -1,0 +1,184 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Tx Id'"
+          [propertyName]="'txId'"
+          [myFormControl]="myFormGroup.get('txId')"
+        >
+          <input
+            class="form-control"
+            id="txId"
+            formControlName="txId"
+            type="text"
+            appAutofocus
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Channel'"
+          [propertyName]="'channel'"
+          [myFormControl]="myFormGroup.get('channel')"
+        >
+          <input
+            class="form-control"
+            id="channel"
+            formControlName="channel"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Frequency'"
+          [propertyName]="'frequency'"
+          [myFormControl]="myFormGroup.get('frequency')"
+        >
+          <input
+            class="form-control"
+            id="frequency"
+            formControlName="frequency"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Tx Fine Tune'"
+          [propertyName]="'txFineTune'"
+          [myFormControl]="myFormGroup.get('txFineTune')"
+        >
+          <input
+            class="form-control"
+            id="txFineTune"
+            formControlName="txFineTune"
+            type="text"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'UHF ID'"
+          [propertyName]="'uhfId'"
+          [myFormControl]="myFormGroup.get('uhfId')"
+        >
+          <input
+            class="form-control"
+            id="uhfId"
+            formControlName="uhfId"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Rigging'"
+          [propertyName]="'rigging'"
+          [myFormControl]="myFormGroup.get('rigging')"
+        >
+          <select class="custom-select" id="rigging" formControlName="rigging">
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('RiggingList') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Software'"
+          [propertyName]="'software'"
+          [myFormControl]="myFormGroup.get('software')"
+        >
+          <select
+            class="custom-select"
+            id="software"
+            formControlName="software"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('SoftwareList') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Status'"
+          [propertyName]="'status'"
+          [myFormControl]="myFormGroup.get('status')"
+        >
+          <select class="custom-select" id="status" formControlName="status">
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions(
+                  'TransmitterStatusOptions',
+                  myFormGroup.get('status').value
+                ) | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Island'"
+          [propertyName]="'island'"
+          [myFormControl]="myFormGroup.get('island')"
+        >
+          <app-type-ahead-control
+            id="island"
+            formControlName="island"
+            [optionType]="'IslandName'"
+          ></app-type-ahead-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Mortality" class="col-md-4">
+      <div class="form-group">
+        <app-transmitter-mortality-edit
+          [myFormGroup]="myFormGroup"
+          [txMortalityID]="myFormGroup.getRawValue().txMortalityId"
+        ></app-transmitter-mortality-edit>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Life Expectancy (weeks)'"
+          [propertyName]="'lifeExpectancy'"
+          [myFormControl]="myFormGroup.get('lifeExpectancy')"
+        >
+          <input
+            class="form-control"
+            id="lifeExpectancy"
+            formControlName="lifeExpectancy"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <label id="expiryLabel">Expiry</label>
+        <input
+          class="form-control"
+          id="expiry"
+          type="text"
+          [value]="expiry | date: 'dd/MM/yyyy'"
+          [disabled]="true"
+        />
+      </div>
+    </app-controlblock>
+  </div>
+</form>

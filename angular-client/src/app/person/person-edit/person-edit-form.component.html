@@ -1,0 +1,157 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Name'"
+          [propertyName]="'name'"
+          [myFormControl]="myFormGroup.get('name')"
+        >
+          <input
+            class="form-control"
+            id="name"
+            formControlName="name"
+            type="text"
+            appAutofocus
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Current Capacity'"
+          [propertyName]="'currentCapacity'"
+          [myFormControl]="myFormGroup.get('currentCapacity')"
+        >
+          <select
+            class="custom-select"
+            id="currentCapacity"
+            formControlName="currentCapacity"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('PersonCapacityOptions')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Phone Number'"
+          [propertyName]="'phoneNumber'"
+          [myFormControl]="myFormGroup.get('phoneNumber')"
+        >
+          <input
+            class="form-control"
+            id="phoneNumber"
+            formControlName="phoneNumber"
+            type="text"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Email Address'"
+          [propertyName]="'emailAddress'"
+          [myFormControl]="myFormGroup.get('emailAddress')"
+        >
+          <input
+            class="form-control"
+            id="emailAddress"
+            formControlName="emailAddress"
+            type="text"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Account" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Create a User Account for this person'"
+          [propertyName]="'hasAccount'"
+          [myFormControl]="myFormGroup.get('hasAccount')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="hasAccount"
+            formControlName="hasAccount"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Username'"
+          [propertyName]="'userName'"
+          [myFormControl]="myFormGroup.get('userName')"
+        >
+          <input
+            class="form-control"
+            id="userName"
+            formControlName="userName"
+            type="text"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Role'"
+          [propertyName]="'personRole'"
+          [myFormControl]="myFormGroup.get('personRole')"
+        >
+          <select
+            class="custom-select"
+            id="personRole"
+            formControlName="personRole"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('PersonRoleOptions')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Account Expiry'"
+          [propertyName]="'accountExpiry'"
+          [myFormControl]="myFormGroup.get('accountExpiry')"
+        >
+          <app-date-control
+            id="accountExpiry"
+            formControlName="accountExpiry"
+            [editorCfg]="'none'"
+          ></app-date-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Comments" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Comments'"
+          [propertyName]="'comments'"
+          [myFormControl]="myFormGroup.get('comments')"
+        >
+          <textarea
+            class="form-control"
+            id="comments"
+            formControlName="comments"
+            rows="4"
+          ></textarea>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

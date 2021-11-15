@@ -1,0 +1,22 @@
+{
+    "log": ["http"],
+    "adminInterface": "127.0.0.1:4985",
+    "interface": "0.0.0.0:4984",
+	"SSLCert":"${SSLCert}",
+	"SSLKey":"${SSLKey}",
+    "databases": {
+        "kbird": {
+            "server": "http://localhost:8091",
+            "bucket": "kakapo-bird",
+            "username": "kakapo-bird",
+            "password": "${bucketPassword}",
+            "enable_shared_bucket_access": true,
+     	    "num_index_replicas": 0,
+            "import_docs": "continuous",
+            "users": { "GUEST": { "disabled": true, "admin_channels": ["*"] } },
+            "sync": `function (doc, oldDoc) {
+				channel("c1");
+            }`
+        }
+    }
+}

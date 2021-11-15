@@ -1,0 +1,60 @@
+<div>
+  <span *ngIf="loading">Loading...</span>
+
+  <section *ngIf="snarkIncludeResult && !loading">
+    <app-controlblock
+      title="Evening: {{ evening.date | date: 'dd/MM/yyy' }}"
+      [noOffset]="true"
+      [withSpacer]="true"
+      *ngFor="let evening of snarkIncludeResult"
+    >
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm mb-3">
+          <thead class="thead-light">
+            <tr>
+              <th>Arrival</th>
+              <th>Departure</th>
+              <th>Bird</th>
+              <th>Activity</th>
+              <th>Weight</th>
+              <th>Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of evening.snarkRecordList">
+              <td>{{ record.arriveDateTime | date: 'dd/MM HH:mm' }}</td>
+              <td>{{ record.departDateTime | date: 'dd/MM HH:mm' }}</td>
+              <td>
+                <app-bird-name-label
+                  [birdID]="record.birdID"
+                ></app-bird-name-label>
+              </td>
+              <td>
+                <select class="custom-select" [(ngModel)]="record['activity']">
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions(
+                        'RecordActivitySelect'
+                      ) | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </td>
+              <td>{{ record.weight | addUnits: 'kg' }}</td>
+              <td>
+                <textarea
+                  class="form-control"
+                  rows="1"
+                  [(ngModel)]="record['comments']"
+                ></textarea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-controlblock>
+  </section>
+</div>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="TEXT-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/Dusky.txt.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>logs/archived/Dusky.%d{yyyy-MM-dd}.%i.txt.log</fileNamePattern>
+      <maxFileSize>20MB</maxFileSize>
+      <totalSizeCap>1GB</totalSizeCap>
+      <!-- 60 days to keep -->
+      <maxHistory>60</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="JSON-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/Dusky.json.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>logs/archived/Dusky.%d{yyyy-MM-dd}.%i.json.log</fileNamePattern>
+      <maxFileSize>20MB</maxFileSize>
+      <totalSizeCap>1GB</totalSizeCap>
+      <!-- 60 days to keep -->
+      <maxHistory>60</maxHistory>
+    </rollingPolicy>
+
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+  </appender>
+
+  <logger name="com.fronde" level="info" additivity="false">
+    <appender-ref ref="TEXT-FILE-ROLLING"/>
+    <appender-ref ref="JSON-FILE-ROLLING"/>
+  </logger>
+
+  <root level="error">
+    <appender-ref ref="TEXT-FILE-ROLLING"/>
+    <appender-ref ref="JSON-FILE-ROLLING"/>
+  </root>
+
+</configuration>

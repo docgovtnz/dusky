@@ -1,0 +1,757 @@
+Private Sub download_Click()
+    Dim recordtype As Integer
+    Dim RecordValue1 As Integer
+    Dim RecordValue2 As Integer
+    Dim RecordValue3 As Integer
+    Dim RecordValue4 As Integer
+    Dim RecordValue5 As Integer
+    Dim tempvalue As Long
+    Dim adder As Integer
+    Dim ThisRecord As String
+    Dim newname As String
+    Dim db As Database
+    Dim temprecords As Recordset
+    Dim thedate As Variant
+    Dim thelasttime As Variant
+    Dim thelasttype As String
+    Dim txids As Recordset
+    Dim allbirds As String
+    Dim birdsathopper(1 To 10) As String
+    Dim i As Integer
+    Dim counter As Integer
+    Dim Bird As String
+    Dim slash
+    Dim lastslash
+    Dim channel As Integer
+    Dim RFID
+    Dim rfidids As Recordset
+    Dim tempbirdid As String
+
+    If MsgBox("Do you want to download new RFID data from a Deceptikon?", vbYesNo, "New data?") = vbNo Then
+        DoCmd.OpenForm "logger data form"
+        Exit Sub
+    End If
+
+
+    newname = saveCD(Me, "", "Find a datalogger file to download", "All files (*.*)" & vbNullChar & "*.*" & vbNullChar)
+    If newname <> "" Then
+        Open newname For Binary As #1
+    Else
+        Exit Sub
+    End If
+
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL ("DELETE * FROM [temp logger data];")
+    DoCmd.SetWarnings True
+
+    Set db = CurrentDb
+    Set temprecords = db.OpenRecordset("temp logger data", dbOpenDynaset)
+    'Set txids = db.OpenRecordset("SELECT birds.BirdID, TxChange.NewTxChannel FROM qrylasttx INNER JOIN ((birds INNER JOIN Recovery ON birds.BirdID = Recovery.BirdID) INNER JOIN TxChange ON Recovery.RocoveryID = TxChange.RecoveryID) ON (qrylasttx.MaxOfDate = Recovery.Date) AND (qrylasttx.[Bird Name] = birds.[Bird Name]) WHERE birds.Alive=True AND birds.[Current Island]='" & Me!Field53 & "';", dbOpenDynaset)
+    'Set txids = db.OpenRecordset("SELECT DISTINCTROW qrylasttx.[Bird Name], recovery.birdid, Recovery.Date, recovery.rocoveryid,Birds.Alive, birds.sex, TxChange.*, Birds.[Transmitter group] FROM ((qrylasttx INNER JOIN Birds ON qrylasttx.[Bird Name] = Birds.[Bird Name]) INNER JOIN Recovery ON (Birds.BirdID = Recovery.BirdID) AND (qrylasttx.MaxOfDate = Recovery.Date)) INNER JOIN TxChange ON Recovery.RocoveryID = TxChange.RecoveryID WHERE Birds.[Current Island]= '" & Me!Field53 & "' AND TxChange.txtranstype <> 'removed' And TxChange.txtranstype <> 'fallen off' AND Birds.Alive = Yes ORDER BY qrylasttx.[Bird Name];", dbOpenDynaset)
+    Set txids = db.OpenRecordset("SELECT DISTINCTROW birds.BirdID, TxChange.NewTxChannel  FROM ((qrylasttx INNER JOIN Birds ON qrylasttx.[Bird Name] = Birds.[Bird Name]) INNER JOIN Recovery ON (Birds.BirdID = Recovery.BirdID) AND (qrylasttx.MaxOfDate = Recovery.Date)) INNER JOIN TxChange ON Recovery.RocoveryID = TxChange.RecoveryID WHERE Birds.[Current Island]= '" & Me!Field53 & "' AND TxChange.txtranstype <> 'removed' And TxChange.txtranstype <> 'fallen off' AND Birds.Alive = Yes ORDER BY qrylasttx.[Bird Name];", dbOpenDynaset)
+    Set rfidids = db.OpenRecordset("SELECT Recovery.BirdID, BandChange.Microchip FROM Recovery RIGHT JOIN BandChange ON Recovery.RocoveryID = BandChange.RecoveryID WHERE BandChange.Microchip Is Not Null;", dbOpenDynaset)
+    Do
+        Get #1, , recordtype
+        If EOF(1) Then Exit Do
+        Get #1, , RecordValue1
+        Get #1, , RecordValue2
+        Get #1, , RecordValue3
+        Get #1, , RecordValue4
+        Get #1, , RecordValue5
+        temprecords.AddNew
+        Select Case Chr(recordtype / 256)
+            Case "T"
+                temprecords!recordtype = "Time"
+                temprecords!Date = Format$(Hex(RecordValue1 / 256), "00") & "/" & Format$(Hex(RecordValue2 / 256), "00") & "/" & Format$(Hex(RecordValue3 / 256), "00")
+                temprecords!Time = Format$(Hex(RecordValue4 / 256), "00") & ":" & Format$(Hex(RecordValue5 / 256), "00")
+                thedate = temprecords!Date
+                thelasttime = temprecords!Time
+            Case "A"
+                temprecords!recordtype = "Arrival"
+                temprecords!Date = thedate
+                temprecords!Time = Format$(Hex(RecordValue1 / 256), "00") & ":" & Format$(Hex(RecordValue2 / 256), "00")
+                channel = Format$(RecordValue3 / 256, "00")
+                If channel < 0 Then channel = channel + 256
+                temprecords![transmitter channel] = channel
+                txids.FindFirst ("newtxchannel = " & channel)
+                Debug.Print "First tx = " & txids!BirdID
+                If Not txids.NoMatch Then
+                    tempbirdid = txids!BirdID
+                    'checks that there's not two birds with the same transmitter
+                    txids.FindNext ("newtxchannel = " & channel)
+                    If txids.NoMatch Then
+                        'if there's no second record then identify the bird
+                        temprecords!BirdID = txids!BirdID
+                        'a variable with all the birdids currently at the snark with commas at the end of each birdid
+                        allbirds = allbirds & txids!BirdID & ","
+                    Else
+                        Debug.Print "Duplicate tx: " & txids!BirdID
+                        MsgBox "There are two birds with txchannel " & channel & ". You'll have to do it manually", , "Two birds the same"
+                        Exit Sub
+                    End If
+                End If
+                thelasttime = temprecords!Time
+
+            Case "D"
+                temprecords!recordtype = "Departure"
+                temprecords!Date = thedate
+                temprecords!Time = Format$(Hex(RecordValue1 / 256), "00") & ":" & Format$(Hex(RecordValue2 / 256), "00")
+                channel = Format$(RecordValue3 / 256, "00")
+                If channel < 0 Then channel = channel + 256
+                temprecords![transmitter channel] = channel
+                txids.FindFirst ("newtxchannel = " & channel)
+                If Not txids.NoMatch Then
+                    temprecords!BirdID = txids!BirdID
+                    'removes the departed birdid from the allbirds string
+                    allbirds = Left(allbirds, InStr(allbirds, txids!BirdID) - 1) & Right(allbirds, Len(allbirds) - InStr(allbirds, txids!BirdID) - Len(txids!BirdID))
+                End If
+                temprecords![signal strength] = Format$(RecordValue4 / 256, "00")
+                If temprecords!Time > #11:55:00 PM# And thelasttime < #12:05:00 AM# Then temprecords!Date = temprecords!Date - 1
+
+            Case "W"
+                temprecords!recordtype = "Weight"
+                temprecords!Date = thedate
+                temprecords!Time = Format$(Hex(RecordValue1 / 256), "00") & ":" & Format$(Hex(RecordValue2 / 256), "00")
+                If RecordValue4 < 0 Then adder = RecordValue4 / 256 + 256 Else adder = RecordValue4 / 256
+                temprecords!Weight = Format$(RecordValue3 + adder)
+                temprecords![weight quality] = Format$(RecordValue5 / 256)
+                'if there is only one bird (and comma) in the allbirds string then set the birdid to allbirds
+                If InStr(allbirds, ",") = Len(allbirds) And Len(allbirds) <> 0 Then
+                    temprecords!BirdID = Left(allbirds, Len(allbirds) - 1)
+                End If
+                thelasttime = temprecords!Time
+
+            Case "B"
+                temprecords!recordtype = "Battery Shutdown"
+                temprecords!Date = thedate
+                temprecords!Time = Format$(Hex(RecordValue1 / 256), "00") & ":" & Format$(Hex(RecordValue2 / 256), "00")
+
+                'ThisRecord = "Battery Shutdown"
+                'ThisRecord = ThisRecord + Chr(9) + Format$(Hex(RecordValue1 / 256), "00")
+                'ThisRecord = ThisRecord + ":" + Format$(Hex(RecordValue2 / 256), "00")
+
+            Case "R"
+                temprecords!recordtype = "RFID"
+                Debug.Print RecordValue1
+                Debug.Print RecordValue2
+                Debug.Print RecordValue3
+                Debug.Print RecordValue4
+                Debug.Print RecordValue5
+
+                If RecordValue1 < 0 Then
+                    RFID = 65536 + (RecordValue1) * (256 ^ 3)
+                Else
+                    RFID = RecordValue1 * (256 ^ 3)
+                End If
+                If RecordValue2 < 0 Then
+                    RFID = RFID + (65536 + RecordValue2) * (256 ^ 2)
+                Else
+                    RFID = RFID + RecordValue2 * (256 ^ 2)
+                End If
+                If RecordValue3 < 0 Then
+                    RFID = RFID + (65536 + RecordValue3) * (256 ^ 1)
+                Else
+                    RFID = RFID + RecordValue3 * (256 ^ 1)
+                End If
+                If RecordValue4 < 0 Then
+                    RFID = RFID + (65536 + RecordValue4) * (256 ^ 0)
+                Else
+                    RFID = RFID + RecordValue4 * (256 ^ 0)
+                End If
+                If RecordValue5 < 0 Then
+                    RFID = RFID + (65536 + RecordValue5) * (256 ^ -1)
+                Else
+                    RFID = RFID + RecordValue5 * (256 ^ -1)
+                End If
+
+
+                'RFID = RecordValue1 * (256 ^ 3)
+                'RFID = RFID + RecordValue2 * (256 ^ 2)
+                'RFID = RFID + RecordValue3 * (256 ^ 1)
+                'RFID = RFID + RecordValue4
+                'RFID = RFID + RecordValue5 / 256
+                Debug.Print RFID
+                temprecords!RFID = RFID
+                rfidids.FindFirst ("val(microchip) = " & RFID)
+                If Not rfidids.NoMatch Then
+                    temprecords!BirdID = rfidids!BirdID
+                    'a variable with all the birdids currently at the snark with commas at the end of each birdid
+                    allbirds = allbirds & rfidids!BirdID & ","
+                End If
+
+                temprecords!Date = thedate
+                temprecords!Time = thelasttime
+
+            Case Else
+                temprecords!recordtype = "Err" & recordtype
+
+                'ThisRecord = "Err" & RecordType
+                'ThisRecord = ThisRecord + " " + Format$(Hex(RecordValue1 / 256), "00")
+                'ThisRecord = ThisRecord + " " + Format$(Hex(RecordValue2 / 256), "00")
+                'ThisRecord = ThisRecord + " " + Format$(Hex(RecordValue3 / 256), "00")
+                'ThisRecord = ThisRecord + " " + Format$(Hex(RecordValue4 / 256), "00")
+                'ThisRecord = ThisRecord + " " + Format$(Hex(RecordValue5 / 256), "00")
+            End Select
+        'Debug.Print ThisRecord
+
+        If temprecords!Time < #12:00:00 PM# Then
+            temprecords![evening date] = temprecords!Date - 1
+        Else
+            temprecords![evening date] = temprecords!Date
+        End If
+        temprecords!include = vbYes
+        temprecords.Update
+    Loop
+
+    Close #1
+    txids.Close
+    rfidids.Close
+    temprecords.Close
+
+
+    'delete any records that aren't arrivals, departures, weights or rfids
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL ("DELETE [temp logger data].* FROM [temp logger data] WHERE [temp logger data].recordtype <> 'arrival' And [temp logger data].recordtype <> 'departure' And [temp logger data].recordtype <> 'rfid' And [temp logger data].recordtype <> 'weight';")
+    DoCmd.SetWarnings True
+
+    GoTo Temp
+
+    'exlude any ambiguous weight records that might come from more than one bird
+    Set temprecords = db.OpenRecordset("SELECT [temp logger data].* FROM [temp logger data] ORDER BY [Date]+[time];", dbOpenDynaset)
+    If Not temprecords.EOF Then
+        temprecords.MoveFirst
+        Do While Not temprecords.EOF
+                If temprecords!recordtype = "arrival" Then
+                    Bird = temprecords!BirdID
+                    'find out if this bird has already been recorded
+                    For i = 1 To 10
+                        If birdsathopper(i) = temprecords!BirdID Then GoTo alreadyathopper
+                    Next i
+                    'if it hasn't been recorded its added to the array birdsathopper
+                    For i = 1 To 10
+                        If IsNull(birdsathopper(i)) Or birdsathopper(i) = "" Then
+                            birdsathopper(i) = temprecords!BirdID
+                            Exit For
+                        End If
+                    Next i
+                ElseIf temprecords!recordtype = "departure" Then
+                    'if its a departing bird remove it from the array birdsathopper
+                    For i = 1 To 10
+                        If birdsathopper(i) = temprecords!BirdID Then
+                            birdsathopper(i) = ""
+                            Exit For
+                        End If
+                    Next i
+                ElseIf temprecords!recordtype = "weight" Then
+                    'if its a weight then count up the number of birds recorded
+                    'and if there's more or less than one, exclude the record
+                    'otherwise assign the weight to the bird that just arrived
+                    counter = 0
+                    For i = 1 To 10
+                        If Not IsNull(birdsathopper(i)) And birdsathopper(i) <> "" Then counter = counter + 1
+                    Next i
+                    temprecords.Edit
+                    If counter <> 1 Then
+                        temprecords!include = vbNo
+                    Else
+                        temprecords!BirdID = Bird
+                    End If
+                    temprecords.Update
+                End If
+alreadyathopper:
+            temprecords.MoveNext
+        Loop
+    End If
+Temp:
+
+    DoCmd.OpenForm "logger data form"
+    If Not IsNull(newname) Then
+        slash = -1
+        Do While slash <> 0
+            lastslash = slash
+            If slash = -1 Then slash = 0
+            slash = InStr(slash + 1, newname, "\")
+        Loop
+        Forms![logger data form]!filename = Mid(newname, lastslash + 1)
+    End If
+
+
+
+
+End Sub
+
+
+==================================================================================
+
+
+Option Compare Database
+Dim qrystring As String
+Dim PrevBirdID, PrevBooming, PrevNesting, PrevSuppFed As String
+
+
+
+Private Sub birdid_Click()
+    Dim db As Database
+    Dim current_table As Recordset
+    Set db = CurrentDb
+
+
+    qrystring = "SELECT [temp logger data].* FROM [temp logger data] WHERE include<>0 and birdid = '" & Me!BirdID.Column(1) & "' AND [evening date] =#" & Format(Me!BirdID.Column(2), "mm/dd/yyyy") & "# AND ( [recordtype]= 'Arrival' or [recordtype]='Departure' or [recordtype]='RFID' or [recordtype]='Weight');"
+    Me![process records].Visible = True
+    Me![process label].Visible = True
+    Me![logger data subform].Form.RecordSource = qrystring
+    Me![show all].Visible = True
+
+
+    lBirdID = Me!BirdID.Column(1)
+
+    ' Set nesting, booming and supp values to previous value for this bird, if that bird just entered
+    If lBirdID = PrevBirdID Then
+        Me!Nesting = PrevNesting
+        Me!Booming = PrevBooming
+        Me![Sup fed] = PrevSuppFed
+    End If
+
+    ' Get bird sex before checking booming or nesting
+    Set current_table = db.OpenRecordset("birds", DB_OPEN_DYNASET)
+    Criteria = "BirdID = '" & [lBirdID] & "'"
+    current_table.FindFirst Criteria
+    If current_table.NoMatch = True Then
+        lSex = 0
+    Else
+        lSex = current_table!Sex
+    End If
+    ' Set booming or nesting based on sex, if not already set
+    If lSex = 1 Then ' male
+        If ((IsNull(Me!Nesting) Or Me!Nesting = 99)) Then
+            Me!Nesting = 0 ' nesting = no
+        End If
+    ElseIf lSex = 2 Then ' female: not booming
+        If ((IsNull(Me!Booming) Or Me!Booming = 99)) Then
+            Me!Booming = 0 ' booming = no
+      End If
+    End If
+
+End Sub
+
+
+
+Private Sub Exsel_Click()
+    Dim logs As Recordset
+    Dim db As Database
+    Dim counter As Integer
+
+    Set db = CurrentDb
+
+    Set logs = db.OpenRecordset(qrystring, dbOpenDynaset)
+    logs.MoveFirst
+    counter = 1
+    While Not logs.EOF
+        If counter >= Me!seltop And counter <= Me!seltop + Me!selheight - 1 Then
+            logs.Edit
+            logs!include = 0
+            logs.Update
+        End If
+        logs.MoveNext
+        counter = counter + 1
+    Wend
+    logs.Close
+    Forms![logger data form]!BirdID.RowSource = ""
+    Forms![logger data form]!BirdID.RowSource = "SELECT DISTINCT [Bird Name] & ' ON ' & [evening date] AS Expr1, birds.BirdID, [temp logger data].[Evening date], [temp logger data].include FROM [temp logger data] INNER JOIN birds ON [temp logger data].Birdid = birds.BirdID WHERE ((([temp logger data].include)<>0) AND (([temp logger data].recordtype)='arrival' Or ([temp logger data].recordtype)='departure')) ORDER BY birds.BirdID, [temp logger data].[Evening date];"
+
+    Me![logger data subform].Requery
+
+End Sub
+
+
+
+Private Sub Form_Load()
+
+Dim kakapo As Database
+Dim current_table As Recordset
+Set kakapo = CurrentDb
+Set current_table = kakapo.OpenRecordset("Defaults", dbOpenDynaset)
+
+'PrevBirdID = "" ' For setting default booming/nesting/supfed values when processing same bird
+
+'Sets the Island default to that set on the home form
+current_table.MoveFirst
+Forms![logger data form]![Island].DefaultValue = "'" & current_table![Island] & "'"
+current_table.Close
+qrystring = "Select * FROM [temp logger data];"
+Me![logger data subform].Form.RecordSource = qrystring
+DoCmd.Maximize
+End Sub
+
+
+
+
+
+
+Private Sub Form_Unload(Cancel As Integer)
+    Dim rst As Recordset
+    Dim db As Database
+
+    Set db = CurrentDb
+
+    Set rst = db.OpenRecordset("SELECT DISTINCT [Bird Name] &  on  & [evening date] AS Expr1, birds.BirdID, [temp logger data].[Evening date], [temp logger data].include FROM [temp logger data] INNER JOIN birds ON [temp logger data].Birdid = birds.BirdID WHERE ((([temp logger data].include)<>0) AND (([temp logger data].recordtype)='arrival' Or ([temp logger data].recordtype)='departure')) ORDER BY birds.BirdID, [temp logger data].[Evening date];", dbOpenDynaset)
+    If Not rst.EOF Then
+        If MsgBox("You haven't finished processing all the birds and days. Do you really want to close the form?", vbYesNo, "Haven't finished!") = vbNo Then
+            Cancel = True
+            Exit Sub
+        End If
+    End If
+End Sub
+
+Private Sub Includesel_Click()
+    Dim logs As Recordset
+    Dim db As Database
+    Dim counter As Integer
+
+    Set db = CurrentDb
+
+    Set logs = db.OpenRecordset(qrystring, dbOpenDynaset)
+    logs.MoveFirst
+    counter = 1
+    While Not logs.EOF
+        If counter >= Me!seltop And counter <= Me!seltop + Me!selheight - 1 Then
+            logs.Edit
+            logs!include = vbYes
+            logs.Update
+        End If
+        logs.MoveNext
+        counter = counter + 1
+    Wend
+    logs.Close
+    Forms![logger data form]!BirdID.RowSource = ""
+    Forms![logger data form]!BirdID.RowSource = "SELECT DISTINCT [Bird Name] & ' ON ' & [evening date] AS Expr1, birds.BirdID, [temp logger data].[Evening date], [temp logger data].include FROM [temp logger data] INNER JOIN birds ON [temp logger data].Birdid = birds.BirdID WHERE [temp logger data].include<>0 AND ([temp logger data].recordtype='arrival' Or [temp logger data].recordtype='departure' Or [temp logger data].recordtype='RFID') ORDER BY birds.BirdID, [temp logger data].[Evening date];"
+
+    Me![logger data subform].Requery
+End Sub
+
+Private Sub iqr_Click()
+    Dim logs As Recordset
+    Dim db As Database
+
+    Set db = CurrentDb
+    Set logs = db.OpenRecordset("temp logger data", dbOpenDynaset)
+    logs.MoveFirst
+    While Not logs.EOF
+        If logs!recordtype = "weight" Then
+            If Val(logs![weight quality]) >= Val(Me![weight quality]) Then
+                logs.Edit
+                logs!include = True
+                logs.Update
+             Else
+                logs.Edit
+                logs!include = False
+                logs.Update
+            End If
+        End If
+        logs.MoveNext
+    Wend
+    logs.Close
+    Me![logger data subform].Form.RecordSource = qrystring
+
+
+End Sub
+
+Private Sub Location_Name_BeforeUpdate(Cancel As Integer)
+Call Location_Name_Change
+End Sub
+
+Private Sub Location_Name_Change()
+    If IsNull(Me![Location Name]) Or Me![Location Name] = "" Then
+        Me![Easting] = ""
+        Me![Northing] = ""
+    Else
+        Me![Easting] = Me![Location Name].Column(1)
+        Me![Northing] = Me![Location Name].Column(2)
+    End If
+End Sub
+
+Private Sub logger_data_subform_Exit(Cancel As Integer)
+    Me!selheight = Me![logger data subform].Form.selheight
+    Me!seltop = Me![logger data subform].Form.seltop
+End Sub
+Private Sub process_records_Click()
+    Dim qrystring As String
+    Dim db As Database
+    Dim TandB As Recordset
+    Dim ardep As Recordset
+    Dim yellowweights As Recordset
+    Dim snark As Recordset
+    Dim TandBrecid As String
+    Dim rst As Recordset
+    Dim lastrecid
+    Dim tonight As Recordset
+    Dim Duration
+    Dim eveningdate
+    Dim recflag
+    Dim weightdatetime
+    Dim weightid
+    Dim recovweights As Recordset
+    Dim days As Recordset
+    Dim birds As Recordset
+    Dim qry As String
+    Dim ID
+    Dim BirdID
+    Dim arrivetime
+    Dim departtime
+    Dim startobs
+    Dim finishobs
+    Dim ntimesoff
+    Dim tottimeoff
+    Dim lasttimeoff
+    Dim firsttimeoff
+    Dim maxtimeoff
+    Dim timeoff
+    Dim ndepart
+    Dim theweight
+    Dim theweightsd
+    Dim theweightn
+
+    Set db = CurrentDb
+
+
+    'checks for empty boxes
+    If Me!Observer = "" Or IsNull(Me!Observer) Or IsNull(Me!Easting) Or Me!Easting = "" Or IsNull(Me!Northing) Or Me!Northing = "" Or IsNull(Me!Frame32) Or Me!Frame32 = "" Or IsNull(Me!Nesting) Or IsNull(Me!Booming) Or IsNull(Me![Sup fed]) Then
+        MsgBox ("You need to fill out the observer and location, TandB or Hopper, nesting booming and sup fed!")
+        Exit Sub
+    End If
+
+    'makes a new tandb/hopper record for the day (if not nest) if it hasn't already been made
+    'else retrieves the tandbrecid
+
+    qrystring = "SELECT [temp logger data].* FROM [temp logger data] WHERE include<>0 and birdid = '" & Me!BirdID.Column(1) & "' AND [evening date] =#" & Format(Me!BirdID.Column(2), "mm/dd/yyyy") & "# AND [recordtype]= 'Arrival' ;"
+    Set days = db.OpenRecordset(qrystring, dbOpenDynaset)
+    If days.EOF Then
+        MsgBox "No records to process!"
+        Exit Sub
+    End If
+    days.MoveFirst
+
+
+    BirdID = Me!BirdID.Column(1)
+    Debug.Print "BirdID = " & BirdID
+    Debug.Print "BirdID col 1 = " & Me!BirdID.Column(1)
+
+    ' if not nest observation then make new T&B/Hopper record (nest obs made later)
+    ' If nest obs have to make T&B/Hopper record, as snark records require T&B hopper record
+'    If Me!Frame32 <> 3 Then
+        Set TandB = db.OpenRecordset("track and bowl activity", dbOpenDynaset)
+        TandB.FindFirst "TandB = '" & Me![Location Name] & "' and Date = #" & Format(days![evening date], "mm/dd/yyyy") & "#"
+        If TandB.NoMatch = False Then
+            TandBrecid = TandB!TandBrecid
+        Else
+            TandB.AddNew
+            TandBrecid = Now()
+            TandB!TandBrecid = TandBrecid
+            TandB!TandB = Me![Location Name]
+            TandB!Date = days![evening date]
+            TandB!Observer = Me!Observer
+            TandB![New Record] = "N"
+            TandB![TB/Hopper] = Me!Frame32
+            TandB.Update
+            TandB.Close
+        End If
+
+    eveningdate = days![evening date]
+    days.Close
+
+    'finds out if there are any weight records and averages and counts them sets  weightdatetime to 1/1/1900 if there are no weights
+    ' If stddev is NULL (since only 1 weight), then set stdev = 0
+    qrystring = "SELECT Min([date]+[time]) AS date_time, Avg([temp logger data].weight) AS AvgOfweight, Count([temp logger data].weight) AS CountOfweight, iif(isnull(StDev([temp logger data].weight)),0, StDev([temp logger data].weight))  AS StDevOfweight FROM [temp logger data] WHERE [temp logger data].include<>0 AND [temp logger data].recordtype='weight' AND birdid = '" & Me!BirdID.Column(1) & "' AND [evening date] = #" & Format(Me!BirdID.Column(2), "mm/dd/yyyy") & "# GROUP BY [temp logger data].Birdid;"
+   Debug.Print qrystring
+    Set yellowweights = db.OpenRecordset(qrystring, dbOpenDynaset)
+    If yellowweights.EOF Then
+        weightdatetime = #1/1/1900#
+    Else
+        yellowweights.MoveFirst
+        weightdatetime = yellowweights!date_time
+        theweight = yellowweights!AvgOfweight / 1000
+        theweightsd = yellowweights!stdevofweight / 1000
+        theweightn = yellowweights!countofweight
+    End If
+    yellowweights.Close
+
+    'makes snark records
+    lastrecid = #1/1/1900#
+    qrystring = "SELECT [temp logger data].* FROM [temp logger data] WHERE include<>0 and birdid = '" & Me!BirdID.Column(1) & "' AND [evening date] =#" & Format(Me!BirdID.Column(2), "mm/dd/yyyy") & "# AND ([recordtype]= 'Arrival' OR [recordtype]='departure') ;"
+    Set ardep = db.OpenRecordset(qrystring, dbOpenDynaset)
+    ardep.MoveFirst
+    startobs = ardep!Date + ardep!Time
+    ntimesoff = -1
+    tottimeoff = 0
+    maxtimeoff = 0
+    lastdepart = Null
+    ndepart = 0
+    recflag = False
+    Do While Not ardep.EOF
+        If ardep![recordtype] = "Arrival" Then
+            Set snark = db.OpenRecordset("Snark records", dbOpenDynaset)
+            snark.AddNew
+            snark!TandBrecid = TandBrecid
+            snark![New Record] = "N"
+            snark!BirdID = ardep!BirdID
+            snark![bird cert] = "Definitely"
+            snark![arrive] = ardep!Time
+            arrivetime = ardep!Date + ardep!Time
+            If (ardep!BirdID = BirdID) And (IsNull(lastdepart) = False) Then
+                timeoff = DateDiff("n", lastdepart, arrivetime)
+                tottimeoff = tottimeoff + timeoff
+                If (timeoff > maxtimeoff) Then
+                    maxtimeoff = timeoff
+                End If
+            End If
+        ElseIf ardep![recordtype] = "Departure" Then
+            If ardep!BirdID = BirdID Then
+                ntimesoff = ntimesoff + 1
+            End If
+            ndepart = ndepart + 1
+            If (ardep!BirdID = BirdID) And ndepart = 1 Then
+                firsttimeoff = ardep!Date + ardep!Time
+            End If
+            snark![Depart] = ardep!Time
+            ID = Now()
+            If ID <= lastrecid Then ID = lastrecid + #12:00:01 AM#
+            snark!Snarkrecid = ID
+            lastrecid = ID
+            departtime = ardep!Date + ardep!Time
+            lastdepart = departtime
+            snark.Update
+            snark.Close
+
+            'adds a recovery record if there's not already one and the birds are present for long enough or if there's a weight
+            Duration = departtime - arrivetime
+            If (Duration > 10 / (60 * 24) And recflag = False) Or ((weightdatetime >= arrivetime) And (weightdatetime <= departtime)) Then
+                If (weightdatetime <= arrivetime Or weightdatetime >= departtime) And weightdatetime <> #1/1/1900# Then GoTo norecovery
+                qry = "INSERT INTO Recovery (island, [date], [time], birdcert, [location name], easting, northing, mapmethod, recoverytype, activity, "
+                qry = qry & "observer, obsquality, rocoveryid, nesting, booming, [sup fed], birdid) "
+                qry = qry & "VALUES ('" & Me!Island & "', #" & Format(arrivetime, "mm/dd/yyyy") & "#, "
+                qry = qry & "#" & Format(arrivetime, "hh:mm") & "#, "
+                qry = qry & "'Definitely', "
+                qry = qry & "'" & Me![Location Name] & "', "
+                qry = qry & Me!Easting & ", "
+                qry = qry & Me!Northing & ", "
+                qry = qry & "'" & Me![Location Name].Column(3) & "', "
+                If Me!Frame32 = 1 Then
+                    qry = qry & "'Snark at T&B', "
+                    qry = qry & "'unknown', "
+                ElseIf Me!Frame32 = 2 Then
+                    qry = qry & "'Snark at hopper', "
+                    qry = qry & "'feeding', "
+                ElseIf Me!Frame32 = 3 Then
+                    qry = qry & "'Snark at nest', "
+                    qry = qry & "'nesting', "
+                End If
+                qry = qry & "'" & Me!Observer & "', "
+                qry = qry & "'Kakapo Team', "
+                qry = qry & "'" & ID & "', "
+                qry = qry & Me!Nesting & ", "
+                qry = qry & Me!Booming & ", "
+                qry = qry & Me![Sup fed] & ", "
+                qry = qry & "'" & Me!BirdID.Column(1) & "');"
+                DoCmd.SetWarnings False
+                DoCmd.RunSQL qry
+                DoCmd.SetWarnings True
+                recflag = True
+
+                'make weight records
+                If weightdatetime > #1/1/1900# And ((weightdatetime >= arrivetime) And (weightdatetime <= departtime)) Then
+                    qry = "INSERT INTO weights (weight,sddev,N,method,[new record],recoveryid) "
+                    qry = qry & "VALUES (" & theweight & ", "
+                    qry = qry & theweightsd & ", "
+                    qry = qry & theweightn & ", "
+                    qry = qry & "'Auto', "
+                    qry = qry & "'N', "
+                    qry = qry & "'" & ID & "');"
+
+                    DoCmd.SetWarnings False
+                    Debug.Print "Make weight record query:"
+                    Debug.Print qry
+                    DoCmd.RunSQL qry
+                    DoCmd.SetWarnings True
+                End If
+norecovery:
+            End If
+            finishobs = ardep!Date + ardep!Time
+
+        End If
+        ardep.MoveNext
+    Loop
+    ardep.Close
+
+    'make nest observation if hasn't been made; else retrieves nest obs id
+    If Me!Frame32 = 3 Then
+
+        Set NestObs = db.OpenRecordset("nest observations", dbOpenDynaset)
+        NestObs.FindFirst "[Location name] = '" & Me![Location Name] & "' and date = #" & Format(eveningdate, "mm/dd/yyyy") & "#"
+        If NestObs.NoMatch = False Then
+            Nestobsid = NestObs![Nest obs id]
+        Else
+            NestObs.AddNew
+            Nestobsid = Now()
+            Debug.Print ("New snark nest observation created: " & Nestobsid)
+            NestObs![Nest obs id] = Nestobsid
+            NestObs![Location Name] = Me![Location Name]
+            NestObs![BirdID] = BirdID
+            NestObs!Date = eveningdate
+            NestObs![Total time off] = tottimeoff
+            NestObs![Number of times off] = ntimesoff
+            NestObs![First time off] = firsttimeoff
+            NestObs![Start observation time] = startobs
+            NestObs![Finish observation time] = finishobs
+            NestObs![Max time off] = maxtimeoff
+'           [nest observations]![Time on nest during night] =
+            NestObs!Notes = "Nest snark observation"
+            NestObs![New Record] = "N"
+            NestObs.Update
+            NestObs.Close
+        End If
+    End If
+
+    ' Set previous bird ID, and previous booming/nesting/supp fed values, for filling in automatically for same bird next time
+    PrevBirdID = Me!BirdID.Column(1)
+    PrevBooming = Me!Booming
+    PrevNesting = Me!Nesting
+    PrevSuppFed = Me![Sup fed]
+
+    'exclude processed weights and arrivals and departures
+    qrystring = "UPDATE [temp logger data] SET [temp logger data].include = 0 WHERE birdid = '" & Me!BirdID.Column(1) & "' AND [evening date] = #" & Format(Me!BirdID.Column(2), "mm/dd/yyyy") & "#;"
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL qrystring
+    DoCmd.SetWarnings True
+    Me!BirdID.Requery
+    Me!BirdID = ""
+    Me!Nesting = Null
+    Me!Booming = Null
+    Me![Sup fed] = Null
+    Call show_all_Click
+
+
+    'open tandb form
+    DoCmd.OpenForm "tandb form"
+    Set rst = Forms![tandb form].RecordsetClone
+    rst.FindFirst "tandbrecid = '" & TandBrecid & "'"
+    If rst.NoMatch Then
+        MsgBox "not found"
+    Else
+        Forms![tandb form].Bookmark = rst.Bookmark
+    End If
+
+
+End Sub
+
+
+
+Private Sub show_all_Click()
+    qrystring = "temp logger data"
+    Me!BirdID.SetFocus
+    Me![process records].Visible = False
+    Me![process label].Visible = False
+    Me!BirdID = ""
+    Me![logger data subform].Form.RecordSource = qrystring
+
+    Me![show all].Visible = False
+End Sub

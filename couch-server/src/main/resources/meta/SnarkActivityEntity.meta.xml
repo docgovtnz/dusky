@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="SnarkActivityEntity">
+  <Property name="activityType" label="Activity Type" javaType="String" jsonType="string"/>
+  <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+  <Property name="date" label="Date" javaType="Date" jsonType="Date"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="locationID" label="Location" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="observerPersonID" label="Observer" javaType="String" jsonType="string"/>
+  <Property name="oldBooming" label="Old Booming" javaType="Boolean" jsonType="boolean"/>
+  <Property name="oldChinging" label="Old Chinging" javaType="Boolean" jsonType="boolean"/>
+  <Property name="oldFightingSign" label="Old Fighting sign" javaType="Integer" jsonType="number"/>
+  <Property name="oldGrubbing" label="Old Grubbing" javaType="Integer" jsonType="number"/>
+  <Property name="oldMatingSign" label="Old Mating Sign" javaType="Integer" jsonType="number"/>
+  <Property name="oldObserver" label="Old Observer" javaType="String" jsonType="string"/>
+  <Property name="oldSkraaking" label="Old Skraaking" javaType="Boolean" jsonType="boolean"/>
+  <Property name="oldSticks" label="Old Sticks" javaType="Integer" jsonType="number"/>
+  <Property name="oldTAndB" label="Old T and B" javaType="String" jsonType="string"/>
+  <Property name="oldTAndBRecId" label="Old T And B Rec Id" javaType="String" jsonType="string"/>
+  <Property name="oldTapeUsed" label="Old Tape Used" javaType="Boolean" jsonType="boolean"/>
+  <Property name="oldTbHopper" label="Old TB/Hopper" javaType="Integer" jsonType="number"/>
+  <Property name="oldTimeRecorded" label="Old Time Recorded" javaType="Integer" jsonType="number"/>
+  <Property name="oldTrackActivity" label="Old Track Activity" javaType="Integer"
+    jsonType="number"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="tandBrecid" label="Tand Brecid" javaType="String" jsonType="string"/>
+  <Property name="snarkRecordList" label="Snark Record List"
+    javaType="List&lt;SnarkRecordEntity&gt;" jsonType="SnarkRecordEntity[]">
+    <Class name="SnarkRecordEntity">
+      <Property name="arriveDateTime" label="Arrive Date Time" javaType="Date" jsonType="Date"/>
+      <Property name="birdCert" label="Bird cert" javaType="String" jsonType="string"/>
+      <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+      <Property name="channel" label="Channel" javaType="Integer" jsonType="number"/>
+      <Property name="departDateTime" label="Depart Date Time" javaType="Date" jsonType="Date"/>
+      <Property name="mating" label="Mating" javaType="Boolean" jsonType="boolean"/>
+      <Property name="oldBirdId" label="Old Bird Id" javaType="String" jsonType="string"/>
+      <Property name="oldSnarkRecId" label="Old Snark Rec Id" javaType="String" jsonType="string"/>
+      <Property name="recordID" label="Record" javaType="String" jsonType="string"/>
+      <Property name="tandbrecid" label="Tandbrecid" javaType="String" jsonType="string"/>
+      <Property name="weight" label="Weight" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdID"/>
+          <DisplayProperty name="birdCert"/>
+          <DisplayProperty name="arriveDateTime"/>
+          <DisplayProperty name="departDateTime"/>
+          <DisplayProperty name="mating"/>
+          <DisplayProperty name="recordID"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="trackAndBowlActivity" label="Track And Bowl Activity"
+    javaType="TrackAndBowlActivityEntity" jsonType="TrackAndBowlActivityEntity">
+    <Class name="TrackAndBowlActivityEntity">
+      <Property name="boom" label="Boom" javaType="Boolean" jsonType="boolean"/>
+      <Property name="ching" label="Ching" javaType="Boolean" jsonType="boolean"/>
+      <Property name="fightingSign" label="Fighting Sign" javaType="String" jsonType="string"/>
+      <Property name="grubbing" label="Grubbing" javaType="String" jsonType="string"/>
+      <Property name="matingSign" label="Mating Sign" javaType="String" jsonType="string"/>
+      <Property name="skraak" label="Skraak" javaType="Boolean" jsonType="boolean"/>
+      <Property name="sticks" label="Sticks" javaType="String" jsonType="string"/>
+      <Property name="tapeUsed" label="Tape Used" javaType="String" jsonType="string"/>
+      <Property name="trackActivity" label="Track Activity" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="trackActivity"/>
+          <DisplayProperty name="sticks"/>
+          <DisplayProperty name="grubbing"/>
+          <DisplayProperty name="fightingSign"/>
+          <DisplayProperty name="matingSign"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="tapeUsed"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="boom"/>
+          <DisplayProperty name="ching"/>
+          <DisplayProperty name="skraak"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="locationID"/>
+      <DisplayProperty name="observerPersonID"/>
+      <DisplayProperty name="date"/>
+      <DisplayProperty name="activityType"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="comments"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

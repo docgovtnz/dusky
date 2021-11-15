@@ -1,0 +1,11 @@
+<div
+  *ngIf="validationMessages && validationMessages.length > 0"
+  style="position: relative; z-index: 1"
+>
+  <alert [dismissible]="true" type="danger" (onClosed)="onClosed()">
+    <h5>Validation Errors</h5>
+    <ul>
+      <li *ngFor="let msg of validationMessages">{{ msg.messageText }}</li>
+    </ul>
+  </alert>
+</div>

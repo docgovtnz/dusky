@@ -1,0 +1,7 @@
+<span *ngIf="locationSearchResults">
+  <app-esri-map
+    [locations]="locationSearchResults"
+    [visibleLayers]="locationTypeSet"
+    [selectedIslandName]="firstIslandSearchResult"
+  ></app-esri-map>
+</span>

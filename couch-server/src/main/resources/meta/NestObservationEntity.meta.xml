@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="NestObservationEntity">
+  <Property name="activeDayMinutes" label="Active day minutes" javaType="Integer"
+    jsonType="number"/>
+  <Property name="activeNightMinutes" label="Active night minutes" javaType="Integer"
+    jsonType="number"/>
+  <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+  <Property name="breathingrate1" label="Breathingrate1" javaType="Integer" jsonType="number"/>
+  <Property name="breathingrate2" label="Breathingrate2" javaType="Integer" jsonType="number"/>
+  <Property name="chick1id" label="Chick1id" javaType="String" jsonType="string"/>
+  <Property name="chick1NumberFeeds" label="Chick 1 number feeds" javaType="Integer"
+    jsonType="number"/>
+  <Property name="chick1TimeFed" label="Chick 1 time fed" javaType="Integer" jsonType="number"/>
+  <Property name="chick2id" label="Chick2id" javaType="String" jsonType="string"/>
+  <Property name="chick2NumberFeeds" label="Chick 2 number feeds" javaType="Integer"
+    jsonType="number"/>
+  <Property name="chick2TimeFed" label="Chick 2 time fed" javaType="Integer" jsonType="number"/>
+  <Property name="chickfirstfeed1" label="Chickfirstfeed1" javaType="Date" jsonType="Date"/>
+  <Property name="chickfirstfeed2" label="Chickfirstfeed2" javaType="Date" jsonType="Date"/>
+  <Property name="chickfirstfeed3" label="Chickfirstfeed3" javaType="Date" jsonType="Date"/>
+  <Property name="chickfirstfeed4" label="Chickfirstfeed4" javaType="Date" jsonType="Date"/>
+  <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+  <Property name="date" label="Date" javaType="Date" jsonType="Date"/>
+  <Property name="dateTime" label="Date/Time" javaType="Date" jsonType="Date"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="finishObservationTime" label="Finish observation time" javaType="Date"
+    jsonType="Date"/>
+  <Property name="firstTimeOff" label="First time off" javaType="Date" jsonType="Date"/>
+  <Property name="hatchDate" label="Hatch date" javaType="Date" jsonType="Date"/>
+  <Property name="heatpad1" label="Heatpad1" javaType="Boolean" jsonType="boolean"/>
+  <Property name="heatpad2" label="Heatpad2" javaType="Boolean" jsonType="boolean"/>
+  <Property name="heatpad3" label="Heatpad3" javaType="Boolean" jsonType="boolean"/>
+  <Property name="heatpad4" label="Heatpad4" javaType="Boolean" jsonType="boolean"/>
+  <Property name="heatPadTime" label="Heat pad time" javaType="Integer" jsonType="number"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="layDate" label="Lay date" javaType="Date" jsonType="Date"/>
+  <Property name="locationID" label="Location ID" javaType="String" jsonType="string"/>
+  <Property name="maxTimeOff" label="Max time off" javaType="Integer" jsonType="number"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="mumback1" label="Mumback1" javaType="Date" jsonType="Date"/>
+  <Property name="mumback2" label="Mumback2" javaType="Date" jsonType="Date"/>
+  <Property name="mumback3" label="Mumback3" javaType="Date" jsonType="Date"/>
+  <Property name="mumback4" label="Mumback4" javaType="Date" jsonType="Date"/>
+  <Property name="nestObsId" label="Nest obs id" javaType="String" jsonType="string"/>
+  <Property name="notes" label="Notes" javaType="String" jsonType="string"/>
+  <Property name="numberOfChicks" label="Number of chicks" javaType="Integer" jsonType="number"/>
+  <Property name="numberOfEggs" label="Number of eggs" javaType="Integer" jsonType="number"/>
+  <Property name="numberOfTimesOff" label="Number of times off" javaType="Integer"
+    jsonType="number"/>
+  <Property name="oldBirdId" label="Old Bird Id" javaType="String" jsonType="string"/>
+  <Property name="oldLocationName" label="Old Location Name" javaType="String" jsonType="string"/>
+  <Property name="percentageOfDayActive" label="Percentage of day active" javaType="Float"
+    jsonType="number"/>
+  <Property name="percentageOfNightActive" label="Percentage of night active" javaType="Float"
+    jsonType="number"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="rolls" label="Rolls" javaType="Integer" jsonType="number"/>
+  <Property name="scratches" label="Scratches" javaType="Integer" jsonType="number"/>
+  <Property name="startObservationTime" label="Start observation time" javaType="Date"
+    jsonType="Date"/>
+  <Property name="timeOnNestDuringDaylight" label="Time on nest during daylight" javaType="Integer"
+    jsonType="number"/>
+  <Property name="timeOnNestDuringNight" label="Time on nest during night" javaType="Integer"
+    jsonType="number"/>
+  <Property name="totalTimeOff" label="Total time off" javaType="Integer" jsonType="number"/>
+  <Property name="unknownChickNumberFeeds" label="Unknown chick number feeds" javaType="Integer"
+    jsonType="number"/>
+  <Property name="unknownChickTimeFed" label="Unknown chick time fed" javaType="Integer"
+    jsonType="number"/>
+  <Property name="weighMethod" label="Weigh Method" javaType="String" jsonType="string"/>
+  <Property name="chickRecordReferenceList" label="Chick Record Reference List"
+    javaType="List&lt;ChickRecordReferenceEntity&gt;" jsonType="ChickRecordReferenceEntity[]">
+    <Class name="ChickRecordReferenceEntity">
+      <Property name="birdID" label="birdID" javaType="String" jsonType="string"/>
+      <Property name="recordID" label="Record ID" javaType="String" jsonType="string"/>
+    </Class>
+  </Property>
+  <Property name="eggRecordReferenceList" label="Egg Record Reference List"
+    javaType="List&lt;EggRecordReferenceEntity&gt;" jsonType="EggRecordReferenceEntity[]">
+    <Class name="EggRecordReferenceEntity">
+      <Property name="birdID" label="birdID" javaType="String" jsonType="string"/>
+      <Property name="recordID" label="Record ID" javaType="String" jsonType="string"/>
+    </Class>
+  </Property>
+  <Property name="motherTripList" label="Mother Trip List" javaType="List&lt;MotherTripEntity&gt;"
+    jsonType="MotherTripEntity[]">
+    <Class name="MotherTripEntity">
+      <Property name="motherLeft" label="Mother Left" javaType="Date" jsonType="Date"/>
+      <Property name="motherBack" label="Mother Back" javaType="Date" jsonType="Date"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="motherLeft"/>
+          <DisplayProperty name="motherBack"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="motherTripSummary" label="Mother Trip Summary" javaType="MotherTripSummaryEntity"
+    jsonType="MotherTripSummaryEntity">
+    <Class name="MotherTripSummaryEntity">
+      <Property name="totalTimeOff" label="Total time off" javaType="Integer" jsonType="number"/>
+      <Property name="numberOfTimesOff" label="Number of times off" javaType="Integer"
+        jsonType="number"/>
+      <Property name="maxTimeOff" label="Max time off" javaType="Integer" jsonType="number"/>
+      <Property name="firstTimeOff" label="First time off" javaType="Date" jsonType="Date"/>
+      <DisplayModel layoutType="Panel">
+        <DisplayGroup>
+          <DisplayProperty name="totalTimeOff"/>
+          <DisplayProperty name="numberOfTimesOff"/>
+          <DisplayProperty name="maxTimeOff"/>
+          <DisplayProperty name="firstTimeOff"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="nestChamber" label="Nest Chamber" javaType="NestChamberEntity"
+    jsonType="NestChamberEntity">
+    <Class name="NestChamberEntity">
+      <Property name="temperature" label="Temperature" javaType="Float" jsonType="number"/>
+      <Property name="relativeHumidity" label="Relative Humidity" javaType="Integer" jsonType="number"/>
+      <Property name="parasitesPresent" label="Parasites Present" javaType="Boolean"
+        jsonType="boolean"/>
+      <Property name="conditions" label="Conditions" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="temperature"/>
+          <DisplayProperty name="relativeHumidity"/>
+          <DisplayProperty name="parasitesPresent"/>
+          <DisplayProperty name="conditions"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="nestChickList" label="Nest Chick List" javaType="List&lt;NestChickEntity&gt;"
+    jsonType="NestChickEntity[]">
+    <Class name="NestChickEntity">
+      <Property name="recordID" label="Record" javaType="String" jsonType="string"/>
+      <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+      <Property name="weightInGrams" label="Weight" javaType="Float" jsonType="number"/>
+      <Property name="cropStatus" label="Crop Status" javaType="String" jsonType="string"/>
+      <Property name="respiratoryRate" label="Respiratory Rate" javaType="Integer"
+        jsonType="number"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <Property name="activity" label="Activity" javaType="String" jsonType="string"/>
+      <Property name="ageClass" label="Age Class" javaType="String" jsonType="string"/>
+      <Property name="milestone" label="Milestone" javaType="String" jsonType="string"/>
+      <Property name="mortality" label="Mortality" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdID"/>
+          <DisplayProperty name="weightInGrams"/>
+          <DisplayProperty name="cropStatus"/>
+          <DisplayProperty name="respiratoryRate"/>
+          <DisplayProperty name="comments"/>
+          <DisplayProperty name="ageClass"/>
+          <DisplayProperty name="milestone"/>
+          <DisplayProperty name="activity"/>
+          <DisplayProperty name="mortality"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="nestEggList" label="Nest Egg List" javaType="List&lt;NestEggEntity&gt;"
+    jsonType="NestEggEntity[]">
+    <Class name="NestEggEntity">
+      <Property name="recordID" label="Record" javaType="String" jsonType="string"/>
+      <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+      <Property name="lengthInMms" label="Length" javaType="Float" jsonType="number"/>
+      <Property name="widthInMms" label="Width" javaType="Float" jsonType="number"/>
+      <Property name="weightInGrams" label="Weight" javaType="Float" jsonType="number"/>
+      <Property name="candlingAgeEstimateInDays" label="Candling Age Estimate" javaType="Integer"
+        jsonType="number"/>
+      <Property name="temperature" label="Temperature" javaType="Float" jsonType="number"/>
+      <Property name="heartRate" label="Heart Rate" javaType="Integer" jsonType="number"/>
+      <Property name="embryoMoving" label="Embryo Moving" javaType="String" jsonType="string"/>
+      <Property name="activity" label="Activity" javaType="String" jsonType="string"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <Property name="ageClass" label="Age Class" javaType="String" jsonType="string"/>
+      <Property name="milestone" label="Milestone" javaType="String" jsonType="string"/>
+      <Property name="mortality" label="Mortality" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdID"/>
+          <DisplayProperty name="ageClass"/>
+          <DisplayProperty name="milestone"/>
+          <DisplayProperty name="mortality"/>
+          <DisplayProperty name="lengthInMms"/>
+          <DisplayProperty name="widthInMms"/>
+          <DisplayProperty name="weightInGrams"/>
+          <DisplayProperty name="candlingAgeEstimateInDays"/>
+          <DisplayProperty name="temperature"/>
+          <DisplayProperty name="heartRate"/>
+          <DisplayProperty name="embryoMoving"/>
+          <DisplayProperty name="activity"/>
+          <DisplayProperty name="comments"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="observationTimes" label="Observation Times" javaType="ObservationTimesEntity"
+    jsonType="ObservationTimesEntity">
+    <Class name="ObservationTimesEntity">
+      <Property name="finishObservationTime" label="Finish observation time" javaType="Date"
+        jsonType="Date"/>
+      <Property name="inspectionTime" label="Inspection time" javaType="Date" jsonType="Date"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="finishObservationTime"/>
+          <DisplayProperty name="inspectionTime"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="observerList" label="Observer List" javaType="List&lt;ObserverEntity&gt;"
+    jsonType="ObserverEntity[]">
+    <Class name="ObserverEntity">
+      <Property name="personID" label="Person ID" javaType="String" jsonType="string"/>
+      <Property name="observerCapacity" label="Observer Capacity" javaType="String"
+        jsonType="string"/>
+      <Property name="observationRoles" label="Observation Roles" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="personID"/>
+          <DisplayProperty name="observerCapacity"/>
+          <DisplayProperty name="observationRoles"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="locationID"/>
+      <DisplayProperty name="birdID"/>
+      <DisplayProperty name="dateTime"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="observerList"/>
+      <DisplayProperty name="weighMethod"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

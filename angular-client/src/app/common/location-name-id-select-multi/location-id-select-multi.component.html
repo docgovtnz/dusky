@@ -1,0 +1,48 @@
+<!-- Not binding to the (typeaheadOnSelect) event, but just using the setter of selectedOption to propagate the
+value change to parent components -->
+<input
+  *ngIf="!autofocus"
+  class="form-control"
+  typeaheadOptionField="locationName"
+  typeaheadGroupField="state"
+  [typeahead]="summaryList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  [disabled]="disabled"
+  [(ngModel)]="locationNameSelected"
+  (keyup.enter)="onEnter($event)"
+  (typeaheadOnSelect)="onSelect($event)"
+  (blur)="onBlur($event)"
+/>
+<input
+  *ngIf="autofocus"
+  class="form-control"
+  typeaheadOptionField="locationName"
+  typeaheadGroupField="state"
+  [typeahead]="summaryList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  [disabled]="disabled"
+  [(ngModel)]="locationNameSelected"
+  (keyup.enter)="onEnter($event)"
+  (typeaheadOnSelect)="onSelect($event)"
+  (blur)="onBlur($event)"
+/>
+
+<span
+  class="badge badge-secondary m-1"
+  *ngFor="let selOpt of _selectedLocations; index as index"
+  [attr.data-index]="index"
+>
+  {{ getLocationName(selOpt) }}
+  <a
+    href="#"
+    class="bg-secondary text-light"
+    (click)="onRemoveOptionAction(index)"
+  >
+    <fa-icon icon="times" aria-hidden="true"></fa-icon
+    ><span class="sr-only">Remove</span>
+  </a>
+</span>

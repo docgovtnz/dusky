@@ -1,0 +1,9 @@
+<button class="btn btn-link btn-sm mr-2" (click)="changeButtonState()">
+  <fa-icon
+    [id]="labelText + 'Icon'"
+    icon="{{ getButtonIcon() }}"
+    aria-hidden="true"
+  ></fa-icon>
+  <span class="sr-only">{{ getButtonName() }}</span>
+  <span [id]="labelText + 'Lbl'">{{ labelText }}</span>
+</button>

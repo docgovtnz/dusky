@@ -1,0 +1,12 @@
+/* For display of comment text, displays new lines and wraps on words */
+
+.comments-text {
+  word-wrap: break-word;
+  /* IE>=5.5 */
+  white-space: pre;
+  /* IE>=6 */
+  white-space: -moz-pre-wrap;
+  /* For Fx<=2 */
+  white-space: pre-wrap;
+  /* Fx>3, Opera>8, Safari>3*/
+}

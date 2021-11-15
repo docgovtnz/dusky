@@ -1,0 +1,31 @@
+<input
+  *ngIf="!autofocus"
+  #typeahead
+  class="form-control border border-primary c-id-select-bg"
+  typeaheadOptionField="birdName"
+  typeaheadGroupField="state"
+  [typeahead]="summaryList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  (typeaheadOnSelect)="onValueChange($event.item.id)"
+  [(ngModel)]="birdNameSelected"
+  (blur)="onInputBlur()"
+  [disabled]="disabled"
+/>
+<input
+  *ngIf="autofocus"
+  #typeahead
+  class="form-control border border-primary c-id-select-bg"
+  typeaheadOptionField="birdName"
+  typeaheadGroupField="state"
+  [typeahead]="summaryList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  (typeaheadOnSelect)="onValueChange($event.item.id)"
+  [(ngModel)]="birdNameSelected"
+  (blur)="onInputBlur()"
+  [disabled]="disabled"
+  appAutofocus
+/>

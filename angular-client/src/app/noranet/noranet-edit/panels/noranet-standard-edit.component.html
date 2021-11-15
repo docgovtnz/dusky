@@ -1,0 +1,90 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Bird(s)</th>
+            <th scope="col">UHF ID</th>
+            <th scope="col">Battery Weeks</th>
+            <th scope="col">Activity Hours</th>
+            <th scope="col">Comments</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-noranet-bird-select-multi
+                [(selectedBirds)]="item.get('birdList').value"
+              ></app-noranet-bird-select-multi>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('uhfId')">
+                <input
+                  class="form-control"
+                  id="uhfId"
+                  formControlName="uhfId"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('batteryLife')">
+                <input
+                  class="form-control"
+                  id="batteryLife"
+                  formControlName="batteryLife"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('activity')">
+                <input
+                  class="form-control"
+                  id="activity"
+                  formControlName="activity"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('comments')">
+                <input
+                  class="form-control"
+                  id="comments"
+                  formControlName="comments"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button class="btn btn-record" (click)="removeItem(i)">
+                <fa-icon icon="minus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Remove</span>
+              </button>
+              <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td colspan="5">&nbsp;</td>
+            <td>
+              <button class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

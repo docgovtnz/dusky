@@ -1,0 +1,18 @@
+<div
+  class="btn-group btn-group-toggle"
+  role="group"
+  btnRadioGroup
+  [(ngModel)]="selectedNameInternal"
+>
+  <button
+    *ngFor="let name of buttonNames"
+    class="btn btn-toggle"
+    [disabled]="isDisabled(name)"
+    btnRadio="{{ name }}"
+    uncheckable
+    tabindex="0"
+    role="button"
+  >
+    {{ name }}
+  </button>
+</div>

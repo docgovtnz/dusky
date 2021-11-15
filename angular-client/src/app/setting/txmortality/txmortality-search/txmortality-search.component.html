@@ -1,0 +1,97 @@
+<section>
+  <app-banner title="Tx Mortalities"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="txmortalityCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Details" class="col-md-6">
+            <div class="form-group">
+              <label for="name"> Name </label>
+              <input
+                class="form-control"
+                id="name"
+                [(ngModel)]="txmortalityCriteria.name"
+                appAutofocus
+              />
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+        <button id="newBtn" (click)="onNew()" [disabled]="!isAuthorized">
+          New
+        </button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Normal BPM</th>
+            <th scope="col">Activity BPM</th>
+            <th scope="col">Mortality BPM</th>
+            <th scope="col">Hours Til Mort</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="12">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="12">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.name }}</td>
+            <td>{{ item.normalBpm }}</td>
+            <td>{{ item.activityBpm }}</td>
+            <td>{{ item.mortalityBpm }}</td>
+            <td>{{ item.hoursTilMort }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pagination
+      *ngIf="pagedResponse && pagedResponse.results.length > 0"
+      [maxSize]="5"
+      [itemsPerPage]="txmortalityCriteria.pageSize"
+      [(ngModel)]="txmortalityCriteria.pageNumber"
+      [totalItems]="pagedResponse.total"
+      (pageChanged)="onPageChanged($event)"
+    >
+    </pagination>
+  </div>
+</section>

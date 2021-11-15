@@ -1,0 +1,22 @@
+<div *ngIf="!morphometrics">
+  <span>Loading ...</span>
+</div>
+<div *ngIf="morphometrics">
+  <div *ngIf="!morphometrics.dateTime">
+    <span>No data found</span>
+  </div>
+
+  <div *ngIf="morphometrics.dateTime">
+    <app-controlblock [noOffset]="true" [withSpacer]="true">
+      <dl class="data-group">
+        <dt>Date Measured</dt>
+        <dd>{{ morphometrics.dateTime | date: 'dd/MM/yyyy' }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+  <div *ngIf="morphometrics.measureDetail && morphometrics.dateTime">
+    <app-measuredetail-panel
+      [measuredetailRevision]="morphometrics.measureDetail"
+    ></app-measuredetail-panel>
+  </div>
+</div>

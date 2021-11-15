@@ -1,0 +1,55 @@
+<section>
+  <app-banner title="Snark Activity"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-snarkactivity-edit-form
+          [myFormGroup]="myFormGroup"
+        ></app-snarkactivity-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <tabset>
+      <tab
+        *ngIf="myFormGroup?.get('trackAndBowlActivity')"
+        [heading]="'Track and Bowl Activity'"
+      >
+        <app-trackandbowlactivity-edit-form
+          *ngIf="myFormGroup?.get('trackAndBowlActivity')"
+          [myFormGroup]="myFormGroup?.get('trackAndBowlActivity')"
+        ></app-trackandbowlactivity-edit-form>
+      </tab>
+
+      <tab
+        *ngIf="myFormGroup?.get('snarkRecordList')"
+        [heading]="'Snark Records'"
+      >
+        <app-snarkrecord-edit-form
+          *ngIf="myFormGroup?.get('snarkRecordList')"
+          [myFormArray]="myFormGroup?.get('snarkRecordList')"
+        ></app-snarkrecord-edit-form>
+      </tab>
+    </tabset>
+  </div>
+</section>

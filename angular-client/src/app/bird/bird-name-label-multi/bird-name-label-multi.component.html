@@ -1,0 +1,4 @@
+<span *ngFor="let bird of birdList; let isLast = last">
+  <app-bird-name-label [birdID]="bird.birdID"></app-bird-name-label
+  >{{ isLast ? '' : ', ' }}
+</span>

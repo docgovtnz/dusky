@@ -1,0 +1,53 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Chick</th>
+        <th scope="col">Weight (g)</th>
+        <th scope="col">Crop Status</th>
+        <th scope="col">Respiratory Rate</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!recordList">
+      <tr>
+        <td colspan="6">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="recordList && recordList.length === 0">
+      <tr>
+        <td colspan="6">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="recordList && recordList.length > 0">
+      <tr *ngFor="let item of recordList" (click)="navToRecord(item.id)">
+        <td>
+          <app-bird-name-label [birdID]="item.birdID"></app-bird-name-label>
+        </td>
+        <td>
+          {{
+            item.weight?.weight
+              ? (item.weight.weight * 1000).toPrecision(4)
+              : ''
+          }}
+        </td>
+        <td>
+          <span class="data-tag">{{ item.chickHealth?.cropStatus }}</span>
+        </td>
+        <td>
+          {{ item.chickHealth?.respiratoryRate }}
+        </td>
+        <td>
+          {{ item.activity }}
+        </td>
+        <td>
+          {{ item.comments }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

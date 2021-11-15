@@ -1,0 +1,197 @@
+<form [formGroup]="myFormGroup" (keydown.enter)="$event.preventDefault()">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Storage Medium</th>
+            <th scope="col">Container</th>
+            <th scope="col">Storage Conditions</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Units</th>
+            <th scope="col">Sample Taken By</th>
+            <th scope="col">Sample ID</th>
+            <th scope="col">Reason for Sample</th>
+            <th></th>
+            <!-- empty column for edit buttons -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('type')">
+                <!-- wrap in grid so typeahead appears in the correct location (otherwise it appears at top of table!) -->
+                <div class="row">
+                  <div class="col-12">
+                    <app-type-ahead-control
+                      id="type"
+                      formControlName="type"
+                      [optionType]="'OtherSampleTypes'"
+                    ></app-type-ahead-control>
+                  </div>
+                </div>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('storageMedium')">
+                <select
+                  class="custom-select"
+                  id="storageMedium"
+                  formControlName="storageMedium"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions(
+                        'StorageMediumOptions'
+                      ) | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('container')">
+                <select
+                  class="custom-select"
+                  id="container"
+                  formControlName="container"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('ContainerOptions')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('storageConditions')">
+                <select
+                  class="custom-select"
+                  id="storageConditions"
+                  formControlName="storageConditions"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions(
+                        'StorageConditionsOptions'
+                      ) | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('amount')">
+                <input
+                  class="form-control"
+                  id="amount"
+                  formControlName="amount"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('units')">
+                <select
+                  class="custom-select"
+                  id="units"
+                  formControlName="units"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions(
+                        'OtherSampleUnitOptions'
+                      ) | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('sampleTakenBy')">
+                <!-- wrap in grid so typeahead appears in the correct location (otherwise it appears at top of table!) -->
+                <div class="row">
+                  <div class="col-12">
+                    <app-person-name-id-select-control
+                      id="sampleTakenBy"
+                      formControlName="sampleTakenBy"
+                    ></app-person-name-id-select-control>
+                  </div>
+                </div>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('sampleName')">
+                <input
+                  class="form-control"
+                  id="sampleName"
+                  formControlName="sampleName"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('reasonForSample')">
+                <input
+                  class="form-control"
+                  id="reasonForSample"
+                  formControlName="reasonForSample"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button
+                class="btn btn-record"
+                (click)="removeItem(i)"
+                [disabled]="item.get('_originalIndex').value !== null"
+              >
+                <fa-icon icon="minus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Remove</span>
+              </button>
+              <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+              <button class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

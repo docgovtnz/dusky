@@ -1,0 +1,32 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/buttons';
+
+:host ::ng-deep .buttonblock {
+  button {
+    @extend .btn;
+    @extend .btn-block;
+  }
+  #searchBtn,
+  #saveBtn,
+  #importBtn,
+  #checkBtn,
+  #graphsBtn {
+    @extend .btn-primary;
+  }
+  #mapBtn,
+  #exportBtn,
+  #downloadBtn,
+  #exportTransmitterBtn {
+    @extend .btn-info;
+  }
+  #resetBtn,
+  #cancelBtn {
+    @extend .btn-outline-secondary;
+  }
+  #upgradeBtn,
+  #newBtn {
+    @extend .btn-success;
+  }
+}

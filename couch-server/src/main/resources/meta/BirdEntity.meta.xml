@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="BirdEntity">
+  <Property name="actualFreshWeight" label="Actual fresh weight" javaType="Float"
+    jsonType="number"/>
+  <Property name="ageClassOverride" label="Age Class Override" javaType="String" jsonType="string"/>
+  <Property name="alive" label="Alive" javaType="Boolean" jsonType="boolean"/>
+  <Property name="fertilityConfirmed" label="Fertility Confirmed by Microscopy" javaType="Boolean" jsonType="boolean"/>
+  <Property name="birdName" label="Bird Name" javaType="String" jsonType="string"/>
+  <Property name="clutch" label="Clutch" javaType="String" jsonType="string"/>
+  <Property name="clutchOrder" label="Clutch order" javaType="Integer" jsonType="number"/>
+  <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+  <Property name="currentBandId" label="Current Band ID" javaType="String" jsonType="string"/>
+  <Property name="currentBandLeg" label="Current Band Leg" javaType="String" jsonType="string"/>
+  <Property name="currentChipId" label="Current Chip ID" javaType="String" jsonType="string"/>
+  <Property name="currentIsland" label="Current Island" javaType="String" jsonType="string"/>
+  <Property name="currentLocationID" label="Current Location ID" javaType="String"
+    jsonType="string"/>
+  <Property name="currentTxRecordId" label="Current Transmitter Record ID" javaType="String"
+    jsonType="string"/>
+  <Property name="dateFirstFound" label="Date first found" javaType="Date" jsonType="Date"/>
+  <Property name="dateFledged" label="Date Fledged" javaType="Date" jsonType="Date"/>
+  <Property name="dateHatched" label="Date Hatched" javaType="Date" jsonType="Date"/>
+  <Property name="dateIndependent" label="Date Independent" javaType="Date" jsonType="Date"/>
+  <Property name="dateLaid" label="Date Laid" javaType="Date" jsonType="Date"/>
+  <Property name="datesMated" label="Dates mated" javaType="String" jsonType="string"/>
+  <Property name="dateWeaned" label="Date Weaned" javaType="Date" jsonType="Date"/>
+  <Property name="daysOnNest" label="Days on nest" javaType="String" jsonType="string"/>
+  <Property name="deadEmbryo" label="Dead embryo" javaType="String" jsonType="string"/>
+  <Property name="definiteFather" label="Definite father" javaType="Boolean" jsonType="boolean"/>
+  <Property name="demise" label="Demise" javaType="Date" jsonType="Date"/>
+  <Property name="discoveryDate" label="Discovery date" javaType="Date" jsonType="Date"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="eggName" label="Egg Name" javaType="String" jsonType="string"/>
+  <Property name="estAgeWhen1stFound" label="Est age when 1st found" javaType="Float"
+    jsonType="number"/>
+  <Property name="father" label="Father" javaType="String" jsonType="string"/>
+  <Property name="firstDayAtOrVeryCloseToNest" label="First day at or very close to nest"
+    javaType="String" jsonType="string"/>
+  <Property name="fledged" label="Fledged" javaType="Boolean" jsonType="boolean"/>
+  <Property name="gan" label="GAN" javaType="String" jsonType="string"/>
+  <Property name="houseID" label="House ID" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="incubationPeriod" label="Incubation Period" javaType="Float" jsonType="number"/>
+  <Property name="interClutchLayingInterval" label="Inter clutch laying interval" javaType="Float"
+    jsonType="number"/>
+  <Property name="lastDateMated" label="Last date mated" javaType="String" jsonType="string"/>
+  <Property name="lastTxChangeId" label="Last Tx Change Id" javaType="String" jsonType="string"/>
+  <Property name="layDateIsEstimate" label="Lay Date Is Estimate" javaType="Boolean"
+    jsonType="boolean"/>
+  <Property name="layIsland" label="Lay island" javaType="String" jsonType="string"/>
+  <Property name="layLocationID" label="Lay location" javaType="String" jsonType="string"/>
+  <Property name="layYear" label="Lay year" javaType="Integer" jsonType="number"/>
+  <Property name="legColour" label="Leg colour" javaType="String" jsonType="string"/>
+  <Property name="matedWith" label="Mated with" javaType="String" jsonType="string"/>
+  <Property name="matingToLaying" label="Mating to laying" javaType="Float" jsonType="number"/>
+  <Property name="matingToNestingDays" label="Mating to nesting: days" javaType="Float"
+    jsonType="number"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedByRecordId" label="Modified By RecordId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="mother" label="Mother" javaType="String" jsonType="string"/>
+  <Property name="nestingToLaying" label="Nesting to laying" javaType="Float" jsonType="number"/>
+  <Property name="nestMother" label="Nest mother" javaType="String" jsonType="string"/>
+  <Property name="oldBirdID" label="Old BirdID" javaType="String" jsonType="string"/>
+  <Property name="plumageColour" label="Plumage colour" javaType="String" jsonType="string"/>
+  <Property name="results" label="Results" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="sex" label="Sex" javaType="String" jsonType="string"/>
+  <Property name="studbookno" label="Studbookno" javaType="Integer" jsonType="number"/>
+  <Property name="transmitterGroup" label="Transmitter group" javaType="String" jsonType="string"/>
+  <Property name="viable" label="Viable" javaType="String" jsonType="string"/>
+  <Property name="historicDataFirstEggWeight" label="HistoricDataFirstEggWeight" javaType="Float" jsonType="number"/>
+  <Property name="birdFeatureList" label="Bird Feature List"
+    javaType="List&lt;BirdFeatureEntity&gt;" jsonType="BirdFeatureEntity[]">
+    <Class name="BirdFeatureEntity">
+      <Property name="birdid" label="Birdid" javaType="String" jsonType="string"/>
+      <Property name="bodyPart" label="Body part" javaType="String" jsonType="string"/>
+      <Property name="description" label="Description" javaType="String" jsonType="string"/>
+      <Property name="featureid" label="Featureid" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="bodyPart"/>
+          <DisplayProperty name="description"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="eggMeasurements" label="Egg Measurements" javaType="EggMeasurementsEntity"
+    jsonType="EggMeasurementsEntity">
+    <Class name="EggMeasurementsEntity">
+      <Property name="eggWeightBeforeFillingWithWater" label="Final Weight" javaType="Float" jsonType="number"/>
+      <Property name="germinalDiscDiameterInMms" label="Germinal Disc Diameter" javaType="Float"
+        jsonType="number"/>
+      <Property name="shellWasteWeightHatched" label="Shell Weight" javaType="Float" jsonType="number"/>
+      <Property name="dryShellWeightHatched" label="Dry Shell Weight (Hatched) (g)" javaType="Float" jsonType="number"/>
+      <Property name="dryShellWeightUnhatched" label="Dry Shell Weight (Unhatched) (g)" javaType="Float" jsonType="number"/>
+      <Property name="weightWithWaterInGrams" label="Weight With Water Filled Aircell"
+        javaType="Float" jsonType="number"/>
+      <Property name="shellThicknessInMms" label="Shell Thickness" javaType="Float"
+        jsonType="number"/>
+      <Property name="addled" label="Addled" javaType="Boolean" jsonType="boolean"/>
+      <Property name="yolkWeightInGrams" label="Yolk Weight" javaType="Float" jsonType="number"/>
+      <Property name="albumenWeightInGrams" label="Albumen Weight" javaType="Float" jsonType="number"/>
+      <Property name="eggLength" label="Length" javaType="Float" jsonType="number"/>
+      <Property name="eggWidth" label="Width" javaType="Float" jsonType="number"/>
+      <Property name="fwCoefficientX104" label="FW co efficient x10-4" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="eggWeightBeforeFillingWithWater"/>
+          <DisplayProperty name="germinalDiscDiameterInMms"/>
+          <DisplayProperty name="shellWasteWeightHatched"/>
+          <DisplayProperty name="dryShellWeightHatched"/>
+          <DisplayProperty name="dryShellWeightUnhatched"/>
+          <DisplayProperty name="weightWithWaterInGrams"/>
+          <DisplayProperty name="shellThicknessInMms"/>
+          <DisplayProperty name="addled"/>
+          <DisplayProperty name="yolkWeightInGrams"/>
+          <DisplayProperty name="albumenWeightInGrams"/>
+          <DisplayProperty name="eggLength"/>
+          <DisplayProperty name="eggWidth"/>
+          <DisplayProperty name="fwCoefficientX104" />
+          <DisplayProperty name="calculatedFreshWeight" />
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="embryoMeasurements" label="Embryo Measurements"
+    javaType="EmbryoMeasurementsEntity" jsonType="EmbryoMeasurementsEntity">
+    <Class name="EmbryoMeasurementsEntity">
+      <Property name="headLengthInMms" label="Head Length" javaType="Float" jsonType="number"/>
+      <Property name="totalLengthInMms" label="Total Length, Straightened (mm)" javaType="Float" jsonType="number"/>
+      <Property name="lengthInSitu" label="Length in Situ" javaType="Float" jsonType="number"/>
+      <Property name="yolkSacMembraneDiameterInMms" label="Yolk Sac Membrane Diameter"
+        javaType="Float" jsonType="number"/>
+      <Property name="estimatedAgeAtDeathInDays" label="Estimated Age At Death" javaType="Integer"
+        jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="headLengthInMms"/>
+          <DisplayProperty name="totalLengthInMms"/>
+          <DisplayProperty name="lengthInSitu"/>
+          <DisplayProperty name="yolkSacMembraneDiameterInMms"/>
+          <DisplayProperty name="estimatedAgeAtDeathInDays"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="birdName"/>
+      <DisplayProperty name="houseID"/>
+      <DisplayProperty name="studbookno"/>
+      <DisplayProperty name="gan"/>
+      <DisplayProperty name="currentIsland"/>
+      <DisplayProperty name="currentLocationID"/>
+      <DisplayProperty name="transmitterGroup"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="sex"/>
+      <DisplayProperty name="id"/>
+      <DisplayProperty name="id"/>
+      <DisplayProperty name="plumageColour"/>
+      <DisplayProperty name="legColour"/>
+      <DisplayProperty name="mother"/>
+      <DisplayProperty name="father"/>
+      <DisplayProperty name="definiteFather"/>
+      <DisplayProperty name="nestMother"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="eggName"/>
+      <DisplayProperty name="viable"/>
+      <DisplayProperty name="layLocationID"/>
+      <DisplayProperty name="layYear"/>
+      <DisplayProperty name="layIsland"/>
+      <DisplayProperty name="clutch"/>
+      <DisplayProperty name="clutchOrder"/>
+      <DisplayProperty name="viable"/>
+      <DisplayProperty name="fertilityConfirmed"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="alive"/>
+      <DisplayProperty name="dateLaid"/>
+      <DisplayProperty name="dateHatched"/>
+      <DisplayProperty name="dateFledged"/>
+      <DisplayProperty name="dateWeaned"/>
+      <DisplayProperty name="dateIndependent"/>
+      <DisplayProperty name="discoveryDate"/>
+      <DisplayProperty name="demise"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

@@ -1,0 +1,23 @@
+<section>
+  <app-banner title="Dashboard"></app-banner>
+</section>
+<section class="bg-light vertical-spacer">
+  <div class="container">
+    <div class="row">
+      <app-controlblock title="Actions" class="col-md-6" [noBody]="true">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a routerLink="/cluster-view">Data Replication</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/map">All Locations Map</a>
+          </li>
+          <li class="list-group-item">
+            <a routerLink="/settings">Settings</a>
+          </li>
+          <li class="list-group-item"><a routerLink="/upgrade">Upgrade</a></li>
+        </ul>
+      </app-controlblock>
+    </div>
+  </div>
+</section>

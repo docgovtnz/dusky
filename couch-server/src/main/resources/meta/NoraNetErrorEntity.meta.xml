@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="NoraNetErrorEntity">
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="fileName" label="File Name" javaType="String" jsonType="string"/>
+  <Property name="fileData" label="file Data" javaType="String" jsonType="string"/>
+  <Property name="dateProcessed" label="Date Processed" javaType="Date" jsonType="Date"/>
+  <Property name="message" label="Error message" javaType="Date" jsonType="Date"/>
+  <Property name="dataImported" label="Data Imported" javaType="Boolean" jsonType="boolean"/>
+  <Property name="actioned" label="Actioned" javaType="Boolean" jsonType="boolean"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="id"/>
+      <DisplayProperty name="fileName"/>
+      <DisplayProperty name="fileData"/>
+      <DisplayProperty name="dateProcessed"/>
+      <DisplayProperty name="message"/>
+      <DisplayProperty name="dataImported"/>
+      <DisplayProperty name="actioned"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

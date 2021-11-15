@@ -1,0 +1,76 @@
+<ng-container [formGroup]="myFormGroup">
+  <td>
+    <input class="form-control" formControlName="femaleTx1" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('femaleTx1')"
+    ></app-message-display>
+  </td>
+  <td>
+    <input class="form-control" formControlName="femaleTx2" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('femaleTx2')"
+    ></app-message-display>
+  </td>
+  <td>
+    <input class="form-control" formControlName="time1" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('time1')"
+    ></app-message-display>
+  </td>
+  <td>
+    <input class="form-control" formControlName="time2" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('time2')"
+    ></app-message-display>
+  </td>
+  <td>
+    <input class="form-control" formControlName="duration1" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('duration1')"
+    ></app-message-display>
+  </td>
+  <td>
+    <input class="form-control" formControlName="duration2" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('duration2')"
+    ></app-message-display>
+  </td>
+  <td>
+    <input class="form-control" formControlName="quality1" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('quality1')"
+    ></app-message-display>
+  </td>
+  <td>
+    <input class="form-control" formControlName="quality2" type="number" />
+    <app-message-display
+      [myFormControl]="myFormGroup.get('quality2')"
+    ></app-message-display>
+  </td>
+  <td>
+    <app-bird-name-label
+      *ngIf="currentBirdId"
+      [birdID]="currentBirdId"
+    ></app-bird-name-label>
+    <input type="hidden" formControlName="birdId" />
+  </td>
+  <td>
+    {{ currentTime | date: 'dd/MM/yyyy HH:mm aa' }}
+  </td>
+  <td>
+    {{ currentDuration }}
+  </td>
+  <td>
+    <app-checkmate-quality [quality]="currentQuality"></app-checkmate-quality>
+  </td>
+  <td>
+    <button class="btn btn-record" (click)="removeItem(index)">
+      <fa-icon icon="minus" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Remove</span>
+    </button>
+    <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+      <fa-icon icon="plus" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Add</span>
+    </button>
+  </td>
+</ng-container>

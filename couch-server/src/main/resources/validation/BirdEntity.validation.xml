@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="BirdEntity" context="Save">
+
+  <Property name="birdName">
+    <RequiredRule/>
+    <BirdUniqueNameRule/>
+  </Property>
+
+  <Property name="dateLaid">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="dateHatched">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="dateFledged">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="demise">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="dateWeaned">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="dateIndependent">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="discoveryDate">
+    <DatePastRule/>
+  </Property>
+
+  <Property name="houseID">
+    <BirdUniqueHouseIDRule/>
+  </Property>
+
+  <Property name="layYear">
+    <YearRangeRule/>
+  </Property>
+
+  <!--TODO make validation cope with arrays-->
+  <!--<Property name="birdFeatureList">-->
+  <!--<Class targetClassName="BirdFeatureEntity">-->
+  <!--<Property name="description">-->
+  <!--<RequiredRule/>-->
+  <!--</Property>-->
+  <!--</Class>-->
+  <!--</Property>-->
+
+</Class>

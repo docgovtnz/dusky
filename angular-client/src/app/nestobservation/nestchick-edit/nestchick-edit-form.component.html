@@ -1,0 +1,173 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Bird</th>
+            <th scope="col">Weight (g)</th>
+            <th scope="col">Crop Status</th>
+            <th scope="col">Respiratory Rate</th>
+            <th scope="col">Activity</th>
+            <th scope="col">Comments</th>
+            <th></th>
+            <!-- empty column for edit buttons -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('birdID')">
+                <app-bird-name-id-select-control
+                  id="birdID"
+                  formControlName="birdID"
+                ></app-bird-name-id-select-control>
+              </app-cell-widget>
+              <span class="data-tag" *ngIf="item.get('ageClass').value">{{
+                item.get('ageClass').value
+              }}</span>
+              <span class="data-tag" *ngIf="item.get('milestone').value">{{
+                item.get('milestone').value
+              }}</span>
+              <span class="data-tag" *ngIf="item.get('mortality').value">{{
+                item.get('mortality').value
+              }}</span>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('weightInGrams')">
+                <input
+                  class="form-control"
+                  [id]="'weightInGrams_' + i"
+                  formControlName="weightInGrams"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('cropStatus')">
+                <select
+                  class="custom-select"
+                  [id]="'conditions_' + i"
+                  formControlName="cropStatus"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('CropStatus') | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('respiratoryRate')">
+                <input
+                  class="form-control"
+                  [id]="'respiratoryRate_' + i"
+                  formControlName="respiratoryRate"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('activity')">
+                <select
+                  class="custom-select"
+                  [id]="'activity_' + i"
+                  formControlName="activity"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('NestChickActivity')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('comments')">
+                <input
+                  class="form-control"
+                  [id]="'comments_' + i"
+                  formControlName="comments"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button
+                *ngIf="
+                  showFledged(
+                    item.get('ageClass').value,
+                    item.get('milestone').value,
+                    item.get('mortality').value
+                  )
+                "
+                class="btn btn-record"
+                (click)="onFledged(i)"
+              >
+                Fledged
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+
+<div
+  bsModal
+  #fledgedChickModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-fledgedchick-edit
+          (chickSaved)="onFledgedChickSaved($event)"
+        ></app-fledgedchick-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #weanedChickModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-weanedchick-edit
+          (chickSaved)="onWeanedChickSaved($event)"
+        ></app-weanedchick-edit>
+      </div>
+    </div>
+  </div>
+</div>

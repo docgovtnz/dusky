@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="mt-3 table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Bird</th>
+        <th scope="col">Installed</th>
+        <th scope="col">Removed</th>
+        <th scope="col">Tune</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!historyList">
+      <tr>
+        <td colspan="4">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="historyList && historyList.length === 0">
+      <tr>
+        <td colspan="4">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="historyList && historyList.length > 0">
+      <tr *ngFor="let item of historyList">
+        <td>
+          <app-link-view
+            [linkUrl]="'/bird/' + item.birdID + '/Transmitters'"
+            [label]="item.birdName"
+          ></app-link-view>
+        </td>
+        <td>{{ item.deployedDateTime | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ item.removedDateTime | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ item.newTxFineTune }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

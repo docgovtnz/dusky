@@ -1,0 +1,140 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <app-widget
+              [label]="'Mother'"
+              [propertyName]="'mother'"
+              [myFormControl]="myFormGroup.get('mother')"
+            >
+              <app-bird-name-id-select-control
+                id="newEgg_mother"
+                formControlName="mother"
+              ></app-bird-name-id-select-control>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Egg Length (mm)'"
+              [propertyName]="'eggLength'"
+              [myFormControl]="myFormGroup.get('eggLength')"
+            >
+              <input
+                class="form-control"
+                id="newEgg_eggLength"
+                formControlName="eggLength"
+                type="number"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Lay Date'"
+              [propertyName]="'layDate'"
+              [myFormControl]="myFormGroup.get('layDate')"
+            >
+              <app-date-time-control
+                id="newEgg_layDate"
+                formControlName="layDate"
+                [mandatoryTime]="true"
+              ></app-date-time-control>
+            </app-widget>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <app-widget
+              [label]="'Location'"
+              [propertyName]="'locationID'"
+              [myFormControl]="myFormGroup.get('locationID')"
+            >
+              <app-location-name-id-select-control
+                id="newEgg_locationID"
+                formControlName="locationID"
+              ></app-location-name-id-select-control>
+            </app-widget>
+          </div>
+
+          <div class="form-group">
+            <app-widget
+              [label]="'Egg Width (mm)'"
+              [propertyName]="'eggWidth'"
+              [myFormControl]="myFormGroup.get('eggWidth')"
+            >
+              <input
+                class="form-control"
+                id="newEgg_eggWidth"
+                formControlName="eggWidth"
+                type="number"
+              />
+            </app-widget>
+          </div>
+
+          <div class="form-group">
+            Fresh Weight Coefficient (x10<sup>4</sup>)
+            <app-widget
+              [propertyName]="'fwCoefficientX10P4'"
+              [myFormControl]="myFormGroup.get('fwCoefficientX10P4')"
+            >
+              <input
+                class="form-control"
+                id="newEgg_fwCoefficientX10P4"
+                formControlName="fwCoefficientX10P4"
+                type="number"
+              />
+            </app-widget>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <app-widget
+              [label]="'Egg Name'"
+              [propertyName]="'eggName'"
+              [myFormControl]="myFormGroup.get('eggName')"
+            >
+              <input
+                class="form-control"
+                id="newEgg_eggName"
+                formControlName="eggName"
+                type="text"
+              />
+            </app-widget>
+          </div>
+
+          <div class="form-group">
+            <app-widget
+              [label]="'Clutch Order'"
+              [propertyName]="'clutchOrder'"
+              [myFormControl]="myFormGroup.get('clutchOrder')"
+            >
+              <input
+                class="form-control"
+                id="newEgg_clutchOrder"
+                formControlName="clutchOrder"
+                type="number"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Lay Date Is Estimate'"
+              [propertyName]="'layDateIsEstimate'"
+              [myFormControl]="myFormGroup.get('layDateIsEstimate')"
+              [isCheckBox]="true"
+              class="form-check"
+            >
+              <input
+                id="newEgg_layDateIsEstimate"
+                formControlName="layDateIsEstimate"
+                type="checkbox"
+                class="form-check-input"
+              />
+            </app-widget>
+          </div>
+        </div>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

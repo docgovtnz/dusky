@@ -1,0 +1,123 @@
+<div class="form-row">
+  <div class="col-md-5">
+    <!-- New Form layout -->
+    <form [formGroup]="myFormGroup" (keydown.enter)="$event.preventDefault()">
+      <div [formArrayName]="myFormArrayName">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-light">
+            <tr>
+              <!--<th scope="col"></th>-->
+              <th scope="col">Location</th>
+              <th scope="col">Easting</th>
+              <th scope="col">Northing</th>
+              <th scope="col">Compass Bearing</th>
+              <th scope="col">Active</th>
+              <th></th>
+              <!-- empty column for edit buttons -->
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              *ngFor="
+                let item of myFormArray.controls;
+                index as i;
+                last as last
+              "
+            >
+              <!--<td class="px-2">{{getLetterIndex(i)}}.</td>-->
+              <td [formGroupName]="i">
+                <app-cell-widget [myFormControl]="item.get('locationID')">
+                  <!-- wrap in grid so typeahead appears in the correct location (otherwise it appears at top of table!) -->
+                  <div class="row">
+                    <div class="col-12">
+                      <app-location-name-id-select-control
+                        id="locationID"
+                        formControlName="locationID"
+                      ></app-location-name-id-select-control>
+                    </div>
+                  </div>
+                </app-cell-widget>
+              </td>
+              <td [formGroupName]="i">
+                <app-cell-widget [myFormControl]="item.get('easting')">
+                  <input
+                    class="form-control form-control-sm"
+                    id="easting"
+                    formControlName="easting"
+                    type="number"
+                  />
+                </app-cell-widget>
+              </td>
+              <td [formGroupName]="i">
+                <app-cell-widget [myFormControl]="item.get('northing')">
+                  <input
+                    class="form-control form-control-sm"
+                    id="northing"
+                    formControlName="northing"
+                    type="number"
+                  />
+                </app-cell-widget>
+              </td>
+              <td [formGroupName]="i">
+                <app-cell-widget [myFormControl]="item.get('compassBearing')">
+                  <input
+                    class="form-control"
+                    id="compassBearing"
+                    formControlName="compassBearing"
+                    type="number"
+                  />
+                </app-cell-widget>
+              </td>
+              <td [formGroupName]="i">
+                <app-cell-widget [myFormControl]="item.get('active')">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="active"
+                      formControlName="active"
+                      type="checkbox"
+                    />
+                  </div>
+                </app-cell-widget>
+              </td>
+              <td>
+                <button class="btn btn-record" (click)="removeItem(i)">
+                  <fa-icon icon="minus" aria-hidden="true"></fa-icon
+                  ><span class="sr-only">Remove</span>
+                </button>
+                <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+                  <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                  ><span class="sr-only">Add</span>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="myFormArray.controls.length === 0">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button class="btn btn-record" (click)="addItem()">
+                  <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                  ><span class="sr-only">Add</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-7">
+    <app-esri-map
+      [displayLocationTypeCheckBoxes]="false"
+      [displayIslandSelector]="true"
+      [selectedIslandName]="selectedIslandName"
+      [locationBearingList]="adjustedLocationBearingList"
+      [triangulationPoint]="triangulationPoint"
+    >
+    </app-esri-map>
+  </div>
+</div>

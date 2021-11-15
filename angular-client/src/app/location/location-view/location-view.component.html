@@ -1,0 +1,86 @@
+<div id="collapseBasic" [collapse]="isCollapsed">
+  <section>
+    <app-banner title="Location">
+      <button
+        *appPermission="'LOCATION_EDIT'"
+        class="btn btn-action"
+        (click)="onEdit()"
+      >
+        <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+      </button>
+      <button
+        *appPermission="'LOCATION_DELETE'"
+        class="btn btn-action"
+        [disabled]="!isDeleteOk()"
+        (click)="deleteConfirmationPopup.show()"
+      >
+        <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+      </button>
+      <app-revision-list-view
+        [entity]="locationEntity"
+        (revisionEvent)="onRevisionEvent($event)"
+      ></app-revision-list-view>
+    </app-banner>
+  </section>
+
+  <section class="vertical-spacer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <app-location-panel
+            [locationRevision]="revision"
+          ></app-location-panel>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section>
+  <button
+    type="button"
+    class="btn btn-collapse"
+    (click)="isCollapsed = !isCollapsed"
+  >
+    <ng-container *ngIf="isCollapsed"
+      ><fa-icon icon="caret-down" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Expand</span></ng-container
+    >
+    <ng-container *ngIf="!isCollapsed"
+      ><fa-icon icon="caret-up" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Collapse</span></ng-container
+    >
+  </button>
+</section>
+
+<section>
+  <div class="container">
+    <tabset #locationTabs>
+      <tab id="mapTab" [heading]="'Map'">
+        <div *ngIf="locationEntity">
+          <app-esri-map
+            [displayLocationTypeCheckBoxes]="false"
+            [displayIslandSelector]="false"
+          >
+          </app-esri-map>
+        </div>
+      </tab>
+      <tab
+        *ngIf="revision?.nestDetails"
+        id="nestDetailsTab"
+        [heading]="'Nest Details'"
+      >
+        <app-nestdetails-panel
+          [nestdetailsRevision]="revision.nestDetails"
+        ></app-nestdetails-panel>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Location'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

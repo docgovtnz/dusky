@@ -1,0 +1,30 @@
+<!-- [TODO] NB: The style revisions have not been tested as this component doesn't appear to be used -->
+<section>
+  <app-banner title="Chick: Weaned"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-weanedchick-edit-form
+          [myFormGroup]="myFormGroup"
+        ></app-weanedchick-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>

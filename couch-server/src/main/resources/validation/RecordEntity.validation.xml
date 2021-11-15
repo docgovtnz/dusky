@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="RecordEntity" context="Save">
+
+  <Property name="birdID">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="island">
+    <RequiredRule/>
+    <TransferRecordIslandRule/>
+  </Property>
+
+  <Property name="locationID">
+    <TransferRecordLocationIDRule/>
+  </Property>
+
+  <Property name="dateTime">
+    <RequiredRule/>
+    <DatePastRule/>
+  </Property>
+
+  <Property name="activity">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="easting">
+    <EastingRule/>
+    <!-- Only needs to be added to one of these properties since it checks both of them -->
+    <EastingAndNorthingRule/>
+    <!-- Only needs to be added to one of these properties since it checks both of them -->
+    <EastingIslandBoundsRule/>
+  </Property>
+
+  <Property name="northing">
+    <NorthingRule/>
+  </Property>
+
+  <Property name="magneticDeclination">
+    <NumberRangeRule min="-359.99" max="359.99" wholeNumber="false"/>
+  </Property>
+
+  <Property name="magneticDeclinationAsOfYear">
+    <YearRangeRule/>
+  </Property>
+
+  <!--<Property name="bands">
+      <Class targetClassName="BandsEntity">
+          <Property name="newBandNumber">
+              <RequiredRule/>
+          </Property>
+      </Class>
+  </Property>-->
+
+  <Property name="observerList">
+    <RequiredRule/>
+    <ObserverRequiredRule/>
+    <Class targetClassName="ObserverEntity">
+      <Property name="personID">
+        <RequiredRule/>
+      </Property>
+      <Property name="observationRoles">
+        <ObservationRoleRequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="healthStatus">
+    <Class targetClassName="HealthStatusEntity">
+      <Property name="healthStatus">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="medicationList">
+    <Class targetClassName="MedicationEntity">
+      <Property name="drug">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="handRaise">
+    <Class targetClassName="HandRaiseEntity">
+      <Property name="medication">
+        <HandRaiseMedicationRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="supplementaryFeeding">
+    <Class targetClassName="SupplementaryFeedingEntity">
+      <!-- TODO this doesn't work in the front end -->
+      <!--<Property name="foodTypes">-->
+      <!--<RequiredRule/>-->
+      <!--</Property>-->
+    </Class>
+  </Property>
+
+  <Property name="eggTimer">
+    <Class targetClassName="EggTimerEntity">
+      <Property name="dataCaptureType">
+        <RequiredRule/>
+      </Property>
+      <Property name="pulseRate">
+        <RequiredRule/>
+      </Property>
+      <Property name="activity2DaysAgo1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity2DaysAgo2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity3DaysAgo1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity3DaysAgo2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity4DaysAgo1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity4DaysAgo2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity5DaysAgo1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity5DaysAgo2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity6DaysAgo1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity6DaysAgo2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity7DaysAgo1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activity7DaysAgo2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activityYesterday1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="activityYesterday2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="batteryLife1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="batteryLife2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="daysSinceChange1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="daysSinceChange2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="durationOfPrevious1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="durationOfPrevious2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="meanActivity1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="meanActivity2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="checkmate">
+    <Class targetClassName="CheckmateEntity">
+      <Property name="dataCaptureType">
+        <RequiredRule/>
+        <CheckmateDataRule/>
+      </Property>
+      <Property name="pulseRate">
+        <RequiredRule/>
+      </Property>
+      <Property name="last24hourActivity1">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+      <Property name="last24hourActivity2">
+        <NumberRangeRule min="2.0" wholeNumber="false"/>
+      </Property>
+
+      <Property name="checkmateDataList">
+        <Class targetClassName="CheckmateDataEntity">
+          <Property name="femaleTx1">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+          <Property name="femaleTx2">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+          <Property name="time1">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+          <Property name="time2">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+          <Property name="duration1">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+          <Property name="duration2">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+          <Property name="quality1">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+          <Property name="quality2">
+            <NumberRangeRule min="2.0" wholeNumber="false"/>
+          </Property>
+        </Class>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="standard">
+    <Class targetClassName="StandardEntity">
+      <Property name="dataCaptureType">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="transferDetail">
+    <Class targetClassName="TransferDetailEntity">
+      <Property name="transferFromIsland">
+        <RequiredRule/>
+      </Property>
+      <Property name="transferToIsland">
+        <RequiredRule/>
+        <TransferRecordToIslandRule/>
+      </Property>
+      <Property name="transferToLocationID">
+        <TransferRecordToLocationIDRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="bloodSampleDetail">
+    <Class targetClassName="BloodSampleDetailEntity">
+      <Property name="bloodSampleList">
+        <Class targetClassName="BloodSampleEntity">
+          <Property name="type">
+            <RequiredRule/>
+          </Property>
+          <Property name="sampleTakenBy">
+            <RequiredRule/>
+          </Property>
+          <Property name="sampleName">
+            <RequiredRule/>
+          </Property>
+        </Class>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="swabSampleList">
+    <Class targetClassName="SwabSampleEntity">
+      <Property name="swabSite">
+        <RequiredRule/>
+      </Property>
+      <Property name="sampleTakenBy">
+        <RequiredRule/>
+      </Property>
+      <Property name="sampleName">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="otherSampleList">
+    <Class targetClassName="OtherSampleEntity">
+      <Property name="type">
+        <RequiredRule/>
+      </Property>
+      <Property name="sampleTakenBy">
+        <RequiredRule/>
+      </Property>
+      <Property name="sampleName">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="spermSampleList">
+    <Class targetClassName="SpermSampleEntity">
+      <Property name="sampleTakenBy">
+        <RequiredRule/>
+      </Property>
+      <Property name="sampleName">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="weight">
+    <CaptureRecordRule/>
+  </Property>
+
+  <Property name="eggHealth">
+    <Class targetClassName="EggHealthEntity">
+      <Property name="heartRate">
+        <NumberRangeRule wholeNumber="true"/>
+      </Property>
+    </Class>
+  </Property>
+
+</Class>

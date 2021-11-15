@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="LifeStageEntity">
+  <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+  <Property name="ageClass" label="Age Class" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+</Class>
+
+

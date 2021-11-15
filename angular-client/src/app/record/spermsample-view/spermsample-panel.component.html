@@ -1,0 +1,73 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Diluent</th>
+        <th scope="col">Container</th>
+        <th scope="col">Storage Conditions</th>
+        <th scope="col">Volume</th>
+        <th scope="col">Collection Method</th>
+        <th scope="col">Papilla Swelling</th>
+        <th scope="col">Stimulation</th>
+        <th scope="col">Stress</th>
+        <th scope="col">Sample Taken By</th>
+        <th scope="col">Sample ID</th>
+        <th scope="col">Reason for Sample</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!spermsampleList">
+      <tr>
+        <td colspan="10">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="spermsampleList && spermsampleList.length === 0">
+      <tr>
+        <td colspan="10">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="spermsampleList && spermsampleList.length > 0">
+      <tr *ngFor="let item of spermsampleList" (click)="onClick(item, $event)">
+        <td>
+          {{ item.diluent }}
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.container }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{
+            item.storageConditions
+          }}</small>
+        </td>
+        <td>
+          {{ item.volumeInMicroL | addUnits: 'μl' }}
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.collectionMethod }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.papillaSwelling }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.stimulation }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.stress }}</small>
+        </td>
+        <td>
+          <app-person-name-label
+            [personId]="item.sampleTakenBy"
+          ></app-person-name-label>
+        </td>
+        <td>
+          {{ item.sampleName }}
+        </td>
+        <td>
+          {{ item.reasonForSample }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

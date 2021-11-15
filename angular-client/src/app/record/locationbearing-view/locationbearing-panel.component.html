@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-lg-5">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <!--<th scope="col"></th>-->
+            <th scope="col">Location</th>
+            <th scope="col">Easting</th>
+            <th scope="col">Northing</th>
+            <th scope="col">Compass Bearing</th>
+            <th scope="col">Active</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of locationBearingList; index as i; last as last"
+          >
+            <!--<td class="px-2">{{getLetterIndex(i)}}.</td>-->
+            <td>
+              <app-location-name-label
+                [locationID]="item.locationID"
+              ></app-location-name-label>
+            </td>
+            <td>{{ item.easting }}</td>
+            <td>{{ item.northing }}</td>
+            <td>{{ item.compassBearing }}</td>
+            <td>{{ item.active }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <app-esri-map
+      [displayLocationTypeCheckBoxes]="false"
+      [locationBearingList]="adjustedLocationBearingList"
+      [triangulationPoint]="locationPoint"
+      [selectedIslandName]="record.island"
+      [displayIslandSelector]="true"
+    >
+    </app-esri-map>
+  </div>
+</div>

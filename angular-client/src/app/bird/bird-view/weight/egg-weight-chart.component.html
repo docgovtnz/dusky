@@ -1,0 +1,6 @@
+<app-controlblock title="Egg Weight Chart" [noOffset]="true">
+  <p *ngFor="let message of messages">{{ message }}</p>
+  <div class="bg-white">
+    <canvas #eggWeightCanvas></canvas>
+  </div>
+</app-controlblock>

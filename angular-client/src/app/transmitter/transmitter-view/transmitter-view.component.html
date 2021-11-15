@@ -1,0 +1,60 @@
+<section>
+  <app-banner title="Transmitter">
+    <button
+      *appPermission="'TRANSMITTER_EDIT'"
+      class="btn btn-action"
+      (click)="onEdit()"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+    <button
+      *appPermission="'TRANSMITTER_DELETE'"
+      class="btn btn-action"
+      [disabled]="!isDeleteOk()"
+      (click)="deleteConfirmationPopup.show()"
+    >
+      <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+    </button>
+    <app-revision-list-view
+      [entity]="transmitterEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-transmitter-panel
+          [transmitterRevision]="revision"
+        ></app-transmitter-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <tabset #birdTabs>
+      <tab [heading]="'History'">
+        <div *ngIf="revision">
+          <div class="row">
+            <div class="col-md-6">
+              <app-transmitter-bird-history
+                [txDocId]="transmitterEntity?.id"
+              ></app-transmitter-bird-history>
+            </div>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Transmitter'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

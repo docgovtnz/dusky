@@ -1,0 +1,4 @@
+include 'code-generator'
+include 'couch-server'
+include 'angular-client'
+include 'tools'

@@ -1,0 +1,100 @@
+<app-controlblock title="Weight Chart" [noOffset]="true">
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="row" *ngIf="!errorMessage">
+    <div class="col-10">
+      <div class="bg-white">
+        <canvas #lineCanvas></canvas>
+      </div>
+    </div>
+    <div class="col-2">
+      <form [formGroup]="searchForm">
+        <fieldset>
+          <legend>Graph Type</legend>
+          <div class="form-group">
+            <div class="btn-group" btnRadioGroup formControlName="graphType">
+              <label btnRadio="weight" class="btn btn-primary" role="button"
+                >Weight</label
+              >
+              <label btnRadio="delta" class="btn btn-primary" role="button"
+                >Delta</label
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Model</legend>
+          <div class="form-group">
+            <div class="btn-group" btnRadioGroup formControlName="strategy">
+              <label btnRadio="raw" class="btn btn-primary" role="button"
+                >Raw</label
+              >
+              <label btnRadio="min" class="btn btn-primary" role="button"
+                >Min</label
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Date Range</legend>
+          <div class="form-group">
+            <div class="input-group">
+              <label class="sr-only" for="dateRange">Date Range Selector</label>
+              <select
+                class="custom-select"
+                id="dateRange"
+                formControlName="dateRange"
+              >
+                <option
+                  *ngFor="let c of dateRangeOptions"
+                  [ngValue]="c.value"
+                  [disabled]="!(c.value === 'custom' || dateHatched)"
+                >
+                  {{ c.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fromDate"> From Date </label>
+            <app-date-control
+              id="fromDate"
+              formControlName="fromDate"
+            ></app-date-control>
+            <app-message-display
+              [myFormControl]="searchForm.get('fromDate')"
+            ></app-message-display>
+          </div>
+          <div class="form-group">
+            <label for="fromDate"> To Date </label>
+            <app-date-control
+              id="toDate"
+              formControlName="toDate"
+            ></app-date-control>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>X Axis</legend>
+          <div class="form-group">
+            <div class="btn-group" btnRadioGroup formControlName="xAxisType">
+              <label btnRadio="date" class="btn btn-primary" role="button"
+                >Date</label
+              >
+              <label
+                btnRadio="age"
+                [disabled]="!dateHatched"
+                class="btn btn-primary"
+                [class.disabled]="!dateHatched"
+                role="button"
+                >Age</label
+              >
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</app-controlblock>

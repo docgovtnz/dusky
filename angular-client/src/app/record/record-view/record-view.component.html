@@ -1,0 +1,294 @@
+<div id="collapseBasic" [collapse]="isCollapsed">
+  <section>
+    <app-banner title="Record: {{ revision?.recordType }}">
+      <button
+        *appPermission="'RECORD_EDIT'"
+        class="btn btn-action"
+        (click)="onEdit()"
+      >
+        <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+      </button>
+      <button
+        *appPermission="'RECORD_DELETE'"
+        class="btn btn-action"
+        [disabled]="!isDeleteOk()"
+        (click)="deleteConfirmationPopup.show()"
+      >
+        <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+      </button>
+      <app-revision-list-view
+        [entity]="recordEntity"
+        (revisionEvent)="onRevisionEvent($event)"
+      ></app-revision-list-view>
+    </app-banner>
+  </section>
+
+  <section class="vertical-spacer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <app-record-panel [recordRevision]="revision"></app-record-panel>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section>
+  <button
+    type="button"
+    class="btn btn-collapse"
+    (click)="isCollapsed = !isCollapsed"
+  >
+    <ng-container *ngIf="isCollapsed"
+      ><fa-icon icon="caret-down" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Expand</span></ng-container
+    >
+    <ng-container *ngIf="!isCollapsed"
+      ><fa-icon icon="caret-up" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Collapse</span></ng-container
+    >
+  </button>
+</section>
+
+<section>
+  <div class="container">
+    <tabset #recordTabs>
+      <tab
+        *ngIf="
+          (revision?.weight && !revision?.snarkData) ||
+          revision?.healthCheck ||
+          revision?.healthStatus
+        "
+        [heading]="'Weight & Health'"
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <app-weight-panel
+              *ngIf="revision?.weight"
+              [weightRevision]="revision.weight"
+            ></app-weight-panel>
+            <app-healthstatus-panel
+              *ngIf="revision?.healthStatus"
+              [healthstatusRevision]="revision.healthStatus"
+            ></app-healthstatus-panel>
+          </div>
+          <div class="col-md-8">
+            <app-healthcheck-panel
+              *ngIf="revision?.healthCheck"
+              [healthcheckRevision]="revision.healthCheck"
+              [birdEntity]="birdEntity"
+            ></app-healthcheck-panel>
+          </div>
+        </div>
+      </tab>
+      <tab *ngIf="revision?.captureDetail" [heading]="'Capture'">
+        <app-capturedetail-panel
+          [capturedetailRevision]="revision.captureDetail"
+        ></app-capturedetail-panel>
+      </tab>
+      <tab *ngIf="revision?.transferDetail" [heading]="'Transfer'">
+        <app-transferdetail-panel
+          [transferdetailRevision]="revision.transferDetail"
+        ></app-transferdetail-panel>
+      </tab>
+      <tab *ngIf="revision?.measureDetail" [heading]="'Measure Details'">
+        <app-measuredetail-panel
+          [measuredetailRevision]="revision.measureDetail"
+        ></app-measuredetail-panel>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.transmitterChange ||
+          revision?.bands ||
+          revision?.chips ||
+          revision?.harnessChange
+        "
+        [heading]="'ID Change'"
+      >
+        <app-identification-view
+          [recordEntity]="revision"
+        ></app-identification-view>
+      </tab>
+      <tab *ngIf="revision?.checkmate" [heading]="'Checkmate'">
+        <app-checkmate-panel
+          [checkmateRevision]="revision.checkmate"
+          [recordRevision]="revision"
+        ></app-checkmate-panel>
+      </tab>
+      <tab *ngIf="revision?.eggHealth" [heading]="'Egg Health'">
+        <app-egghealth-panel
+          [egghealthRevision]="revision.eggHealth"
+        ></app-egghealth-panel>
+      </tab>
+      <tab *ngIf="revision?.chickHealth" [heading]="'Chick Health'">
+        <app-chickhealth-panel
+          [chickhealthRevision]="revision.chickHealth"
+        ></app-chickhealth-panel>
+      </tab>
+      <tab *ngIf="revision?.eggTimer" [heading]="'Egg Timer'">
+        <app-eggtimer-panel
+          [eggtimerRevision]="revision.eggTimer"
+          [recordRevision]="revision"
+        ></app-eggtimer-panel>
+      </tab>
+      <tab *ngIf="revision?.standard" [heading]="'Standard'">
+        <app-standard-panel
+          [standardRevision]="revision.standard"
+          [recordRevision]="revision"
+        ></app-standard-panel>
+      </tab>
+
+      <tab
+        *ngIf="revision?.handRaise || revision?.medicationList"
+        [heading]="'Hand-Feeding & Medication'"
+      >
+        <app-handraise-panel
+          [handraiseRevision]="revision.handRaise"
+        ></app-handraise-panel>
+
+        <div *ngIf="revision?.medicationList">
+          <app-medication-panel
+            [medicationList]="revision.medicationList"
+          ></app-medication-panel>
+        </div>
+      </tab>
+      <tab
+        *ngIf="revision?.supplementaryFeeding"
+        [heading]="'Supplementary Feeding'"
+      >
+        <app-supplementaryfeeding-panel
+          [supplementaryfeedingRevision]="revision.supplementaryFeeding"
+        ></app-supplementaryfeeding-panel>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.batteryLife &&
+          !revision.checkmate &&
+          !revision.eggTimer &&
+          !revision.txActivity &&
+          !revision.standard
+        "
+        [heading]="'Battery Life'"
+      >
+        <app-batterylife-panel
+          [batterylifeRevision]="revision.batteryLife"
+        ></app-batterylife-panel>
+      </tab>
+      <tab *ngIf="revision?.snarkData" [heading]="'Snark Data'">
+        <div class="row">
+          <div class="col-md-4">
+            <app-snarkdata-panel
+              [snarkdataRevision]="revision.snarkData"
+            ></app-snarkdata-panel>
+            <div *ngIf="revision.snarkData?.snarkActivityID" class="my-3">
+              <p>
+                <a
+                  routerLink="/snarkactivity/{{
+                    revision.snarkData.snarkActivityID
+                  }}"
+                >
+                  View Snark Activity
+                  <fa-icon
+                    icon="external-link-alt"
+                    aria-hidden="true"
+                  ></fa-icon>
+                </a>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <app-weight-panel
+              *ngIf="revision?.weight"
+              [weightRevision]="revision.weight"
+            ></app-weight-panel>
+          </div>
+        </div>
+      </tab>
+      <tab *ngIf="revision?.txActivity" [heading]="'Tx Activity'">
+        <app-txactivity-panel
+          [txactivityRevision]="revision.txActivity"
+        ></app-txactivity-panel>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.otherSampleList ||
+          revision?.bloodSampleDetail ||
+          revision?.swabSampleList ||
+          revision?.spermSampleList
+        "
+        [heading]="'Samples'"
+      >
+        <app-controlblock
+          title="Blood"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="revision?.bloodSampleDetail"
+        >
+          <app-bloodsampledetail-panel
+            [bloodSampleDetail]="revision.bloodSampleDetail"
+          ></app-bloodsampledetail-panel>
+        </app-controlblock>
+        <app-controlblock
+          title="Swab"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="revision?.swabSampleList"
+        >
+          <app-swabsample-panel
+            [swabsampleList]="revision.swabSampleList"
+          ></app-swabsample-panel>
+        </app-controlblock>
+        <app-controlblock
+          title="Other"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="revision?.otherSampleList"
+        >
+          <app-othersample-panel
+            [othersampleList]="revision.otherSampleList"
+          ></app-othersample-panel>
+        </app-controlblock>
+        <app-controlblock
+          title="Sperm"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="revision?.spermSampleList"
+        >
+          <app-spermsample-panel
+            [spermsampleList]="revision.spermSampleList"
+          ></app-spermsample-panel>
+        </app-controlblock>
+      </tab>
+      <tab *ngIf="revision?.locationBearingList" [heading]="'Triangulation'">
+        <app-locationbearing-panel
+          [locationBearingList]="revision.locationBearingList"
+          [record]="revision"
+        ></app-locationbearing-panel>
+      </tab>
+      <tab
+        id="mapTab"
+        *ngIf="revision && !revision.locationBearingList"
+        [heading]="'Map'"
+      >
+        <ng-container *ngIf="recordEntity">
+          <app-esri-map
+            [displayLocationTypeCheckBoxes]="false"
+            [displayIslandSelector]="false"
+          >
+          </app-esri-map>
+        </ng-container>
+      </tab>
+      <tab *ngIf="revision" [heading]="'Comments'" active="true">
+        <app-comments-view [revision]="revision"></app-comments-view>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Record'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

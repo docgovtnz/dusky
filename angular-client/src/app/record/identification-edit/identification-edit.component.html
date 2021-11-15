@@ -1,0 +1,274 @@
+<div class="row">
+  <app-controlblock
+    title="Current Identification"
+    [noOffset]="true"
+    class="col-md-4"
+  >
+    <dl class="data-group mb-2">
+      <dt>Transmitter</dt>
+      <dd>
+        <app-link-view
+          *ngIf="currentTransmitter"
+          [linkUrl]="'/transmitter/' + currentTransmitter.id"
+          [label]="currentTransmitter.txId"
+        ></app-link-view>
+      </dd>
+      <dt>Date</dt>
+      <dd>{{ currentDeployedDate | date: 'dd/MM/yyyy' }}</dd>
+      <dt>Channel</dt>
+      <dd>{{ currentTransmitter?.channel }}</dd>
+      <dt>Tx Expire Date</dt>
+      <dd>{{ currentExpiryDate | date: 'dd/MM/yyyy' }}</dd>
+      <dt>Frequency</dt>
+      <dd>{{ currentTransmitter?.frequency }}</dd>
+      <dt>UHF ID</dt>
+      <dd>{{ currentTransmitter?.uhfId | number: '3.0-0' }}</dd>
+    </dl>
+    <dl class="data-group mb-2">
+      <dt>Chip</dt>
+      <dd>{{ currentChip?.microchip }}</dd>
+      <dt>Date</dt>
+      <dd>{{ currentChip?.dateTime | date: 'dd/MM/yyyy' }}</dd>
+    </dl>
+    <dl class="data-group mb-2">
+      <dt>Band</dt>
+      <dd>{{ currentBand?.newBandNumber }}</dd>
+      <dt>Date</dt>
+      <dd>{{ currentBand?.dateTime | date: 'dd/MM/yyyy' }}</dd>
+    </dl>
+  </app-controlblock>
+  <app-controlblock
+    title="New Identification"
+    [noOffset]="true"
+    class="col-md-6"
+  >
+    <div class="form-row">
+      <div class="form-group">
+        <form [formGroup]="checkGroup">
+          <app-widget
+            [label]="'Tx Removed (no new Tx fitted)'"
+            [propertyName]="'txRemovedCheck'"
+            [myFormControl]="checkGroup.get('txRemovedCheck')"
+            [isCheckBox]="true"
+            class="form-check form-check-inline pl-1"
+          >
+            <input
+              class="form-check-input"
+              id="txRemovedCheck"
+              formControlName="txRemovedCheck"
+              type="checkbox"
+            />
+          </app-widget>
+        </form>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <form
+          [formGroup]="myFormGroup.get('transmitterChange')"
+          *ngIf="myFormGroup.get('transmitterChange')"
+        >
+          <app-widget
+            [label]="'Transmitter'"
+            [propertyName]="'txTo'"
+            [myFormControl]="myFormGroup.get('transmitterChange').get('txTo')"
+          >
+            <app-transmitter-txid-id-select-control
+              id="txTo"
+              formControlName="txTo"
+              removedOption="true"
+            ></app-transmitter-txid-id-select-control>
+          </app-widget>
+        </form>
+      </div>
+      <div class="form-group col-md-4 offset-md-1">
+        <form
+          [formGroup]="myFormGroup.get('chips')"
+          *ngIf="myFormGroup.get('chips')"
+        >
+          <app-widget
+            [label]="'Chip'"
+            [propertyName]="'microchip'"
+            [myFormControl]="myFormGroup.get('chips').get('microchip')"
+          >
+            <input
+              class="form-control"
+              id="microchip"
+              formControlName="microchip"
+              [typeahead]="['Removed']"
+              [typeaheadScrollable]="true"
+              [typeaheadOptionsInScrollableView]="14"
+              [typeaheadOptionsLimit]="60"
+            />
+          </app-widget>
+        </form>
+      </div>
+      <div class="form-group col-md-4">
+        <form
+          [formGroup]="myFormGroup.get('bands')"
+          *ngIf="myFormGroup.get('bands')"
+        >
+          <div class="row">
+            <div class="form-group col-md-6">
+              <app-widget
+                [label]="'Band'"
+                [propertyName]="'newBandNumber'"
+                [myFormControl]="myFormGroup.get('bands').get('newBandNumber')"
+              >
+                <input
+                  class="form-control"
+                  id="newBandNumber"
+                  formControlName="newBandNumber"
+                  [typeahead]="['unbanded']"
+                  [typeaheadScrollable]="true"
+                  [typeaheadOptionsInScrollableView]="14"
+                  [typeaheadOptionsLimit]="60"
+                />
+              </app-widget>
+            </div>
+            <div class="form-group col-md-6">
+              <app-widget
+                [label]="'Leg'"
+                [propertyName]="'bandLeg'"
+                [myFormControl]="myFormGroup.get('bands').get('leg')"
+              >
+                <select
+                  class="custom-select"
+                  id="bandLeg"
+                  formControlName="leg"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('LegOptions') | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-widget>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <form
+              [formGroup]="myFormGroup.get('transmitterChange')"
+              *ngIf="myFormGroup.get('transmitterChange')"
+            >
+              <app-widget
+                [label]="'Tx Fine Tuning'"
+                [propertyName]="'newTxFineTune'"
+                [myFormControl]="
+                  myFormGroup.get('transmitterChange').get('newTxFineTune')
+                "
+              >
+                <input
+                  class="form-control"
+                  id="newTxFineTune"
+                  formControlName="newTxFineTune"
+                />
+              </app-widget>
+            </form>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="txExpiryDate"> Tx Expiry Date </label>
+            <input
+              class="form-control"
+              id="selectedExpiryDate"
+              type="text"
+              [value]="selectedExpiryDate | date: 'dd/MM/yyyy'"
+              [disabled]="true"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="channel"> Channel </label>
+            <input
+              class="form-control"
+              id="channel"
+              type="text"
+              [value]="selectedTransmitter?.channel"
+              [disabled]="true"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="frequency"> Frequency </label>
+            <input
+              class="form-control"
+              id="selectedFrequency"
+              type="text"
+              [value]="selectedTransmitter?.frequency"
+              [disabled]="true"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="uhfId"> UHF ID </label>
+            <input
+              class="form-control"
+              id="uhfId"
+              type="text"
+              [value]="selectedTransmitter?.uhfId | number: '3.0-0'"
+              [disabled]="true"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-controlblock>
+  <app-controlblock title="Harness" [noOffset]="true" class="col-md-2">
+    <form
+      [formGroup]="myFormGroup.get('harnessChange')"
+      *ngIf="myFormGroup.get('harnessChange')"
+    >
+      <div class="form-group">
+        <app-widget
+          [label]="'Old length - Left'"
+          [propertyName]="'oldHarnessLengthLeft'"
+          [myFormControl]="
+            myFormGroup.get('harnessChange').get('oldHarnessLengthLeft')
+          "
+        >
+          <input
+            class="form-control"
+            id="oldHarnessLengthLeft"
+            formControlName="oldHarnessLengthLeft"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Old length - Right'"
+          [propertyName]="'oldHarnessLengthRight'"
+          [myFormControl]="
+            myFormGroup.get('harnessChange').get('oldHarnessLengthRight')
+          "
+        >
+          <input
+            class="form-control"
+            id="oldHarnessLengthRight"
+            formControlName="oldHarnessLengthRight"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'New Length'"
+          [propertyName]="'newHarnessLength'"
+          [myFormControl]="
+            myFormGroup.get('harnessChange').get('newHarnessLength')
+          "
+        >
+          <input
+            class="form-control"
+            id="newHarnessLength"
+            formControlName="newHarnessLength"
+          />
+        </app-widget>
+      </div>
+    </form>
+  </app-controlblock>
+</div>

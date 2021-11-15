@@ -1,0 +1,82 @@
+<ng-container *ngIf="trackandbowlactivityRevision">
+  <div class="row">
+    <app-controlblock title="Track and Bowl" class="col-md-8" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Track Activity</dt>
+        <dd>
+          <span class="data-tag">
+            {{ trackandbowlactivityRevision.trackActivity }}
+          </span>
+        </dd>
+        <dt>Sticks</dt>
+        <dd>
+          <span class="data-tag">
+            {{ trackandbowlactivityRevision.sticks }}
+          </span>
+        </dd>
+        <dt>Grubbing</dt>
+        <dd>
+          <span class="data-tag">
+            {{ trackandbowlactivityRevision.grubbing }}
+          </span>
+        </dd>
+        <dt>Fighting Sign</dt>
+        <dd>
+          <span class="data-tag">
+            {{ trackandbowlactivityRevision.fightingSign }}
+          </span>
+        </dd>
+        <dt>Mating Sign</dt>
+        <dd>
+          <span class="data-tag">
+            {{ trackandbowlactivityRevision.matingSign }}
+          </span>
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="VOR" class="col-md-2" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Tape Used</dt>
+        <dd>
+          <span class="data-tag">
+            {{ trackandbowlactivityRevision.tapeUsed }}
+          </span>
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Detected" class="col-md-2" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Boom</dt>
+        <dd>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            disabled
+            id="boom"
+            [(ngModel)]="trackandbowlactivityRevision.boom"
+          />
+        </dd>
+        <dt>Ching</dt>
+        <dd>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            disabled
+            id="ching"
+            [(ngModel)]="trackandbowlactivityRevision.ching"
+          />
+        </dd>
+        <dt>Skraak</dt>
+        <dd>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            disabled
+            id="skraak"
+            [(ngModel)]="trackandbowlactivityRevision.skraak"
+          />
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

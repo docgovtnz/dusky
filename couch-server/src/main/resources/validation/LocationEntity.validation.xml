@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="LocationEntity" context="Save">
+
+  <Property name="locationName">
+    <RequiredRule/>
+    <LocationUniqueNameRule/>
+  </Property>
+
+  <Property name="island">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="mappingMethod">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="easting">
+    <RequiredRule/>
+    <EastingRule/>
+    <!-- Only needs to be added to one of these properties since it checks both of them -->
+    <EastingIslandBoundsRule/>
+    <LocationTypeTargetBirdRule/>
+    <NestTypeMandatoryClutchRule/>
+  </Property>
+
+  <Property name="northing">
+    <RequiredRule/>
+    <NorthingRule/>
+  </Property>
+
+  <Property name="locationType">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="captivityType">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="firstDate">
+    <DatePastRule/>
+  </Property>
+
+</Class>

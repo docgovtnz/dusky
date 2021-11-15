@@ -1,0 +1,20 @@
+<ng-template #content><ng-content></ng-content></ng-template>
+
+<ng-container *ngIf="isCheckBox">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+
+<label
+  id="{{ propertyName + 'Label' }}"
+  [ngClass]="{ 'form-check-label': isCheckBox }"
+  >{{ label
+  }}<span class="text-danger" *ngIf="isRequired()"
+    ><strong>&nbsp;*</strong></span
+  ></label
+>
+
+<ng-container *ngIf="!isCheckBox">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+
+<app-message-display [myFormControl]="myFormControl"></app-message-display>

@@ -1,0 +1,55 @@
+<div
+  bsModal
+  #deleteConfirmationModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Confirm Delete</h4>
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="onCancelDelete()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          Are you sure{{
+            entityName ? ' you want to delete this ' + entityName : ''
+          }}?
+        </div>
+        <div *ngIf="message !== null" class="pt-4">{{ message }}</div>
+        <hr />
+        <div class="row">
+          <div class="offset-6 col-md-6 text-right">
+            <button
+              id="confirmDeleteBtn"
+              type="button"
+              (click)="onConfirmDelete()"
+              [disabled]="!deleteOk"
+              class="btn btn-danger mr-1"
+            >
+              Delete{{ entityName ? ' ' + entityName : '' }}
+            </button>
+            <button
+              id="cancelDeleteBtn"
+              type="button"
+              (click)="onCancelDelete()"
+              class="btn btn-default"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

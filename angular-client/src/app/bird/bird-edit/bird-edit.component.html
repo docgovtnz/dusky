@@ -1,0 +1,61 @@
+<section>
+  <app-banner title="Bird"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-bird-edit-form [myFormGroup]="myFormGroup"></app-bird-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <tabset #birdTabs>
+      <tab *ngIf="myFormGroup?.get('birdFeatureList')" [heading]="'Features'">
+        <app-birdfeature-edit-form
+          [myFormArray]="myFormGroup.get('birdFeatureList')"
+        ></app-birdfeature-edit-form>
+      </tab>
+      <tab
+        *ngIf="myFormGroup?.get('eggMeasurements')"
+        [heading]="'Egg Measurements'"
+      >
+        <app-eggmeasurements-edit-form
+          [myFormGroup]="myFormGroup.get('eggMeasurements')"
+        ></app-eggmeasurements-edit-form>
+      </tab>
+      <tab
+        *ngIf="myFormGroup?.get('embryoMeasurements')"
+        [heading]="'Embryo Measurements'"
+      >
+        <app-embryomeasurements-edit-form
+          [myFormGroup]="myFormGroup.get('embryoMeasurements')"
+        ></app-embryomeasurements-edit-form>
+      </tab>
+      <tab *ngIf="birdEntity" [heading]="'Comments'">
+        <app-comments-edit
+          [entity]="birdEntity"
+          field="comments"
+        ></app-comments-edit>
+      </tab>
+    </tabset>
+  </div>
+</section>

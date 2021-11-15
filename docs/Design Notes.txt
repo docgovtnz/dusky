@@ -1,0 +1,120 @@
+Test upload to code commit 3....
+
+
+-------------------
+Basic Release Build
+-------------------
+
+From the top-level of the project
+
+1. Edit "couch-server\src\main\resources\application.properties" and increment the version numer as required.
+
+2. set JAVA_HOME=C:\Java\jdk-10.0.2    (optional if more than one JDK installed)
+
+3. gradlew -PencryptionPassword="<encryptionKey>" clean :couch-server:packageDistribution
+
+Will create folder called: D:\Projects\dusky\couch-server\build\dist\dusky
+
+4. Deploy to DOC FTP server
+
+See the ReadMe.txt that it creates
+
+5. Commit and push the application.properties change
+
+------------------------
+
+
+You can Autowire both the Bucket and CouchbaseTemplate (or get the Bucket from the Template)
+
+When doing a CouchbaseTemplate template query you also need to get the ID and CAS variables which come from some
+sort of meta() level context.
+
+SELECT META(`kakapo-bird`).id AS _ID, META(`kakapo-bird`).cas AS _CAS, `kakapo-bird`.* FROM `kakapo-bird` WHERE `docType` = 'Bird' LIMIT 20 OFFSET 0
+
+@Autowired
+protected CouchbaseTemplate couchbaseTemplate;
+
+public List<BirdEntity> search(BirdCriteria criteria) {
+    Statement statement = N1qlUtils.createSelectClauseForEntity(couchbaseTemplate.getCouchbaseBucket().name())
+            .from(i(couchbaseTemplate.getCouchbaseBucket().name()))
+            .where(i("docType").eq("'Bird'"))
+            .limit(10);
+
+    N1qlQuery query = N1qlQuery.simple(statement);
+
+    List<BirdEntity> list = couchbaseTemplate.findByN1QL(query, BirdEntity.class);
+    return list;
+}
+
+
+
+-----------------------
+Drop INDEX `kakapo-bird`.`#primary`
+Drop INDEX `kakapo-bird`.`idx_bird`
+Drop INDEX `kakapo-bird`.`idx_bird_revision`
+Drop INDEX `kakapo-bird`.`idx_credential`
+Drop INDEX `kakapo-bird`.`idx_person`
+Drop INDEX `kakapo-bird`.`idx_recovery`
+Drop INDEX `kakapo-bird`.`idx_recovery_birdID`
+Drop INDEX `kakapo-bird`.`idx_docType`
+//Drop INDEX `kakapo-bird`.`idx_revision_entityId`
+
+Create Primary Index on `kakapo-bird`
+CREATE INDEX `idx_bird` ON `kakapo-bird`(`javaClass`) WHERE (`javaClass` = "com.fronde.server.domain.BirdEntity")
+//CREATE INDEX `idx_recovery` ON `kakapo-bird`(`javaClass`) WHERE (`javaClass` = "com.fronde.server.domain.RecoveryEntity")
+//CREATE INDEX `idx_recovery_birdID` ON `kakapo-bird`(`javaClass`,`birdID`) WHERE (`javaClass` = "com.fronde.server.domain.RecoveryEntity")
+
+CREATE INDEX `idx_docType` ON `kakapo-bird`(`docType`)
+//CREATE INDEX `idx_revision_entityId` ON `kakapo-bird`(`javaClass`,`entityId`) WHERE (`javaClass` = "com.fronde.server.domain.RevisionList")
+
+
+
+CREATE INDEX `idx_record_entryDate` ON `kakapo-bird`(`javaClass`, `entryDate`) WHERE (`javaClass` = "com.fronde.server.domain.RecordEntity")
+
+
+Delete FROM `kakapo-bird` WHERE javaClass LIKE "com.fronde%"
+
+------------------------
+
+SELECT array_count(k.observerList) as ac FROM `kakapo-bird` k WHERE docType = 'Record' and recoveryType = 'Capture' and array_count(k.observerList) > 0
+
+------------------------
+
+SQL Server Migration Assistant
+
+https://docs.microsoft.com/en-us/sql/ssma/sql-server-migration-assistant?view=sql-server-2017
+
+
+-------------------------
+
+http://localhost:8092/beer-sample/_design/dev_beer
+http://localhost:8092/beer-sample/_design/dev_beer/_view/brewery_beers
+
+-------------------------
+
+http://www.jcgonzalez.com/java-simple-proxy-socket-server-examples
+https://github.com/stefano-lupo/Java-Proxy-Server/tree/master/src
+
+Option A: Use VPN connections and then the VPN connection will provide protection from external listeners, the exact scope of this protection depends on the VPN and how it's configured. This would be good from Island to AWS, but won't protect traffic within the Island network.
+
+Option B: Proxy back through the Spring Server. Have the Spring server proxy all the traffic to and from the Sync Gateway. The Spring Server needs to have TLS enabled and that is most definitely doable. If the SG is protected with Windows Firewall and the Spring Server is permitted traffic then the only way to communicate with the SG is via the Spring Server. Unencrypted traffic is only visible within the machine and never on the network - so it wouldn't be visible on Island wifi networks. This solution somewhat depends on having Windows Firewall switched on. If it wasn't the machine to machine network traffic would be encrypted, but the SG's would be exposed.
+
+Writing a proxy server isn't too hard, I've done similar stuff before. There are probably open-source options out there too, and for this email I was able to find a couple of candidates, but the problem is that Server Proxy is a bit of an overloaded term and Google kept giving me client based solutions.
+
+Option C: Use CE Edition Server and EE Mobile Edition Sync Gateway. If we only need the EE edition of sync gateway then these might be a bit cheaper. Maybe? But depends on EE Sync Gateway  being able to connect to CE Server.
+
+Option D: Purchase more editions of EE Server. One for each island? The Laptops run CE, but the Island to mainland communication is via the EE Server.
+
+-------------------------
+
+Build process prompts the user to supply the secret. Injected into source code and compile. Not saved in source control. Can't change, or it will break config on Laptops.
+
+-------------------------
+
+Storing bucket password in serviceconfig.json and support for SSL client certificates.
+
+https://forums.couchbase.com/t/bucket-password-in-sync-gateway-config-file/12951/4
+
+Example of setting cookie
+
+https://forums.couchbase.com/t/anyway-to-authorize-a-sync-gateway-replication-request/12396

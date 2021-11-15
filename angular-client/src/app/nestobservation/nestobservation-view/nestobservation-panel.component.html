@@ -1,0 +1,40 @@
+<ng-container *ngIf="nestobservationRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4">
+      <dl class="data-group">
+        <dt>Location</dt>
+        <dd>
+          <app-location-name-label
+            [locationID]="nestobservationRevision.locationID"
+          ></app-location-name-label>
+        </dd>
+        <dt>Bird</dt>
+        <dd>
+          <app-bird-name-label
+            [birdID]="nestobservationRevision.birdID"
+          ></app-bird-name-label>
+        </dd>
+        <dt>Date/Time</dt>
+        <dd>
+          {{ nestobservationRevision.dateTime | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Record Info" class="col-md-8">
+      <dl class="data-group">
+        <dt>Observer List</dt>
+        <dd>
+          <app-observer-view
+            [observers]="nestobservationRevision.observerList"
+          ></app-observer-view>
+        </dd>
+        <dt>Weigh Method</dt>
+        <dd>
+          <span class="data-tag">{{
+            nestobservationRevision.weighMethod
+          }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

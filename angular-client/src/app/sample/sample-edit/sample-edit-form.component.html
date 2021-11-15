@@ -1,0 +1,236 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Sample ID'"
+          [propertyName]="'sampleName'"
+          [myFormControl]="myFormGroup.get('sampleName')"
+        >
+          <input
+            class="form-control"
+            id="sampleName"
+            formControlName="sampleName"
+            type="text"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Bird'"
+          [propertyName]="'birdID'"
+          [myFormControl]="myFormGroup.get('birdID')"
+        >
+          <app-bird-name-id-select-control
+            id="birdID"
+            formControlName="birdID"
+            [disabled]="true"
+          ></app-bird-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Collection Date'"
+          [propertyName]="'collectionDate'"
+          [myFormControl]="myFormGroup.get('collectionDate')"
+        >
+          <app-date-time-control
+            id="collectionDate"
+            formControlName="collectionDate"
+            [mandatoryTime]="true"
+            [disabled]="true"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Sample Category'"
+          [propertyName]="'sampleCategory'"
+          [myFormControl]="myFormGroup.get('sampleCategory')"
+        >
+          <input
+            class="form-control"
+            id="sampleCategory"
+            formControlName="sampleCategory"
+            type="text"
+            disabled="true"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Sample Type'"
+          [propertyName]="'sampleType'"
+          [myFormControl]="myFormGroup.get('sampleType')"
+        >
+          <input
+            class="form-control"
+            id="sampleType"
+            formControlName="sampleType"
+            type="text"
+            disabled="true"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Details" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Collection Island'"
+          [propertyName]="'collectionIsland'"
+          [myFormControl]="myFormGroup.get('collectionIsland')"
+        >
+          <input
+            class="form-control"
+            id="collectionIsland"
+            formControlName="collectionIsland"
+            type="text"
+            disabled="true"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Collection Location'"
+          [propertyName]="'collectionLocationID'"
+          [myFormControl]="myFormGroup.get('collectionLocationID')"
+        >
+          <app-location-name-id-select-control
+            id="collectionLocationID"
+            formControlName="collectionLocationID"
+            [disabled]="true"
+          ></app-location-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Sample Taken By'"
+          [propertyName]="'sampleTakenBy'"
+          [myFormControl]="myFormGroup.get('sampleTakenBy')"
+        >
+          <app-person-name-id-select-control
+            id="sampleTakenBy"
+            formControlName="sampleTakenBy"
+          ></app-person-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Reason for Sample'"
+          [propertyName]="'reasonForSample'"
+          [myFormControl]="myFormGroup.get('reasonForSample')"
+        >
+          <input
+            class="form-control"
+            id="reasonForSample"
+            formControlName="reasonForSample"
+            type="text"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Storage" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Storage Medium'"
+          [propertyName]="'storageMedium'"
+          [myFormControl]="myFormGroup.get('storageMedium')"
+        >
+          <select
+            class="custom-select"
+            id="storageMedium"
+            formControlName="storageMedium"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('StorageMediumOptions')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Container'"
+          [propertyName]="'container'"
+          [myFormControl]="myFormGroup.get('container')"
+        >
+          <select
+            class="custom-select"
+            id="container"
+            formControlName="container"
+            (change)="selectContainerChange()"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('ContainerOptions') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Storage Conditions'"
+          [propertyName]="'storageConditions'"
+          [myFormControl]="myFormGroup.get('storageConditions')"
+        >
+          <select
+            class="custom-select"
+            id="storageConditions"
+            formControlName="storageConditions"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('StorageConditionsOptions')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Archived'"
+          [propertyName]="'archived'"
+          [myFormControl]="myFormGroup.get('archived')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="archived"
+            formControlName="archived"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Location" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Island'"
+          [propertyName]="'currentIsland'"
+          [myFormControl]="myFormGroup.get('currentIsland')"
+        >
+          <app-type-ahead-control
+            id="currentIsland"
+            formControlName="currentIsland"
+            [optionType]="'IslandName'"
+          ></app-type-ahead-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

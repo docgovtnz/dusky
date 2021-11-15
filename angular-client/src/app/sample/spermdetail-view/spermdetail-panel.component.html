@@ -1,0 +1,36 @@
+<ng-container *ngIf="spermdetailRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Diluent</dt>
+        <dd>
+          {{ spermdetailRevision.diluent }}
+        </dd>
+        <dt>Volume</dt>
+        <dd>
+          {{ spermdetailRevision.volumeInMicroL | addUnits: 'μl' }}
+        </dd>
+        <dt>Collection Method</dt>
+        <dd>
+          <span class="data-tag">{{
+            spermdetailRevision.collectionMethod
+          }}</span>
+        </dd>
+        <dt>Papilla Swelling</dt>
+        <dd>
+          <span class="data-tag">{{
+            spermdetailRevision.papillaSwelling
+          }}</span>
+        </dd>
+        <dt>Stimulation</dt>
+        <dd>
+          <span class="data-tag">{{ spermdetailRevision.stimulation }}</span>
+        </dd>
+        <dt>Stress</dt>
+        <dd>
+          <span class="data-tag">{{ spermdetailRevision.stress }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

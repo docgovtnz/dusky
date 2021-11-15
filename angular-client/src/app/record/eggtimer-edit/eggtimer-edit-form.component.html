@@ -1,0 +1,226 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Data Capture Type'"
+          [propertyName]="'dataCaptureType'"
+          [myFormControl]="myFormGroup.get('dataCaptureType')"
+        >
+          <select
+            class="custom-select"
+            id="dataCaptureType"
+            formControlName="dataCaptureType"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('DataCaptureTypeSelect')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+
+      <div class="form-group">
+        <app-widget
+          [label]="'Pulse Rate'"
+          [propertyName]="'pulseRate'"
+          [myFormControl]="myFormGroup.get('pulseRate')"
+        >
+          <select
+            class="custom-select"
+            id="pulseRate"
+            formControlName="pulseRate"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('EggTimerPulseRateOptions')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+
+      <ng-container
+        *ngIf="myFormGroup.get('dataCaptureType').value === 'Manual'"
+      >
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <app-widget
+                [label]="'Battery life 1'"
+                [propertyName]="'batteryLife1'"
+                [myFormControl]="myFormGroup.get('batteryLife1')"
+              >
+                <input
+                  class="form-control"
+                  id="batteryLife1"
+                  formControlName="batteryLife1"
+                  type="number"
+                />
+              </app-widget>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <app-widget
+                [label]="'Battery life 2'"
+                [propertyName]="'batteryLife2'"
+                [myFormControl]="myFormGroup.get('batteryLife2')"
+              >
+                <input
+                  class="form-control"
+                  id="batteryLife2"
+                  formControlName="batteryLife2"
+                  type="number"
+                />
+              </app-widget>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </app-controlblock>
+
+    <ng-container *ngIf="myFormGroup.get('dataCaptureType').value === 'Manual'">
+      <app-controlblock title="Status" [noOffset]="true" class="col-md-3">
+        <app-dual-control-widget
+          [label]="'Days since change of status'"
+          [myFormGroup]="myFormGroup"
+          control1Name="daysSinceChange1"
+          control2Name="daysSinceChange2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Duration of previous incubation state'"
+          [myFormGroup]="myFormGroup"
+          control1Name="durationOfPrevious1"
+          control2Name="durationOfPrevious2"
+        ></app-dual-control-widget>
+      </app-controlblock>
+    </ng-container>
+    <ng-container *ngIf="myFormGroup.get('dataCaptureType').value === 'Manual'">
+      <app-controlblock title="Activity" [noOffset]="true" class="col-md-6">
+        <app-dual-control-widget
+          [label]="'Activity Yesterday'"
+          [myFormGroup]="myFormGroup"
+          control1Name="activityYesterday1"
+          control2Name="activityYesterday2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Activity 2 Days Ago'"
+          [myFormGroup]="myFormGroup"
+          control1Name="activity2DaysAgo1"
+          control2Name="activity2DaysAgo2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Activity 3 days ago'"
+          [myFormGroup]="myFormGroup"
+          control1Name="activity3DaysAgo1"
+          control2Name="activity3DaysAgo2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Activity 4 days ago'"
+          [myFormGroup]="myFormGroup"
+          control1Name="activity4DaysAgo1"
+          control2Name="activity4DaysAgo2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Activity 5 days ago'"
+          [myFormGroup]="myFormGroup"
+          control1Name="activity5DaysAgo1"
+          control2Name="activity5DaysAgo2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Activity 6 days ago'"
+          [myFormGroup]="myFormGroup"
+          control1Name="activity6DaysAgo1"
+          control2Name="activity6DaysAgo2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Activity 7 days ago'"
+          [myFormGroup]="myFormGroup"
+          control1Name="activity7DaysAgo1"
+          control2Name="activity7DaysAgo2"
+        ></app-dual-control-widget>
+        <app-dual-control-widget
+          [label]="'Mean Activity'"
+          [myFormGroup]="myFormGroup"
+          control1Name="meanActivity1"
+          control2Name="meanActivity2"
+        ></app-dual-control-widget>
+      </app-controlblock>
+    </ng-container>
+    <ng-container
+      *ngIf="myFormGroup.get('dataCaptureType').value === 'From Errol'"
+    >
+      <app-controlblock title="Activity" [noOffset]="true" class="col-md-6">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <app-widget
+              [label]="'Days since change of status'"
+              [propertyName]="'errolDaysSinceChange'"
+              [myFormControl]="myFormGroup.get('errolDaysSinceChange')"
+            >
+              <input
+                class="form-control"
+                id="errolDaysSinceChange"
+                formControlName="errolDaysSinceChange"
+                type="number"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group col-md-6">
+            <app-widget
+              [label]="'Errol ID'"
+              [propertyName]="'errolID'"
+              [myFormControl]="myFormGroup.get('errolID')"
+            >
+              <input
+                class="form-control"
+                id="errolID"
+                formControlName="errolID"
+                type="number"
+              />
+            </app-widget>
+          </div>
+
+          <div class="form-group col-md-6">
+            <app-widget
+              [label]="'Activity 1 Day'"
+              [propertyName]="'errolActivity1Day'"
+              [myFormControl]="myFormGroup.get('errolActivity1Day')"
+            >
+              <input
+                class="form-control"
+                id="errolActivity1Day"
+                formControlName="errolActivity1Day"
+                type="number"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group col-md-6">
+            <app-widget
+              [label]="'Activity 7 days'"
+              [propertyName]="'errolActivity7Days'"
+              [myFormControl]="myFormGroup.get('errolActivity7Days')"
+            >
+              <input
+                class="form-control"
+                id="errolActivity7Days"
+                formControlName="errolActivity7Days"
+                type="number"
+              />
+            </app-widget>
+          </div>
+        </div>
+      </app-controlblock>
+    </ng-container>
+  </div>
+</form>

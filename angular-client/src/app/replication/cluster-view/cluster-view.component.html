@@ -1,0 +1,92 @@
+<section>
+  <app-banner title="Data Replication" [noOffset]="true"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <dl class="row my-0">
+              <dt class="col-5">Local Address</dt>
+              <dd class="col-7">{{ localAddress?.address }}</dd>
+              <dt class="col-5">Sync Gateway Status</dt>
+              <dd class="col-7">{{ syncGatewayStatus?.status }}</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-header">Operational Mode</div>
+          <div class="card-body">
+            <div class="form-group">
+              <app-toggle-switch
+                [buttonNames]="['Peer', 'Master', 'Client', 'Server']"
+                [selectedName]="operationalMode"
+                [disabledNames]="disabledNames"
+                (selectedNameChange)="onSelectedNameChange($event)"
+                [disabled]="working"
+              ></app-toggle-switch>
+            </div>
+
+            <form class="form">
+              <div class="input-group">
+                <select
+                  class="custom-select"
+                  id="connectToServer"
+                  name="connectToServer"
+                  [(ngModel)]="connectionRequest.connectToServer"
+                  [disabled]="isConnectionDisabled() || working"
+                >
+                  <option
+                    *ngFor="let opt of allowedTargetAddresses"
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+
+                <div class="input-group-append">
+                  <button
+                    type="submit"
+                    [disabled]="isConnectionDisabled() || working"
+                    class="btn btn-success"
+                    (click)="onConnectToNode()"
+                  >
+                    Connect
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <app-replication-chart
+              #replicationChart
+              [fileActivity]="syncGatewayStatus?.fileActivity"
+            ></app-replication-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <app-replication-view
+      #replicationView
+      [connectionMap]="syncGatewayStatus?.connectionMap"
+      (disconnectionEvent)="restartPolling()"
+    ></app-replication-view>
+  </div>
+</section>

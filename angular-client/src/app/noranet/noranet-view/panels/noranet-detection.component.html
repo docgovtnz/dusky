@@ -1,0 +1,43 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Bird(s)</th>
+        <th scope="col">UHF ID</th>
+        <th scope="col">Detection Type</th>
+        <th scope="col">Pulses</th>
+        <th scope="col">Peak Twitch</th>
+        <th scope="col">Activity Hours</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!detectionList">
+      <tr>
+        <td colspan="6">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="detectionList && detectionList.length === 0">
+      <tr>
+        <td colspan="6">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="detectionList && detectionList.length > 0">
+      <tr *ngFor="let item of detectionList">
+        <td>
+          <app-bird-name-label-multi
+            [birdList]="item.birdList"
+          ></app-bird-name-label-multi>
+        </td>
+        <td>{{ item.uhfId | number: '3.0-0' }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.pulseCount }}</td>
+        <td>{{ item.peakTwitch }}</td>
+        <td>{{ item.activity }}</td>
+        <td>{{ item.comments }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,18 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+@import 'bootstrap/scss/mixins';
+
+$btn-toggle-background: $secondary;
+$btn-toggle-hover: darken($btn-toggle-background, 7.5%);
+$btn-toggle-active: $primary;
+
+.btn-toggle {
+  @include button-variant(
+    $btn-toggle-background,
+    $btn-toggle-background,
+    $btn-toggle-hover,
+    $btn-toggle-hover,
+    $btn-toggle-active,
+    $btn-toggle-active
+  );
+}

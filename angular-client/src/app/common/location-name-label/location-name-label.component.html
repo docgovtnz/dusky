@@ -1,0 +1,10 @@
+<div>
+  <span *ngIf="locationSummary && link"
+    ><a routerLink="/location/{{ locationSummary.id }}">{{
+      locationSummary.locationName
+    }}</a></span
+  >
+  <span *ngIf="locationSummary && !link">{{
+    locationSummary.locationName
+  }}</span>
+</div>

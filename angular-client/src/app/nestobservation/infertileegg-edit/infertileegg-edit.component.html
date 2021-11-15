@@ -1,0 +1,45 @@
+<section>
+  <app-banner title="Egg: Infertile"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-infertileegg-edit-form
+          [myFormGroup]="myFormGroup"
+        ></app-infertileegg-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer" *ngIf="infertileeggEntity">
+  <div class="container">
+    <tabset>
+      <tab
+        *ngIf="myFormGroup?.get('eggMeasurements')"
+        [heading]="'Egg Measurements'"
+      >
+        <app-eggmeasurements-edit-form
+          [myFormGroup]="myFormGroup?.get('eggMeasurements')"
+          idPrefix="inf_"
+        ></app-eggmeasurements-edit-form>
+      </tab>
+    </tabset>
+  </div>
+</section>

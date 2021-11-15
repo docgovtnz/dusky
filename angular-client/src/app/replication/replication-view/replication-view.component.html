@@ -1,0 +1,83 @@
+<div class="table-responsive">
+  <table class="mt-3 table table-bordered table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Local</th>
+        <th scope="col">Remote</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!connectionMap">
+      <tr>
+        <td colspan="12">Search not yet executed.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="connectionMap && connectionMapKeys().length === 0">
+      <tr>
+        <td colspan="12">No connections found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="connectionMap && connectionMapKeys().length > 0">
+      <tr *ngFor="let itemKey of connectionMapKeys()">
+        <td>
+          {{ connectionMap[itemKey].localTaskId }}
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Period Ending</th>
+                  <th scope="col">Read</th>
+                  <th scope="col">Written</th>
+                  <th scope="col">Failures</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let stat of connectionMap[itemKey].localActivityList"
+                >
+                  <td>{{ stat.periodEnding | date: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td>{{ stat.docsRead }}</td>
+                  <td>{{ stat.docsWritten }}</td>
+                  <td>{{ stat.docWriteFailures }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+        <td>
+          {{ connectionMap[itemKey].remoteTaskId }}
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Period</th>
+                  <th scope="col">Read</th>
+                  <th scope="col">Written</th>
+                  <th scope="col">Failures</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let stat of connectionMap[itemKey].remoteActivityList"
+                >
+                  <td>{{ stat.periodEnding | date: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td>{{ stat.docsRead }}</td>
+                  <td>{{ stat.docsWritten }}</td>
+                  <td>{{ stat.docWriteFailures }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="onDisconnect(itemKey)">
+            Disconnect
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

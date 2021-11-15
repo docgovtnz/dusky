@@ -1,0 +1,49 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">TxID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Island</th>
+        <th scope="col">Channel</th>
+        <th scope="col">Tune</th>
+        <th scope="col">UHF ID</th>
+        <th scope="col">Mort Type</th>
+        <th scope="col">Action</th>
+        <th scope="col">Software</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!historyList">
+      <tr>
+        <td colspan="8">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="historyList && historyList.length === 0">
+      <tr>
+        <td colspan="8">No data found.</td>
+      </tr>
+    </tbody>
+
+    <!-- TODO: Need to calculate expiry date -->
+    <tbody *ngIf="historyList && historyList.length > 0">
+      <tr *ngFor="let item of historyList">
+        <td>
+          <app-link-view
+            [linkUrl]="'/transmitter/' + item.txDocId"
+            [label]="item.txId"
+          ></app-link-view>
+        </td>
+        <td>{{ item.recordDateTime | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ item.recordIsland }}</td>
+        <td>{{ item.channel }}</td>
+        <td>{{ item.txFineTune }}</td>
+        <td>{{ item.uhfId | number: '3.0-0' }}</td>
+        <td>{{ item.mortType }}</td>
+        <td>{{ item.newStatus }}</td>
+        <td>{{ item.software }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

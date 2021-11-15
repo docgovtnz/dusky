@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessageTemplateMap>
+
+  <Rule name="RequiredRule">
+    <message key="Required">Value is required</message>
+  </Rule>
+
+  <Rule name="DateFutureRule">
+    <message key="DateFuture">Must be a future date</message>
+  </Rule>
+
+  <Rule name="DatePastRule">
+    <message key="DatePast">Must be a historical date</message>
+  </Rule>
+
+  <Rule name="EmailRule">
+    <message key="InvalidEmail">Must be an email address (contain the @ symbol)</message>
+  </Rule>
+
+  <Rule name="NumberRangeRule">
+    <message key="LessThanMinValue">Less than the minimum value of {min}</message>
+    <message key="GreaterThanMaxValue">Greater than the maximum value of {max}</message>
+    <message key="WholeNumber">Must be a whole number</message>
+    <message key="NotANumber">Value is not a number</message>
+  </Rule>
+
+  <Rule name="PersonHasAccountEnabled">
+    <message key="UsernameRequired">Username is required when user account is enabled</message>
+    <message key="RoleRequired">Role is required when user account is enabled</message>
+    <message key="AccountExpiryRequired">Account Expiry is required when user account is enabled and
+      Current Capacity is 'Volunteer'
+    </message>
+    <message key="FutureAccountExpiryRequired">Cannot enable expired account. Either disable the
+      account, clear the Account Expiry, or set Account Expiry to today or later
+    </message>
+  </Rule>
+
+  <Rule name="TransferRecordIslandRule">
+    <message key="IslandsMustMatch">Island on the record must match the transfer to island</message>
+  </Rule>
+
+  <Rule name="TransferRecordLocationIDRule">
+    <message key="LocationIDsMustMatch">Location on the record must match the transfer to location
+    </message>
+  </Rule>
+
+  <Rule name="CheckmateDataRule">
+    <message key="FemaleChannel.required">Channel is required.</message>
+    <message key="FemaleChannel1.required">Channel 1 is required.</message>
+    <message key="FemaleChannel2.required">Channel 2 is required.</message>
+    <message key="Time.required">Time is required.</message>
+    <message key="Time1.required">Time 1 is required.</message>
+    <message key="Time2.required">Time 2 is required.</message>
+    <message key="Duration.required">Duration is required.</message>
+    <message key="Duration1.required">Duration 1 is required.</message>
+    <message key="Duration2.required">Duration 2 is required.</message>
+    <message key="Quality.required">Quality is required.</message>
+    <message key="Quality1.required">Quality 1 is required.</message>
+    <message key="Quality2.required">Quality 2 is required.</message>
+  </Rule>
+
+  <Rule name="TransferRecordToIslandRule">
+    <message key="TransferToIslandMustDiffer">The transfer to island cannot be the same as the
+      transfer from island
+    </message>
+  </Rule>
+
+  <Rule name="TransferRecordToLocationIDRule">
+    <message key="TransferToLocationIDMustDiffer">The transfer to location cannot be the same as the
+      transfer from location
+    </message>
+  </Rule>
+
+  <Rule name="ObserverRequiredRule">
+    <message key="ObserverRequired">A record must have at least one observer</message>
+  </Rule>
+
+  <Rule name="ObservationRoleRequiredRule">
+    <message key="ObservationRoleRequired">An observer must have at least one role</message>
+  </Rule>
+
+  <Rule name="NestEggValidationRule">
+    <message key="requiredForRow">{field} is required for Egg Observation rows {rows}</message>
+    <message key="required">{field} is required</message>
+    <message key="EggWeightOutsideRange">Egg weights must be between 0 and 100g for rows {rows}
+    </message>
+    <message key="HeartRateOutsideRange">Heart rate must be an integer of 0 or greater for rows
+      {rows}
+    </message>
+  </Rule>
+
+  <Rule name="NestChickValidationRule">
+    <message key="requiredForRow">{field} is required for Chick Observation rows {rows}</message>
+    <message key="required">{field} is required</message>
+    <message key="ChickWeightOutsideRange">Chick weights must be between 0 and 5000g for rows
+      {rows}
+    </message>
+  </Rule>
+
+  <Rule name="MotherTripListValidationRule">
+    <message key="requiredForRow">{field} is required for Mother Trip rows #{rows}</message>
+    <message key="motherLeftMustBeAfterNestObservation">Mother Left date/time on rows #{rows} must
+      be on or after the Observation date/time
+    </message>
+    <message key="motherBackMustBeAfterMotherLeft">Mother Back date/time on rows #{rows} must be on
+      or after the Mother Left date/time
+    </message>
+  </Rule>
+
+  Finish time >= Inspection time
+  Inspection time >= Start time
+  <Rule name="ObservationTimeValidationRule">
+    <message key="required">{field} is required</message>
+
+    <message key="FinishTimeMustBeOnAfterInspectionTime">Finish observation time must be on or after
+      the Inspection time
+    </message>
+    <message key="InspectionTimeMustBeOnAfterObservationTime">Inspection time must be on or after
+      the Observation Date/Time
+    </message>
+  </Rule>
+
+  <Rule name="EastingRule">
+    <message key="NotInRange">Easting value supplied is not within the range specified by the
+      Island.
+    </message>
+  </Rule>
+
+  <Rule name="NorthingRule">
+    <message key="NotInRange">Northing value supplied is not within the range specified by the
+      Island.
+    </message>
+  </Rule>
+
+  <Rule name="EastingAndNorthingRule">
+    <message key="IfOneThenTheOther">If either of Easting or Northing is supplied then the other
+      value must also be supplied.
+    </message>
+  </Rule>
+
+  <Rule name="EastingIslandBoundsRule">
+    <message key="IslandNotFound">The island entered does not exist.</message>
+    <message key="IslandBoundsUndefined">The island &quot;{island}&quot; for this location does not
+      have any bounding values defined.
+    </message>
+  </Rule>
+
+  <Rule name="LocationTypeTargetBirdRule">
+    <message key="TargetBirdMandatoryForThisLocationType">The Target Bird field is mandatory for a
+      location of type &quot;{locationType}&quot;.
+    </message>
+    <message key="TargetBirdHandraiseForThisLocationType">The Target Bird selected should be the
+      &quot;Handraise&quot; bird for a location of type &quot;{locationType}&quot;.
+    </message>
+  </Rule>
+
+  <Rule name="NestTypeMandatoryClutchRule">
+    <message key="ClutchIsMandatoryForNest">The Clutch field is mandatory for a &quot;{locationType}&quot;
+      location.
+    </message>
+  </Rule>
+
+  <Rule name="BirdUniqueNameRule">
+    <message key="BirdNameNotUnique">A Bird with the same name already exists. Please choose another
+      name.
+    </message>
+  </Rule>
+
+  <Rule name="BirdUniqueHouseIDRule">
+    <message key="BirdHouseIDNotUnique">A Bird with the same House ID already exists. Please choose
+      another House ID.
+    </message>
+  </Rule>
+
+  <Rule name="PersonUniqueNameRule">
+    <message key="PersonNameNotUnique">A Person with the same name already exists. Please choose
+      another name.
+    </message>
+  </Rule>
+
+  <Rule name="PersonUniqueUsernameRule">
+    <message key="PersonUsernameNotUnique">A Person with the same username already exists. Please
+      choose another username.
+    </message>
+  </Rule>
+
+  <Rule name="LocationUniqueNameRule">
+    <message key="LocationNameNotUnique">A Location with the same name already exists. Please choose
+      another name.
+    </message>
+  </Rule>
+
+  <Rule name="TransmitterUniqueTxIdRule">
+    <message key="TransmitterTxIdNotUnique">A Transmitter with the same id already exists. Please
+      choose another id.
+    </message>
+  </Rule>
+
+  <Rule name="TransmitterUhfIdRule">
+    <message key="TransmitterUhfIdNotInRange">A Transmitter UHF ID must be in the range of 0 - 999.
+      Please choose another id.
+    </message>
+  </Rule>
+
+  <Rule name="UsernameRule">
+    <message key="ContainsDots">The username of "{userName}" for a Data Replication account must not
+      contain any dots.
+    </message>
+  </Rule>
+
+  <Rule name="HaematologyTestValidationRule">
+    <message key="RepeatedTests">Test '{test}' has been repeated on rows {rows}</message>
+  </Rule>
+
+  <Rule name="ChemistryAssayValidationRule">
+    <message key="RepeatedChemistryAssays">Chemistry assay '{chemistryAssay}' has been repeated on
+      rows {rows}
+    </message>
+  </Rule>
+
+  <Rule name="MicrobiologyAndParasitologyTestValidationRule">
+    <message key="RepeatedTests">Test '{test}' has been repeated on rows {rows}</message>
+  </Rule>
+
+  <Rule name="SpermMeasureValidationRule">
+    <message key="RepeatedSpermMeasures">Sperm measure '{spermMeasure}' has been repeated on rows
+      {rows}
+    </message>
+  </Rule>
+
+  <Rule name="FeedOutRule">
+    <message key="FeedOutDateOutOnOrBeforeDateIn">Date in must be on or after Date out</message>
+    <message key="FeedOutInLessOrEqualOut">In must be less than or equal to Out on rows {rows}
+    </message>
+  </Rule>
+
+  <Rule name="CaptureRecordRule">
+    <message key="WeightOutsideRange">Weight must be between 0 and 5kg</message>
+    <message key="HeartRateOutsideRange">Heart rate must be an integer of 0 or greater</message>
+  </Rule>
+
+  <Rule name="HandRaiseMedicationRule">
+    <message key="MedicationNotSetWhenDrugs">Medication checkbox must be selected if any drugs have
+      been entered
+    </message>
+  </Rule>
+
+  <Rule name="IslandUniqueIdRule">
+    <message key="IslandIdNotUnique">An island with the same ID already exists. Please
+      choose another ID.
+    </message>
+  </Rule>
+
+  <Rule name="IslandUniqueNameRule">
+    <message key="IslandNameNotUnique">An island with the same name already exists. Please
+      choose another name.
+    </message>
+  </Rule>
+
+  <Rule name="IslandMustExistRule">
+    <message key="IslandMustExist">The island entered does not exist.</message>
+  </Rule>
+
+  <Rule name="StationValidRule">
+    <message key="StationTypeRule">Station must begin with a type of "Hub", "Berrol", "Errol",
+      "Nest Snark" or "Feed-out Snark".
+    </message>
+    <message key="StationFormatRule">Station format invalid. Please enter a Station type followed by
+      a single space and a number between 0 and 255.
+    </message>
+  </Rule>
+
+  <Rule name="NoraNetActivityRule">
+    <message key="NoraNetActivityNotRelevant">Activity is not relevant for detections of type
+      '{detectionType}'. Please remove the Activity value.
+    </message>
+    <message key="NoraNetActivityRequired">Activity value is required for detections of type
+      '{detectionTypes}'.
+    </message>
+  </Rule>
+
+  <Rule name="NoraNetCheckMateRule">
+    <message key="NoraNetCmFemaleRequired">At least 1 female should be recorded for any mating
+      activity'.
+    </message>
+  </Rule>
+
+  <Rule name="RelativeHumidityRule">
+    <message key="RelativeHumidityOutsideRange">Relative Humidity must be between 0 and 100%
+    </message>
+  </Rule>
+
+  <Rule name="YearRangeRule">
+    <message key="YEAR_RANGE_RULE">{field} must be a 4-digit number between 1001 and the current
+      year.
+    </message>
+  </Rule>
+
+  <Rule name="TxMortalityUniqueNameRule">
+    <message key="IsNameNotUnique">A Tx Mortality with the same name already exists. Please
+      choose another name.
+    </message>
+  </Rule>
+
+  <!-- Template for copy and paste -->
+  <!--<Rule name="">
+      <message key=""></message>
+  </Rule>-->
+
+</MessageTemplateMap>

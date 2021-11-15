@@ -1,0 +1,121 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Bird</th>
+            <th scope="col">Bird cert</th>
+            <th scope="col">Arrival Time</th>
+            <th scope="col">Departure Time</th>
+            <th scope="col">Mating</th>
+            <th scope="col">Record</th>
+            <th></th>
+            <!-- empty column for edit buttons -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('birdID')">
+                <app-bird-name-id-select-control
+                  id="birdID"
+                  formControlName="birdID"
+                ></app-bird-name-id-select-control>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('birdCert')">
+                <select
+                  class="custom-select"
+                  id="birdCert"
+                  formControlName="birdCert"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('CertaintyOptions')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('arriveDateTime')">
+                <app-date-time-control
+                  id="arriveDateTime"
+                  formControlName="arriveDateTime"
+                  [mandatoryTime]="false"
+                ></app-date-time-control>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('departDateTime')">
+                <app-date-time-control
+                  id="departDateTime"
+                  formControlName="departDateTime"
+                  [mandatoryTime]="false"
+                ></app-date-time-control>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget
+                [myFormControl]="item.get('mating')"
+                class="form-check"
+                [isCheckBox]="true"
+              >
+                <input
+                  class="form-check-input"
+                  id="mating"
+                  formControlName="mating"
+                  type="checkbox"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('recordID')">
+                <input
+                  class="form-control"
+                  id="recordID"
+                  formControlName="recordID"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button class="btn btn-record" (click)="removeItem(i)">
+                <fa-icon icon="minus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Remove</span>
+              </button>
+              <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+              <button class="btn btn-secondary" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

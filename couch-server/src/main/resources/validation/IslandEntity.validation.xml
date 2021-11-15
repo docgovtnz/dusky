@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="IslandEntity" context="Save">
+
+  <Property name="name">
+    <RequiredRule/>
+    <IslandUniqueNameRule/>
+  </Property>
+
+  <Property name="islandId">
+    <IslandUniqueIdRule/>
+  </Property>
+
+  <Property name="upperEasting">
+    <NumberRangeRule min="1.0" wholeNumber="false"/>
+  </Property>
+
+  <Property name="upperNorthing">
+    <NumberRangeRule min="1.0" wholeNumber="false"/>
+  </Property>
+
+  <Property name="lowerEasting">
+    <NumberRangeRule min="1.0" wholeNumber="false"/>
+  </Property>
+
+  <Property name="lowerNorthing">
+    <NumberRangeRule min="1.0" wholeNumber="false"/>
+  </Property>
+
+  <Property name="magneticDeclination">
+    <NumberRangeRule min="-359.99" max="359.99" wholeNumber="false"/>
+  </Property>
+
+  <Property name="magneticDeclinationAsOfYear">
+    <YearRangeRule/>
+  </Property>
+</Class>

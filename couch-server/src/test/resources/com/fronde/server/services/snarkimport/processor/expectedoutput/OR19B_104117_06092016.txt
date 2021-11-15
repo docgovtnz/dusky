@@ -1,0 +1,35 @@
+Snark Records
+evening=2016-09-02
+SnarkRecordEntity{arriveDateTime=2016-09-02T14:48, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-02T16:12, mating=null, weight=1.475}
+SnarkRecordEntity{arriveDateTime=2016-09-02T17:09, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-02T18:12, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-02T20:01, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-02T20:18, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-02T21:00, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-02T22:03, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-03T06:38, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-03T08:23, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-02T19:24, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-02T21:23, mating=null, weight=2.288}
+SnarkRecordEntity{arriveDateTime=2016-09-02T22:00, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-03T02:07, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-03T03:17, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-03T05:36, mating=null, weight=null}
+evening=2016-09-03
+SnarkRecordEntity{arriveDateTime=2016-09-03T18:00, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-03T18:55, mating=null, weight=1.471}
+SnarkRecordEntity{arriveDateTime=2016-09-04T04:16, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-04T05:10, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-04T07:02, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-04T09:11, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-03T19:06, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-03T19:19, mating=null, weight=2.28}
+SnarkRecordEntity{arriveDateTime=2016-09-03T23:37, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-04T03:15, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-04T05:10, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-04T05:10, mating=null, weight=null}
+evening=2016-09-04
+SnarkRecordEntity{arriveDateTime=2016-09-04T19:23, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-04T20:34, mating=null, weight=2.222}
+SnarkRecordEntity{arriveDateTime=2016-09-04T20:44, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-04T21:59, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-05T02:13, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-05T03:03, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-05T03:17, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-05T05:28, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-05T06:33, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-05T06:51, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-04T20:14, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-04T20:34, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-04T23:20, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-05T02:02, mating=null, weight=1.433}
+SnarkRecordEntity{arriveDateTime=2016-09-05T02:51, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-05T03:03, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-05T07:03, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-05T09:16, mating=null, weight=null}
+evening=2016-09-05
+SnarkRecordEntity{arriveDateTime=2016-09-05T18:30, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-05T18:54, mating=null, weight=1.435}
+SnarkRecordEntity{arriveDateTime=2016-09-05T21:24, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-05T22:27, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-06T06:27, birdCert='Definitely', birdID='converted_id_for_33', departDateTime=2016-09-06T07:17, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-05T18:54, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-05T21:17, mating=null, weight=2.3}
+SnarkRecordEntity{arriveDateTime=2016-09-05T22:53, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-06T00:02, mating=null, weight=null}
+SnarkRecordEntity{arriveDateTime=2016-09-06T03:47, birdCert='Definitely', birdID='converted_id_for_49', departDateTime=2016-09-06T05:59, mating=null, weight=null}
+Mystery Weights

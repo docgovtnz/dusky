@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="LocationEntity">
+  <Property name="active" label="Active" javaType="Boolean" jsonType="boolean"/>
+  <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+  <Property name="captivityType" label="Captivity Type" javaType="String" jsonType="string"/>
+  <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="easting" label="Easting" javaType="Float" jsonType="number"/>
+  <Property name="firstDate" label="First Date" javaType="Date" jsonType="Date"/>
+  <Property name="gpscount" label="Gpscount" javaType="Integer" jsonType="number"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="island" label="Island" javaType="String" jsonType="string"/>
+  <Property name="locationName" label="Location Name" javaType="String" jsonType="string"/>
+  <Property name="locationType" label="Location Type" javaType="String" jsonType="string"/>
+  <Property name="mappingMethod" label="Mapping Method" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="northing" label="Northing" javaType="Float" jsonType="number"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="nestDetails" label="Nest Details" javaType="NestDetailsEntity"
+    jsonType="NestDetailsEntity">
+    <Class name="NestDetailsEntity">
+      <Property name="chamberHeight" label="Chamber Height" javaType="Float" jsonType="number"/>
+      <Property name="chamberLength" label="Chamber length" javaType="Float" jsonType="number"/>
+      <Property name="chamberRise" label="Chamber Rise" javaType="Float" jsonType="number"/>
+      <Property name="chamberWidth" label="Chamber Width" javaType="Float" jsonType="number"/>
+      <Property name="clutch" label="Clutch" javaType="String" jsonType="string"/>
+      <Property name="entranceHeight" label="Entrance Height" javaType="Float" jsonType="number"/>
+      <Property name="entranceRise" label="Entrance Rise" javaType="Float" jsonType="number"/>
+      <Property name="entranceWidth" label="Entrance Width" javaType="Float" jsonType="number"/>
+      <Property name="locationName" label="Location Name" javaType="String" jsonType="string"/>
+      <Property name="nestBox" label="Nest box" javaType="Boolean" jsonType="boolean"/>
+      <Property name="nestBoxDateAdded" label="Date Added" javaType="Date" jsonType="Date"/>
+      <Property name="nestType" label="Nest Type" javaType="String" jsonType="string"/>
+      <Property name="oldSiteDescription" label="Old Site Description" javaType="String"
+        jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="nestType"/>
+          <DisplayProperty name="clutch"/>
+          <DisplayProperty name="entranceHeight"/>
+          <DisplayProperty name="entranceWidth"/>
+          <DisplayProperty name="entranceRise"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="chamberHeight"/>
+          <DisplayProperty name="chamberWidth"/>
+          <DisplayProperty name="chamberLength"/>
+          <DisplayProperty name="chamberRise"/>
+        </DisplayGroup>
+        <DisplayGroup>
+          <DisplayProperty name="nestBox"/>
+          <DisplayProperty name="nestBoxDateAdded"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="locationName"/>
+      <DisplayProperty name="island"/>
+      <DisplayProperty name="mappingMethod"/>
+      <DisplayProperty name="easting"/>
+      <DisplayProperty name="northing"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="locationType"/>
+      <DisplayProperty name="firstDate"/>
+      <DisplayProperty name="captivityType"/>
+      <DisplayProperty name="birdID"/>
+      <DisplayProperty name="active"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="comments"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

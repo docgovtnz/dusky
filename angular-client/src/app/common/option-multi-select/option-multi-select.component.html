@@ -1,0 +1,25 @@
+<select
+  class="custom-select"
+  [disabled]="disabled"
+  [(ngModel)]="selectedOption"
+>
+  <option *ngFor="let opt of optionList" [ngValue]="opt">
+    {{ opt }}
+  </option>
+</select>
+
+<span
+  class="badge badge-secondary m-1"
+  *ngFor="let selOpt of _selectedOptions; index as index"
+  [attr.data-index]="index"
+>
+  {{ selOpt }}
+  <a
+    href="#"
+    class="bg-secondary text-light"
+    (click)="onRemoveOptionAction(index)"
+  >
+    <fa-icon icon="times" aria-hidden="true"></fa-icon
+    ><span class="sr-only">Remove</span>
+  </a>
+</span>

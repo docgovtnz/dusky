@@ -1,0 +1,69 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Bird</th>
+        <th scope="col">Length (mm)</th>
+        <th scope="col">Width (mm)</th>
+        <th scope="col">Weight (g)</th>
+        <th scope="col">Candling Age Estimate</th>
+        <th scope="col">Temperature (°C)</th>
+        <th scope="col">Heart Rate (bpm)</th>
+        <th scope="col">Embryo Moving</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!recordList">
+      <tr>
+        <td colspan="8">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="recordList && recordList.length === 0">
+      <tr>
+        <td colspan="10">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="recordList && recordList.length > 0">
+      <tr *ngFor="let item of recordList" (click)="navToRecord(item.id)">
+        <td>
+          <app-bird-name-label [birdID]="item.birdID"></app-bird-name-label>
+        </td>
+        <td>
+          {{ item.eggHealth?.lengthInMms }}
+        </td>
+        <td>
+          {{ item.eggHealth?.widthInMms }}
+        </td>
+        <td>
+          {{
+            item.weight?.weight
+              ? (item.weight.weight * 1000).toPrecision(4)
+              : ''
+          }}
+        </td>
+        <td>
+          {{ item.eggHealth?.candlingAgeEstimateInDays }}
+        </td>
+        <td>
+          {{ item.eggHealth?.temperature }}
+        </td>
+        <td>
+          {{ item.eggHealth?.heartRate }}
+        </td>
+        <td>
+          <span class="data-tag">{{ item.eggHealth?.embryoMoving }}</span>
+        </td>
+        <td>
+          {{ item.activity }}
+        </td>
+        <td>
+          {{ item.comments }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

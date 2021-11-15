@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="TxMortalityEntity">
+  <Property name="activityBpm" label="Activity Bpm" javaType="Integer" jsonType="number"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="hoursTilMort" label="Hours Til Mort" javaType="Integer" jsonType="number"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="mortalityBpm" label="Mortality Bpm" javaType="Integer" jsonType="number"/>
+  <Property name="name" label="Name" javaType="String" jsonType="string"/>
+  <Property name="normalBpm" label="Normal Bpm" javaType="Integer" jsonType="number"/>
+  <Property name="oldTxMortId" label="OldTxMortId" javaType="Integer" jsonType="number"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="name"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="normalBpm"/>
+      <DisplayProperty name="activityBpm"/>
+      <DisplayProperty name="mortalityBpm"/>
+      <DisplayProperty name="hoursTilMort"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

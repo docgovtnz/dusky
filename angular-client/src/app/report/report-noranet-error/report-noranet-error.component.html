@@ -1,0 +1,81 @@
+<section>
+  <app-banner title="NoraNet File Import Errors" subtitle="Report"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="noraneterrorCriteria">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Details" class="col-md-4">
+            <div class="form-row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="fromDateProcessed"> First Date </label>
+                  <app-date-editor
+                    id="fromDateProcessed"
+                    [editorCfg]="'none'"
+                    [(dateValue)]="fromDateProcessed"
+                  ></app-date-editor>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="toDateProcessed"> Last Date </label>
+                  <app-date-editor
+                    id="toDateProcessed"
+                    [editorCfg]="'none'"
+                    [(dateValue)]="toDateProcessed"
+                  ></app-date-editor>
+                </div>
+              </div>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <ng-container *ngIf="!report"> Report not yet executed. </ng-container>
+    <ng-container *ngIf="report">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Date/Time</th>
+              <th scope="col">File Name</th>
+              <th scope="col">Message</th>
+              <th scope="col">Data Imported?</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="report.length === 0">
+            <tr>
+              <td [attr.colspan]="7">No results.</td>
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="report.length > 0">
+            <tr *ngFor="let item of report">
+              <td>{{ item.dateProcessed | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ item.fileName }}</td>
+              <td>{{ item.message }}</td>
+              <td>{{ item.dataImported ? 'Yes' : 'No' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</section>

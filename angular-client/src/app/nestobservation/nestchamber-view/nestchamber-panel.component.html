@@ -1,0 +1,30 @@
+<ng-container *ngIf="nestchamberRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Temperature</dt>
+        <dd>
+          {{ nestchamberRevision.temperature | addUnits: '°C' }}
+        </dd>
+        <dt>Relative Humidity</dt>
+        <dd>
+          {{ nestchamberRevision.relativeHumidity | addUnits: '%' }}
+        </dd>
+        <dt>Parasites Present</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="parasitesPresent"
+            [(ngModel)]="nestchamberRevision.parasitesPresent"
+          />
+        </dd>
+        <dt>Conditions</dt>
+        <dd>
+          <span class="data-tag">{{ nestchamberRevision.conditions }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

@@ -1,0 +1,41 @@
+<section>
+  <app-banner title="Island">
+    <button
+      *appPermission="'ISLAND_EDIT'"
+      class="btn btn-action"
+      (click)="onEdit()"
+      [disabled]="!isAuthorized"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+    <button
+      *appPermission="'ISLAND_DELETE'"
+      class="btn btn-action"
+      [disabled]="!isDeleteOk() || !isAuthorized"
+      (click)="deleteConfirmationPopup.show()"
+    >
+      <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+    </button>
+    <app-revision-list-view
+      [entity]="islandEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-island-panel [islandRevision]="revision"></app-island-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Island'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

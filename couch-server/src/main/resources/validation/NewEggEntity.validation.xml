@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="NewEggEntity" context="Save">
+
+  <Property name="mother">
+    <RequiredRule/>
+  </Property>
+  <Property name="locationID">
+    <RequiredRule/>
+  </Property>
+  <Property name="eggName">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="layDate">
+    <RequiredRule/>
+    <DatePastRule/>
+  </Property>
+
+  <Property name="clutchOrder">
+    <RequiredRule/>
+  </Property>
+</Class>

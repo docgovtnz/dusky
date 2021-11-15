@@ -1,0 +1,768 @@
+<ng-container *ngIf="healthcheckRevision">
+  <app-controlblock title="Health Check" [noOffset]="true">
+    <div class="row no-gutters">
+      <div class="col-md-1 offset-md-2 text-center">
+        <label>Not Checked</label>
+      </div>
+      <div class="col-md-1 text-center">
+        <label>Okay</label>
+      </div>
+      <div class="col-md-1 text-center">
+        <label>Not Okay</label>
+      </div>
+      <div class="col-md-1 text-center">
+        <label>Existing Issue</label>
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <label>Notes</label>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="eyes"> Eyes </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="eyes"
+          [(ngModel)]="healthcheckRevision.eyes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="eyes"
+          [(ngModel)]="healthcheckRevision.eyes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="eyes"
+          [(ngModel)]="healthcheckRevision.eyes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="eyes"
+          [(ngModel)]="healthcheckRevision.eyes"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.eyesNotes }}
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="ears"> Ears </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="ears"
+          [(ngModel)]="healthcheckRevision.ears"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="ears"
+          [(ngModel)]="healthcheckRevision.ears"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="ears"
+          [(ngModel)]="healthcheckRevision.ears"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="ears"
+          [(ngModel)]="healthcheckRevision.ears"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.earsNotes }}
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="cereAndNostrils"> Cere & nostrils </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="cereAndNostrils"
+          [(ngModel)]="healthcheckRevision.cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="cereAndNostrils"
+          [(ngModel)]="healthcheckRevision.cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="cereAndNostrils"
+          [(ngModel)]="healthcheckRevision.cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="cereAndNostrils"
+          [(ngModel)]="healthcheckRevision.cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.cereNotes }}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="bill"> Bill </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="bill"
+          [(ngModel)]="healthcheckRevision.bill"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="bill"
+          [(ngModel)]="healthcheckRevision.bill"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="bill"
+          [(ngModel)]="healthcheckRevision.bill"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="bill"
+          [(ngModel)]="healthcheckRevision.bill"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.billNotes }}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="patagia"> Patagia </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="patagia"
+          [(ngModel)]="healthcheckRevision.patagia"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="patagia"
+          [(ngModel)]="healthcheckRevision.patagia"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="patagia"
+          [(ngModel)]="healthcheckRevision.patagia"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="patagia"
+          [(ngModel)]="healthcheckRevision.patagia"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.patagiaNotes }}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="wings"> Wings </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="wings"
+          [(ngModel)]="healthcheckRevision.wings"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="wings"
+          [(ngModel)]="healthcheckRevision.wings"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="wings"
+          [(ngModel)]="healthcheckRevision.wings"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="wings"
+          [(ngModel)]="healthcheckRevision.wings"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.wingsNotes }}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="back"> Back </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="back"
+          [(ngModel)]="healthcheckRevision.back"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="back"
+          [(ngModel)]="healthcheckRevision.back"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="back"
+          [(ngModel)]="healthcheckRevision.back"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="back"
+          [(ngModel)]="healthcheckRevision.back"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.backNotes }}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="chest"> Chest </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="chest"
+          [(ngModel)]="healthcheckRevision.chest"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="chest"
+          [(ngModel)]="healthcheckRevision.chest"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="chest"
+          [(ngModel)]="healthcheckRevision.chest"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="chest"
+          [(ngModel)]="healthcheckRevision.chest"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.chestNotes }}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="cloaca"> Cloaca </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="cloaca"
+          [(ngModel)]="healthcheckRevision.cloaca"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="cloaca"
+          [(ngModel)]="healthcheckRevision.cloaca"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="cloaca"
+          [(ngModel)]="healthcheckRevision.cloaca"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="cloaca"
+          [(ngModel)]="healthcheckRevision.cloaca"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <div>
+          <ng-container *ngIf="healthcheckRevision.cloacaScore"
+            ><small class="badge badge-primary"
+              ><strong>{{ healthcheckRevision.cloacaScore }}</strong></small
+            >&nbsp;</ng-container
+          >{{ healthcheckRevision.cloacaNotes }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="vent"> Vent </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="vent"
+          [(ngModel)]="healthcheckRevision.vent"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="vent"
+          [(ngModel)]="healthcheckRevision.vent"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="vent"
+          [(ngModel)]="healthcheckRevision.vent"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="vent"
+          [(ngModel)]="healthcheckRevision.vent"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <div>
+          <ng-container *ngIf="healthcheckRevision.ventScore"
+            ><small class="badge badge-primary"
+              ><strong>{{ healthcheckRevision.ventScore }}</strong></small
+            >&nbsp;</ng-container
+          >{{ healthcheckRevision.ventNotes }}
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="legs"> Legs </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="legs"
+          [(ngModel)]="healthcheckRevision.legs"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="legs"
+          [(ngModel)]="healthcheckRevision.legs"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="legs"
+          [(ngModel)]="healthcheckRevision.legs"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="legs"
+          [(ngModel)]="healthcheckRevision.legs"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.legsNotes }}
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="feetAndToes"> Feet & Toes </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="feetAndToes"
+          [(ngModel)]="healthcheckRevision.feetAndToes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="feetAndToes"
+          [(ngModel)]="healthcheckRevision.feetAndToes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="feetAndToes"
+          [(ngModel)]="healthcheckRevision.feetAndToes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="feetAndToes"
+          [(ngModel)]="healthcheckRevision.feetAndToes"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.feetNotes }}
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="plumage"> Plumage </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="plumage"
+          [(ngModel)]="healthcheckRevision.plumage"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="plumage"
+          [(ngModel)]="healthcheckRevision.plumage"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="plumage"
+          [(ngModel)]="healthcheckRevision.plumage"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="plumage"
+          [(ngModel)]="healthcheckRevision.plumage"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.plumageNotes }}
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="transmitter"> Transmitter Fit </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="transmitter"
+          [(ngModel)]="healthcheckRevision.transmitter"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="transmitter"
+          [(ngModel)]="healthcheckRevision.transmitter"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="transmitter"
+          [(ngModel)]="healthcheckRevision.transmitter"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="transmitter"
+          [(ngModel)]="healthcheckRevision.transmitter"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        {{ healthcheckRevision.transmitterNotes }}
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="microchip"> Microchip </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="0"
+          name="microchip"
+          [(ngModel)]="healthcheckRevision.microchip"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="1"
+          name="microchip"
+          [(ngModel)]="healthcheckRevision.microchip"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="2"
+          name="microchip"
+          [(ngModel)]="healthcheckRevision.microchip"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          type="radio"
+          disabled
+          [value]="4"
+          name="microchip"
+          [(ngModel)]="healthcheckRevision.microchip"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <div>
+          <ng-container *ngIf="healthcheckRevision.microchipNumber"
+            ><small class="badge badge-primary"
+              ><strong>{{ healthcheckRevision.microchipNumber }}</strong></small
+            >&nbsp;</ng-container
+          >{{ healthcheckRevision.microchipNotes }}
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="inMoult"> In Moult </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="inMoult"
+          disabled
+          [(ngModel)]="healthcheckRevision.inMoult"
+          type="checkbox"
+        />
+      </div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-5 offset-md-1">&nbsp;</div>
+    </div>
+    <div
+      *ngIf="
+        (birdEntity && birdEntity.sex === 'Female') ||
+        healthcheckRevision.broodPatch
+      "
+      class="row no-gutters"
+    >
+      <div class="col-md-2">
+        <label for="broodPatch"> Brood Patch </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="broodPatch"
+          disabled
+          [(ngModel)]="healthcheckRevision.broodPatch"
+          type="checkbox"
+        />
+      </div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-5 offset-md-1">&nbsp;</div>
+    </div>
+    <div
+      *ngIf="
+        (birdEntity && birdEntity.sex === 'Male') || healthcheckRevision.boomSac
+      "
+      class="row no-gutters"
+    >
+      <div class="col-md-2">
+        <label for="boomSac"> Boom Sac </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="boomSac"
+          disabled
+          [(ngModel)]="healthcheckRevision.boomSac"
+          type="checkbox"
+        />
+      </div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-5 offset-md-1">&nbsp;</div>
+    </div>
+  </app-controlblock>
+</ng-container>

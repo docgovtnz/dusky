@@ -1,0 +1,24 @@
+<ng-container *ngIf="blooddetailRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Type</dt>
+        <dd>
+          {{ blooddetailRevision.type }}
+        </dd>
+        <dt>Volume</dt>
+        <dd>{{ blooddetailRevision.volumeInMl | addUnits: 'ml' }}</dd>
+        <dt>Total Blood Volume</dt>
+        <dd>{{ blooddetailRevision.totalBloodVolumeInMl | addUnits: 'mL' }}</dd>
+        <dt>Vein Site(s)</dt>
+        <dd>
+          <span
+            class="badge badge-secondary mr-2"
+            *ngFor="let site of blooddetailRevision.veinSite"
+            >{{ site }}</span
+          >
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

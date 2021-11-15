@@ -1,0 +1,62 @@
+<section>
+  <app-banner title="NoraNet"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-noranet-edit-form
+          [myFormGroup]="myFormGroup"
+        ></app-noranet-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section class="vertical-spacer" *ngIf="myFormGroup?.get('detectionList')">
+    <h2>Detection</h2>
+    <app-noranet-detection-edit
+      [myFormArray]="myFormGroup?.get('detectionList')"
+    ></app-noranet-detection-edit>
+  </section>
+  <section class="vertical-spacer" *ngIf="myFormGroup?.get('standardList')">
+    <h2>Standard</h2>
+    <app-noranet-standard-edit
+      [myFormArray]="myFormGroup?.get('standardList')"
+    ></app-noranet-standard-edit>
+  </section>
+  <section class="vertical-spacer" *ngIf="myFormGroup?.get('cmLongList')">
+    <h2>Mating Checkmate</h2>
+    <app-noranet-cmlong-edit
+      [myFormArray]="myFormGroup?.get('cmLongList')"
+    ></app-noranet-cmlong-edit>
+  </section>
+  <section class="vertical-spacer" *ngIf="myFormGroup?.get('cmShortList')">
+    <h2>Non-Mating Checkmate</h2>
+    <app-noranet-cmshort-edit
+      [myFormArray]="myFormGroup?.get('cmShortList')"
+    ></app-noranet-cmshort-edit>
+  </section>
+  <section class="vertical-spacer" *ngIf="myFormGroup?.get('eggTimerList')">
+    <h2>Egg Timer</h2>
+    <app-noranet-eggtimer-edit
+      [myFormArray]="myFormGroup?.get('eggTimerList')"
+    ></app-noranet-eggtimer-edit>
+  </section>
+</div>

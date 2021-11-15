@@ -1,0 +1,211 @@
+
+Top Tips
+
+* If you rename a "Rule" class don't forget to rename the Rule's message map in ValidationMessages.xml
+* If you rename a Entity field/property don't forget to check and see if it's used in an Index in CouchbaseStartup
+
+
+---------
+> Task :couch-server:compileJava
+D:\Projects\dusky\couch-server\src\main\java\com\fronde\server\config\CouchbaseInitializer.java:281: error: incompatible types: Charset cannot be converted to String
+            result.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+
+Gradle build fails.
+Make sure you are using Java 10.
+
+
+
+----
+2018-10-05T15:13:08.598+13:00 HTTP:  #236: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:08.598+13:00 HTTP: #236:     --> 401 Login required  (0.0 ms)
+2018-10-05T15:13:09.100+13:00 HTTP:  #237: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:09.100+13:00 HTTP: #237:     --> 401 Login required  (0.0 ms)
+2018-10-05T15:13:09.602+13:00 HTTP:  #238: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:09.602+13:00 HTTP: #238:     --> 401 Login required  (0.0 ms)
+2018-10-05T15:13:10.105+13:00 HTTP:  #239: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:10.105+13:00 HTTP: #239:     --> 401 Login required  (1.0 ms)
+2018-10-05T15:13:10.606+13:00 HTTP:  #240: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:10.606+13:00 HTTP: #240:     --> 401 Login required  (1.0 ms)
+2018-10-05T15:13:11.108+13:00 HTTP:  #241: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:11.108+13:00 HTTP: #241:     --> 401 Login required  (0.0 ms)
+2018-10-05T15:13:11.610+13:00 HTTP:  #242: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:11.610+13:00 HTTP: #242:     --> 401 Login required  (1.0 ms)
+2018-10-05T15:13:12.112+13:00 HTTP:  #243: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:12.112+13:00 HTTP: #243:     --> 401 Login required  (1.0 ms)
+2018-10-05T15:13:12.613+13:00 HTTP:  #244: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:12.613+13:00 HTTP: #244:     --> 401 Login required  (0.0 ms)
+2018-10-05T15:13:13.114+13:00 HTTP:  #245: GET /kbird/_local/fb444f33513d13bb1c0738abc20cbb1b5b676b10 (as GUEST)
+2018-10-05T15:13:13.114+13:00 HTTP: #245:     --> 401 Login required  (0.0 ms)
+2018-10-05T15:13:13.615+13:00 HTTP:  #246: GET /kbird/_local/fb444
+
+
+
+----------------------------
+
+Problem: 400 Bad request JSON parse error: Cannot deserialize instance of `java.util.ArrayList` out of START_OBJECT token
+
+Symptom is a 400 erro attempting to post a object to the server.
+
+{"timestamp":"2018-08-23T07:26:10.582+0000","status":400,"error":"Bad Request","message":"JSON parse error: Cannot deserialize instance of `java.util.ArrayList` out of START_OBJECT token; nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize instance of `java.util.ArrayList` out of START_OBJECT token\n at [Source: (PushbackInputStream); line: 1, column: 1308] (through reference chain: com.fronde.server.domain.BirdEntity[\"birdFeatureList\"])","path":"/api/bird/"}
+
+Analysis: Problem occurs because something has mangled the data structure, the object being sent should have an array
+but something has mangled that into an object. In the JSON below "birdFeatureList" should be an array of objects.
+
+In this particular case it was because the FormService wasn't setting up the nested form properly at all and it
+also wasn't recursively walking the bad structure copying bad data back into the entity.
+
+
+{
+  "id": "710eb571-945b-4f86-9aa4-bdcb69ecf43e",
+  "docType": "Bird",
+  "modifiedTime": "2018-08-23T06:48:06.998Z",
+  "modifiedByPersonId": "Data Migration",
+  "revision": null,
+  "actualFreshWeight": 0,
+  "alive": true,
+  "birdName": "Alice",
+  "clutch": 0,
+  "clutchOrder": 0,
+  "comments": "Cream foot soles 27/6/00. Nuclear sclerosis: age related lens thickening, blue-grey haziness of the lens not usually effecting vision except in very dense cases.",
+  "currentIsland": "Whenua Hou",
+  "dateFirstFound": null,
+  "dateFledged": null,
+  "dateHatched": null,
+  "dateLaid": null,
+  "datesMated": null,
+  "daysOnNest": null,
+  "deadEmbryo": null,
+  "definiteFather": false,
+  "demise": null,
+  "discoveryDate": "1981-04-04T12:00:00.000Z",
+  "estAgeWhen1stFound": null,
+  "father": null,
+  "firstDayAtOrVeryCloseToNest": null,
+  "fledged": true,
+  "houseID": "KS81011",
+  "incubationPeriod": 0,
+  "interClutchLayingInterval": 0,
+  "lastDateMated": null,
+  "lastTxChangeId": "3/07/2018 5:52:25 p.m.",
+  "layIsland": "Stewart",
+  "layYear": 0,
+  "legColour": "Dark grey",
+  "length": 0,
+  "matedWith": null,
+  "matingToLaying": 0,
+  "matingToNestingDays": 0,
+  "mother": null,
+  "nestingToLaying": 0,
+  "nestMother": "85df153b-1c3f-4322-9a5a-2ac9cfd6147b",
+  "oldBirdID": "35706Alice",
+  "plumageColour": "Dark grey",
+  "results": null,
+  "sex": "Female",
+  "shellThickness": 0,
+  "shellWeight": 0,
+  "studbookno": 25,
+  "transmitterGroup": "Summit",
+  "viable": null,
+  "weight": 0,
+  "width": 0,
+  "birdFeatureList": {
+    "bodyPart": null,
+    "description": null
+  },
+  "fwcoEfficientX104": 0
+}
+----------------------------
+
+Problem: Timeout when creating admin user
+
+Analysis: Problem seems to occur frequently on someone's Laptop and suspect this is after hibernation. Restarting couchbase server didn't work but recreating the idx_person index did.
+
+Reproducible in the Couchbase Admin console by setting a queries Scan Consistency to Statement Plus (which is what is used by the underlying Spring Couchbase framework).
+
+Unknown mitigation at this time.
+
+
+----------------------------
+
+Sync Gateway configuration during Startup fails.
+
+...need to run As Administrator
+
+ - Probably only affects Developers since Dusky Service is run using local service admin account.
+
+2018-12-04 13:10:00.253  INFO 11868 --- [      Thread-16] c.f.server.utils.CommandLineExecutor     : Process finished successfully
+2018-12-04 13:10:00.254  INFO 11868 --- [           main] c.f.server.utils.CommandLineExecutor     : Exited with resultCode: 2
+2018-12-04 13:10:00.254 ERROR 11868 --- [           main] com.fronde.server.utils.ServiceManager   : Failed to stop service
+2018-12-04 13:10:00.261 ERROR 11868 --- [           main] c.f.s.c.s.SyncGatewayInitializer         : Could not configure Sync Gateway
+
+com.fronde.server.config.syncgateway.SyncGatewayInitializer$SyncServerInitializerException: Could not stop service
+	at com.fronde.server.config.syncgateway.SyncGatewayInitializer.initialize(SyncGatewayInitializer.java:138) [classes/:na]
+	at com.fronde.server.config.syncgateway.SyncGatewayInitializer.initialize(SyncGatewayInitializer.java:80) [classes/:na]
+	at com.fronde.server.config.ApplicationStartup.onApplicationEvent(ApplicationStartup.java:58) [classes/:na]
+	at com.fronde.server.config.ApplicationStartup.onApplicationEvent(ApplicationStartup.java:21) [classes/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) [spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) [spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) [spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:400) [spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:354) [spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.running(EventPublishingRunListener.java:103) [spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.running(SpringApplicationRunListeners.java:78) [spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:346) [spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258) [spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246) [spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at com.fronde.server.CouchServerApplication.main(CouchServerApplication.java:112) [classes/:na]
+
+2018-12-04 13:10:00.261 ERROR 11868 --- [           main] c.f.s.c.s.SyncGatewayInitializer         : Continuing with Dusky startup anyway
+2018-12-04 13:10:00.383  WARN 11868 --- [           main] c.f.server.config.ApplicationStartup     : Admin user already exists so skipping creation.
+
+
+--------------------------
+
+Data replication fails with TLS Bad Certificate error
+
+...even though the error message use "remote" check that the local SG TLS is setup correctly. Check the doc "Dusky TLS Design.docx" for details
+
+
+2018-12-04 10:35:36.421177 I | http: TLS handshake error from [fe80::302d:32e4:7fe1:39f5%Ethernet]:62038: remote error: tls: bad certificate
+2018-12-04 10:35:36.528650 I | http: TLS handshake error from [fe80::302d:32e4:7fe1:39f5%Ethernet]:62039: remote error: tls: bad certificate
+2018-12-04 10:35:36.936980 I | http: TLS handshake error from [fe80::302d:32e4:7fe1:39f5%Ethernet]:62044: remote error: tls: bad certificate
+2018-12-04 10:35:37.222304 I | http: TLS handshake error from [fe80::302d:32e4:7fe1:39f5%Ethernet]:62046: remote error: tls: bad certificate
+
+
+
+---------------------------
+
+Trying to run CouchServerApplication as a main class and get the following error
+
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'couchbase.admin.password' in value "${couchbase.admin.password}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:172) ~[spring-core-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:124) ~[spring-core-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:237)
+
+The problem is that there's a special Spring property initializer that relies on the "META-INF\spring.factories" file being on the classpath in the right places.
+You seem able to lose this in IDEA when you do a clean and don't do a proper "build" of the IDEA project. Just running the CouchServerApplication main method
+doesn't seem to build the project (copy the resources).
+
+
+
+---------------------------
+
+Sync Gateway fails to start
+
+Log file contains....
+
+panic: assignment to entry in nil map
+
+A problem during development of the Health Samples data migration created revision documents that were null and empty
+
+This forum post suggested it was a bug, but could also be fixed by deleting the null and empty documents.
+
+https://forums.couchbase.com/t/q-sync-gateway-crash/19192
+
+SELECT meta().id from `kakapo-bird` WHERE `kakapo-bird` IS NULL;
+
+I've deleted the null documents and got a script to recreate the Revisions. Should be ok now.
+
+----------------------------
+
+

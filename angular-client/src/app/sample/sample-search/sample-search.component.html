@@ -1,0 +1,344 @@
+<section>
+  <app-banner title="Samples"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="sampleCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Bird" class="col-md-3">
+            <div class="form-group">
+              <label for="birdIDs"> Bird </label>
+              <app-bird-id-select-multi
+                id="birdIDs"
+                [(selectedBirds)]="sampleCriteria.birdIDs"
+                [autofocus]="true"
+                (selectedBirdsChange)="onBirdSelectionChanged()"
+              ></app-bird-id-select-multi>
+            </div>
+            <div class="form-group">
+              <label for="ageClass"> Age Class </label>
+              <select
+                class="custom-select"
+                id="ageClass"
+                [(ngModel)]="sampleCriteria.ageClass"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('AgeClasses') | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sex"> Sex </label>
+              <select
+                class="custom-select"
+                id="sex"
+                [(ngModel)]="sampleCriteria.sex"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('SexOptions') | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Sample Location" class="col-md-3">
+            <div class="form-group">
+              <label for="collectionIsland"> Collection Island </label>
+              <app-type-ahead
+                id="collectionIsland"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="sampleCriteria.collectionIsland"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="collectionLocationID"> Location </label>
+              <app-location-name-id-select
+                id="collectionLocationID"
+                [(locationID)]="sampleCriteria.collectionLocationID"
+                (locationIDChange)="doSearch()"
+                (keyup.enter)="prevent($event)"
+              ></app-location-name-id-select>
+            </div>
+            <div class="form-group">
+              <label for="sampleTakenBy"> Sample Taken By </label>
+              <app-person-id-select
+                id="sampleTakenBy"
+                [(personID)]="sampleCriteria.sampleTakenBy"
+                (personIDChange)="doSearch()"
+                (keyup.enter)="prevent($event)"
+              ></app-person-id-select>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showArchived"
+                  [(ngModel)]="sampleCriteria.showArchived"
+                />
+                <label class="form-check-label" for="showArchived">
+                  Archived
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showNotArchived"
+                  [(ngModel)]="sampleCriteria.showNotArchived"
+                />
+                <label class="form-check-label" for="showNotArchived">
+                  Not Archived
+                </label>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Sample" class="col-md-3">
+            <div class="form-group">
+              <label for="sampleName"> Sample ID </label>
+              <input
+                class="form-control"
+                id="sampleName"
+                [(ngModel)]="sampleCriteria.sampleName"
+              />
+            </div>
+            <div class="form-group">
+              <label for="sampleCategory"> Sample Category </label>
+              <select
+                class="custom-select"
+                id="sampleCategory"
+                [(ngModel)]="sampleCriteria.sampleCategory"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('SampleCategories')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="container"> Container </label>
+              <select
+                class="custom-select"
+                id="container"
+                [(ngModel)]="sampleCriteria.container"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('ContainerOptions')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sampleType"> Sample Type </label>
+              <app-type-ahead
+                id="sampleType"
+                [optionType]="'SampleTypes'"
+                [(selectedOption)]="sampleCriteria.sampleType"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showResultsEntered"
+                  [(ngModel)]="sampleCriteria.showResultsEntered"
+                />
+                <label class="form-check-label" for="showResultsEntered">
+                  Results Entered
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showResultsNotEntered"
+                  [(ngModel)]="sampleCriteria.showResultsNotEntered"
+                />
+                <label class="form-check-label" for="showResultsNotEntered">
+                  Results Not Entered
+                </label>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Collection Date" class="col-md-3">
+            <div class="form-group">
+              <label for="fromDate"> From Date </label>
+              <app-date-editor
+                id="fromDate"
+                [editorCfg]="'none'"
+                [(dateValue)]="sampleCriteria.fromDate"
+              ></app-date-editor>
+            </div>
+            <div class="form-group">
+              <label for="toDate"> To Date </label>
+              <app-date-editor
+                id="toDate"
+                [editorCfg]="'none'"
+                [(dateValue)]="sampleCriteria.toDate"
+              ></app-date-editor>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Sample ID</th>
+            <th scope="col">Bird</th>
+            <th scope="col">Sample Category</th>
+            <th scope="col">Sample Type</th>
+            <th scope="col">Container</th>
+            <th scope="col">Taken By</th>
+            <th scope="col">Collection Date</th>
+            <th scope="col">Island</th>
+            <th scope="col">Location</th>
+            <th scope="col">Haem</th>
+            <th scope="col">Chem</th>
+            <th scope="col">M&P</th>
+            <th scope="col">Sperm</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="13">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="13">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.sampleName }}</td>
+            <td>
+              <app-link-view
+                [linkUrl]="'/bird/' + item.birdID"
+                [label]="item.birdName"
+              ></app-link-view>
+            </td>
+            <td>{{ item.sampleCategory }}</td>
+            <td>{{ item.sampleType }}</td>
+            <td>{{ item.container }}</td>
+            <td>
+              <app-link-view
+                [linkUrl]="'/person/' + item.sampleTakenByID"
+                [label]="item.sampleTakenByName"
+              ></app-link-view>
+            </td>
+            <td>{{ item.collectionDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ item.collectionIsland }}</td>
+            <td>
+              <app-link-view
+                [linkUrl]="'/location/' + item.collectionLocationID"
+                [label]="item.collectionLocationName"
+              ></app-link-view>
+            </td>
+            <td>
+              <ng-container *ngIf="item.hasHaematologyTests"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Has tests</span></ng-container
+              >
+            </td>
+            <td>
+              <ng-container *ngIf="item.hasChemistryAssays"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Has assays</span></ng-container
+              >
+            </td>
+            <td>
+              <ng-container *ngIf="item.hasMicrobiologyAndParasitologyTests"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Has tests</span></ng-container
+              >
+            </td>
+            <td>
+              <ng-container *ngIf="item.hasSpermMeasures"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Has measures</span></ng-container
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="sampleCriteria.pageSize"
+          [(ngModel)]="sampleCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+<ng-container *ngIf="eggmeasurementsRevision">
+  <div class="row">
+    <app-controlblock title="Egg" class="col-md-6" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Egg Length</dt>
+        <dd>{{ eggmeasurementsRevision.eggLength | addUnits: 'mm' }}</dd>
+        <dt>Egg Width</dt>
+        <dd>{{ eggmeasurementsRevision.eggWidth | addUnits: 'mm' }}</dd>
+        <dt>Fresh Weight Coefficient (x10<sup>4</sup>)</dt>
+        <dd>{{ eggmeasurementsRevision.fwCoefficientX104 }}</dd>
+        <dt>Calculated Fresh Weight</dt>
+        <dd>
+          <ng-template [ngIf]="calculatedWeight !== -1">
+            {{ calculatedWeight | number: '0.0-4' | addUnits: 'g' }}
+          </ng-template>
+        </dd>
+        <dt>Weight Before Filling with Water</dt>
+        <dd>
+          {{
+            eggmeasurementsRevision.eggWeightBeforeFillingWithWater
+              | addUnits: 'g'
+          }}
+        </dd>
+        <dt>Shell Thickness</dt>
+        <dd>
+          {{ eggmeasurementsRevision.shellThicknessInMms | addUnits: 'mm' }}
+        </dd>
+        <dt>Germinal Disc Diameter</dt>
+        <dd>
+          {{
+            eggmeasurementsRevision.germinalDiscDiameterInMms | addUnits: 'mm'
+          }}
+        </dd>
+
+        <dt>Weight With Water Filled Aircell</dt>
+        <dd>
+          {{ eggmeasurementsRevision.weightWithWaterInGrams | addUnits: 'g' }}
+        </dd>
+        <dt>Yolk Weight</dt>
+        <dd>
+          {{ eggmeasurementsRevision.yolkWeightInGrams | addUnits: 'g' }}
+        </dd>
+        <dt>Albumen Weight</dt>
+        <dd>
+          {{ eggmeasurementsRevision.albumenWeightInGrams | addUnits: 'g' }}
+        </dd>
+        <dt>Shell & Waste Weight (Hatched)</dt>
+        <dd>
+          {{ eggmeasurementsRevision.shellWasteWeightHatched | addUnits: 'g' }}
+        </dd>
+        <dt>Dry Shell Weight (Hatched)</dt>
+        <dd>
+          {{ eggmeasurementsRevision.dryShellWeightHatched | addUnits: 'g' }}
+        </dd>
+        <dt>Dry Shell Weight (Unhatched)</dt>
+        <dd>
+          {{ eggmeasurementsRevision.dryShellWeightUnhatched | addUnits: 'g' }}
+        </dd>
+
+        <dt>Addled</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="addled"
+            [(ngModel)]="eggmeasurementsRevision.addled"
+          />
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

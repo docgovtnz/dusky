@@ -1,0 +1,22 @@
+/**
+  Experiments for Data validation
+*/
+.VALID {
+  border-left: 5px solid #42a948; /* green */
+}
+
+.INVALID {
+  border-left: 5px solid #a94442; /* red */
+}
+
+/* Suppress the spinner buttons for number inputs for Chrome */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Suppress the spinner buttons for number inputs for Firefox*/
+input[type='number'] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,43 @@
+<ng-container *ngIf="transmitterRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4">
+      <dl class="data-group">
+        <dt>Tx Id</dt>
+        <dd>{{ transmitterRevision.txId }}</dd>
+        <dt>Channel</dt>
+        <dd>{{ transmitterRevision.channel }}</dd>
+        <dt>Frequency</dt>
+        <dd>{{ transmitterRevision.frequency }}</dd>
+        <dt>Tx Fine Tune</dt>
+        <dd>{{ transmitterRevision.txFineTune }}</dd>
+        <dt>UHF ID</dt>
+        <dd>{{ transmitterRevision.uhfId | number: '3.0-0' }}</dd>
+        <dt>Rigging</dt>
+        <dd>
+          <span class="data-tag">{{ transmitterRevision.rigging }}</span>
+        </dd>
+        <dt>Software</dt>
+        <dd>
+          <span class="data-tag">{{ transmitterRevision.software }}</span>
+        </dd>
+        <dt>Status</dt>
+        <dd>
+          <span class="data-tag">{{ transmitterRevision.status }}</span>
+        </dd>
+        <dt>Island</dt>
+        <dd>{{ transmitterRevision.island }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Mortality" class="col-md-4">
+      <app-tx-mortality
+        [txMort]="transmitterRevision.txMortalityId"
+      ></app-tx-mortality>
+      <dl class="data-group">
+        <dt>Life Expectancy</dt>
+        <dd>
+          {{ transmitterRevision.lifeExpectancy | addUnits: 'weeks' }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

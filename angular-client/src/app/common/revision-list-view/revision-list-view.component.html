@@ -1,0 +1,68 @@
+<div
+  class="btn-group"
+  dropdown
+  (onShown)="onShown()"
+  (onHidden)="onHidden()"
+  [autoClose]="false"
+>
+  <button
+    dropdownToggle
+    class="btn btn-action dropdown-toggle"
+    type="button"
+    id="revisionHistoryButton"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <fa-icon icon="history" aria-hidden="true"></fa-icon>Revision History
+  </button>
+  <div
+    class="dropdown-menu dropdown-menu-right p-2"
+    aria-labelledby="revisionHistoryButton"
+    *dropdownMenu
+  >
+    <div class="form-row align-items-center">
+      <div class="col-6">
+        <div class="btn-group" role="group">
+          <button
+            class="btn btn-secondary btn-sm"
+            [disabled]="isPreviousBtnDisabled()"
+            (click)="onNextRevision(-1)"
+          >
+            <fa-icon icon="chevron-left" aria-hidden="true"></fa-icon>
+            <span class="sr-only">Previous</span>
+          </button>
+          <button
+            class="btn btn-secondary btn-sm"
+            [disabled]="isNextBtnDisabled()"
+            (click)="onNextRevision(+1)"
+          >
+            <fa-icon icon="chevron-right" aria-hidden="true"></fa-icon>
+            <span class="sr-only">Next</span>
+          </button>
+        </div>
+      </div>
+      <ng-container
+        *ngIf="
+          revisionList &&
+          revisionList?.revisions &&
+          revision &&
+          revisionList?.revisions?.length !== 0
+        "
+      >
+        <div class="col-6">
+          <span class="text-nowrap">
+            ({{ revisionIdx + 1 }} / {{ revisionList.revisions.length }})
+          </span>
+        </div>
+        <div class="col-12 mt-2">
+          <div>
+            <p class="m-0">
+              {{ revision.modifiedTime | date: 'dd/MM/yyyy HH:mm' }}
+            </p>
+            <p class="m-0">{{ modifiedByPersonLabel }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

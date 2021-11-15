@@ -1,0 +1,173 @@
+
+Couchbase V6 Upgrade Instructions
+---------------------------------
+
+
+The following instructions apply to all of the different kinds of environments; Developers, AWS and Laptops.
+
+
+1. Ensure that the environment being upgraded has completed Data Replication and is up to date with whatever other nodes
+it is replicating with.
+
+ - For Laptops this means the Laptop should be replicating ok with AWS, you could do a quick replication test and as long
+as updates from the Laptop are currently arriving on AWS everything else from the Laptop should be in-sync.
+
+ - For AWS this should be fine either way.
+
+ - For Developer environments, you probably don't care about the data locally, just get the fresh data from the AWS environment.
+
+2. To check the Document count of the environment being upgraded at the end of this process log into the Couchbase admin
+console and execute the following query. It will produce the total number of documents by docType and will ignore the
+internal documents managed by Couchbase.
+
+Select docType, count(*) from `kakapo-bird` group by docType order by docType
+
+Copy the table of results using the "copy" icon button from the query view
+
+$1	docType
+1173
+663	"Bird"
+67	"Credential"
+49135	"FeedOut"
+24	"Island"
+901	"LifeStage"
+3972	"Location"
+427	"NestObservation"
+451	"Person"
+155630	"Record"
+1	"Replication"
+1420	"RevisionBird"
+49528	"RevisionFeedOut"
+25	"RevisionIsland"
+901	"RevisionLifeStage"
+4261	"RevisionLocation"
+723	"RevisionNestObservation"
+625	"RevisionPerson"
+160631	"RevisionRecord"
+2635	"RevisionSample"
+124	"RevisionSetting"
+46719	"RevisionSnarkActivity"
+1364	"RevisionSnarkImport"
+2515	"RevisionTransmitter"
+17	"RevisionTxMortality"
+2612	"Sample"
+8	"Setting"
+43056	"SnarkActivity"
+1364	"SnarkImport"
+2413	"Transmitter"
+17	"TxMortality"
+
+
+
+
+3. From Windows control panel perform the following. The order of this may be important and this is probably the safest
+way to do things.
+
+ - Shutdown the Dusky Service    <<<==== Don't forget this one ====<<<
+ - Shutdown Couchbase Sync Gateway
+ - Shutdown Couchbase Server
+
+ - Uninstall Couchbase Sync Gateway
+ - Uninstall Couchbase Server
+
+
+4. Delete everything under the Couchbase folder. We don't need any of the backups or other stuff to carry over, so this
+folder can be cleaned out.
+
+(Depending on Laptop/AWS environment....)
+C:\Program Files\Couchbase
+D:\Program Files\Couchbase
+
+
+5. Install Couchbase V6. These installers are available on the FTP server in; "/NatOffice/Fronde/Project Dusky/CouchbaseUpgradeV6/"
+
+couchbase-server-community_6.0.0-windows_amd64.msi   (~14.6 MB)
+couchbase-sync-gateway-community_2.1.3_x86_64.msi    (~200.7 MB)
+
+
+6. Delete the "sync-gateway-init.lock" file in the Dusky folder (so that Sync Gateway Initialisation will be performed
+on Dusky server startup)
+
+
+7. Start the Dusky Service. For developers you need to run Intellij as Administrator for a bit so that SG Window service
+can be configured.
+
+If you watch the Dusky log at this point you should see things like...
+
+2019-04-10 10:18:58.604  INFO 8796 --- [ost-startStop-1] c.f.server.config.CouchbaseInitializer   : Creating cluster
+2019-04-10 10:18:58.757  INFO 8796 --- [ost-startStop-1] c.f.server.config.CouchbaseInitializer   : Creating user
+2019-04-10 10:18:58.841  INFO 8796 --- [ost-startStop-1] c.f.server.config.CouchbaseInitializer   : Creating bucket
+2019-04-10 10:18:59.117  INFO 8796 --- [ost-startStop-1] com.couchbase.client.core.CouchbaseCore  : CouchbaseEnvironment: {sslEnabled=false, sslKeystoreFile='null', sslTruststoreFile='null', sslKeystorePassword=false, sslTruststorePassword=false, sslKeystore=null, sslTruststore=null, bootstrapHttpEnabled=true, bootstrapCarrierEnabled=true, bootstrapHttpDirectPort=8091, bootstrapHttpSslPort=18091, bootstrapCarrierDirectPort=11210, bootstrapCarrierSslPort=11207, ioPoolSize=4, computationPoolSize=4, responseBufferSize=16384, requestBufferSize=16384, kvServiceEndpoints=1, viewServiceEndpoints=12, queryServiceEndpoints=12, searchServiceEndpoints=12, configPollInterval=2500, configPollFloorInterval=50, ioPool=NioEventLoopGroup, kvIoPool=null, viewIoPool=null, searchIoPool=null, queryIoPool=null, coreScheduler=CoreScheduler, memcachedHashingStrategy=DefaultMemcachedHashingStrategy, eventBus=DefaultEventBus, packageNameAndVersion=couchbase-java-client/2.5.9 (git: 2.5.9, core: 1.5.9), retryStrategy=BestEffort, maxRequestLifetime=75000, retryDelay=ExponentialDelay{growBy 1.0 MICROSECONDS, powers of 2; lower=100, upper=100000}, reconnectDelay=ExponentialDelay{growBy 1.0 MILLISECONDS, powers of 2; lower=32, upper=4096}, observeIntervalDelay=ExponentialDelay{growBy 1.0 MICROSECONDS, powers of 2; lower=10, upper=100000}, keepAliveInterval=30000, continuousKeepAliveEnabled=true, keepAliveErrorThreshold=4, keepAliveTimeout=2500, autoreleaseAfter=2000, bufferPoolingEnabled=true, tcpNodelayEnabled=true, mutationTokensEnabled=false, socketConnectTimeout=1000, callbacksOnIoPool=false, disconnectTimeout=25000, requestBufferWaitStrategy=com.couchbase.client.core.env.DefaultCoreEnvironment$2@62c8e45b, certAuthEnabled=false, coreSendHook=null, forceSaslPlain=false, queryTimeout=75000, viewTimeout=75000, searchTimeout=75000, analyticsTimeout=75000, kvTimeout=2500, connectTimeout=5000, dnsSrvEnabled=false}
+2019-04-10 10:19:00.263  INFO 8796 --- [      cb-io-1-1] com.couchbase.client.core.node.Node      : Connected to Node 127.0.0.1/127.0.0.1
+2019-04-10 10:19:00.364  INFO 8796 --- [-computations-1] c.c.c.core.config.ConfigurationProvider  : Opened bucket kakapo-bird
+2019-04-10 10:19:01.425  WARN 8796 --- [ost-startStop-1] c.f.server.config.CouchbaseInitializer   : Bucket not yet ready
+2019-04-10 10:19:02.428  WARN 8796 --- [ost-startStop-1] c.f.server.config.CouchbaseInitializer   : Bucket not yet ready
+2019-04-10 10:19:03.431  WARN 8796 --- [ost-startStop-1] c.f.server.config.CouchbaseInitializer   : Bucket not yet ready
+2019-04-10 10:19:04.573  INFO 8796 --- [ost-startStop-1] c.f.server.config.CouchbaseInitializer   : Bucket is now ready
+2019-04-10 10:19:04.583  INFO 8796 --- [      cb-io-1-1] com.couchbase.client.core.node.Node      : Disconnected from Node 127.0.0.1/127.0.0.1
+2019-04-10 10:19:04.583  INFO 8796 --- [ost-startStop-1] c.c.c.core.config.ConfigurationProvider  : Closed bucket kakapo-bird
+2019-04-10 10:19:04.602  INFO 8796 --- [entExecutor-2-2] c.c.client.core.env.CoreEnvironment      : Shutdown IoPool: success 
+2019-04-10 10:19:04.602  INFO 8796 --- [-computations-1] c.c.client.core.env.CoreEnvironment      : Shutdown kvIoPool: success 
+2019-04-10 10:19:04.602  INFO 8796 --- [-computations-1] c.c.client.core.env.CoreEnvironment      : Shutdown viewIoPool: success 
+2019-04-10 10:19:04.603  INFO 8796 --- [-computations-1] c.c.client.core.env.CoreEnvironment      : Shutdown queryIoPool: success 
+2019-04-10 10:19:04.603  INFO 8796 --- [-computations-1] c.c.client.core.env.CoreEnvironment      : Shutdown searchIoPool: success 
+2019-04-10 10:19:04.603  INFO 8796 --- [-computations-1] c.c.client.core.env.CoreEnvironment      : Shutdown Core Scheduler: success 
+2019-04-10 10:19:04.603  INFO 8796 --- [-computations-1] c.c.client.core.env.CoreEnvironment      : Shutdown Runtime Metrics Collector: success 
+2019-04-10 10:19:04.603  INFO 8796 --- [-computations-1] c.c.client.core.env.CoreEnvironment      : Shutdown Latency Metrics Collector: success 
+2019-04-10 10:19:04.604  INFO 8796 --- [       Thread-8] c.c.client.core.env.CoreEnvironment      : Shutdown Netty: success 
+2019-04-10 10:19:04.646  INFO 8796 --- [ost-startStop-1] com.couchbase.client.core.CouchbaseCore  : CouchbaseEnvironment: {sslEnabled=false, sslKeystoreFile='null', sslTruststoreFile='null', sslKeystorePassword=false, sslTruststorePassword=false, sslKeystore=null, sslTruststore=null, bootstrapHttpEnabled=true, bootstrapCarrierEnabled=true, bootstrapHttpDirectPort=8091, bootstrapHttpSslPort=18091, bootstrapCarrierDirectPort=11210, bootstrapCarrierSslPort=11207, ioPoolSize=4, computationPoolSize=4, responseBufferSize=16384, requestBufferSize=16384, kvServiceEndpoints=1, viewServiceEndpoints=12, queryServiceEndpoints=12, searchServiceEndpoints=12, configPollInterval=2500, configPollFloorInterval=50, ioPool=NioEventLoopGroup, kvIoPool=null, viewIoPool=null, searchIoPool=null, queryIoPool=null, coreScheduler=CoreScheduler, memcachedHashingStrategy=DefaultMemcachedHashingStrategy, eventBus=DefaultEventBus, packageNameAndVersion=couchbase-java-client/2.5.9 (git: 2.5.9, core: 1.5.9), retryStrategy=BestEffort, maxRequestLifetime=75000, retryDelay=ExponentialDelay{growBy 1.0 MICROSECONDS, powers of 2; lower=100, upper=100000}, reconnectDelay=ExponentialDelay{growBy 1.0 MILLISECONDS, powers of 2; lower=32, upper=4096}, observeIntervalDelay=ExponentialDelay{growBy 1.0 MICROSECONDS, powers of 2; lower=10, upper=100000}, keepAliveInterval=30000, continuousKeepAliveEnabled=true, keepAliveErrorThreshold=4, keepAliveTimeout=2500, autoreleaseAfter=2000, bufferPoolingEnabled=true, tcpNodelayEnabled=true, mutationTokensEnabled=false, socketConnectTimeout=1000, callbacksOnIoPool=false, disconnectTimeout=25000, requestBufferWaitStrategy=com.couchbase.client.core.env.DefaultCoreEnvironment$2@754ce7d3, certAuthEnabled=false, coreSendHook=null, forceSaslPlain=false, queryTimeout=75000, viewTimeout=75000, searchTimeout=75000, analyticsTimeout=75000, kvTimeout=2500, connectTimeout=5000, dnsSrvEnabled=false}
+2019-04-10 10:19:04.711  INFO 8796 --- [      cb-io-5-1] com.couchbase.client.core.node.Node      : Connected to Node 127.0.0.1/127.0.0.1
+2019-04-10 10:19:04.721  INFO 8796 --- [      cb-io-5-1] com.couchbase.client.core.node.Node      : Disconnected from Node 127.0.0.1/127.0.0.1
+2019-04-10 10:19:04.807  INFO 8796 --- [      cb-io-5-2] com.couchbase.client.core.node.Node      : Connected to Node 127.0.0.1/127.0.0.1
+2019-04-10 10:19:04.818  INFO 8796 --- [-computations-8] c.c.c.core.config.ConfigurationProvider  : Opened bucket kakapo-bird
+
+...Then the Sync Gateway being intialized...
+
+2019-04-10 10:25:22.024  INFO 5940 --- [           main] c.f.s.c.s.SyncGatewayInitializer         : Sync Gateway Initialization using working directory: C:\dusky
+2019-04-10 10:25:22.034  INFO 5940 --- [           main] c.f.s.c.s.SyncGatewayInitializer         : Couchbase Sync Gateway has not been configured; configuring it now
+2019-04-10 10:25:22.035  INFO 5940 --- [           main] c.f.s.c.s.SyncGatewayInitializer         : Couchbase Sync Server is missing certifcate and/or private key. Initializing...
+
+
+And then a bit later all of the indexes being created....
+
+2019-04-10 10:19:20.163  INFO 8796 --- [           main] c.fronde.server.config.CouchbaseStartup  : createIndex: CREATE INDEX `idx_docType` ON `kakapo-bird`(`docType`)
+2019-04-10 10:19:22.972  INFO 8796 --- [           main] c.fronde.server.config.CouchbaseStartup  : createIndex: N1qlQueryResult{status='success', finalSuccess=true, parseSuccess=true, allRows=[], signature=null, info=N1qlMetrics{resultCount=0, errorCount=0, warningCount=0, mutationCount=0, sortCount=0, resultSize=0, elapsedTime='2.8022027s', executionTime='2.8022027s'}, profileInfo={}, errors=[], requestId='c3ff026e-9af5-4051-8226-25c21958c66f', clientContextId=''}
+2019-04-10 10:19:22.986  INFO 8796 --- [           main] c.fronde.server.config.CouchbaseStartup  : createIndex: CREATE INDEX `idx_record_date` ON `kakapo-bird`(`docType`, `dateTime`) WHERE (`docType` = 'Record')
+2019-04-10 10:19:25.744  INFO 8796 --- [           main] c.fronde.server.config.CouchbaseStartup  : createIndex: N1qlQueryResult{status='success', finalSuccess=true, parseSuccess=true, allRows=[], signature=null, info=N1qlMetrics{resultCount=0, errorCount=0, warningCount=0, mutationCount=0, sortCount=0, resultSize=0, elapsedTime='2.7552322s', executionTime='2.7552322s'}, profileInfo={}, errors=[], requestId='27d68792-8e35-45d2-8510-3ede9e37083b', clientContextId=''}
+2019-04-10 10:19:25.758  INFO 8796 --- [           main] c.fronde.server.config.CouchbaseStartup  : createIndex: CREATE INDEX `idx_record_recordType` ON `kakapo-bird`(`docType`, `recordType`) WHERE (`docType` = 'Record')
+2019-04-10 10:19:28.454  INFO 8796 --- [           main] c.fronde.server.config.CouchbaseStartup  : createIndex: N1qlQueryResult{status='success', finalSuccess=true, parseSuccess=true, allRows=[], signature=null, info=N1qlMetrics{resultCount=0, errorCount=0, warningCount=0, mutationCount=0, sortCount=0, resultSize=0, elapsedTime='2.6924906s', executionTime='2.6924906s'}, profileInfo={}, errors=[], requestId='d5dfc499-410a-45c9-94db-473e820ae9c1', clientContextId=''}
+2019-04-10 10:19:28.480  INFO 8796 --- [           main] c.fronde.server.config.CouchbaseStartup  : createIndex: CREATE INDEX `idx_record_activity` ON `kakapo-bird`(`docType`, `activity`) WHERE (`docType` = 'Record')
+
+
+Wait for all of the indexes to be created (~5-10mins)
+
+
+8. Check the serviceconfig.json file. It needs to contain the line;
+
+"num_index_replicas": 0,
+
+
+9. At this point the environment should go to go. Depending on what kind of server it is and other factors data replication
+may be started automatically or might need someone to give things a bit of a nudge by logging in. The database will
+start off empty but as soon as data replication is started it will start filling up with data. You can check on this by;
+ - Monitoring CPU
+ - Monitoring the Disk size of the Couchbase folder
+ - Logging into the Couchbase console and watching the Document count of
+ - Logging into the application and monitoring the
+ - Tailing the C:\Program Files\Couchbase\Sync Gateway\var\lib\couchbase\logs\sync_gateway_error.log
+
+
+Once data replication is done the only other confirmation test would be that the Document count should be roughly the same
+as the number recorded back in step 2 above. It doesn't need to be exactly the same, the database stores additional
+documents for it's own purpose.
+
+
+Backout Procedure
+
+Should it be determined that this process has failed then the Backout procedure will be to restore the Version 5
+Couchbase environment by restoring the Image based backups. This could mean a small amount of data-loss and may need to
+be coordinated with the business. Perhaps they stop data entry between the time of the backup and the time that the
+upgrade on AWS is done (read-only would be fine).
+
+
+

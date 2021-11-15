@@ -1,0 +1,223 @@
+<section>
+  <app-server-message-display
+    [validationMessages]="messages"
+  ></app-server-message-display>
+</section>
+
+<section>
+  <div class="container">
+    <app-controlblock title="Details" [noOffset]="true" [withSpacer]="true">
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="island">
+            Method <span class="text-danger"> * </span></label
+          >
+          <select
+            class="custom-select"
+            id="method"
+            [(ngModel)]="method"
+            appAutofocus
+          >
+            <option *ngFor="let m of methods" [ngValue]="m">{{ m }}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="island">
+            Island <span class="text-danger"> * </span></label
+          >
+          <app-type-ahead
+            id="island"
+            [optionType]="'IslandName'"
+            [(selectedOption)]="island"
+          ></app-type-ahead>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="personID">
+            Observer <span class="text-danger"> * </span></label
+          >
+          <app-person-id-select
+            id="personID"
+            [(personID)]="personID"
+          ></app-person-id-select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="dateTime">
+            Date <span class="text-danger"> * </span></label
+          >
+          <app-date-time-editor
+            id="dateTime"
+            [(dateTimeValue)]="dateTime"
+          ></app-date-time-editor>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="locationName">Signal Received From Location</label>
+          <app-type-ahead
+            id="locationName"
+            [optionType]="'LocationName'"
+            [(selectedOption)]="locationName"
+          ></app-type-ahead>
+        </div>
+      </div>
+      <div class="text-right">
+        <button
+          class="btn btn-primary"
+          [disabled]="!island"
+          (click)="onShowBirds()"
+        >
+          Show Birds
+        </button>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Birds list" [noOffset]="true" [withSpacer]="true">
+      <div class="text-right">
+        <button
+          class="btn btn-primary"
+          [disabled]="
+            !(entries && entries.length > 0) ||
+            !method ||
+            !island ||
+            !personID ||
+            !dateTime
+          "
+          (click)="onCreateRecords()"
+        >
+          Create Records
+        </button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" [style.width.%]="10">Bird</th>
+              <th scope="col" [style.width.%]="5">Signal</th>
+              <th scope="col" [style.width.%]="5">Battery 1</th>
+              <th scope="col" [style.width.%]="5">Battery 2</th>
+              <th scope="col" [style.width.%]="70">Notes</th>
+              <th scope="col" [style.width.%]="5"></th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="!entries">
+            <tr>
+              <td colspan="12">Search not yet executed.</td>
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="entries && entries.length === 0">
+            <tr>
+              <td colspan="12">No search results found.</td>
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="entries && entries.length > 0">
+            <tr *ngFor="let item of entries" class="search-result-item">
+              <td [style.width.%]="10">
+                <app-bird-name-label
+                  [birdID]="item['birdID']"
+                ></app-bird-name-label>
+              </td>
+              <td [style.width.%]="5">
+                <input
+                  class="form-check"
+                  type="checkbox"
+                  id="signal"
+                  [(ngModel)]="item['signal']"
+                  (ngModelChange)="onSignalChange(item)"
+                />
+              </td>
+              <td [style.width.%]="5">
+                <input
+                  class="form-control"
+                  type="number"
+                  id="batteryLife1"
+                  [(ngModel)]="item['batteryLife1']"
+                />
+              </td>
+              <td [style.width.%]="5">
+                <input
+                  class="form-control"
+                  type="number"
+                  id="batteryLife2"
+                  [(ngModel)]="item['batteryLife2']"
+                />
+              </td>
+              <td [style.width.%]="70">
+                <textarea
+                  class="form-control"
+                  rows="1"
+                  id="notes"
+                  [(ngModel)]="item['notes']"
+                ></textarea>
+              </td>
+              <td [style.width.%]="5">
+                <img
+                  *ngIf="item['loading']"
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                />
+                <small *ngIf="item['created']" class="badge badge-success"
+                  >Record Created</small
+                >
+                <ng-container *ngIf="item['failed']">
+                  <small class="badge badge-danger">Record Create Failed</small
+                  ><br />
+                  (click Create Records to try again)<br />
+                  <ul *ngIf="item['messages']">
+                    <li *ngFor="let msg of item['messages']">
+                      {{ msg.messageText }}
+                    </li>
+                  </ul>
+                </ng-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-controlblock>
+  </div>
+</section>
+
+<div
+  bsModal
+  #createRecordsModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Create Records</h4>
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="onCancelCreateRecords()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want create records from the selected signals?
+        <hr />
+        <button
+          id="confirmCreateRecordsBtn"
+          type="button"
+          (click)="onConfirmCreateRecords()"
+          class="btn btn-primary"
+        >
+          Save
+        </button>
+        <button
+          id="cancelCreateRecordsBtn"
+          type="button"
+          (click)="onCancelCreateRecords()"
+          class="btn btn-default"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

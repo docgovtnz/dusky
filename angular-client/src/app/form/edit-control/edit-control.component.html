@@ -1,0 +1,22 @@
+<!-- [TODO] NB: The style revisions have not been tested as this component doesn't appear to be used -->
+<label id="{{ propertyName + 'Label' }}" class="pr-2"
+  >{{ label
+  }}<span class="text-danger" *ngIf="isRequired"
+    ><strong>&nbsp;*</strong></span
+  ></label
+>
+
+<input
+  class="form-control"
+  name="name"
+  [type]="inputType"
+  [(ngModel)]="value"
+  (keyup)="onValueChange($event.target.value)"
+  [ngClass]="
+    !myFormControl.pristine && (myFormControl.dirty || myFormControl.touched)
+      ? myFormControl.status
+      : ''
+  "
+/>
+
+<app-message-display [myFormControl]="myFormControl"></app-message-display>

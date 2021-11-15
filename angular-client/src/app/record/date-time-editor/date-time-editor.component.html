@@ -1,0 +1,48 @@
+<div class="input-group">
+  <ng-container *ngIf="!autofocus">
+    <input
+      [id]="id ? id + '_dateInput' : null"
+      type="text"
+      class="form-control"
+      #dateEditor="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      style="min-width: 120px"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="dateEditor.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date/Time Editor</span></span
+      >
+    </div>
+  </ng-container>
+  <ng-container *ngIf="autofocus">
+    <input
+      [id]="id ? id + '_dateInput' : null"
+      type="text"
+      class="form-control"
+      #dateEditor="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      style="min-width: 120px"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+      appAutofocus
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="dateEditor.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date/Time Editor</span></span
+      >
+    </div>
+  </ng-container>
+  <input
+    [id]="id ? id + '_timeInput' : null"
+    class="form-control"
+    [(ngModel)]="timeInputValue"
+    (blur)="onTimeInputBlur()"
+    style="min-width: 80px"
+  />
+</div>

@@ -1,0 +1,85 @@
+<ng-container *ngIf="recordEntity">
+  <div class="row">
+    <app-controlblock title="ID Status" [noOffset]="true" div class="col-md-3">
+      <dl class="data-group">
+        <dt>Transmitter</dt>
+        <dd>
+          <app-transmitter-id-label
+            *ngIf="recordEntity?.transmitterChange?.txTo"
+            [transmitterID]="recordEntity.transmitterChange.txTo"
+          ></app-transmitter-id-label>
+          <span *ngIf="!recordEntity?.transmitterChange">Unchanged</span>
+          <span
+            *ngIf="
+              !recordEntity?.transmitterChange?.txTo &&
+              recordEntity?.transmitterChange?.txFrom
+            "
+            >Removed</span
+          >
+        </dd>
+        <dt>Current Channel</dt>
+        <dd>
+          <span>{{
+            transmitterEntity ? transmitterEntity.channel : 'Unchanged'
+          }}</span>
+        </dd>
+        <dt>Frequency</dt>
+        <dd>
+          <span>{{
+            transmitterEntity ? transmitterEntity.frequency : 'Unchanged'
+          }}</span>
+        </dd>
+        <dt>UHF ID</dt>
+        <dd>
+          <span>{{
+            transmitterEntity
+              ? (transmitterEntity.uhfId | number: '3.0-0')
+              : 'Unchanged'
+          }}</span>
+        </dd>
+        <dt>Band</dt>
+        <dd>
+          <span>{{
+            recordEntity.bands ? recordEntity.bands.newBandNumber : 'Unchanged'
+          }}</span>
+        </dd>
+        <dt>Microchip</dt>
+        <dd>
+          <span *ngIf="recordEntity?.chips?.microchip">{{
+            recordEntity.chips.microchip
+          }}</span>
+          <span *ngIf="!recordEntity?.chips">Unchanged</span>
+          <span *ngIf="recordEntity?.chips && !recordEntity?.chips?.microchip"
+            >Removed</span
+          >
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Harness" [noOffset]="true" div class="col-md-3">
+      <ng-container *ngIf="!_recordEntity.harnessChange">
+        <span>No harness change information.</span>
+      </ng-container>
+
+      <ng-container *ngIf="_recordEntity.harnessChange">
+        <dl class="data-group">
+          <dt>Old Length - Left</dt>
+          <dd>
+            {{
+              _recordEntity.harnessChange.oldHarnessLengthLeft | addUnits: 'mm'
+            }}
+          </dd>
+          <dt>Old Length - Right</dt>
+          <dd>
+            {{
+              _recordEntity.harnessChange.oldHarnessLengthRight | addUnits: 'mm'
+            }}
+          </dd>
+          <dt>New Length</dt>
+          <dd>
+            {{ _recordEntity.harnessChange.newHarnessLength | addUnits: 'mm' }}
+          </dd>
+        </dl>
+      </ng-container>
+    </app-controlblock>
+  </div>
+</ng-container>

@@ -1,0 +1,33 @@
+export class TxActivityEntity {
+  alg1Activity2DaysAgo1: number;
+  alg1Activity2DaysAgo2: number;
+  alg1Activity3DaysAgo1: number;
+  alg1Activity3DaysAgo2: number;
+  alg1Activity4DaysAgo1: number;
+  alg1Activity4DaysAgo2: number;
+  alg1Activity5DaysAgo1: number;
+  alg1Activity5DaysAgo2: number;
+  alg1Activity6DaysAgo1: number;
+  alg1Activity6DaysAgo2: number;
+  alg1ActivityYesterday1: number;
+  alg1ActivityYesterday2: number;
+  alg2Activity2DaysAgo1: number;
+  alg2Activity2DaysAgo2: number;
+  alg2Activity3DaysAgo1: number;
+  alg2Activity3DaysAgo2: number;
+  alg2Activity4DaysAgo1: number;
+  alg2Activity4DaysAgo2: number;
+  alg2Activity5DaysAgo1: number;
+  alg2Activity5DaysAgo2: number;
+  alg2Activity6DaysAgo1: number;
+  alg2Activity6DaysAgo2: number;
+  alg2ActivityYesterday1: number;
+  alg2ActivityYesterday2: number;
+  batteryLife1: number;
+  batteryLife2: number;
+  hairTrigger1: number;
+  hairTrigger2: number;
+  longTrigger1: number;
+  longTrigger2: number;
+  recoveryid: string;
+}

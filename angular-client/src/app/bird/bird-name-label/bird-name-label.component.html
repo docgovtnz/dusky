@@ -1,0 +1,8 @@
+<span>
+  <span *ngIf="birdSummary && link"
+    ><a routerLink="/bird/{{ birdSummary.id }}">{{
+      birdSummary.birdName
+    }}</a></span
+  >
+  <span *ngIf="birdSummary && !link">{{ birdSummary.birdName }}</span>
+</span>

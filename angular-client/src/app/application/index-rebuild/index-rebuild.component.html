@@ -1,0 +1,81 @@
+<div
+  class="modal fade"
+  bsModal
+  #resetIndexModal="bs-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-static-name"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Rebuild Indexes</div>
+      <div class="modal-body" style="height: 10em">
+        <div *ngIf="step === 'WARNING'">
+          <div class="container">
+            <div class="row">
+              Are you sure you want to rebuild indexes? This process can take
+              15-30 minutes and may make your machine unresponsive for the
+              duration of the rebuild. Only reset the indexes if advised to by
+              Support.
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-6">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-block"
+                  data-dismiss="modal"
+                  (click)="close()"
+                >
+                  Cancel
+                </button>
+              </div>
+              <div class="col-6">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  (click)="begin()"
+                >
+                  Rebuild Indexes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="step === 'PROGRESS'">
+          <div class="container">
+            <div class="row">
+              {{ status.timeRemaining }}
+            </div>
+            <div class="row mt-2">
+              <progressbar
+                [max]="100"
+                [value]="status.progress"
+                class="progress-striped active"
+              >
+                <span class="text-nowrap">{{ status.progress }}%</span>
+              </progressbar>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="step === 'COMPLETE'">
+          <div class="container">
+            <div class="row">Indexing process is complete.</div>
+            <div class="row mt-2">
+              <button
+                type="button"
+                class="btn btn-secondary btn-block"
+                data-dismiss="modal"
+                (click)="close()"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

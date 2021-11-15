@@ -1,0 +1,20 @@
+<ng-container *ngIf="standardRevision">
+  <div class="row">
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-3">
+      <dl class="data-group">
+        <dt>Data Capture Type</dt>
+        <dd>
+          <span class="data-tag">{{ standardRevision.dataCaptureType }}</span>
+        </dd>
+        <dt>Battery 1</dt>
+        <dd>
+          <span class="data-tag">{{ standardRevision.battery1 }}</span>
+        </dd>
+        <dt>Battery 2</dt>
+        <dd>
+          <span class="data-tag">{{ standardRevision.battery2 }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

@@ -1,0 +1,23 @@
+<!-- Not binding to the (typeaheadOnSelect) event, but just using the setter of selectedOption to propagate the
+value change to parent components -->
+<input
+  *ngIf="!autofocus"
+  class="form-control"
+  [typeahead]="optionList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  [(ngModel)]="selectedOption"
+  [disabled]="disabled"
+/>
+<input
+  *ngIf="autofocus"
+  class="form-control"
+  [typeahead]="optionList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  [(ngModel)]="selectedOption"
+  [disabled]="disabled"
+  appAutofocus
+/>

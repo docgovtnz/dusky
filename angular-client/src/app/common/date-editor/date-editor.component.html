@@ -1,0 +1,71 @@
+<div class="input-group mb-1" *ngIf="editorCfg === 'WithPresets'">
+  <div role="group">
+    <button
+      [id]="id ? id + '_allButton' : null"
+      class="btn btn-link btn-sm"
+      (click)="onClickAll()"
+    >
+      All
+    </button>
+    <button
+      [id]="id ? id + '_yearButton' : null"
+      class="btn btn-link btn-sm"
+      (click)="onClickYear()"
+    >
+      Year
+    </button>
+    <button
+      [id]="id ? id + '_monthButton' : null"
+      class="btn btn-link btn-sm"
+      (click)="onClickMonth()"
+    >
+      Month
+    </button>
+    <button
+      [id]="id ? id + '_weekButton' : null"
+      class="btn btn-link btn-sm"
+      (click)="onClickWeek()"
+    >
+      Week
+    </button>
+  </div>
+</div>
+<div class="input-group">
+  <ng-container *ngIf="!autofocus">
+    <input
+      [id]="id"
+      type="text"
+      class="form-control"
+      #dateEditor="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="dateEditor.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date Editor</span></span
+      >
+    </div>
+  </ng-container>
+  <ng-container *ngIf="autofocus">
+    <input
+      [id]="id"
+      type="text"
+      class="form-control"
+      #dateEditor="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+      appAutofocus
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="dateEditor.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date Editor</span></span
+      >
+    </div>
+  </ng-container>
+</div>

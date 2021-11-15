@@ -1,0 +1,105 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-12">
+      <div class="row">
+        <div class="form-group col-md-3">
+          <app-widget
+            [label]="'Location'"
+            [propertyName]="'locationID'"
+            [myFormControl]="myFormGroup.get('locationID')"
+          >
+            <app-location-name-id-select-control
+              id="locationID"
+              formControlName="locationID"
+              [autofocus]="true"
+            ></app-location-name-id-select-control>
+          </app-widget>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="island"> Island </label>
+          <input id="island" [value]="island" class="form-control" disabled />
+        </div>
+        <div class="form-group col-md-3">
+          <app-widget
+            [label]="'Observer'"
+            [propertyName]="'observerPersonID'"
+            [myFormControl]="myFormGroup.get('observerPersonID')"
+          >
+            <app-person-name-id-select-control
+              id="observerPersonID"
+              formControlName="observerPersonID"
+            ></app-person-name-id-select-control>
+          </app-widget>
+        </div>
+        <div class="form-group col-md-3">
+          <app-widget
+            [label]="'Activity Type'"
+            [propertyName]="'activityType'"
+            [myFormControl]="myFormGroup.get('activityType')"
+          >
+            <select
+              class="custom-select"
+              id="activityType"
+              formControlName="activityType"
+            >
+              <option
+                *ngFor="
+                  let opt of optionsService.getOptions('ActivityType') | async
+                "
+                [ngValue]="opt"
+              >
+                {{ opt }}
+              </option>
+            </select>
+          </app-widget>
+        </div>
+        <div class="form-group col-md-3">
+          <app-widget
+            [label]="'Weight Quality Override'"
+            [propertyName]="'qualityOverride'"
+            [myFormControl]="myFormGroup.get('qualityOverride')"
+          >
+            <input
+              class="form-control"
+              id="qualityOverride"
+              formControlName="qualityOverride"
+              type="number"
+            />
+          </app-widget>
+        </div>
+        <div class="form-group col-md-3">
+          <div class="form-check form-check-inline form-check-align">
+            <input
+              class="form-check-input"
+              id="showLockRecords"
+              formControlName="showLockRecords"
+              type="checkbox"
+            />
+            <label class="form-check-label" for="showLockRecords">
+              Show Lock Records
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <!-- unable to wrap this in app widget because we can't get access to the snarkFile input using @ViewChild if it is inside app-widget -->
+        <label id="snarkFileContentLabel"
+          >Snark File<span class="text-danger"
+            ><strong>&nbsp;*</strong></span
+          ></label
+        >
+        <input
+          #snarkFile
+          class="form-control"
+          id="snarkFile"
+          type="file"
+          (change)="onSnarkFileChange($event)"
+        />
+        <app-message-display
+          [myFormControl]="myFormGroup.get('snarkFileContent')"
+        ></app-message-display>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

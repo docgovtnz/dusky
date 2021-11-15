@@ -1,0 +1,56 @@
+<ng-container *ngIf="locationRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-3">
+      <dl class="data-group">
+        <dt>Location Name</dt>
+        <dd>{{ locationRevision.locationName }}</dd>
+        <dt>Island</dt>
+        <dd>{{ locationRevision.island }}</dd>
+        <dt>Mapping Method</dt>
+        <dd>
+          <span class="data-tag">{{ locationRevision.mappingMethod }}</span>
+        </dd>
+        <dt>Easting</dt>
+        <dd>{{ locationRevision.easting }}</dd>
+        <dt>Northing</dt>
+        <dd>{{ locationRevision.northing }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Parameters" class="col-md-3">
+      <dl class="data-group">
+        <dt>Location Type</dt>
+        <dd>
+          <span class="data-tag">{{ locationRevision.locationType }}</span>
+        </dd>
+        <dt>First Date</dt>
+        <dd>{{ locationRevision.firstDate | date: 'dd/MM/yyyy' }}</dd>
+        <dt>Captivity Type</dt>
+        <dd>
+          <span class="data-tag">{{ locationRevision.captivityType }}</span>
+        </dd>
+        <dt>Target Bird</dt>
+        <dd>
+          <app-bird-name-label
+            [birdID]="locationRevision.birdID"
+          ></app-bird-name-label>
+        </dd>
+        <dt>Active</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="active"
+            [(ngModel)]="locationRevision.active"
+          />
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Description" class="col-md-6">
+      <dl class="data-group">
+        <dt>Site Description</dt>
+        <dd>{{ locationRevision.comments }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

@@ -1,0 +1,402 @@
+SnarkFileTimeRecord{dateTime=2016-10-19T13:18}
+SnarkFileArrivalRecord{time=18:45, channel=35}
+SnarkFileWeightRecord{time=18:48, weight=1411, quality=198}
+SnarkFileWeightRecord{time=18:50, weight=1415, quality=229}
+SnarkFileWeightRecord{time=18:52, weight=1419, quality=249}
+SnarkFileWeightRecord{time=18:55, weight=1427, quality=249}
+SnarkFileWeightRecord{time=18:58, weight=1439, quality=246}
+SnarkFileWeightRecord{time=19:03, weight=1446, quality=197}
+SnarkFileWeightRecord{time=19:08, weight=1478, quality=244}
+SnarkFileWeightRecord{time=19:10, weight=1482, quality=245}
+SnarkFileWeightRecord{time=19:13, weight=1490, quality=243}
+SnarkFileWeightRecord{time=19:16, weight=1494, quality=244}
+SnarkFileWeightRecord{time=19:19, weight=1501, quality=244}
+SnarkFileWeightRecord{time=19:22, weight=1509, quality=247}
+SnarkFileWeightRecord{time=19:25, weight=1513, quality=249}
+SnarkFileWeightRecord{time=19:29, weight=1513, quality=238}
+SnarkFileWeightRecord{time=19:33, weight=1517, quality=248}
+SnarkFileWeightRecord{time=19:37, weight=1521, quality=239}
+SnarkFileWeightRecord{time=19:42, weight=1525, quality=247}
+SnarkFileWeightRecord{time=19:47, weight=1529, quality=249}
+SnarkFileWeightRecord{time=19:52, weight=1533, quality=245}
+SnarkFileWeightRecord{time=19:57, weight=1533, quality=248}
+SnarkFileWeightRecord{time=20:02, weight=1537, quality=248}
+SnarkFileWeightRecord{time=20:07, weight=1537, quality=248}
+SnarkFileWeightRecord{time=20:11, weight=1537, quality=248}
+SnarkFileWeightRecord{time=20:16, weight=1541, quality=247}
+SnarkFileDepartureRecord{time=20:18, channel=35}
+SnarkFileArrivalRecord{time=20:23, channel=35}
+SnarkFileWeightRecord{time=20:25, weight=1517, quality=229}
+SnarkFileWeightRecord{time=20:27, weight=1521, quality=237}
+SnarkFileWeightRecord{time=20:29, weight=1521, quality=243}
+SnarkFileWeightRecord{time=20:31, weight=1521, quality=246}
+SnarkFileWeightRecord{time=20:34, weight=1525, quality=248}
+SnarkFileWeightRecord{time=20:37, weight=1525, quality=250}
+SnarkFileWeightRecord{time=20:40, weight=1529, quality=249}
+SnarkFileArrivalRecord{time=20:40, channel=61}
+SnarkFileWeightRecord{time=20:55, weight=1427, quality=158}
+SnarkFileWeightRecord{time=20:59, weight=1427, quality=226}
+SnarkFileWeightRecord{time=21:00, weight=1431, quality=248}
+SnarkFileWeightRecord{time=21:02, weight=1431, quality=246}
+SnarkFileWeightRecord{time=21:05, weight=1435, quality=248}
+SnarkFileWeightRecord{time=21:09, weight=1439, quality=243}
+SnarkFileWeightRecord{time=21:12, weight=1435, quality=252}
+SnarkFileWeightRecord{time=21:16, weight=1439, quality=224}
+SnarkFileWeightRecord{time=21:20, weight=1439, quality=133}
+SnarkFileDepartureRecord{time=21:20, channel=35}
+SnarkFileArrivalRecord{time=21:25, channel=35}
+SnarkFileWeightRecord{time=21:26, weight=1474, quality=211}
+SnarkFileWeightRecord{time=21:28, weight=1478, quality=247}
+SnarkFileDepartureRecord{time=21:25, channel=61}
+SnarkFileWeightRecord{time=21:30, weight=1478, quality=246}
+SnarkFileWeightRecord{time=21:33, weight=1478, quality=252}
+SnarkFileWeightRecord{time=21:35, weight=1482, quality=245}
+SnarkFileArrivalRecord{time=21:37, channel=61}
+SnarkFileWeightRecord{time=21:39, weight=1486, quality=242}
+SnarkFileDepartureRecord{time=21:38, channel=61}
+SnarkFileWeightRecord{time=21:42, weight=1486, quality=255}
+SnarkFileWeightRecord{time=21:46, weight=1486, quality=246}
+SnarkFileArrivalRecord{time=21:48, channel=61}
+SnarkFileWeightRecord{time=21:50, weight=1490, quality=244}
+SnarkFileDepartureRecord{time=21:50, channel=61}
+SnarkFileWeightRecord{time=21:54, weight=1494, quality=241}
+SnarkFileWeightRecord{time=21:59, weight=1497, quality=236}
+SnarkFileWeightRecord{time=22:04, weight=1497, quality=234}
+SnarkFileWeightRecord{time=22:09, weight=1501, quality=251}
+SnarkFileWeightRecord{time=22:14, weight=1505, quality=239}
+SnarkFileWeightRecord{time=22:18, weight=1509, quality=255}
+SnarkFileWeightRecord{time=22:23, weight=1517, quality=242}
+SnarkFileDepartureRecord{time=22:25, channel=35}
+SnarkFileTimeRecord{dateTime=2016-10-20T00:00}
+SnarkFileArrivalRecord{time=00:38, channel=35}
+SnarkFileWeightRecord{time=00:40, weight=1435, quality=221}
+SnarkFileWeightRecord{time=00:41, weight=1439, quality=238}
+SnarkFileWeightRecord{time=00:44, weight=1443, quality=216}
+SnarkFileWeightRecord{time=00:46, weight=1443, quality=244}
+SnarkFileWeightRecord{time=00:48, weight=1446, quality=237}
+SnarkFileWeightRecord{time=00:51, weight=1450, quality=236}
+SnarkFileWeightRecord{time=00:55, weight=1450, quality=244}
+SnarkFileWeightRecord{time=00:59, weight=1454, quality=245}
+SnarkFileWeightRecord{time=01:02, weight=1458, quality=235}
+SnarkFileWeightRecord{time=01:07, weight=1462, quality=234}
+SnarkFileWeightRecord{time=01:11, weight=1466, quality=232}
+SnarkFileWeightRecord{time=01:16, weight=1466, quality=245}
+SnarkFileWeightRecord{time=01:21, weight=1474, quality=231}
+SnarkFileWeightRecord{time=01:25, weight=1478, quality=237}
+SnarkFileWeightRecord{time=01:30, weight=1482, quality=240}
+SnarkFileWeightRecord{time=01:35, weight=1482, quality=231}
+SnarkFileWeightRecord{time=01:40, weight=1486, quality=245}
+SnarkFileWeightRecord{time=01:45, weight=1490, quality=255}
+SnarkFileWeightRecord{time=01:49, weight=1490, quality=255}
+SnarkFileWeightRecord{time=01:54, weight=1494, quality=241}
+SnarkFileWeightRecord{time=01:58, weight=1494, quality=255}
+SnarkFileWeightRecord{time=02:03, weight=1497, quality=247}
+SnarkFileWeightRecord{time=02:07, weight=1501, quality=255}
+SnarkFileDepartureRecord{time=02:08, channel=35}
+SnarkFileArrivalRecord{time=02:12, channel=35}
+SnarkFileWeightRecord{time=02:14, weight=1513, quality=25}
+SnarkFileArrivalRecord{time=02:16, channel=92}
+SnarkFileDepartureRecord{time=02:14, channel=35}
+SnarkFileWeightRecord{time=02:21, weight=2358, quality=172}
+SnarkFileWeightRecord{time=02:23, weight=2358, quality=255}
+SnarkFileWeightRecord{time=02:25, weight=2358, quality=164}
+SnarkFileWeightRecord{time=02:38, weight=2405, quality=249}
+SnarkFileWeightRecord{time=02:39, weight=2409, quality=255}
+SnarkFileArrivalRecord{time=05:01, channel=35}
+SnarkFileWeightRecord{time=05:03, weight=1470, quality=181}
+SnarkFileWeightRecord{time=05:05, weight=1470, quality=247}
+SnarkFileWeightRecord{time=05:07, weight=1474, quality=222}
+SnarkFileWeightRecord{time=05:09, weight=1474, quality=248}
+SnarkFileWeightRecord{time=05:11, weight=1474, quality=243}
+SnarkFileWeightRecord{time=05:14, weight=1478, quality=249}
+SnarkFileWeightRecord{time=05:18, weight=1478, quality=238}
+SnarkFileDepartureRecord{time=05:18, channel=35}
+SnarkFileTimeRecord{dateTime=2016-10-20T12:00}
+SnarkFileTimeRecord{dateTime=2016-10-20T13:00}
+SnarkFileArrivalRecord{time=19:32, channel=35}
+SnarkFileWeightRecord{time=19:34, weight=1411, quality=152}
+SnarkFileWeightRecord{time=19:36, weight=1415, quality=218}
+SnarkFileWeightRecord{time=19:38, weight=1415, quality=241}
+SnarkFileWeightRecord{time=19:40, weight=1415, quality=222}
+SnarkFileWeightRecord{time=19:43, weight=1419, quality=248}
+SnarkFileWeightRecord{time=19:46, weight=1423, quality=244}
+SnarkFileWeightRecord{time=19:49, weight=1423, quality=235}
+SnarkFileWeightRecord{time=19:52, weight=1427, quality=255}
+SnarkFileWeightRecord{time=19:55, weight=1431, quality=255}
+SnarkFileWeightRecord{time=20:00, weight=1431, quality=240}
+SnarkFileWeightRecord{time=20:05, weight=1439, quality=243}
+SnarkFileWeightRecord{time=20:10, weight=1443, quality=223}
+SnarkFileWeightRecord{time=20:15, weight=1446, quality=251}
+SnarkFileArrivalRecord{time=20:16, channel=61}
+SnarkFileDepartureRecord{time=20:16, channel=35}
+SnarkFileDepartureRecord{time=20:16, channel=61}
+SnarkFileArrivalRecord{time=21:10, channel=35}
+SnarkFileWeightRecord{time=21:13, weight=1407, quality=193}
+SnarkFileWeightRecord{time=21:15, weight=1407, quality=248}
+SnarkFileWeightRecord{time=21:16, weight=1411, quality=247}
+SnarkFileWeightRecord{time=21:19, weight=1411, quality=242}
+SnarkFileWeightRecord{time=21:22, weight=1415, quality=249}
+SnarkFileWeightRecord{time=21:25, weight=1415, quality=246}
+SnarkFileWeightRecord{time=21:28, weight=1419, quality=252}
+SnarkFileArrivalRecord{time=21:29, channel=42}
+SnarkFileDepartureRecord{time=21:30, channel=35}
+SnarkFileWeightRecord{time=21:34, weight=1949, quality=38}
+SnarkFileWeightRecord{time=21:44, weight=1933, quality=14}
+SnarkFileDepartureRecord{time=21:47, channel=42}
+SnarkFileArrivalRecord{time=23:53, channel=35}
+SnarkFileWeightRecord{time=23:57, weight=1427, quality=202}
+SnarkFileWeightRecord{time=23:59, weight=1431, quality=227}
+SnarkFileTimeRecord{dateTime=2016-10-21T00:00}
+SnarkFileWeightRecord{time=00:01, weight=1431, quality=246}
+SnarkFileWeightRecord{time=00:03, weight=1435, quality=239}
+SnarkFileWeightRecord{time=00:05, weight=1435, quality=248}
+SnarkFileWeightRecord{time=00:08, weight=1439, quality=255}
+SnarkFileWeightRecord{time=00:12, weight=1443, quality=236}
+SnarkFileWeightRecord{time=00:16, weight=1443, quality=237}
+SnarkFileWeightRecord{time=00:20, weight=1443, quality=255}
+SnarkFileWeightRecord{time=00:24, weight=1446, quality=255}
+SnarkFileWeightRecord{time=00:29, weight=1446, quality=246}
+SnarkFileWeightRecord{time=00:33, weight=1446, quality=255}
+SnarkFileWeightRecord{time=00:37, weight=1446, quality=255}
+SnarkFileWeightRecord{time=00:42, weight=1446, quality=255}
+SnarkFileWeightRecord{time=00:48, weight=1450, quality=242}
+SnarkFileWeightRecord{time=00:52, weight=1450, quality=255}
+SnarkFileWeightRecord{time=00:57, weight=1450, quality=255}
+SnarkFileWeightRecord{time=01:01, weight=1450, quality=249}
+SnarkFileWeightRecord{time=01:06, weight=1450, quality=246}
+SnarkFileWeightRecord{time=01:11, weight=1454, quality=255}
+SnarkFileWeightRecord{time=01:15, weight=1454, quality=255}
+SnarkFileWeightRecord{time=01:20, weight=1454, quality=242}
+SnarkFileWeightRecord{time=01:24, weight=1454, quality=255}
+SnarkFileWeightRecord{time=01:29, weight=1478, quality=229}
+SnarkFileWeightRecord{time=01:30, weight=1478, quality=255}
+SnarkFileWeightRecord{time=01:33, weight=1478, quality=237}
+SnarkFileWeightRecord{time=01:35, weight=1482, quality=255}
+SnarkFileWeightRecord{time=01:38, weight=1482, quality=243}
+SnarkFileWeightRecord{time=01:42, weight=1474, quality=250}
+SnarkFileWeightRecord{time=01:45, weight=1482, quality=255}
+SnarkFileWeightRecord{time=01:48, weight=1482, quality=245}
+SnarkFileWeightRecord{time=01:52, weight=1486, quality=255}
+SnarkFileDepartureRecord{time=01:54, channel=35}
+SnarkFileArrivalRecord{time=02:15, channel=92}
+SnarkFileDepartureRecord{time=02:22, channel=92}
+SnarkFileArrivalRecord{time=03:35, channel=92}
+SnarkFileWeightRecord{time=03:40, weight=2330, quality=15}
+SnarkFileWeightRecord{time=03:45, weight=2365, quality=255}
+SnarkFileWeightRecord{time=03:46, weight=2369, quality=255}
+SnarkFileWeightRecord{time=03:48, weight=2369, quality=255}
+SnarkFileDepartureRecord{time=03:49, channel=92}
+SnarkFileArrivalRecord{time=04:34, channel=35}
+SnarkFileWeightRecord{time=04:37, weight=1443, quality=226}
+SnarkFileWeightRecord{time=04:38, weight=1446, quality=245}
+SnarkFileWeightRecord{time=04:41, weight=1446, quality=227}
+SnarkFileWeightRecord{time=04:44, weight=1446, quality=234}
+SnarkFileWeightRecord{time=04:46, weight=1450, quality=255}
+SnarkFileWeightRecord{time=04:49, weight=1450, quality=255}
+SnarkFileWeightRecord{time=04:52, weight=1450, quality=255}
+SnarkFileWeightRecord{time=04:55, weight=1450, quality=255}
+SnarkFileWeightRecord{time=04:59, weight=1454, quality=255}
+SnarkFileWeightRecord{time=05:04, weight=1450, quality=255}
+SnarkFileWeightRecord{time=05:09, weight=1454, quality=246}
+SnarkFileWeightRecord{time=05:14, weight=1454, quality=249}
+SnarkFileWeightRecord{time=05:18, weight=1454, quality=249}
+SnarkFileWeightRecord{time=05:24, weight=1454, quality=199}
+SnarkFileDepartureRecord{time=05:26, channel=35}
+SnarkFileTimeRecord{dateTime=2016-10-21T12:00}
+SnarkFileTimeRecord{dateTime=2016-10-21T13:00}
+SnarkFileArrivalRecord{time=20:05, channel=35}
+SnarkFileWeightRecord{time=20:06, weight=1411, quality=217}
+SnarkFileWeightRecord{time=20:09, weight=1415, quality=240}
+SnarkFileWeightRecord{time=20:11, weight=1419, quality=233}
+SnarkFileWeightRecord{time=20:14, weight=1419, quality=236}
+SnarkFileWeightRecord{time=20:17, weight=1423, quality=242}
+SnarkFileWeightRecord{time=20:20, weight=1423, quality=247}
+SnarkFileWeightRecord{time=20:23, weight=1427, quality=245}
+SnarkFileWeightRecord{time=20:27, weight=1427, quality=249}
+SnarkFileWeightRecord{time=20:31, weight=1431, quality=252}
+SnarkFileWeightRecord{time=20:35, weight=1431, quality=251}
+SnarkFileWeightRecord{time=20:40, weight=1435, quality=243}
+SnarkFileWeightRecord{time=20:44, weight=1435, quality=249}
+SnarkFileWeightRecord{time=20:50, weight=1439, quality=245}
+SnarkFileWeightRecord{time=20:54, weight=1439, quality=241}
+SnarkFileWeightRecord{time=20:59, weight=1439, quality=251}
+SnarkFileWeightRecord{time=21:05, weight=1443, quality=232}
+SnarkFileWeightRecord{time=21:10, weight=1446, quality=252}
+SnarkFileWeightRecord{time=21:15, weight=1466, quality=245}
+SnarkFileWeightRecord{time=21:17, weight=1470, quality=250}
+SnarkFileWeightRecord{time=21:19, weight=1470, quality=247}
+SnarkFileWeightRecord{time=21:21, weight=1470, quality=252}
+SnarkFileWeightRecord{time=21:24, weight=1474, quality=250}
+SnarkFileWeightRecord{time=21:27, weight=1474, quality=255}
+SnarkFileWeightRecord{time=21:30, weight=1474, quality=224}
+SnarkFileWeightRecord{time=21:34, weight=1478, quality=251}
+SnarkFileDepartureRecord{time=21:35, channel=35}
+SnarkFileTimeRecord{dateTime=2016-10-22T00:00}
+SnarkFileArrivalRecord{time=00:29, channel=92}
+SnarkFileWeightRecord{time=00:42, weight=2326, quality=249}
+SnarkFileWeightRecord{time=00:44, weight=2330, quality=249}
+SnarkFileWeightRecord{time=00:46, weight=2330, quality=255}
+SnarkFileWeightRecord{time=00:47, weight=2330, quality=255}
+SnarkFileWeightRecord{time=00:50, weight=2330, quality=255}
+SnarkFileArrivalRecord{time=00:51, channel=35}
+SnarkFileWeightRecord{time=00:53, weight=2330, quality=255}
+SnarkFileDepartureRecord{time=00:52, channel=35}
+SnarkFileWeightRecord{time=00:56, weight=2330, quality=255}
+SnarkFileWeightRecord{time=00:59, weight=2330, quality=255}
+SnarkFileWeightRecord{time=01:03, weight=2330, quality=255}
+SnarkFileWeightRecord{time=01:07, weight=2330, quality=255}
+SnarkFileWeightRecord{time=01:11, weight=2330, quality=255}
+SnarkFileDepartureRecord{time=01:15, channel=92}
+SnarkFileArrivalRecord{time=01:37, channel=92}
+SnarkFileWeightRecord{time=01:39, weight=2322, quality=99}
+SnarkFileWeightRecord{time=01:48, weight=2342, quality=163}
+SnarkFileDepartureRecord{time=01:47, channel=92}
+SnarkFileArrivalRecord{time=02:58, channel=35}
+SnarkFileWeightRecord{time=03:02, weight=1446, quality=184}
+SnarkFileWeightRecord{time=03:05, weight=1450, quality=232}
+SnarkFileWeightRecord{time=03:07, weight=1450, quality=237}
+SnarkFileWeightRecord{time=03:10, weight=1454, quality=246}
+SnarkFileWeightRecord{time=03:12, weight=1454, quality=241}
+SnarkFileWeightRecord{time=03:16, weight=1454, quality=236}
+SnarkFileWeightRecord{time=03:19, weight=1458, quality=245}
+SnarkFileArrivalRecord{time=03:22, channel=42}
+SnarkFileWeightRecord{time=03:22, weight=1458, quality=164}
+SnarkFileDepartureRecord{time=03:22, channel=35}
+SnarkFileWeightRecord{time=03:27, weight=2032, quality=232}
+SnarkFileWeightRecord{time=03:28, weight=2032, quality=100}
+SnarkFileWeightRecord{time=03:39, weight=2024, quality=46}
+SnarkFileWeightRecord{time=03:40, weight=2024, quality=15}
+SnarkFileWeightRecord{time=03:45, weight=2028, quality=34}
+SnarkFileDepartureRecord{time=03:47, channel=42}
+SnarkFileArrivalRecord{time=04:31, channel=92}
+SnarkFileWeightRecord{time=04:38, weight=2365, quality=208}
+SnarkFileWeightRecord{time=04:39, weight=2365, quality=255}
+SnarkFileWeightRecord{time=04:40, weight=2365, quality=255}
+SnarkFileWeightRecord{time=04:42, weight=2365, quality=255}
+SnarkFileWeightRecord{time=04:45, weight=2365, quality=247}
+SnarkFileWeightRecord{time=04:49, weight=2365, quality=226}
+SnarkFileWeightRecord{time=04:51, weight=2365, quality=255}
+SnarkFileWeightRecord{time=04:52, weight=2365, quality=91}
+SnarkFileDepartureRecord{time=04:53, channel=92}
+SnarkFileArrivalRecord{time=05:29, channel=35}
+SnarkFileWeightRecord{time=05:31, weight=1454, quality=228}
+SnarkFileWeightRecord{time=05:33, weight=1458, quality=231}
+SnarkFileWeightRecord{time=05:35, weight=1458, quality=250}
+SnarkFileWeightRecord{time=05:37, weight=1462, quality=252}
+SnarkFileWeightRecord{time=05:40, weight=1462, quality=253}
+SnarkFileWeightRecord{time=05:43, weight=1466, quality=250}
+SnarkFileWeightRecord{time=05:46, weight=1466, quality=255}
+SnarkFileWeightRecord{time=05:50, weight=1466, quality=255}
+SnarkFileWeightRecord{time=05:54, weight=1470, quality=252}
+SnarkFileWeightRecord{time=05:58, weight=1470, quality=255}
+SnarkFileWeightRecord{time=06:03, weight=1474, quality=255}
+SnarkFileWeightRecord{time=06:09, weight=1474, quality=245}
+SnarkFileWeightRecord{time=06:13, weight=1474, quality=249}
+SnarkFileWeightRecord{time=06:18, weight=1474, quality=249}
+SnarkFileWeightRecord{time=06:22, weight=1478, quality=94}
+SnarkFileDepartureRecord{time=06:22, channel=35}
+SnarkFileTimeRecord{dateTime=2016-10-22T12:00}
+SnarkFileTimeRecord{dateTime=2016-10-22T13:00}
+SnarkFileArrivalRecord{time=20:04, channel=92}
+SnarkFileDepartureRecord{time=20:08, channel=92}
+SnarkFileArrivalRecord{time=20:28, channel=61}
+SnarkFileWeightRecord{time=20:30, weight=2252, quality=5}
+SnarkFileWeightRecord{time=20:31, weight=2255, quality=5}
+SnarkFileDepartureRecord{time=20:32, channel=61}
+SnarkFileArrivalRecord{time=21:13, channel=42}
+SnarkFileWeightRecord{time=21:16, weight=1941, quality=9}
+SnarkFileWeightRecord{time=21:19, weight=1926, quality=39}
+SnarkFileArrivalRecord{time=21:22, channel=34}
+SnarkFileDepartureRecord{time=21:24, channel=34}
+SnarkFileArrivalRecord{time=21:44, channel=92}
+SnarkFileDepartureRecord{time=21:55, channel=42}
+SnarkFileDepartureRecord{time=21:56, channel=92}
+SnarkFileArrivalRecord{time=22:04, channel=92}
+SnarkFileWeightRecord{time=22:07, weight=2291, quality=116}
+SnarkFileArrivalRecord{time=22:31, channel=35}
+SnarkFileWeightRecord{time=22:32, weight=1454, quality=130}
+SnarkFileWeightRecord{time=22:34, weight=2291, quality=15}
+SnarkFileDepartureRecord{time=22:32, channel=35}
+SnarkFileWeightRecord{time=22:48, weight=2314, quality=227}
+SnarkFileWeightRecord{time=22:49, weight=2314, quality=255}
+SnarkFileWeightRecord{time=22:51, weight=2314, quality=255}
+SnarkFileWeightRecord{time=22:53, weight=2314, quality=255}
+SnarkFileWeightRecord{time=22:55, weight=2314, quality=255}
+SnarkFileWeightRecord{time=22:58, weight=2314, quality=255}
+SnarkFileWeightRecord{time=23:01, weight=2314, quality=255}
+SnarkFileDepartureRecord{time=23:06, channel=92}
+SnarkFileTimeRecord{dateTime=2016-10-23T00:00}
+SnarkFileArrivalRecord{time=00:13, channel=35}
+SnarkFileWeightRecord{time=00:18, weight=1395, quality=201}
+SnarkFileWeightRecord{time=00:19, weight=1395, quality=235}
+SnarkFileWeightRecord{time=00:21, weight=1399, quality=185}
+SnarkFileArrivalRecord{time=00:22, channel=92}
+SnarkFileWeightRecord{time=00:24, weight=2322, quality=255}
+SnarkFileDepartureRecord{time=00:21, channel=35}
+SnarkFileWeightRecord{time=00:25, weight=2326, quality=255}
+SnarkFileWeightRecord{time=00:27, weight=2326, quality=255}
+SnarkFileWeightRecord{time=00:29, weight=2326, quality=97}
+SnarkFileWeightRecord{time=00:32, weight=2322, quality=255}
+SnarkFileWeightRecord{time=00:34, weight=2326, quality=255}
+SnarkFileWeightRecord{time=00:35, weight=2326, quality=255}
+SnarkFileWeightRecord{time=00:37, weight=2326, quality=255}
+SnarkFileDepartureRecord{time=00:39, channel=92}
+SnarkFileArrivalRecord{time=01:54, channel=92}
+SnarkFileWeightRecord{time=02:12, weight=2342, quality=253}
+SnarkFileDepartureRecord{time=02:13, channel=92}
+SnarkFileArrivalRecord{time=02:21, channel=35}
+SnarkFileWeightRecord{time=02:24, weight=1415, quality=241}
+SnarkFileWeightRecord{time=02:26, weight=1419, quality=242}
+SnarkFileWeightRecord{time=02:28, weight=1419, quality=240}
+SnarkFileWeightRecord{time=02:30, weight=1419, quality=244}
+SnarkFileWeightRecord{time=02:33, weight=1423, quality=252}
+SnarkFileWeightRecord{time=02:36, weight=1423, quality=246}
+SnarkFileWeightRecord{time=02:40, weight=1423, quality=252}
+SnarkFileWeightRecord{time=02:43, weight=1427, quality=249}
+SnarkFileWeightRecord{time=02:47, weight=1427, quality=45}
+SnarkFileArrivalRecord{time=02:47, channel=92}
+SnarkFileWeightRecord{time=02:49, weight=2346, quality=255}
+SnarkFileDepartureRecord{time=02:46, channel=35}
+SnarkFileWeightRecord{time=02:51, weight=2346, quality=255}
+SnarkFileWeightRecord{time=02:53, weight=2346, quality=168}
+SnarkFileWeightRecord{time=03:13, weight=2342, quality=255}
+SnarkFileWeightRecord{time=03:14, weight=2346, quality=48}
+SnarkFileDepartureRecord{time=03:17, channel=92}
+SnarkFileArrivalRecord{time=03:57, channel=35}
+SnarkFileWeightRecord{time=04:02, weight=1403, quality=225}
+SnarkFileWeightRecord{time=04:04, weight=1407, quality=242}
+SnarkFileWeightRecord{time=04:06, weight=1403, quality=117}
+SnarkFileArrivalRecord{time=04:07, channel=92}
+SnarkFileWeightRecord{time=04:08, weight=2381, quality=255}
+SnarkFileDepartureRecord{time=04:06, channel=35}
+SnarkFileWeightRecord{time=04:10, weight=2385, quality=255}
+SnarkFileWeightRecord{time=04:13, weight=2385, quality=245}
+SnarkFileArrivalRecord{time=04:20, channel=61}
+SnarkFileDepartureRecord{time=04:20, channel=61}
+SnarkFileDepartureRecord{time=04:20, channel=92}
+SnarkFileArrivalRecord{time=05:10, channel=92}
+SnarkFileWeightRecord{time=05:11, weight=2369, quality=34}
+SnarkFileArrivalRecord{time=05:11, channel=35}
+SnarkFileDepartureRecord{time=05:11, channel=35}
+SnarkFileWeightRecord{time=05:17, weight=2373, quality=56}
+SnarkFileDepartureRecord{time=05:20, channel=92}
+SnarkFileArrivalRecord{time=05:28, channel=35}
+SnarkFileWeightRecord{time=05:30, weight=1443, quality=247}
+SnarkFileWeightRecord{time=05:32, weight=1446, quality=251}
+SnarkFileWeightRecord{time=05:34, weight=1446, quality=248}
+SnarkFileWeightRecord{time=05:36, weight=1446, quality=253}
+SnarkFileWeightRecord{time=05:39, weight=1450, quality=251}
+SnarkFileWeightRecord{time=05:42, weight=1450, quality=252}
+SnarkFileWeightRecord{time=05:46, weight=1454, quality=252}
+SnarkFileWeightRecord{time=05:49, weight=1454, quality=247}
+SnarkFileWeightRecord{time=05:54, weight=1458, quality=250}
+SnarkFileWeightRecord{time=05:58, weight=1458, quality=255}
+SnarkFileWeightRecord{time=06:02, weight=1458, quality=251}
+SnarkFileWeightRecord{time=06:07, weight=1458, quality=255}
+SnarkFileWeightRecord{time=06:12, weight=1458, quality=251}
+SnarkFileWeightRecord{time=06:17, weight=1462, quality=247}
+SnarkFileWeightRecord{time=06:21, weight=1462, quality=255}
+SnarkFileWeightRecord{time=06:27, weight=1462, quality=253}
+SnarkFileWeightRecord{time=06:32, weight=1466, quality=252}
+SnarkFileWeightRecord{time=06:37, weight=1466, quality=255}
+SnarkFileDepartureRecord{time=06:39, channel=35}

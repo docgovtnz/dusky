@@ -1,0 +1,63 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Drug</th>
+        <th scope="col">Concentration value</th>
+        <th scope="col">Concentration units</th>
+        <th scope="col">Dose rate value</th>
+        <th scope="col">Dose rate units</th>
+        <th scope="col">Route</th>
+        <th scope="col">Times per day</th>
+        <th scope="col">Day number</th>
+        <th scope="col">Course length</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!medicationList">
+      <tr>
+        <td colspan="9">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="medicationList && medicationList.length === 0">
+      <tr>
+        <td colspan="9">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="medicationList && medicationList.length > 0">
+      <tr *ngFor="let item of medicationList">
+        <td>
+          <small class="badge badge-primary">{{ item.drug }}</small>
+        </td>
+        <td>
+          {{ item.concentrationValue }}
+        </td>
+        <td>
+          <small class="badge badge-primary">{{
+            item.concentrationUnits
+          }}</small>
+        </td>
+        <td>
+          {{ item.doseRateValue }}
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.doseRateUnits }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.route }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.timesPerDay }}</small>
+        </td>
+        <td>
+          {{ item.dayNumber }}
+        </td>
+        <td>
+          {{ item.courseLength }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

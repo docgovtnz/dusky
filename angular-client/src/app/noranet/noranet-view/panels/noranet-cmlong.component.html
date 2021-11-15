@@ -1,0 +1,62 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Bird(s)</th>
+        <th scope="col">UHF ID</th>
+        <th scope="col">CM Hour</th>
+        <th scope="col">CM Minute</th>
+        <th scope="col">Last CM Hour</th>
+        <th scope="col">Last CM Minute</th>
+        <th scope="col">Mating Age</th>
+        <th scope="col">CM Female(s)</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!cmLongList">
+      <tr>
+        <td colspan="8">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="cmLongList && cmLongList.length === 0">
+      <tr>
+        <td colspan="8">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="cmLongList && cmLongList.length > 0">
+      <tr *ngFor="let item of cmLongList">
+        <td>
+          <app-bird-name-label-multi
+            [birdList]="item.birdList"
+          ></app-bird-name-label-multi>
+        </td>
+        <td>{{ item.uhfId | number: '3.0-0' }}</td>
+        <td>{{ item.cmHour }}</td>
+        <td>{{ item.cmMinute }}</td>
+        <td>{{ item.lastCmHour }}</td>
+        <td>{{ item.lastCmMinute }}</td>
+        <td>{{ item.matingAge }}</td>
+        <td>
+          <ng-container
+            *ngIf="item.cmFemaleList && item.cmFemaleList.length > 0"
+          >
+            <ul>
+              <li *ngFor="let female of item.cmFemaleList">
+                <app-bird-name-label-multi
+                  [birdList]="female.birdList"
+                ></app-bird-name-label-multi>
+                UHF ID: {{ female.uhfId }}; Start Time (h ago):
+                {{ female.startTimeHoursAgo }}; Duration: {{ female.duration }};
+                Quality: {{ female.quality }}
+              </li>
+            </ul>
+          </ng-container>
+        </td>
+        <td>{{ item.comments }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

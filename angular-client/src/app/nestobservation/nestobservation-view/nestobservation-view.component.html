@@ -1,0 +1,119 @@
+<section>
+  <app-banner title="Nest Observation">
+    <button
+      *appPermission="'NESTOBSERVATION_EDIT'"
+      id="editBtn"
+      class="btn btn-action"
+      (click)="onEdit()"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+    <button
+      *appPermission="'NESTOBSERVATION_DELETE'"
+      id="deleteBtn"
+      class="btn btn-action"
+      [disabled]="!isDeleteOk()"
+      (click)="deleteConfirmationPopup.show()"
+    >
+      <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+    </button>
+    <app-revision-list-view
+      [entity]="nestobservationEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-nestobservation-panel
+          [nestobservationRevision]="revision"
+        ></app-nestobservation-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <tabset #recordTabs>
+      <tab *ngIf="revision?.observationTimes" [heading]="'Observation Times'">
+        <app-observationtimes-panel
+          [observationtimesRevision]="revision.observationTimes"
+        ></app-observationtimes-panel>
+      </tab>
+      <tab *ngIf="revision?.motherTripList" [heading]="'Mother Trips'">
+        <app-mothertrip-panel
+          [mothertripList]="revision.motherTripList"
+          [mothertripsummaryRevision]="revision.motherTripSummary"
+        ></app-mothertrip-panel>
+      </tab>
+      <tab
+        *ngIf="revision?.nestChamber"
+        [heading]="'Nest Chamber'"
+        [active]="
+          !(
+            revision?.chickRecordReferenceList &&
+            revision.chickRecordReferenceList.length > 0
+          ) &&
+          !(
+            revision?.eggRecordReferenceList &&
+            revision.eggRecordReferenceList.length > 0
+          )
+        "
+      >
+        <app-nestchamber-panel
+          [nestchamberRevision]="revision.nestChamber"
+        ></app-nestchamber-panel>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.eggRecordReferenceList &&
+          revision.eggRecordReferenceList.length > 0
+        "
+        [heading]="'Eggs'"
+        [active]="
+          revision?.eggRecordReferenceList &&
+          revision.eggRecordReferenceList.length > 0
+        "
+      >
+        <app-nestegg-panel [recordList]="eggRecordList"></app-nestegg-panel>
+      </tab>
+      <tab
+        *ngIf="
+          revision?.chickRecordReferenceList &&
+          revision.chickRecordReferenceList.length > 0
+        "
+        [heading]="'Chicks'"
+        [active]="
+          revision?.chickRecordReferenceList &&
+          revision.chickRecordReferenceList.length > 0 &&
+          !(
+            revision?.eggRecordReferenceList &&
+            revision.eggRecordReferenceList.length > 0
+          )
+        "
+      >
+        <app-nestchick-panel
+          [recordList]="chickRecordList"
+        ></app-nestchick-panel>
+      </tab>
+
+      <tab *ngIf="revision" [heading]="'Comments'">
+        <app-comments-view [revision]="revision"></app-comments-view>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [deleteOk]="isDeleteOk()"
+  [entityName]="'Nest Observation'"
+  [message]="
+    'Note that related Records will not be deleted and must be removed manually.'
+  "
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

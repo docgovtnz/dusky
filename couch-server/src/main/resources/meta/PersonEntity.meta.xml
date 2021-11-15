@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="PersonEntity">
+  <Property name="accountExpiry" label="Account Expiry" javaType="Date" jsonType="Date"/>
+  <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+  <Property name="currentCapacity" label="Current Capacity" javaType="String" jsonType="string"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="emailAddress" label="Email Address" javaType="String" jsonType="string"/>
+  <Property name="hasAccount" label="Has Account" javaType="Boolean" jsonType="boolean"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="name" label="Name" javaType="String" jsonType="string"/>
+  <Property name="personRole" label="Role" javaType="String" jsonType="string"/>
+  <Property name="phoneNumber" label="Phone Number" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="userName" label="Username" javaType="String" jsonType="string"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="name"/>
+      <DisplayProperty name="currentCapacity"/>
+      <DisplayProperty name="phoneNumber"/>
+      <DisplayProperty name="emailAddress"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="hasAccount"/>
+      <DisplayProperty name="userName"/>
+      <DisplayProperty name="personRole"/>
+      <DisplayProperty name="accountExpiry"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="comments"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

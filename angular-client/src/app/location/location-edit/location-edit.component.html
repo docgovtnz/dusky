@@ -1,0 +1,50 @@
+<section>
+  <app-banner title="Location"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-location-edit-form
+          [myFormGroup]="myFormGroup"
+        ></app-location-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <tabset>
+      <tab id="mapTab" [heading]="'Map'">
+        <div>
+          <app-esri-map
+            [displayLocationTypeCheckBoxes]="false"
+            [displayIslandSelector]="false"
+          >
+          </app-esri-map>
+        </div>
+      </tab>
+      <tab [heading]="'Nest Details'" *ngIf="hasNestDetails">
+        <app-nestdetails-edit-form
+          [myFormGroup]="myFormGroup.get('nestDetails')"
+        ></app-nestdetails-edit-form>
+      </tab>
+    </tabset>
+  </div>
+</section>

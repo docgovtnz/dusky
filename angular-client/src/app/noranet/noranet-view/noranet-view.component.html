@@ -1,0 +1,72 @@
+<section>
+  <app-banner title="NoraNet">
+    <button
+      *appPermission="'NORANET_EDIT'"
+      id="editBtn"
+      class="btn btn-action"
+      (click)="onEdit()"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+
+    <app-revision-list-view
+      [entity]="noranetEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-noranet-panel [noranetRevision]="revision"></app-noranet-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <section class="vertical-spacer" *ngIf="revision?.detectionList">
+      <h2>Detection</h2>
+      <app-noranet-detection-panel
+        [detectionList]="revision.detectionList"
+      ></app-noranet-detection-panel>
+    </section>
+    <section class="vertical-spacer" *ngIf="revision?.standardList">
+      <h2>Standard</h2>
+      <app-noranet-standard-panel
+        [standardList]="revision.standardList"
+      ></app-noranet-standard-panel>
+    </section>
+    <section class="vertical-spacer" *ngIf="revision?.cmLongList">
+      <h2>Mating Checkmate</h2>
+      <app-noranet-cmlong-panel
+        [cmLongList]="revision.cmLongList"
+      ></app-noranet-cmlong-panel>
+    </section>
+    <section class="vertical-spacer" *ngIf="revision?.cmShortList">
+      <h2>Non-Mating Checkmate</h2>
+      <app-noranet-cmshort-panel
+        [cmShortList]="revision.cmShortList"
+      ></app-noranet-cmshort-panel>
+    </section>
+    <section class="vertical-spacer" *ngIf="revision?.eggTimerList">
+      <h2>Egg Timer</h2>
+      <app-noranet-eggtimer-panel
+        [eggTimerList]="revision.eggTimerList"
+      ></app-noranet-eggtimer-panel>
+    </section>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [deleteOk]="isDeleteOk()"
+  [entityName]="'NoraNet'"
+  [message]="
+    'Note that related Records will not be deleted and must be removed manually.'
+  "
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

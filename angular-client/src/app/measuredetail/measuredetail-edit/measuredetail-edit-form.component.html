@@ -1,0 +1,228 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock
+      title="Head, Body and Wing"
+      [noOffset]="true"
+      class="col-md-4"
+    >
+      <div class="form-group">
+        <app-widget
+          [label]="'Tail Length (mm)'"
+          [propertyName]="'tailLength'"
+          [myFormControl]="myFormGroup.get('tailLength')"
+        >
+          <input
+            class="form-control"
+            id="tailLength"
+            formControlName="tailLength"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Wing Length (mm)'"
+          [propertyName]="'wingLength'"
+          [myFormControl]="myFormGroup.get('wingLength')"
+        >
+          <input
+            class="form-control"
+            id="wingLength"
+            formControlName="wingLength"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Sternum-shoulder (mm)'"
+          [propertyName]="'sternumshoulder'"
+          [myFormControl]="myFormGroup.get('sternumshoulder')"
+        >
+          <input
+            class="form-control"
+            id="sternumshoulder"
+            formControlName="sternumshoulder"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Culmen And Cere (mm)'"
+          [propertyName]="'culmenAndCere'"
+          [myFormControl]="myFormGroup.get('culmenAndCere')"
+        >
+          <input
+            class="form-control"
+            id="culmenAndCere"
+            formControlName="culmenAndCere"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Culmen Length (mm)'"
+          [propertyName]="'culmenLength'"
+          [myFormControl]="myFormGroup.get('culmenLength')"
+        >
+          <input
+            class="form-control"
+            id="culmenLength"
+            formControlName="culmenLength"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Culmen Width (mm)'"
+          [propertyName]="'culmenWidth'"
+          [myFormControl]="myFormGroup.get('culmenWidth')"
+        >
+          <input
+            class="form-control"
+            id="culmenWidth"
+            formControlName="culmenWidth"
+            type="number"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Femur and Foot" [noOffset]="true" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Leg'"
+          [propertyName]="'leg'"
+          [myFormControl]="myFormGroup.get('leg')"
+        >
+          <select class="custom-select" id="leg" formControlName="leg">
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('LegOptions') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Longest Toe (mm)'"
+          [propertyName]="'longestToe'"
+          [myFormControl]="myFormGroup.get('longestToe')"
+        >
+          <input
+            class="form-control"
+            id="longestToe"
+            formControlName="longestToe"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Femur (mm)'"
+          [propertyName]="'femur'"
+          [myFormControl]="myFormGroup.get('femur')"
+        >
+          <input
+            class="form-control"
+            id="femur"
+            formControlName="femur"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Long Toe Claw (mm)'"
+          [propertyName]="'longToeClaw'"
+          [myFormControl]="myFormGroup.get('longToeClaw')"
+        >
+          <input
+            class="form-control"
+            id="longToeClaw"
+            formControlName="longToeClaw"
+            type="number"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Tarsus" [noOffset]="true" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Tarsus Depth Squashed (mm)'"
+          [propertyName]="'tarsusDepthSquashed'"
+          [myFormControl]="myFormGroup.get('tarsusDepthSquashed')"
+        >
+          <input
+            class="form-control"
+            id="tarsusDepthSquashed"
+            formControlName="tarsusDepthSquashed"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Tarsus Depth Unsquashed (mm)'"
+          [propertyName]="'tarsusDepthUnsquashed'"
+          [myFormControl]="myFormGroup.get('tarsusDepthUnsquashed')"
+        >
+          <input
+            class="form-control"
+            id="tarsusDepthUnsquashed"
+            formControlName="tarsusDepthUnsquashed"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Tarsus Length (mm)'"
+          [propertyName]="'tarsusLength'"
+          [myFormControl]="myFormGroup.get('tarsusLength')"
+        >
+          <input
+            class="form-control"
+            id="tarsusLength"
+            formControlName="tarsusLength"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Tarsus Width Squashed (mm)'"
+          [propertyName]="'tarsusWidthSquashed'"
+          [myFormControl]="myFormGroup.get('tarsusWidthSquashed')"
+        >
+          <input
+            class="form-control"
+            id="tarsusWidthSquashed"
+            formControlName="tarsusWidthSquashed"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Tarsus Width Unsquashed (mm)'"
+          [propertyName]="'tarsusWidthUnsquashed'"
+          [myFormControl]="myFormGroup.get('tarsusWidthUnsquashed')"
+        >
+          <input
+            class="form-control"
+            id="tarsusWidthUnsquashed"
+            formControlName="tarsusWidthUnsquashed"
+            type="number"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

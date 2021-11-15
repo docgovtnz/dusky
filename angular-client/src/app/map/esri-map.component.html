@@ -1,0 +1,60 @@
+<div id="map" class="container-fluid bg-light">
+  <div class="form-row justify-content-between bg-white">
+    <div class="col-md-auto my-1" *ngIf="displayMapTypeBtns">
+      <app-toggle-switch
+        [buttonNames]="['Geotiffs', 'Generic', 'Imagery']"
+        (selectedNameChange)="onChangeMapType($event)"
+      ></app-toggle-switch>
+    </div>
+    <div class="col-md-auto my-1" *ngIf="hasBirdData()">
+      <app-bird-label-toggle
+        (changesMade)="updateBirdLocations()"
+      ></app-bird-label-toggle>
+    </div>
+    <div class="col-md-auto my-1">
+      <div class="form-inline">
+        <ng-container
+          *ngIf="displayIslandSelector && islandList && selectedIsland"
+        >
+          <select
+            class="custom-select"
+            id="islandList"
+            style="min-width: 136px"
+            [compareWith]="byId"
+            [(ngModel)]="selectedIsland"
+            (ngModelChange)="onIslandSelected($event)"
+          >
+            <option *ngFor="let opt of islandList" [ngValue]="opt">
+              {{ opt.name }}
+            </option>
+          </select>
+        </ng-container>
+        <app-full-screen-toggle [element]="mapNode"></app-full-screen-toggle>
+      </div>
+    </div>
+    <div class="col-md-auto my-1" *ngIf="displayLocationTypeCheckBoxes">
+      <div class="form-inline">
+        <app-three-state-button
+          [labelText]="locationType"
+          [state]="getLocationTypeState(locationType)"
+          (stateChange)="onLocationTypeStateChange(locationType, $event)"
+          *ngFor="let locationType of locationTypes"
+        ></app-three-state-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-height form-row">
+    <div
+      id="mapNode"
+      #mapNode
+      [ngClass]="hasBirdData() ? 'col-md-10' : 'col-md-12'"
+    ></div>
+    <div class="col-md-2 bird-legend" *ngIf="hasBirdData()">
+      <app-bird-legend
+        [birdList]="birdList"
+        (birdSelectionChanges)="onBirdSelectionChanges()"
+      ></app-bird-legend>
+    </div>
+  </div>
+</div>

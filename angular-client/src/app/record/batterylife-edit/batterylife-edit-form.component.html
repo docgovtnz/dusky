@@ -1,0 +1,40 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Battery Life" [noOffset]="true" class="col-md-6">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <app-widget
+              [label]="'Battery life 1'"
+              [propertyName]="'batteryLife1'"
+              [myFormControl]="myFormGroup.get('batteryLife1')"
+            >
+              <input
+                class="form-control"
+                id="batteryLife1"
+                formControlName="batteryLife1"
+                type="number"
+              />
+            </app-widget>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <app-widget
+              [label]="'Battery life 2'"
+              [propertyName]="'batteryLife2'"
+              [myFormControl]="myFormGroup.get('batteryLife2')"
+            >
+              <input
+                class="form-control"
+                id="batteryLife2"
+                formControlName="batteryLife2"
+                type="number"
+              />
+            </app-widget>
+          </div>
+        </div>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

@@ -1,0 +1,120 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6">
+      <div class="form-group">
+        <app-widget
+          [label]="'Name'"
+          [propertyName]="'name'"
+          [myFormControl]="myFormGroup.get('name')"
+        >
+          <input
+            class="form-control"
+            id="name"
+            formControlName="name"
+            type="text"
+            appAutofocus
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'ID'"
+          [propertyName]="'islandId'"
+          [myFormControl]="myFormGroup.get('islandId')"
+        >
+          <input
+            class="form-control"
+            id="islandId"
+            formControlName="islandId"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Lower easting'"
+          [propertyName]="'lowerEasting'"
+          [myFormControl]="myFormGroup.get('lowerEasting')"
+        >
+          <input
+            class="form-control"
+            id="lowerEasting"
+            formControlName="lowerEasting"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Lower northing'"
+          [propertyName]="'lowerNorthing'"
+          [myFormControl]="myFormGroup.get('lowerNorthing')"
+        >
+          <input
+            class="form-control"
+            id="lowerNorthing"
+            formControlName="lowerNorthing"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Upper easting'"
+          [propertyName]="'upperEasting'"
+          [myFormControl]="myFormGroup.get('upperEasting')"
+        >
+          <input
+            class="form-control"
+            id="upperEasting"
+            formControlName="upperEasting"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Upper northing'"
+          [propertyName]="'upperNorthing'"
+          [myFormControl]="myFormGroup.get('upperNorthing')"
+        >
+          <input
+            class="form-control"
+            id="upperNorthing"
+            formControlName="upperNorthing"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Magnetic Declination'"
+          [propertyName]="'magneticDeclination'"
+          [myFormControl]="myFormGroup.get('magneticDeclination')"
+        >
+          <input
+            class="form-control"
+            id="magneticDeclination"
+            formControlName="magneticDeclination"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Magnetic Declination As Of Year'"
+          [propertyName]="'magneticDeclinationAsOfYear'"
+          [myFormControl]="myFormGroup.get('magneticDeclinationAsOfYear')"
+        >
+          <input
+            class="form-control"
+            id="magneticDeclinationAsOfYear"
+            formControlName="magneticDeclinationAsOfYear"
+            type="number"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

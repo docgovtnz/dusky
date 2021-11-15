@@ -1,0 +1,90 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock
+      title="Capture Details"
+      [noOffset]="true"
+      class="col-md-6"
+    >
+      <div class="form-group">
+        <app-widget
+          [label]="'Capture Method'"
+          [propertyName]="'captureMethod'"
+          [myFormControl]="myFormGroup.get('captureMethod')"
+        >
+          <select
+            class="custom-select"
+            id="captureMethod"
+            formControlName="captureMethod"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('CaptureMethods') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Response'"
+          [propertyName]="'response'"
+          [myFormControl]="myFormGroup.get('response')"
+        >
+          <select
+            class="custom-select"
+            id="response"
+            formControlName="response"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('CaptureResponses') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Handling Duration (mins)'"
+          [propertyName]="'duration'"
+          [myFormControl]="myFormGroup.get('duration')"
+        >
+          <input
+            class="form-control"
+            id="duration"
+            formControlName="duration"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Reaction'"
+          [propertyName]="'reaction'"
+          [myFormControl]="myFormGroup.get('reaction')"
+        >
+          <select
+            class="custom-select"
+            id="reaction"
+            formControlName="reaction"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('CaptureReactions') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

@@ -1,0 +1,9 @@
+<select class="custom-select" [(ngModel)]="birdID" (change)="onBirdIDChange()">
+  <option value=""></option>
+  <option
+    *ngFor="let birdSummary of birdSummaryList"
+    [ngValue]="birdSummary.id"
+  >
+    {{ birdSummary.birdName }}
+  </option>
+</select>

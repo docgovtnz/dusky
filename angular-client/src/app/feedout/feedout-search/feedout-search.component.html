@@ -1,0 +1,686 @@
+<ng-container *ngIf="editMode">
+  <section>
+    <app-banner title="Edit: Feed Out" [noOffset]="true">
+      <button
+        class="btn btn-action"
+        [disabled]="editing"
+        (click)="onDisableEditMode()"
+      >
+        <fa-icon icon="undo" aria-hidden="true"></fa-icon>
+        Back to Search
+      </button>
+      <button class="btn btn-action" (click)="onAddClick()">
+        <fa-icon icon="plus-square" aria-hidden="true"></fa-icon>
+        Add New
+      </button>
+      <button class="btn btn-action" (click)="onSaveAll()">
+        <fa-icon icon="save" aria-hidden="true"></fa-icon>
+        Save All
+      </button>
+    </app-banner>
+  </section>
+
+  <app-server-message-display
+    [validationMessages]="allMessages"
+  ></app-server-message-display>
+</ng-container>
+
+<ng-container *ngIf="!editMode">
+  <section>
+    <app-banner title="Feed Out"></app-banner>
+  </section>
+
+  <app-server-message-display
+    [validationMessages]="allMessages"
+  ></app-server-message-display>
+
+  <section
+    class="vertical-spacer bg-light"
+    *ngIf="feedoutCriteria"
+    (keyup.enter)="onSearch()"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <div class="row">
+            <app-controlblock title="Locations" class="col-md-3">
+              <div class="form-group">
+                <label for="island"> Island </label>
+                <app-type-ahead
+                  id="island"
+                  [optionType]="'IslandName'"
+                  [(selectedOption)]="feedoutCriteria.island"
+                  [autofocus]="true"
+                ></app-type-ahead>
+              </div>
+              <div class="form-group">
+                <label for="locationID"> Location </label>
+                <app-location-name-id-select
+                  id="locationID"
+                  [(locationID)]="feedoutCriteria.locationID"
+                  [island]="feedoutCriteria.island"
+                  (locationIDChange)="doSearch()"
+                  (keyup.enter)="prevent($event)"
+                ></app-location-name-id-select>
+              </div>
+            </app-controlblock>
+            <app-controlblock title="Birds" class="col-md-3">
+              <div class="form-group">
+                <label for="birdID"> Bird </label>
+                <app-bird-name-id-select
+                  id="birdID"
+                  [(birdID)]="feedoutCriteria.birdID"
+                  (birdIDChange)="doSearch()"
+                  (keyup.enter)="prevent($event)"
+                ></app-bird-name-id-select>
+              </div>
+              <div class="form-group">
+                <label for="sex"> Sex </label>
+                <select
+                  class="custom-select"
+                  id="sex"
+                  [(ngModel)]="feedoutCriteria.sex"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('SexOptions') | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </div>
+            </app-controlblock>
+            <app-controlblock title="Date" class="col-md-3">
+              <div class="form-group">
+                <label for="fromDate"> From this Date </label>
+                <app-date-editor
+                  id="fromDate"
+                  [editorCfg]="'WithPresets'"
+                  [(dateValue)]="feedoutCriteria.fromDate"
+                ></app-date-editor>
+              </div>
+              <div class="form-group">
+                <label for="toDate"> To this Date </label>
+                <app-date-editor
+                  id="toDate"
+                  [editorCfg]="'none'"
+                  [(dateValue)]="feedoutCriteria.toDate"
+                ></app-date-editor>
+              </div>
+            </app-controlblock>
+            <app-controlblock title="Foods" class="col-md-3">
+              <div class="form-group">
+                <label for="food"> Food Type </label>
+                <select
+                  class="custom-select"
+                  id="food"
+                  [(ngModel)]="feedoutCriteria.food"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('FeedOutFoodTypes')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </div>
+            </app-controlblock>
+          </div>
+        </div>
+        <app-buttonblock class="col-md-2">
+          <button id="searchBtn" (click)="onSearch()">Search</button>
+          <button
+            id="exportBtn"
+            (click)="onExport()"
+            [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+          >
+            Export
+          </button>
+          <button
+            id="mapBtn"
+            (click)="onEnableEditMode()"
+            [disabled]="!pagedResponse"
+          >
+            Edit
+          </button>
+          <button id="resetBtn" (click)="onClear()">Reset</button>
+        </app-buttonblock>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Location</th>
+            <th scope="col">Date out</th>
+            <th scope="col">Date in</th>
+            <th scope="col">Birds</th>
+            <th scope="col">Food</th>
+            <th scope="col">Out</th>
+            <th scope="col">In</th>
+            <th scope="col">Consumed</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="9">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody
+          *ngIf="
+            pagedResponse && pagedResponse.results.length === 0 && !editMode
+          "
+        >
+          <tr>
+            <td colspan="9">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody
+          *ngIf="
+            pagedResponse && (pagedResponse.results.length > 0 || editMode)
+          "
+        >
+          <ng-container *ngFor="let item of added; index as i">
+            <ng-container *ngIf="!deleted[toAddIndex(i)]">
+              <tr
+                *ngIf="edited[toAddIndex(i)] && saved[toAddIndex(i)]"
+                class="search-result-item"
+                [ngClass]="{ 'table-danger': error[toAddIndex(i)] }"
+              >
+                <td>
+                  <app-location-name-label
+                    [locationID]="edited[toAddIndex(i)].locationID"
+                    [link]="!editMode"
+                  ></app-location-name-label>
+                </td>
+                <td>
+                  {{ edited[toAddIndex(i)].dateOut | date: 'dd/MM/yyyy' }}
+                </td>
+                <td>{{ edited[toAddIndex(i)].dateIn | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                  <ng-container
+                    *ngFor="let target of edited[toAddIndex(i)].targetBirdList"
+                  >
+                    <app-bird-name-label
+                      [birdID]="target.birdID"
+                      [link]="!editMode"
+                    ></app-bird-name-label>
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let tally of edited[toAddIndex(i)].foodTallyList"
+                    >{{ tally.name }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let tally of edited[toAddIndex(i)].foodTallyList"
+                    >{{ tally.out }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let tally of edited[toAddIndex(i)].foodTallyList"
+                    >{{ tally.in }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let tally of edited[toAddIndex(i)].foodTallyList"
+                  >
+                    {{
+                      (tally.in || tally.in === 0) &&
+                      (tally.out || tally.out === 0)
+                        ? tally.out - tally.in
+                        : ''
+                    }}<br *ngIf="!isFirst" />
+                  </ng-container>
+                </td>
+                <td class="text-right text-nowrap">
+                  <button
+                    *ngIf="!loading[toAddIndex(i)]"
+                    class="btn btn-record"
+                    (click)="onEditClick(toAddIndex(i))"
+                  >
+                    <fa-icon icon="edit" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Edit</span>
+                  </button>
+                  <button
+                    *ngIf="!loading[toAddIndex(i)]"
+                    class="btn btn-record"
+                    (click)="onDeleteClick(toAddIndex(i))"
+                  >
+                    <fa-icon icon="trash" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Delete</span>
+                  </button>
+                  <img
+                    *ngIf="loading[toAddIndex(i)]"
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                </td>
+              </tr>
+
+              <tr
+                *ngIf="edited[toAddIndex(i)] && !saved[toAddIndex(i)]"
+                class="search-result-item"
+                [ngClass]="{ 'table-danger': error[toAddIndex(i)] }"
+              >
+                <td>
+                  <!-- wrap in grid so typeahead appears in the correct location (otherwise it appears at top of table!) -->
+                  <div class="row">
+                    <div class="col-12">
+                      <app-location-name-id-select
+                        [id]="'location_' + toAddIndex(i)"
+                        [(locationID)]="edited[toAddIndex(i)].locationID"
+                      ></app-location-name-id-select>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <app-date-editor
+                    [(dateValue)]="edited[toAddIndex(i)].dateOut"
+                  ></app-date-editor>
+                </td>
+                <td>
+                  <app-date-editor
+                    [(dateValue)]="edited[toAddIndex(i)].dateIn"
+                  ></app-date-editor>
+                </td>
+                <td>
+                  <app-feedout-targets-edit
+                    [(targets)]="edited[toAddIndex(i)].targetBirdList"
+                  ></app-feedout-targets-edit>
+                </td>
+                <td>
+                  <app-feedout-tallys-edit
+                    [(tallys)]="edited[toAddIndex(i)].foodTallyList"
+                  ></app-feedout-tallys-edit>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let tally of edited[toAddIndex(i)].foodTallyList"
+                  >
+                    <input
+                      type="number"
+                      class="form-control"
+                      [(ngModel)]="tally.out"
+                    />
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let tally of edited[toAddIndex(i)].foodTallyList"
+                  >
+                    <input
+                      type="number"
+                      class="form-control"
+                      [(ngModel)]="tally.in"
+                    />
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let tally of edited[toAddIndex(i)].foodTallyList"
+                  >
+                    <input
+                      type="number"
+                      class="form-control"
+                      [value]="
+                        (tally.in || tally.in === 0) &&
+                        (tally.out || tally.out === 0)
+                          ? tally.out - tally.in
+                          : ''
+                      "
+                      readonly
+                    />
+                  </ng-container>
+                </td>
+                <td class="text-right text-nowrap">
+                  <button
+                    *ngIf="!loading[toAddIndex(i)]"
+                    class="btn btn-record"
+                    (click)="onSaveClick(toAddIndex(i))"
+                  >
+                    <fa-icon icon="check" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Save</span>
+                  </button>
+                  <button
+                    *ngIf="!loading[toAddIndex(i)]"
+                    class="btn btn-record"
+                    (click)="onCancelClick(toAddIndex(i))"
+                  >
+                    <fa-icon icon="times" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Cancel</span>
+                  </button>
+                  <img
+                    *ngIf="loading[toAddIndex(i)]"
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let item of pagedResponse.results; index as i">
+            <ng-container *ngIf="!deleted[i]">
+              <tr *ngIf="!edited[i]" class="search-result-item">
+                <td>
+                  <app-location-name-label
+                    [locationID]="item.locationID"
+                    [link]="!editMode"
+                  ></app-location-name-label>
+                </td>
+                <td>{{ item.dateOut | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ item.dateIn | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                  <ng-container *ngFor="let target of item.targetBirdList">
+                    <app-bird-name-label
+                      [birdID]="target.birdID"
+                      [link]="!editMode"
+                    ></app-bird-name-label>
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of item.foodTallyList"
+                    >{{ tally.name }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of item.foodTallyList"
+                    >{{ tally.out }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of item.foodTallyList"
+                    >{{ tally.in }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of item.foodTallyList">
+                    {{
+                      (tally.in || tally.in === 0) &&
+                      (tally.out || tally.out === 0)
+                        ? tally.out - tally.in
+                        : ''
+                    }}<br *ngIf="!isFirst" />
+                  </ng-container>
+                </td>
+                <td class="text-right text-nowrap">
+                  <button
+                    *ngIf="editMode && !loading[i]"
+                    class="btn btn-record"
+                    (click)="onEditClick(i)"
+                  >
+                    <fa-icon icon="edit" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Edit</span>
+                  </button>
+                  <button
+                    *ngIf="editMode && !loading[i]"
+                    class="btn btn-record"
+                    (click)="onDeleteClick(i)"
+                  >
+                    <fa-icon icon="trash" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Delete</span>
+                  </button>
+                  <img
+                    *ngIf="editMode && loading[i]"
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                </td>
+              </tr>
+
+              <tr
+                *ngIf="edited[i] && saved[i]"
+                class="search-result-item"
+                [ngClass]="{ 'table-danger': error[i] }"
+              >
+                <td>
+                  <app-location-name-label
+                    [locationID]="edited[i].locationID"
+                    [link]="!editMode"
+                  ></app-location-name-label>
+                </td>
+                <td>{{ edited[i].dateOut | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ edited[i].dateIn | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                  <ng-container *ngFor="let target of edited[i].targetBirdList">
+                    <app-bird-name-label
+                      [birdID]="target.birdID"
+                      [link]="!editMode"
+                    ></app-bird-name-label>
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of edited[i].foodTallyList"
+                    >{{ tally.name }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of edited[i].foodTallyList"
+                    >{{ tally.out }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of edited[i].foodTallyList"
+                    >{{ tally.in }}<br *ngIf="!isFirst"
+                  /></ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of edited[i].foodTallyList">
+                    {{
+                      (tally.in || tally.in === 0) &&
+                      (tally.out || tally.out === 0)
+                        ? tally.out - tally.in
+                        : ''
+                    }}<br *ngIf="!isFirst" />
+                  </ng-container>
+                </td>
+                <td class="text-right text-nowrap">
+                  <button
+                    *ngIf="!loading[i]"
+                    class="btn btn-record"
+                    (click)="onEditClick(i)"
+                  >
+                    <fa-icon icon="edit" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Edit</span>
+                  </button>
+                  <button
+                    *ngIf="!loading[i]"
+                    class="btn btn-record"
+                    (click)="onDeleteClick(i)"
+                  >
+                    <fa-icon icon="trash" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Delete</span>
+                  </button>
+                  <img
+                    *ngIf="loading[i]"
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                </td>
+              </tr>
+
+              <tr
+                *ngIf="edited[i] && !saved[i]"
+                class="search-result-item"
+                [ngClass]="{ 'table-danger': error[i] }"
+              >
+                <td>
+                  <!-- wrap in grid so typeahead appears in the correct location (otherwise it appears at top of table!) -->
+                  <div class="row">
+                    <div class="col-12">
+                      <app-location-name-id-select
+                        [id]="'location_' + i"
+                        [(locationID)]="edited[i].locationID"
+                      ></app-location-name-id-select>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <app-date-editor
+                    [(dateValue)]="edited[i].dateOut"
+                  ></app-date-editor>
+                </td>
+                <td>
+                  <app-date-editor
+                    [(dateValue)]="edited[i].dateIn"
+                  ></app-date-editor>
+                </td>
+                <td>
+                  <app-feedout-targets-edit
+                    [(targets)]="edited[i].targetBirdList"
+                  ></app-feedout-targets-edit>
+                </td>
+                <td>
+                  <app-feedout-tallys-edit
+                    [(tallys)]="edited[i].foodTallyList"
+                  ></app-feedout-tallys-edit>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of edited[i].foodTallyList">
+                    <input
+                      type="number"
+                      class="form-control"
+                      [(ngModel)]="tally.out"
+                    />
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of edited[i].foodTallyList">
+                    <input
+                      type="number"
+                      class="form-control"
+                      [(ngModel)]="tally.in"
+                    />
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let tally of edited[i].foodTallyList">
+                    <input
+                      type="number"
+                      class="form-control"
+                      [value]="
+                        (tally.in || tally.in === 0) &&
+                        (tally.out || tally.out === 0)
+                          ? tally.out - tally.in
+                          : ''
+                      "
+                      readonly
+                    />
+                  </ng-container>
+                </td>
+                <td class="text-right text-nowrap">
+                  <button
+                    *ngIf="!loading[i]"
+                    class="btn btn-record"
+                    (click)="onSaveClick(i)"
+                  >
+                    <fa-icon icon="check" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Save</span>
+                  </button>
+                  <button
+                    *ngIf="!loading[i]"
+                    class="btn btn-record"
+                    (click)="onCancelClick(i)"
+                  >
+                    <fa-icon icon="times" aria-hidden="true"></fa-icon
+                    ><span class="sr-only">Cancel</span>
+                  </button>
+                  <img
+                    *ngIf="loading[i]"
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="!editMode && pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="feedoutCriteria.pageSize"
+          [(ngModel)]="feedoutCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  bsModal
+  #confirmDeleteModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete Feed Out</h4>
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="onCancelDelete()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the selected Feed Out?
+        <hr />
+        <div class="row">
+          <div class="offset-6 col-md-6 text-right">
+            <button
+              id="confirmDeleteBtn"
+              type="button"
+              (click)="onConfirmDelete()"
+              class="btn btn-danger mr-1"
+            >
+              Delete Feed Out
+            </button>
+            <button
+              id="cancelDeleteBtn"
+              type="button"
+              (click)="onCancelDelete()"
+              class="btn btn-default"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

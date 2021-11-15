@@ -1,0 +1,32 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Snark" [noOffset]="true" class="col-md-6">
+      <div class="form-group">
+        <app-widget
+          [label]="'Arrival Time'"
+          [propertyName]="'arriveDateTime'"
+          [myFormControl]="myFormGroup.get('arriveDateTime')"
+        >
+          <app-date-time-control
+            id="arriveDateTime"
+            formControlName="arriveDateTime"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Departure Time'"
+          [propertyName]="'departDateTime'"
+          [myFormControl]="myFormGroup.get('departDateTime')"
+        >
+          <app-date-time-control
+            id="departDateTime"
+            formControlName="departDateTime"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

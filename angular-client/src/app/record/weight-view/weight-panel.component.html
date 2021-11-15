@@ -1,0 +1,12 @@
+<ng-container *ngIf="weightRevision">
+  <app-controlblock title="Weight" [noOffset]="true" [withSpacer]="true">
+    <dl class="data-group">
+      <dt>Method</dt>
+      <dd>
+        <span class="data-tag">{{ weightRevision.method }}</span>
+      </dd>
+      <dt>Weight</dt>
+      <dd>{{ weightRevision.weight | addUnits: 'kg' }}</dd>
+    </dl>
+  </app-controlblock>
+</ng-container>

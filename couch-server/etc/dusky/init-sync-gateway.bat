@@ -1,0 +1,1 @@
+"%JAVA_HOME%\bin\java" -cp Dusky.jar -Dloader.main=com.fronde.server.config.syncgateway.SyncGatewayInitializer org.springframework.boot.loader.PropertiesLauncher

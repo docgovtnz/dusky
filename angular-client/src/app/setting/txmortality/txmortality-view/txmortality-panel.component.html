@@ -1,0 +1,22 @@
+<ng-container *ngIf="txmortalityRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4">
+      <dl class="data-group">
+        <dt>Name</dt>
+        <dd>{{ txmortalityRevision.name }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Parameters" class="col-md-4">
+      <dl class="data-group">
+        <dt>Normal BPM</dt>
+        <dd>{{ txmortalityRevision.normalBpm }}</dd>
+        <dt>Activity BPM</dt>
+        <dd>{{ txmortalityRevision.activityBpm }}</dd>
+        <dt>Mortality BPM</dt>
+        <dd>{{ txmortalityRevision.mortalityBpm }}</dd>
+        <dt>Hours Til Mort</dt>
+        <dd>{{ txmortalityRevision.hoursTilMort }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

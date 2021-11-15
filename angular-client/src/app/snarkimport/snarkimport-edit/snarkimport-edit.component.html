@@ -1,0 +1,104 @@
+<section>
+  <app-banner title="Snark Import"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<!-- Step 0: User adds details and uploads file. Result sent to: /check -->
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-snarkimport-edit-form
+          [myFormGroup]="myFormGroup"
+          (snarkFileChange)="parseSnarkFile($event)"
+        ></app-snarkimport-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="checkBtn"
+          (click)="runCheck()"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+        >
+          Check
+        </button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<!-- Step 1: User can select/deselect rows as desired. Result sent to: /include -->
+<section class="vertical-spacer">
+  <div class="container">
+    <h2>1. Snark data for inclusion</h2>
+    <p>
+      Select the Snark data to be included. Inclusions/exclusions are
+      pre-selected based on a set of rules.
+    </p>
+
+    <div class="alert alert-secondary" *ngIf="!snarkCheckResult">
+      Pending metadata and data upload
+    </div>
+
+    <ng-container *ngIf="snarkCheckResult">
+      <app-snarkcheckresult-panel
+        [snarkCheckResult]="snarkCheckResult"
+        [loading]="checkLoading"
+      ></app-snarkcheckresult-panel>
+
+      <div class="text-right" *ngIf="snarkCheckResult">
+        <button
+          class="btn btn-primary"
+          id="includeBtn"
+          [disabled]="
+            myFormGroup?.invalid || !snarkCheckResult || includeLoading
+          "
+          (click)="runInclude()"
+        >
+          Include
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</section>
+
+<!-- Step 2: User can assign activities and comments as desired. Result sent to: /import -->
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <h2>2. Records to be created</h2>
+    <p>
+      Records will be created as per the table(s) below. Only evenings with
+      records are shown.
+    </p>
+
+    <div class="alert alert-secondary" *ngIf="!snarkIncludeResult">
+      Pending processing
+    </div>
+
+    <ng-container *ngIf="snarkIncludeResult">
+      <app-snarkincluderesult-panel
+        [snarkIncludeResult]="snarkIncludeResult"
+        [loading]="includeLoading"
+      >
+      </app-snarkincluderesult-panel>
+
+      <div class="text-right">
+        <button
+          class="btn btn-primary"
+          id="importBtn"
+          [disabled]="
+            myFormGroup?.invalid ||
+            !snarkIncludeResult ||
+            snarkIncludeResult.length === 0 ||
+            importLoading
+          "
+          (click)="runImport()"
+        >
+          Import
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</section>

@@ -1,0 +1,93 @@
+<ng-container *ngIf="checkmateRevision">
+  <div class="row">
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-4">
+      <dl class="data-group">
+        <dt>Data Capture Type</dt>
+        <dd>
+          <span class="data-tag">{{ checkmateRevision.dataCaptureType }}</span>
+        </dd>
+        <dt>Pulse Rate</dt>
+        <dd>
+          <span class="data-tag">{{ checkmateRevision.pulseRate }}</span>
+        </dd>
+        <ng-container
+          *ngIf="
+            recordRevision.batteryLife &&
+            recordRevision.batteryLife.battLifeWeeks
+          "
+        >
+          <dt>Battery Life</dt>
+          <dd>
+            {{ recordRevision.batteryLife.battLifeWeeks | addUnits: 'weeks' }}
+          </dd>
+        </ng-container>
+        <dt>Last 24 Hours Activity</dt>
+        <dd>
+          <app-activity-label
+            [activityRawValue]="checkmateRevision.last24hourActivity"
+          >
+          </app-activity-label>
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Data" [noOffset]="true" class="col-md-8">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Female Bird</th>
+              <th scope="col">Time of Mating</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Quality</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="!checkmateRevision.checkmateDataList">
+            <tr>
+              <td colspan="4">Loading...</td>
+            </tr>
+          </tbody>
+
+          <tbody
+            *ngIf="
+              checkmateRevision.checkmateDataList &&
+              checkmateRevision.checkmateDataList.length === 0
+            "
+          >
+            <tr>
+              <td colspan="4">No data found.</td>
+            </tr>
+          </tbody>
+
+          <tbody
+            *ngIf="
+              checkmateRevision.checkmateDataList &&
+              checkmateRevision.checkmateDataList.length > 0
+            "
+          >
+            <tr
+              *ngFor="
+                let item of checkmateRevision.checkmateDataList;
+                let i = index
+              "
+            >
+              <td>
+                <app-bird-name-label
+                  *ngIf="item.birdId"
+                  [birdID]="item.birdId"
+                ></app-bird-name-label>
+              </td>
+              <td>{{ item.time | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ item.duration }}</td>
+              <td>
+                <app-checkmate-quality
+                  [quality]="item.quality"
+                ></app-checkmate-quality>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-controlblock>
+  </div>
+</ng-container>

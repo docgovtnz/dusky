@@ -1,0 +1,83 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Observation" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Location'"
+          [propertyName]="'locationID'"
+          [myFormControl]="myFormGroup.get('locationID')"
+        >
+          <app-location-name-id-select-control
+            id="locationID"
+            formControlName="locationID"
+            [autofocus]="true"
+          ></app-location-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Bird'"
+          [propertyName]="'birdID'"
+          [myFormControl]="myFormGroup.get('birdID')"
+        >
+          <app-bird-name-id-select-control
+            id="birdID"
+            formControlName="birdID"
+          ></app-bird-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Date/Time'"
+          [propertyName]="'dateTime'"
+          [myFormControl]="myFormGroup.get('dateTime')"
+        >
+          <app-date-time-control
+            id="dateTime"
+            formControlName="dateTime"
+            [mandatoryTime]="true"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Record Info" class="col-md-8">
+      <div class="form-group">
+        <app-widget
+          [label]="'Observer List'"
+          [propertyName]="'observerList'"
+          [myFormControl]="myFormGroup.get('observerList')"
+        >
+          <app-observer-edit
+            id="observerList"
+            [myFormArray]="myFormGroup.get('observerList')"
+            [recordType]="'Capture'"
+          ></app-observer-edit>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Weigh Method'"
+          [propertyName]="'weighMethod'"
+          [myFormControl]="myFormGroup.get('weighMethod')"
+        >
+          <select
+            class="custom-select"
+            id="weighMethod"
+            formControlName="weighMethod"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('WeightMethodSelect')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

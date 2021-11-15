@@ -1,0 +1,8 @@
+<span>
+  <!-- One of these is a span and one of these is a small, because they're used in slightly different contexts, should
+  probably have a flag to also drive the control of the span vs small as well but didn't seem important enough at the time -->
+  <span *ngIf="person && !makeStrong">{{ person.name }}</span>
+  <small *ngIf="person && makeStrong"
+    ><strong>{{ person.name }}</strong></small
+  >
+</span>

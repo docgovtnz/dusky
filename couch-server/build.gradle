@@ -1,0 +1,212 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.18.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = '1.10'
+targetCompatibility = '1.10'
+
+sourceSets {
+	generated {
+		java {
+			compileClasspath = sourceSets.main.compileClasspath
+			srcDir "$buildDir/generated-src"
+		}
+	}
+
+	main {
+		java {
+			srcDir 'src/main/java'
+			compileClasspath += sourceSets.generated.output
+			exclude '**/EnvironmentProcessor.java'
+		}
+	}
+}
+
+task generateSources(type: Copy) {
+	outputs.upToDateWhen { false }
+	from('src/main/java') {
+		include '**/EnvironmentProcessor.java'
+		includeEmptyDirs false
+	}
+	into "$buildDir/generated-src"
+	filter { line -> line.replaceAll('<ENCRYPTION PASSWORD>', "$encryptionPassword") }
+}
+
+group = 'com.fronde'
+//version = '' - not using version in Gradle, see application.properties
+//sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile 'javax.xml.bind:jaxb-api:2.3.0'
+    compile 'org.glassfish.jaxb:jaxb-runtime:2.3.0'
+    compile 'javax.activation:javax.activation-api:1.2.0'
+
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.springframework.boot:spring-boot-starter-aop'
+	compile 'org.springframework.boot:spring-boot-starter-jdbc:2.1.18.RELEASE'
+
+	compile 'org.springframework.data:spring-data-couchbase:3.0.8.RELEASE'
+
+	implementation 'ch.qos.logback:logback-classic:1.2.3'
+	implementation 'net.logstash.logback:logstash-logback-encoder:6.1'
+	implementation 'io.sentry:sentry-spring-boot-starter:4.3.0'
+
+	compile 'io.jsonwebtoken:jjwt:0.9.0'
+	compile 'commons-io:commons-io:2.4'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.9.5'
+	compile 'com.hazelcast:hazelcast:3.9.3'
+	compile 'uk.com.robust-it:cloning:1.9.10'
+    compile 'org.apache.commons:commons-csv:1.5'
+	compile 'org.apache.commons:commons-math3:3.6.1'
+
+	compile 'org.bouncycastle:bcpkix-jdk15on:1.60'
+
+
+	compile files('libs/3.25.jar')
+
+	runtime 'com.microsoft.sqlserver:mssql-jdbc:6.4.0.jre8'
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+// The output directory for this changes if you are running the Application class as a main method from within an IDE
+// but be careful because the "dist" directory is needed for distributable builds
+//into 'out/production/resources/static'
+task copyWebApp(type: Copy, dependsOn: ":angular-client:npmBuild") {
+	from '../angular-client/dist'
+	into 'build/resources/main/static'
+	doLast {
+		println("Copy WebApp: good to go")
+	}
+}
+
+task packageRelease(type: Copy, dependsOn: ":couch-server:bootJar") {
+	from('etc/dusky/') {
+		include '**.*'
+	}
+
+	from('build/libs/') {
+		include 'Dusky.jar'
+	}
+	into 'build/dist/dusky'
+	doLast {
+		println("packageRelease: good to go")
+	}
+}
+
+task packageDistributionProdServer(type: Zip) {
+	archiveName = "dusky-prod-server.zip"
+	destinationDir = file("${buildDir}/dist")
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	from "etc/env/prod-server"
+	from "build/dist/dusky"
+	into "Dusky"
+
+	dependsOn(packageRelease)
+}
+
+task packageDistributionProdLaptop(type: Zip) {
+	archiveName = "dusky-prod-laptop.zip"
+	destinationDir = file("${buildDir}/dist")
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	from "etc/env/prod-laptop"
+	from "build/dist/dusky"
+	into "Dusky"
+
+	dependsOn(packageRelease)
+}
+
+task packageDistributionDevServer(type: Zip) {
+	archiveName = "dusky-dev-server.zip"
+	destinationDir = file("${buildDir}/dist")
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	from "etc/env/dev-server"
+	from "build/dist/dusky"
+	into "Dusky"
+
+	dependsOn(packageRelease)
+}
+
+task packageDistributionDevLaptop(type: Zip) {
+	archiveName = "dusky-dev-laptop.zip"
+	destinationDir = file("${buildDir}/dist")
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	from "etc/env/dev-laptop"
+	from "build/dist/dusky"
+	into "Dusky"
+
+	dependsOn(packageRelease)
+}
+
+task packageDistributionTestServer(type: Zip) {
+	archiveName = "dusky-test-server.zip"
+	destinationDir = file("${buildDir}/dist")
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	from "etc/env/test-server"
+	from "build/dist/dusky"
+	into "Dusky"
+
+	dependsOn(packageRelease)
+}
+
+task packageDistributionTestLaptop(type: Zip) {
+	archiveName = "dusky-test-laptop.zip"
+	destinationDir = file("${buildDir}/dist")
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	from "etc/env/test-laptop"
+	from "build/dist/dusky"
+	into "Dusky"
+
+	dependsOn(packageRelease)
+}
+
+
+task packageDistribution() {
+	dependsOn(packageDistributionProdLaptop)
+	dependsOn(packageDistributionProdServer)
+	dependsOn(packageDistributionDevServer)
+	dependsOn(packageDistributionDevLaptop)
+	dependsOn(packageDistributionTestServer)
+	dependsOn(packageDistributionTestLaptop)
+}
+
+
+springBoot {
+	mainClassName = 'com.fronde.server.CouchServerApplication'
+}
+
+bootJar {
+	dependsOn 'copyWebApp'
+	baseName = 'Dusky'
+	mainClassName = 'com.fronde.server.CouchServerApplication'
+	launchScript()
+}
+
+compileGeneratedJava.dependsOn(generateSources)
+compileJava.dependsOn(compileGeneratedJava)
+compileJava.source sourceSets.generated.java, sourceSets.main.java

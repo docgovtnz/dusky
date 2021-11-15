@@ -1,0 +1,30 @@
+@media print {
+  @page {
+    size: landscape;
+  }
+}
+
+#mapNode {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.map-height {
+  height: 680px;
+}
+
+.bird-legend {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+/** WARNING: You might have thought you could override the CSS of some ESRI stlying here, but you would be wrong!
+ The ESRI map loads it's own CSS from the 3.25.jar file of library source on the server. Inside of that
+ is the CSS that the ESRI map uses. So you can unzip that jar file, change the CSS and the zip/rename it back to a jar
+ and copy it into the couch-server/libs folder. */
+/*** .esriPopup a[title="Zoom to"] { display:none; } ****/
+
+/** But wait get gets even worse. The next time someone upgrades the ESRI code there's various manual modifications that
+will need to be made like this CSS hack around the zoom to link. */

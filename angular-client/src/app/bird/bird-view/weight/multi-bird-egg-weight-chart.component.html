@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <div class="row mt-2 mb-2">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <button type="button" class="btn btn-info mr-3" (click)="selectAll()">
+        All
+      </button>
+      <button type="button" class="btn btn-info" (click)="unselectAll()">
+        None
+      </button>
+    </div>
+  </div>
+
+  <div class="row" style="height: 80vh">
+    <div class="col-10">
+      <canvas #multiBirdWeightCanvas></canvas>
+    </div>
+    <div class="col-2" style="overflow-y: scroll">
+      <div
+        class="d-flex align-items-center"
+        *ngFor="let legendItem of legendItems"
+        (click)="toggle(legendItem)"
+      >
+        <div class="pr-2">
+          <svg
+            height="0.8em"
+            width="1.5em"
+            *ngIf="legendItem.type === 0"
+            style="vertical-align: baseline"
+          >
+            <text
+              x="0em"
+              y="50%"
+              style="font-size: 45%"
+              fill="#cccccc"
+              textLength="100%"
+              lengthAdjust="spacingAndGlyphs"
+            >
+              NO
+            </text>
+            <text
+              x="0em"
+              y="100%"
+              style="font-size: 45%"
+              fill="#cccccc"
+              textLength="100%"
+              lengthAdjust="spacingAndGlyphs"
+            >
+              DATA
+            </text>
+          </svg>
+
+          <svg
+            height="0.8em"
+            width="1.5em"
+            *ngIf="legendItem.type === 1"
+            style="vertical-align: baseline"
+          >
+            <line
+              x1="0em"
+              y1="0.4em"
+              x2="1.5em"
+              y2="0.4em"
+              [style.stroke]="legendItem.borderColor"
+              [style.stroke-width]="legendItem.borderWidth"
+              [style.stroke-dasharray]="''"
+            />
+          </svg>
+
+          <svg
+            height="0.8em"
+            width="1.5em"
+            *ngIf="legendItem.type === 2"
+            style="vertical-align: baseline"
+          >
+            <line
+              x1="0em"
+              y1="0.4em"
+              x2="1.5em"
+              y2="0.4em"
+              [style.stroke]="legendItem.borderColor"
+              [style.stroke-width]="legendItem.borderWidth"
+              [style.stroke-dasharray]="'5 5'"
+            />
+          </svg>
+
+          <svg
+            height="0.8em"
+            width="1.5em"
+            *ngIf="legendItem.type === 3"
+            style="vertical-align: baseline"
+          >
+            <line
+              x1="0em"
+              y1="0.3em"
+              x2="1.5em"
+              y2="0.3em"
+              [style.stroke]="legendItem.borderColor"
+              [style.stroke-width]="legendItem.borderWidth"
+              [style.stroke-dasharray]="''"
+            />
+            <line
+              x1="0em"
+              y1="0.5em"
+              x2="1.5em"
+              y2="0.5em"
+              [style.stroke]="legendItem.borderColor"
+              [style.stroke-width]="legendItem.borderWidth"
+              [style.stroke-dasharray]="'5 5'"
+            />
+          </svg>
+        </div>
+        <div
+          [style.text-decoration]="
+            legendItem.hidden || legendItem.type === 0 ? 'line-through' : 'none'
+          "
+          [style.color]="
+            legendItem.hidden || legendItem.type === 0 ? '#CCCCCC' : '#000000'
+          "
+        >
+          {{ legendItem.label }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

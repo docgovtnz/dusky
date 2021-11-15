@@ -1,0 +1,24 @@
+<ng-container *ngIf="egghealthRevision">
+  <div class="row">
+    <app-controlblock title="Measurements" [noOffset]="true" class="col-md-6">
+      <dl class="data-group">
+        <dt>Length</dt>
+        <dd>{{ egghealthRevision.lengthInMms | addUnits: 'mm' }}</dd>
+        <dt>Width</dt>
+        <dd>{{ egghealthRevision.widthInMms | addUnits: 'mm' }}</dd>
+        <dt>Candling Age Estimate</dt>
+        <dd>
+          {{ egghealthRevision.candlingAgeEstimateInDays | addUnits: 'days' }}
+        </dd>
+        <dt>Temperature</dt>
+        <dd>{{ egghealthRevision.temperature | addUnits: '°C' }}</dd>
+        <dt>Heart Rate</dt>
+        <dd>{{ egghealthRevision.heartRate | addUnits: 'bpm' }}</dd>
+        <dt>Embryo Moving</dt>
+        <dd>
+          <span class="data-tag">{{ egghealthRevision.embryoMoving }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

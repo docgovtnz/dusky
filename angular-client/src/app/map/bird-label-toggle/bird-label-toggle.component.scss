@@ -1,0 +1,11 @@
+input[type='checkbox'],
+input[type='radio'] {
+  box-sizing: border-box;
+  padding: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.form-check-input {
+  margin-top: 0.1rem;
+}

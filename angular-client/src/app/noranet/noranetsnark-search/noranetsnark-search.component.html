@@ -1,0 +1,136 @@
+<section>
+  <app-banner title="NoraNet: Snarks"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="noranetSnarkCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Details" class="col-md-3">
+            <div class="form-group">
+              <label for="stations"> Station ID </label>
+              <app-type-ahead
+                id="station"
+                [optionType]="'Stations'"
+                [(selectedOption)]="noranetSnarkCriteria.stationId"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="island">
+                Island
+                <span class="text-danger"><strong>&nbsp;*</strong></span>
+              </label>
+              <app-type-ahead
+                id="island"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="noranetSnarkCriteria.island"
+              ></app-type-ahead>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Dates" class="col-md-3">
+            <div class="form-group">
+              <label for="fromActivityDate"> From Date </label>
+              <app-date-editor
+                id="fromActivityDate"
+                [editorCfg]="'WithPresets'"
+                [(dateValue)]="noranetSnarkCriteria.fromActivityDate"
+              ></app-date-editor>
+            </div>
+            <div class="form-group">
+              <label for="toActivityDate"> To Date </label>
+              <app-date-editor
+                id="toActivityDate"
+                [editorCfg]="'none'"
+                [(dateValue)]="noranetSnarkCriteria.toActivityDate"
+              ></app-date-editor>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Island</th>
+            <th scope="col">Date</th>
+            <th scope="col">Station ID</th>
+            <th scope="col">Weights</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="4">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results?.length === 0">
+          <tr>
+            <td colspan="4">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results?.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.island }}</td>
+            <td>{{ item.activityDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ item.stationId }}</td>
+            <td>
+              <ul class="list-unstyled m-0">
+                <li *ngFor="let weight of item.weightData">
+                  {{ weight }}
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results?.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="noranetSnarkCriteria.pageSize"
+          [(ngModel)]="noranetSnarkCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results?.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+<ng-container *ngIf="transferdetailRevision">
+  <div class="row">
+    <app-controlblock title="Transfer" [noOffset]="true" class="col-md-6">
+      <dl class="data-group">
+        <dt>Transfer from Island</dt>
+        <dd>{{ transferdetailRevision.transferFromIsland }}</dd>
+        <dt>Transfer to Island</dt>
+        <dd>{{ transferdetailRevision.transferToIsland }}</dd>
+        <dt>Transfer from Location</dt>
+        <dd>
+          <app-location-name-label
+            [locationID]="transferdetailRevision.transferFromLocationID"
+          ></app-location-name-label>
+        </dd>
+        <dt>Transfer to Location</dt>
+        <dd>
+          <app-location-name-label
+            [locationID]="transferdetailRevision.transferToLocationID"
+          ></app-location-name-label>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

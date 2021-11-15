@@ -1,0 +1,83 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6">
+      <div class="form-group">
+        <app-widget
+          [label]="'Location'"
+          [propertyName]="'locationID'"
+          [myFormControl]="myFormGroup.get('locationID')"
+        >
+          <app-location-name-id-select-control
+            id="locationID"
+            formControlName="locationID"
+            [autofocus]="true"
+          ></app-location-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Observer'"
+          [propertyName]="'observerPersonID'"
+          [myFormControl]="myFormGroup.get('observerPersonID')"
+        >
+          <app-person-name-id-select-control
+            id="observerPersonID"
+            formControlName="observerPersonID"
+          ></app-person-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Date'"
+          [propertyName]="'date'"
+          [myFormControl]="myFormGroup.get('date')"
+        >
+          <app-date-control
+            id="date"
+            formControlName="date"
+            [editorCfg]="'none'"
+          ></app-date-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Activity Type'"
+          [propertyName]="'activityType'"
+          [myFormControl]="myFormGroup.get('activityType')"
+        >
+          <select
+            class="custom-select"
+            id="activityType"
+            formControlName="activityType"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('ActivityType') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Comments" class="col-md-6">
+      <div class="form-group">
+        <app-widget
+          [label]="'Comments'"
+          [propertyName]="'comments'"
+          [myFormControl]="myFormGroup.get('comments')"
+        >
+          <textarea
+            class="form-control"
+            id="comments"
+            formControlName="comments"
+            rows="4"
+          ></textarea>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

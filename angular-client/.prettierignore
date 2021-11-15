@@ -1,0 +1,7 @@
+package.json
+package-lock.json
+dist
+node_modules
+src/assets/styles
+angular.json
+tslint.json

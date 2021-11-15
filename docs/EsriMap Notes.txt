@@ -1,0 +1,71 @@
+
+How to get the Type definitions
+
+https://github.com/tomwayson/angular-esri-loader/issues/2
+
+
+Geometry engine.
+
+
+The New Zealand Map Grid (LINZ) - https://www.linz.govt.nz/data/geodetic-system/datums-projections-heights/projections/new-zealand-map-grid-nzmg
+Introduction to NZTM (maptoaster) - https://www.maptoaster.com/maptoaster-topo-nz/articles/nztm/nztm.html
+Understanding New Zealand coordinate systems (NZ Tramper) - https://tramper.nz/2302/understanding-new-zealand-coordinate-systems/
+
+
+
+Latitude and longitude coordinates are often written as degrees, minutes, and seconds of arc as follows:
+  43°35′53.3″ S, 170°08′33.0″ E
+  or as decimal degrees: -43.5981468, 170.1425128
+
+One second of arc (1″) equates to 30m, or 0.00028 in decimal degrees.
+
+
+The New Zealand Geodetic Datum 2000 (NZGD2000) supercedes NZGD49, which was in use until 1998.
+ - There's about a 200m difference between these datums
+
+GPS units use the World Geodetic System 1984 (WGS84)
+
+NZGD2000 and WGS84 may be considered identical for now — differences are on the scale of 1-2 metres.
+
+Aoraki / Mount Cook is referenced as: 5169132, 1369317.
+
+
+----------------
+
+Downgrading from 4.8.1 to 3.25. Loader stays the same, but think we need to be loading it locally
+rather than online.
+
+From:
+"@types/arcgis-js-api": "^4.8.1",
+
+To:
+"@types/arcgis-js-api": "3.25.0",
+
+
+----------------
+
+Getting the ArcGIS library to run offline involved;
+
+1. Using the documentation at;
+
+https://developers.arcgis.com/javascript/3/jshelp/intro_accessapi.html
+
+2. Following the "Download" strategy at the bottom of the page
+
+3. Creating a public Developer account to get access to the API
+
+4. Downloading the 3.25 version of the API and unzipping it
+
+5. Reading the install instructions from within the zip file to track down and "Modify the Build" to change the library supplied source code from
+
+6. https://[HOSTNAME_AND_PATH_TO_JSAPI]dojo
+
+7. To the fully qualified hostname and path of where the library will be running (not sure if relative paths work or not yet)
+
+8. Host the library within a web server of some kind at the expected location.
+
+Current size = 129 MB on disk.
+ ...though to be fair there are ways of building an application specific version of the library.
+
+See also: https://github.com/Esri/esri-loader#why-is-this-needed
+

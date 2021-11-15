@@ -1,0 +1,252 @@
+<section>
+  <app-banner title="Records"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="recordCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Bird" class="col-md-3">
+            <div class="form-group">
+              <label for="birdIDs"> Bird(s) </label>
+              <app-bird-id-select-multi
+                id="birdIDs"
+                [(selectedBirds)]="recordCriteria.birdIDs"
+                [autofocus]="true"
+                (selectedBirdsChange)="onBirdSelectionChanged()"
+              ></app-bird-id-select-multi>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="significantEventOnly"
+                  [(ngModel)]="recordCriteria.significantEventOnly"
+                />
+                <label class="form-check-label" for="significantEventOnly">
+                  Show Significant Event Only
+                </label>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Record" class="col-md-3">
+            <div class="form-group">
+              <label for="recordType"> Record Type </label>
+              <app-option-select-multi
+                #recordTypeBox
+                id="recordType"
+                [optionType]="'RecordType'"
+                [(selectedOptions)]="recordCriteria.recordTypes"
+              ></app-option-select-multi>
+            </div>
+            <div class="form-group">
+              <label for="reason"> Reason </label>
+              <app-option-select-multi
+                #reasonBox
+                id="reason"
+                [optionType]="'RecordReasons'"
+                [(selectedOptions)]="recordCriteria.reasons"
+              ></app-option-select-multi>
+            </div>
+            <div class="form-group">
+              <label for="activity"> Activity </label>
+              <app-type-ahead
+                id="activity"
+                [optionType]="'RecordActivities'"
+                [(selectedOption)]="recordCriteria.activity"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="withWeightOnly"
+                  [(ngModel)]="recordCriteria.withWeightOnly"
+                />
+                <label class="form-check-label" for="withWeightOnly">
+                  Show With Weight Only
+                </label>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Locations" class="col-md-3">
+            <div class="form-group">
+              <label for="island"> Island </label>
+              <app-type-ahead
+                id="island"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="recordCriteria.island"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="locationID"> Location </label>
+              <app-location-name-id-select
+                id="locationID"
+                [(locationID)]="recordCriteria.locationID"
+                (locationIDChange)="doSearch()"
+                (keyup.enter)="prevent($event)"
+              ></app-location-name-id-select>
+            </div>
+            <div class="form-group">
+              <label for="observerPersonID"> Recorder </label>
+              <app-person-id-select
+                id="observerPersonID"
+                [(personID)]="recordCriteria.observerPersonID"
+                (personIDChange)="doSearch()"
+                (keyup.enter)="prevent($event)"
+              ></app-person-id-select>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Dates" class="col-md-3">
+            <div class="form-group">
+              <label for="fromDate"> From Date </label>
+              <app-date-editor
+                id="fromDate"
+                [editorCfg]="'WithPresets'"
+                [(dateValue)]="recordCriteria.fromDate"
+              ></app-date-editor>
+            </div>
+            <div class="form-group">
+              <label for="toDate"> To Date </label>
+              <app-date-editor
+                id="toDate"
+                [editorCfg]="'none'"
+                [(dateValue)]="recordCriteria.toDate"
+              ></app-date-editor>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button
+          id="mapBtn"
+          (click)="onMap()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Map
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Bird</th>
+            <th scope="col">Recorder</th>
+            <th scope="col">Island</th>
+            <th scope="col">Location</th>
+            <th scope="col">Easting</th>
+            <th scope="col">Northing</th>
+            <th scope="col">Record Type</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Sub Reason</th>
+            <th scope="col">Activity</th>
+            <th scope="col">Weight</th>
+            <th scope="col">S</th>
+            <th scope="col">C</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="12">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="12">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.dateTime | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+              <app-link-view
+                [linkUrl]="'/bird/' + item.birdID"
+                [label]="item.birdName"
+              ></app-link-view>
+            </td>
+            <td>{{ item.recorder }}</td>
+            <td>{{ item.island }}</td>
+            <td>
+              <app-link-view
+                [linkUrl]="'/location/' + item.locationID"
+                [label]="item.locationName"
+              ></app-link-view>
+            </td>
+            <td>{{ item.easting }}</td>
+            <td>{{ item.northing }}</td>
+            <td>{{ item.recordType }}</td>
+            <td>{{ item.reason }}</td>
+            <td>{{ item.subReason }}</td>
+            <td>{{ item.activity }}</td>
+            <td>{{ item.weight | addUnits: 'kg' }}</td>
+            <td>
+              <ng-container *ngIf="item.hasSample"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Sample</span></ng-container
+              >
+            </td>
+            <td>
+              <ng-container *ngIf="item.hasComment"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Comments</span></ng-container
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="recordCriteria.pageSize"
+          [(ngModel)]="recordCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

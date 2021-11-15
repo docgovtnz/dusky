@@ -1,0 +1,74 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">UHF ID</th>
+        <th scope="col">Bird(s)</th>
+        <th scope="col">Station</th>
+        <th scope="col">Pulses</th>
+        <th scope="col">Detection Type</th>
+        <th scope="col">Activity Hours</th>
+        <th scope="col">Peak Twitch</th>
+        <th scope="col">Battery Weeks</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!pagedResponse">
+      <tr>
+        <td colspan="9">Search not yet executed.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="pagedResponse && pagedResponse.results?.length === 0">
+      <tr>
+        <td colspan="9">No search results found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="pagedResponse && pagedResponse.results?.length > 0">
+      <tr
+        *ngFor="let item of pagedResponse.results"
+        (click)="onClick(item, $event)"
+        class="search-result-item"
+      >
+        <td>{{ item.activityDate | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ item.uhfId | number: '3.0-0' }}</td>
+        <td>
+          <app-bird-name-label-multi
+            [birdList]="item.birdList"
+          ></app-bird-name-label-multi>
+        </td>
+        <td>{{ item.stationId }}</td>
+        <td>{{ item.pulseCount }}</td>
+        <td>{{ item.dataType }}</td>
+        <td>{{ item.activity }}</td>
+        <td>{{ item.peakTwitch }}</td>
+        <td>{{ item.batteryLife }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <pagination
+      *ngIf="pagedResponse && pagedResponse.results?.length > 0"
+      [boundaryLinks]="true"
+      [maxSize]="5"
+      [itemsPerPage]="noranetCriteria.pageSize"
+      [(ngModel)]="noranetCriteria.pageNumber"
+      [totalItems]="pagedResponse.total"
+      (pageChanged)="onPageChanged($event)"
+    >
+    </pagination>
+  </div>
+  <div
+    *ngIf="pagedResponse && pagedResponse.results?.length > 0"
+    class="col-6 result-count"
+  >
+    Showing {{ pagedResponse.firstResult | number }} to
+    {{ pagedResponse.lastResult | number }} of
+    {{ pagedResponse.total | number }} results
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<ng-container *ngIf="supplementaryfeedingRevision">
+  <div class="row">
+    <app-controlblock
+      title="Supplementary Feeding"
+      [noOffset]="true"
+      class="col-md-6"
+    >
+      <dl class="data-group">
+        <dt>Feeding Regime</dt>
+        <dd>
+          <span class="data-tag">{{
+            supplementaryfeedingRevision.feedingRegime
+          }}</span>
+        </dd>
+        <dt>Food Types</dt>
+        <dd>
+          <app-multi-value-view
+            [values]="supplementaryfeedingRevision.foodTypes"
+          ></app-multi-value-view>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

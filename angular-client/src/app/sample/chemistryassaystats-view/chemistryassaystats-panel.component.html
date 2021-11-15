@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Mean</th>
+        <th scope="col">StDev</th>
+        <th scope="col">Min</th>
+        <th scope="col">Max</th>
+        <th scope="col">n</th>
+        <th scope="col">Rank</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!assayStatsList">
+      <tr>
+        <td colspan="6">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="assayStatsList && assayStatsList.length === 0">
+      <tr>
+        <td colspan="6">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="assayStatsList && assayStatsList.length > 0">
+      <tr *ngFor="let item of assayStatsList; index as i">
+        <td>
+          {{ item.mean | number: '1.0-2' }}
+        </td>
+        <td>
+          {{ item.standardDeviation | number: '1.0-2' }}
+        </td>
+        <td>
+          {{ item.minimum | number: '1.0-2' }}
+        </td>
+        <td>
+          {{ item.maximum | number: '1.0-2' }}
+        </td>
+        <td>
+          {{ item.n }}
+        </td>
+        <td>
+          <ng-container *ngIf="assayRanksList">{{
+            assayRanksList[i]
+          }}</ng-container>
+          <ng-container *ngIf="!assayRanksList">...</ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

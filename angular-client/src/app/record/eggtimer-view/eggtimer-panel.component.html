@@ -1,0 +1,100 @@
+<ng-container *ngIf="eggtimerRevision">
+  <div class="row">
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-3">
+      <dl class="data-group">
+        <dt>Data Capture Type</dt>
+        <dd>
+          <span class="data-tag">{{ eggtimerRevision.dataCaptureType }}</span>
+        </dd>
+        <dt>Pulse Rate</dt>
+        <dd>
+          <span class="data-tag">{{ eggtimerRevision.pulseRate }}</span>
+        </dd>
+        <ng-container *ngIf="recordRevision.batteryLife">
+          <dt>Battery life</dt>
+          <dd>
+            {{ recordRevision.batteryLife.battLifeWeeks | addUnits: 'weeks' }}
+          </dd>
+        </ng-container>
+      </dl>
+    </app-controlblock>
+    <ng-container *ngIf="eggtimerRevision.dataCaptureType === 'Manual'">
+      <app-controlblock title="Status" [noOffset]="true" class="col-md-3">
+        <dl class="data-group">
+          <dt>Days since change of status</dt>
+          <dd>{{ eggtimerRevision.daysSinceChange | addUnits: 'days' }}</dd>
+          <dt>Duration in days of current/last incubation state</dt>
+          <dd>{{ eggtimerRevision.durationOfPrevious | addUnits: 'days' }}</dd>
+        </dl>
+      </app-controlblock>
+      <app-controlblock title="Activity" [noOffset]="true" class="col-md-6">
+        <dl class="data-group">
+          <dt>Activity yesterday</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.activityYesterday"
+            ></app-activity-label>
+          </dd>
+          <dt>Activity 2 days ago</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.activity2DaysAgo"
+            ></app-activity-label>
+          </dd>
+          <dt>Activity 3 days ago</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.activity3DaysAgo"
+            ></app-activity-label>
+          </dd>
+          <dt>Activity 4 days ago</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.activity4DaysAgo"
+            ></app-activity-label>
+          </dd>
+          <dt>Activity 5 days ago</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.activity5DaysAgo"
+            ></app-activity-label>
+          </dd>
+          <dt>Activity 6 days ago</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.activity6DaysAgo"
+            ></app-activity-label>
+          </dd>
+          <dt>Activity 7 days ago</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.activity7DaysAgo"
+            ></app-activity-label>
+          </dd>
+          <dt>Mean activity</dt>
+          <dd>
+            <app-activity-label
+              [activityRawValue]="eggtimerRevision.meanActivity"
+            ></app-activity-label>
+          </dd>
+        </dl>
+      </app-controlblock>
+    </ng-container>
+    <ng-container *ngIf="eggtimerRevision.dataCaptureType === 'From Errol'">
+      <app-controlblock title="Activity" [noOffset]="true" class="col-md-6">
+        <dl class="data-group">
+          <dt>Errol ID</dt>
+          <dd>{{ eggtimerRevision.errolID }}</dd>
+          <dt>Days in Incubation</dt>
+          <dd>
+            {{ eggtimerRevision.errolDaysSinceChange | addUnits: 'days' }}
+          </dd>
+          <dt>Activity 1 days</dt>
+          <dd>{{ eggtimerRevision.errolActivity1Day | addUnits: 'hours' }}</dd>
+          <dt>Activity 7 days</dt>
+          <dd>{{ eggtimerRevision.errolActivity7Days | addUnits: 'hours' }}</dd>
+        </dl>
+      </app-controlblock>
+    </ng-container>
+  </div>
+</ng-container>

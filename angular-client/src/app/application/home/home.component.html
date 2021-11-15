@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <br />
+  <p>Home page.</p>
+
+  <ng-container *ngIf="serverMode === 'Client'">
+    <button
+      class="btn btn-primary btn-block"
+      style="width: 20em"
+      (click)="resetIndexes()"
+    >
+      Rebuild Indexes
+    </button>
+  </ng-container>
+</div>
+
+<app-index-rebuild></app-index-rebuild>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="SampleEntity">
+  <Property name="archived" label="Archived" javaType="Boolean" jsonType="boolean"/>
+  <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+  <Property name="bloodChemistryComments" label="Blood Chemistry Comments" javaType="String"
+    jsonType="string"/>
+  <Property name="collectionDate" label="Collection Date" javaType="Date" jsonType="Date"/>
+  <Property name="collectionIsland" label="Collection Island" javaType="String" jsonType="string"/>
+  <Property name="collectionLocationID" label="LocationID" javaType="String" jsonType="string"/>
+  <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+  <Property name="container" label="Container" javaType="String" jsonType="string"/>
+  <Property name="currentIsland" label="Island" javaType="String" jsonType="string"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="haematologyComments" label="Haematology Comments" javaType="String"
+    jsonType="string"/>
+  <Property name="haemolysed" label="Haemolysed" javaType="Boolean" jsonType="boolean"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="microbiologyAndParasitologyComments"
+    label="Microbiology And Parasitology Comments" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="sampleCategory" label="Sample Category" javaType="String" jsonType="string"/>
+  <Property name="sampleName" label="Sample ID" javaType="String" jsonType="string"/>
+  <Property name="sampleTakenBy" label="Sample Taken By" javaType="String" jsonType="string"/>
+  <Property name="sampleType" label="Sample Type" javaType="String" jsonType="string"/>
+  <Property name="smudgeCells" label="Smudge cells" javaType="Boolean" jsonType="boolean"/>
+  <Property name="spermComments" label="Sperm Comments" javaType="String" jsonType="string"/>
+  <Property name="storageConditions" label="Storage Conditions" javaType="String"
+    jsonType="string"/>
+  <Property name="storageMedium" label="Storage Medium" javaType="String" jsonType="string"/>
+  <Property name="reasonForSample" label="Reason for Sample" javaType="String" jsonType="string"/>
+  <Property name="bloodDetail" label="Blood Detail" javaType="BloodDetailEntity"
+    jsonType="BloodDetailEntity">
+    <Class name="BloodDetailEntity">
+      <Property name="totalBloodVolumeInMl" label="Total Blood Volume" javaType="Float"
+        jsonType="number"/>
+      <Property name="type" label="Type" javaType="String" jsonType="string"/>
+      <Property name="volumeInMl" label="Volume" javaType="Float" jsonType="number"/>
+      <Property name="veinSite" label="Vein Site" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="type"/>
+          <DisplayProperty name="volumeInMl"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="chemistryAssayList" label="Chemistry Assay List"
+    javaType="List&lt;ChemistryAssayEntity&gt;" jsonType="ChemistryAssayEntity[]">
+    <Class name="ChemistryAssayEntity">
+      <Property name="labName" label="Lab Name" javaType="String" jsonType="string"/>
+      <Property name="caseNumber" label="Case Number" javaType="String" jsonType="string"/>
+      <Property name="dateProcessed" label="Date Processed" javaType="Date" jsonType="Date"/>
+      <Property name="chemistryAssay" label="Chemistry Assay" javaType="String" jsonType="string"/>
+      <Property name="result" label="Result" javaType="String" jsonType="string"/>
+      <Property name="statsExclude" label="Stats Exclude?" javaType="Boolean" jsonType="boolean"/>
+      <Property name="timeOfCentrifuge" label="Time Of Centrifuge" javaType="Date" jsonType="Date"/>
+      <Property name="chemistryMethod" label="Chemistry Method" javaType="String"
+        jsonType="string"/>
+      <Property name="plasmaOrSerum" label="Plasma Or Serum" javaType="String" jsonType="string"/>
+      <Property name="oldStorageMedium" label="Old Storage Medium" javaType="String"
+        jsonType="string"/>
+      <Property name="oldContainer" label="Old Container" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="labName"/>
+          <DisplayProperty name="caseNumber"/>
+          <DisplayProperty name="dateProcessed"/>
+          <DisplayProperty name="chemistryAssay"/>
+          <DisplayProperty name="result"/>
+          <DisplayProperty name="statsExclude"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="haematologyTestList" label="Haematology Test List"
+    javaType="List&lt;HaematologyTestEntity&gt;" jsonType="HaematologyTestEntity[]">
+    <Class name="HaematologyTestEntity">
+      <Property name="labName" label="Lab Name" javaType="String" jsonType="string"/>
+      <Property name="caseNumber" label="Case Number" javaType="String" jsonType="string"/>
+      <Property name="dateProcessed" label="Date Processed" javaType="Date" jsonType="Date"/>
+      <Property name="test" label="Test" javaType="String" jsonType="string"/>
+      <Property name="result" label="Result" javaType="String" jsonType="string"/>
+      <Property name="statsExclude" label="Stats Exclude?" javaType="Boolean" jsonType="boolean"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="labName"/>
+          <DisplayProperty name="caseNumber"/>
+          <DisplayProperty name="dateProcessed"/>
+          <DisplayProperty name="test"/>
+          <DisplayProperty name="result"/>
+          <DisplayProperty name="statsExclude"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="microbiologyAndParasitologyTestList"
+    label="Microbiology And Parasitology Test List"
+    javaType="List&lt;MicrobiologyAndParasitologyTestEntity&gt;"
+    jsonType="MicrobiologyAndParasitologyTestEntity[]">
+    <Class name="MicrobiologyAndParasitologyTestEntity">
+      <Property name="labName" label="Lab Name" javaType="String" jsonType="string"/>
+      <Property name="caseNumber" label="Case Number" javaType="String" jsonType="string"/>
+      <Property name="dateProcessed" label="Date Processed" javaType="Date" jsonType="Date"/>
+      <Property name="test" label="Test" javaType="String" jsonType="string"/>
+      <Property name="result" label="Result" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="labName"/>
+          <DisplayProperty name="caseNumber"/>
+          <DisplayProperty name="dateProcessed"/>
+          <DisplayProperty name="test"/>
+          <DisplayProperty name="result"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="otherDetail" label="Other Detail" javaType="OtherDetailEntity"
+    jsonType="OtherDetailEntity">
+    <Class name="OtherDetailEntity">
+      <Property name="type" label="Type" javaType="String" jsonType="string"/>
+      <Property name="amount" label="Amount" javaType="Float" jsonType="number"/>
+      <Property name="units" label="Units" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="type"/>
+          <DisplayProperty name="amount"/>
+          <DisplayProperty name="units"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="spermDetail" label="Sperm Detail" javaType="SpermDetailEntity"
+    jsonType="SpermDetailEntity">
+    <Class name="SpermDetailEntity">
+      <Property name="diluent" label="Diluent" javaType="String" jsonType="string"/>
+      <Property name="volumeInMicroL" label="Volume" javaType="Float" jsonType="number"/>
+      <Property name="collectionMethod" label="Collection Method" javaType="String"
+        jsonType="string"/>
+      <Property name="papillaSwelling" label="Papilla Swelling" javaType="String"
+        jsonType="string"/>
+      <Property name="stimulation" label="Stimulation" javaType="String" jsonType="string"/>
+      <Property name="stress" label="Stress" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="diluent"/>
+          <DisplayProperty name="volumeInMicroL"/>
+          <DisplayProperty name="collectionMethod"/>
+          <DisplayProperty name="papillaSwelling"/>
+          <DisplayProperty name="stimulation"/>
+          <DisplayProperty name="stress"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="spermMeasureList" label="Sperm Measure List"
+    javaType="List&lt;SpermMeasureEntity&gt;" jsonType="SpermMeasureEntity[]">
+    <Class name="SpermMeasureEntity">
+      <Property name="labName" label="Lab Name" javaType="String" jsonType="string"/>
+      <Property name="caseNumber" label="Case Number" javaType="String" jsonType="string"/>
+      <Property name="dateProcessed" label="Date Processed" javaType="Date" jsonType="Date"/>
+      <Property name="spermMeasure" label="Sperm Measure" javaType="String" jsonType="string"/>
+      <Property name="result" label="Result" javaType="String" jsonType="string"/>
+      <Property name="spermHeaderID" label="Sperm Header ID" javaType="String" jsonType="string"/>
+      <Property name="spermMeasureID" label="Sperm Measure ID" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="labName"/>
+          <DisplayProperty name="caseNumber"/>
+          <DisplayProperty name="dateProcessed"/>
+          <DisplayProperty name="spermMeasure"/>
+          <DisplayProperty name="result"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="swabDetail" label="Swab Detail" javaType="SwabDetailEntity"
+    jsonType="SwabDetailEntity">
+    <Class name="SwabDetailEntity">
+      <Property name="swabSite" label="Swab Site" javaType="String" jsonType="string"/>
+      <Property name="quantity" label="Quantity" javaType="Integer" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="swabSite"/>
+          <DisplayProperty name="quantity"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="sampleName"/>
+      <DisplayProperty name="birdID"/>
+      <DisplayProperty name="collectionDate"/>
+      <DisplayProperty name="sampleCategory"/>
+      <DisplayProperty name="sampleType"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="collectionIsland"/>
+      <DisplayProperty name="collectionLocationID"/>
+      <DisplayProperty name="sampleTakenBy"/>
+      <DisplayProperty name="reasonForSample"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="storageMedium"/>
+      <DisplayProperty name="container"/>
+      <DisplayProperty name="storageConditions"/>
+      <DisplayProperty name="archived"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="currentIsland"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

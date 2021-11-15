@@ -1,0 +1,29 @@
+<input
+  *ngIf="!autofocus"
+  #typeahead
+  class="form-control border border-primary c-id-select-bg"
+  typeaheadOptionField="personName"
+  [typeahead]="summaryList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  (typeaheadOnSelect)="onTypeaheadOnSelect($event)"
+  [(ngModel)]="personNameSelected"
+  (blur)="onInputBlur()"
+  [disabled]="disabled"
+/>
+<input
+  *ngIf="autofocus"
+  #typeahead
+  class="form-control border border-primary c-id-select-bg"
+  typeaheadOptionField="personName"
+  [typeahead]="summaryList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  (typeaheadOnSelect)="onTypeaheadOnSelect($event)"
+  [(ngModel)]="personNameSelected"
+  (blur)="onInputBlur()"
+  [disabled]="disabled"
+  appAutofocus
+/>

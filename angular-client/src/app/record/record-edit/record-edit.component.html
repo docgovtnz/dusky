@@ -1,0 +1,262 @@
+<section>
+  <app-banner title="Record: {{ recordEntity?.recordType }}"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-record-edit-form
+          [recordEntity]="recordEntity"
+          [myFormGroup]="myFormGroup"
+        ></app-record-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer" *ngIf="dataLoaded">
+  <div class="container">
+    <tabset>
+      <tab
+        *ngIf="
+          myFormGroup?.get('weight') ||
+          myFormGroup?.get('healthCheck') ||
+          myFormGroup?.get('healthStatus')
+        "
+        [heading]="'Weight & Health'"
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <app-weight-edit-form
+              *ngIf="myFormGroup?.get('weight')"
+              [myFormGroup]="myFormGroup?.get('weight')"
+            ></app-weight-edit-form>
+            <app-healthstatus-edit-form
+              *ngIf="myFormGroup?.get('healthStatus')"
+              [myFormGroup]="myFormGroup?.get('healthStatus')"
+            ></app-healthstatus-edit-form>
+          </div>
+          <div class="col-md-8">
+            <app-healthcheck-edit-form
+              *ngIf="myFormGroup?.get('healthCheck')"
+              [myFormGroup]="myFormGroup.get('healthCheck')"
+              [birdEntity]="birdEntity"
+            ></app-healthcheck-edit-form>
+          </div>
+        </div>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('captureDetail')" [heading]="'Capture'">
+        <app-capturedetail-edit-form
+          [myFormGroup]="myFormGroup?.get('captureDetail')"
+        ></app-capturedetail-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('transferDetail')" [heading]="'Transfer'">
+        <app-transferdetail-edit-form
+          [myFormGroup]="myFormGroup?.get('transferDetail')"
+        ></app-transferdetail-edit-form>
+      </tab>
+      <tab
+        *ngIf="myFormGroup?.get('measureDetail')"
+        [heading]="'Measure Details'"
+      >
+        <app-measuredetail-edit-form
+          [myFormGroup]="myFormGroup?.get('measureDetail')"
+        ></app-measuredetail-edit-form>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('transmitterChange') ||
+          myFormGroup?.get('chips') ||
+          myFormGroup?.get('bands') ||
+          myFormGroup?.get('harnessChange')
+        "
+        [heading]="'ID Change'"
+        [active]="service.eventReason === 'Tx dropped'"
+      >
+        <app-identification-edit
+          [myFormGroup]="myFormGroup"
+          [birdID]="myFormGroup.get('birdID').value"
+          [recordDateTime]="myFormGroup.get('dateTime').value"
+        ></app-identification-edit>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('standard')" [heading]="'Standard'">
+        <app-standard-edit-form
+          [myFormGroup]="myFormGroup?.get('standard')"
+        ></app-standard-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('checkmate')" [heading]="'Checkmate'">
+        <app-checkmate-edit-form
+          [myFormGroup]="myFormGroup?.get('checkmate')"
+          [myFormArray]="
+            myFormGroup?.get('checkmate')?.get('checkmateDataList')
+          "
+        ></app-checkmate-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('eggTimer')" [heading]="'Egg Timer'">
+        <app-eggtimer-edit-form
+          [myFormGroup]="myFormGroup?.get('eggTimer')"
+        ></app-eggtimer-edit-form>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('handRaise') || myFormGroup?.get('medicationList')
+        "
+        [heading]="'Hand-Feeding & Medication'"
+      >
+        <app-handraise-edit-form
+          *ngIf="myFormGroup?.get('handRaise')"
+          [myFormGroup]="myFormGroup.get('handRaise')"
+          [isMedMandatory]="isMedMandatory"
+        ></app-handraise-edit-form>
+
+        <app-medication-edit-form
+          *ngIf="myFormGroup?.get('medicationList')"
+          [myFormArray]="myFormGroup.get('medicationList')"
+          (oneOrMoreMed)="drugChange($event)"
+        ></app-medication-edit-form>
+      </tab>
+      <tab
+        *ngIf="myFormGroup?.get('supplementaryFeeding')"
+        [heading]="'Supplementary Feeding'"
+      >
+        <app-supplementaryfeeding-edit-form
+          [myFormGroup]="myFormGroup?.get('supplementaryFeeding')"
+        ></app-supplementaryfeeding-edit-form>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('batteryLife') &&
+          !myFormGroup?.get('checkmate') &&
+          !recordEntity.eggTimer &&
+          !recordEntity.standard
+        "
+        [heading]="'Battery Life'"
+      >
+        <app-batterylife-edit-form
+          [myFormGroup]="myFormGroup?.get('batteryLife')"
+        ></app-batterylife-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('snarkData')" [heading]="'Snark Data'">
+        <app-snarkdata-edit-form
+          [myFormGroup]="myFormGroup?.get('snarkData')"
+        ></app-snarkdata-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('eggHealth')" [heading]="'Egg Health'">
+        <app-egghealth-edit-form
+          [myFormGroup]="myFormGroup?.get('eggHealth')"
+        ></app-egghealth-edit-form>
+      </tab>
+      <tab *ngIf="myFormGroup?.get('chickHealth')" [heading]="'Chick Health'">
+        <app-chickhealth-edit-form
+          [myFormGroup]="myFormGroup?.get('chickHealth')"
+        ></app-chickhealth-edit-form>
+      </tab>
+      <tab
+        *ngIf="
+          myFormGroup?.get('otherSampleList') ||
+          myFormGroup?.get('bloodSampleDetail') ||
+          myFormGroup?.get('swabSampleList') ||
+          myFormGroup?.get('spermSampleList')
+        "
+        [heading]="'Samples'"
+      >
+        <app-controlblock
+          title="Blood"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="myFormGroup?.get('bloodSampleDetail')"
+        >
+          <app-bloodsampledetail-edit-form
+            [myFormGroup]="myFormGroup.get('bloodSampleDetail')"
+            [myFormArray]="
+              myFormGroup.get('bloodSampleDetail')?.get('bloodSampleList')
+            "
+            [sampleNamePrefix]="bloodSampleNamePrefix"
+          ></app-bloodsampledetail-edit-form>
+        </app-controlblock>
+        <app-controlblock
+          title="Swab"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="myFormGroup?.get('swabSampleList')"
+        >
+          <app-swabsample-edit-form
+            [myFormArray]="myFormGroup.get('swabSampleList')"
+            [sampleNamePrefix]="swabSampleNamePrefix"
+          ></app-swabsample-edit-form>
+        </app-controlblock>
+        <app-controlblock
+          title="Other"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="myFormGroup?.get('otherSampleList')"
+        >
+          <app-othersample-edit-form
+            [myFormArray]="myFormGroup.get('otherSampleList')"
+            [sampleNamePrefix]="otherSampleNamePrefix"
+          ></app-othersample-edit-form>
+        </app-controlblock>
+        <app-controlblock
+          title="Sperm"
+          [noOffset]="true"
+          [withSpacer]="true"
+          *ngIf="myFormGroup?.get('spermSampleList')"
+        >
+          <app-spermsample-edit-form
+            [myFormArray]="myFormGroup.get('spermSampleList')"
+            [sampleNamePrefix]="spermSampleNamePrefix"
+          ></app-spermsample-edit-form>
+        </app-controlblock>
+      </tab>
+      <tab
+        *ngIf="myFormGroup?.get('locationBearingList')"
+        [heading]="'Triangulation'"
+      >
+        <app-locationbearing-edit-form
+          [myFormArray]="myFormGroup.get('locationBearingList')"
+          [eastingFormControl]="myFormGroup.get('easting')"
+          [northingFormControl]="myFormGroup.get('northing')"
+          [islandNameFormControl]="myFormGroup.get('island')"
+          [magneticDeclinationFormControl]="
+            myFormGroup.get('magneticDeclination')
+          "
+        >
+        </app-locationbearing-edit-form>
+      </tab>
+      <tab
+        *ngIf="!myFormGroup?.get('locationBearingList')"
+        id="mapTab"
+        [heading]="'Map'"
+      >
+        <app-esri-map
+          [displayLocationTypeCheckBoxes]="false"
+          [displayIslandSelector]="false"
+        >
+        </app-esri-map>
+      </tab>
+      <tab *ngIf="!myFormGroup?.get('comments')" [heading]="'Comments'">
+        <ng-container *ngIf="recordEntity">
+          <app-comments-edit
+            [entity]="recordEntity"
+            field="comments"
+          ></app-comments-edit>
+        </ng-container>
+      </tab>
+    </tabset>
+  </div>
+</section>

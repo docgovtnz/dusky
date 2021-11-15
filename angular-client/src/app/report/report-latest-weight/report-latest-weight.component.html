@@ -1,0 +1,205 @@
+<section>
+  <app-banner title="Latest Weights" subtitle="Report"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="birdCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Birds" class="col-md-6">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="birdNames"> Bird Names </label>
+                  <app-bird-name-select-multi
+                    id="birdNames"
+                    [(selectedBirds)]="birdCriteria.birdNames"
+                    [autofocus]="true"
+                    (selectedBirdsChange)="onBirdSelectionChanged()"
+                  ></app-bird-name-select-multi>
+                </div>
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="showAlive"
+                      [(ngModel)]="birdCriteria.showAlive"
+                    />
+                    <label class="form-check-label" for="showAlive">
+                      Alive
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="showDead"
+                      [(ngModel)]="birdCriteria.showDead"
+                    />
+                    <label class="form-check-label" for="showDead">
+                      Dead
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="sex"> Sex </label>
+                  <select
+                    class="custom-select"
+                    id="sex"
+                    [(ngModel)]="birdCriteria.sex"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('SexOptions')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="ageClass"> Age Class </label>
+                  <select
+                    class="custom-select"
+                    id="ageClass"
+                    [(ngModel)]="birdCriteria.ageClass"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('AgeClasses')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Locations" class="col-md-3">
+            <div class="form-group">
+              <label for="currentIsland"> Current Island </label>
+              <app-type-ahead
+                id="currentIsland"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="birdCriteria.currentIsland"
+              ></app-type-ahead>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Transmitter" class="col-md-3">
+            <div class="form-group">
+              <label for="transmitterGroup"> Transmitter group </label>
+              <select
+                class="custom-select"
+                id="transmitterGroup"
+                [(ngModel)]="birdCriteria.transmitterGroup"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('TransmitterGroups')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Bird Name</th>
+            <th scope="col">Latest Weight (kg)</th>
+            <th scope="col">Latest Date</th>
+            <th scope="col">Previous Weight (kg)</th>
+            <th scope="col">Previous Date</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="12">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="12">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            class="search-result-item"
+          >
+            <td>{{ item.birdName }}</td>
+            <td>{{ item.latestWeight | number: '1.2-2' }}</td>
+            <td>{{ item.latestDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ item.previousWeight | number: '1.2-2' }}</td>
+            <td>{{ item.previousDate | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="birdCriteria.pageSize"
+          [(ngModel)]="birdCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="NestObservationEntity" context="Save">
+
+  <Property name="locationID">
+    <RequiredRule/>
+  </Property>
+  <Property name="birdID">
+    <RequiredRule/>
+  </Property>
+  <Property name="dateTime">
+    <RequiredRule/>
+    <DatePastRule/>
+  </Property>
+  <Property name="observerList">
+    <RequiredRule/>
+    <ObserverRequiredRule/>
+    <Class targetClassName="ObserverEntity">
+      <Property name="personID">
+        <RequiredRule/>
+      </Property>
+      <Property name="observationRoles">
+        <ObservationRoleRequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="nestChamber">
+    <Class target="NestChamberEntity">
+      <Property name="relativeHumidity">
+        <NumberRangeRule max="100" wholeNumber="true"/>
+        <RelativeHumidityRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="motherTripList">
+    <MotherTripListValidationRule/>
+    <Class target="MotherTripEntity">
+      <Property name="motherLeft">
+        <RequiredRule/>
+        <DatePastRule/>
+      </Property>
+      <Property name="motherBack">
+        <RequiredRule/>
+        <DatePastRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="observationTimes">
+    <ObservationTimeValidationRule/>
+    <Class targetClassName="ObservationTimesEntity">
+      <Property name="finishObservationTime">
+        <DatePastRule/>
+      </Property>
+      <Property name="inspectionTime">
+        <DatePastRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="nestEggList">
+    <NestEggValidationRule/>
+    <Class targetClassName="NestEggEntity">
+      <Property name="heartRate">
+        <NumberRangeRule wholeNumber="true"/>
+      </Property>
+    </Class>
+  </Property>
+  <Property name="nestChickList">
+    <NestChickValidationRule/>
+  </Property>
+</Class>

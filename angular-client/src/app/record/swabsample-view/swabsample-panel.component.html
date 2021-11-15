@@ -1,0 +1,61 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Swab Site</th>
+        <th scope="col">Storage Medium</th>
+        <th scope="col">Container</th>
+        <th scope="col">Storage Conditions</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Sample Taken By</th>
+        <th scope="col">Sample ID</th>
+        <th scope="col">Reason for Sample</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!swabsampleList">
+      <tr>
+        <td colspan="7">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="swabsampleList && swabsampleList.length === 0">
+      <tr>
+        <td colspan="7">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="swabsampleList && swabsampleList.length > 0">
+      <tr *ngFor="let item of swabsampleList" (click)="onClick(item, $event)">
+        <td>
+          <small class="badge badge-primary">{{ item.swabSite }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.storageMedium }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.container }}</small>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{
+            item.storageConditions
+          }}</small>
+        </td>
+        <td>
+          {{ item.quantity }}
+        </td>
+        <td>
+          <app-person-name-label
+            [personId]="item.sampleTakenBy"
+          ></app-person-name-label>
+        </td>
+        <td>
+          {{ item.sampleName }}
+        </td>
+        <td>
+          {{ item.reasonForSample }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,71 @@
+Query Database
+--------------
+
+This procedure describes how to run a SQL query against the Couchbase database either on the Laptops or the AWS
+environments. You can use this procedure to gain access to the Couchbase Admin console to run the query through the
+web interface and/or execute the query using the command line.
+
+Acquire the Password
+--------------------
+
+To perform any action against the database you first need to acquire the Couchbase Administrator password for the
+database you wish to access. Each Laptop environment generates a random password and the AWS environment's also have
+their own passwords.
+
+For the laptops the easiest way is to login to the Laptop Dusky application with the "Admin" user or some other user
+who has been given the  "System Admin" role.
+
+From the "Settings" page the database Administrator password can be seen by clicking on the "Show" button next to the
+Couchbase Administrator Password field.
+
+If you are not able to login to the application because of a problem with these accounts then the Laptop's password
+can still be acquired in the following way. The passwords are stored in the "generated.properties" and/or potentially in the
+"application.properties" for developer environments. Look for the property named "couchbase.admin.password".
+
+The password can be in plain text
+
+couchbase.bucket.password=PasswordHere
+couchbase.admin.password=PasswordHere
+
+Or, it can be encrypted (this following example is invalid garbage)
+
+couchbase.bucket.password=encrypted(X1dXx2sdfjs;odjowwerwerzPhfAANAXMm9sgeW+4gQ=)
+couchbase.admin.password=encrypted(VcL2txE9BJV4Dsf3AYiM2342sdfsdgsdgsgsdggzg4Q=)
+
+Encrypted passwords must be decrypted using the Decryption tool and Decryption key.
+
+
+Login to the Couchbase Admin Console
+------------------------------------
+
+Use a web browser and the URL; "http://localhost:8091" to access the Couchbase Admin console.
+
+Login with the credentials "Administrator" and the Password acquired from the previous step above.
+
+Navigate to the "Query" page from the side menu and execute the required query.
+
+
+
+Execute the query from the Command line
+---------------------------------------
+
+Alternatively you can also execute the query using the command line. This may be more useful if the number of results
+is particulary large, or the query contains more than one statement. Many of the Update/Delete/Drop scripts need to
+execute more than one statement ad the Web console Query page can't do this.
+
+1. Set PATH to contain Couchbase CLI tools if not done already
+
+set PATH=%PATH%;C:\Program Files\Couchbase\Server\bin
+
+2. Execute the query from the same machine as the database with the following command
+
+cbq -f "Script.n1ql" -u Administrator -p PasswordHere
+
+Notes:
+ - It doesn't matter what the file name suffix is, sometimes it might be .sql, or n1ql, or .txt
+ - If you need to target the machine on a different server there's a -e http://hostname:8091 option
+ - If you need to output to a file:  -o file.json
+ - If you need more help use -h
+
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="SnarkImportEntity" context="Save">
+
+  <Property name="locationID">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="observerPersonID">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="activityType">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="qualityOverride">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="snarkFileContent">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="snarkFileName">
+    <RequiredRule/>
+  </Property>
+</Class>

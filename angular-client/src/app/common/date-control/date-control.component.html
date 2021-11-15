@@ -1,0 +1,39 @@
+<div class="input-group">
+  <ng-container *ngIf="!autofocus">
+    <input
+      [id]="id"
+      class="form-control"
+      type="text"
+      #datePicker="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="datePicker.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date Picker</span></span
+      >
+    </div>
+  </ng-container>
+  <ng-container *ngIf="autofocus">
+    <input
+      [id]="id"
+      class="form-control"
+      type="text"
+      #datePicker="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+      appAutofocus
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="datePicker.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date Picker</span></span
+      >
+    </div>
+  </ng-container>
+</div>

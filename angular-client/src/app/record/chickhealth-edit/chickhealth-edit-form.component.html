@@ -1,0 +1,42 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-6">
+      <div class="form-group">
+        <app-widget
+          [label]="'Crop Status'"
+          [propertyName]="'cropStatus'"
+          [myFormControl]="myFormGroup.get('cropStatus')"
+        >
+          <select
+            class="custom-select"
+            id="cropStatus"
+            formControlName="cropStatus"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('CropStatus') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Respiratory Rate'"
+          [propertyName]="'respiratoryRate'"
+          [myFormControl]="myFormGroup.get('respiratoryRate')"
+        >
+          <input
+            class="form-control"
+            id="respiratoryRate"
+            formControlName="respiratoryRate"
+            type="number"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

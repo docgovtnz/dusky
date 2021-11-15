@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="SampleEntity" context="Save">
+
+  <Property name="sampleName">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="sampleTakenBy">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="bloodDetail">
+    <Class targetClassName="BloodDetailEntity">
+      <Property name="type">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="swabDetail">
+    <Class targetClassName="SwabDetailEntity">
+      <Property name="swabSite">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="otherDetail">
+    <Class targetClassName="OtherDetailEntity">
+      <Property name="type">
+        <RequiredRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="spermDetail">
+    <Class targetClassName="SpermDetailEntity">
+    </Class>
+  </Property>
+
+  <Property name="haematologyTestList">
+    <HaematologyTestValidationRule/>
+    <Class targetClassName="HaematologyTestEntity">
+      <Property name="test">
+        <RequiredRule/>
+      </Property>
+      <Property name="result">
+        <RequiredRule/>
+      </Property>
+      <Property name="dateProcessed">
+        <DatePastRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="chemistryAssayList">
+    <ChemistryAssayValidationRule/>
+    <Class targetClassName="ChemistryAssayEntity">
+      <Property name="chemistryAssay">
+        <RequiredRule/>
+      </Property>
+      <Property name="result">
+        <RequiredRule/>
+      </Property>
+      <Property name="dateProcessed">
+        <DatePastRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="microbiologyAndParasitologyTestList">
+    <MicrobiologyAndParasitologyTestValidationRule/>
+    <Class targetClassName="MicrobiologyAndParasitologyTestEntity">
+      <Property name="test">
+        <RequiredRule/>
+      </Property>
+      <Property name="result">
+        <RequiredRule/>
+      </Property>
+      <Property name="dateProcessed">
+        <DatePastRule/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="spermMeasureList">
+    <SpermMeasureValidationRule/>
+    <Class targetClassName="SpermMeasureEntity">
+      <Property name="spermMeasure">
+        <RequiredRule/>
+      </Property>
+      <Property name="result">
+        <RequiredRule/>
+      </Property>
+      <Property name="dateProcessed">
+        <DatePastRule/>
+      </Property>
+    </Class>
+  </Property>
+
+</Class>

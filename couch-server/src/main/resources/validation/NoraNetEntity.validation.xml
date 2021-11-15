@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="NoraNetEntity" context="Save">
+
+  <Property name="island">
+    <RequiredRule/>
+    <IslandMustExistRule/>
+  </Property>
+
+  <Property name="stationId">
+    <RequiredRule/>
+    <StationValidRule/>
+  </Property>
+
+  <Property name="fileDate">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="activityDate">
+    <RequiredRule/>
+    <NoraNetActivityRule/>
+  </Property>
+
+  <Property name="detectionList">
+    <Class targetClassName="NoraNetDetectionEntity">
+      <Property name="uhfId">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="999" wholeNumber="true"/>
+      </Property>
+      <Property name="category">
+        <RequiredRule/>
+      </Property>
+      <Property name="pulseCount">
+        <RequiredRule/>
+        <NumberRangeRule min="1.0" wholeNumber="true"/>
+      </Property>
+      <Property name="peakTwitch">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="255" wholeNumber="true"/>
+      </Property>
+      <Property name="activity">
+        <NumberRangeRule min="0.0" max="24.0" wholeNumber="false"/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="standardList">
+    <Class targetClassName="NoraNetStandardEntity">
+      <Property name="uhfId">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="999" wholeNumber="true"/>
+      </Property>
+      <Property name="activity">
+        <RequiredRule/>
+        <NumberRangeRule min="0.0" max="24.0" wholeNumber="false"/>
+      </Property>
+      <Property name="batteryLife">
+        <RequiredRule/>
+        <NumberRangeRule min="0" wholeNumber="true"/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="eggTimerList">
+    <Class targetClassName="NoraNetEggTimerEntity">
+      <Property name="uhfId">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="999" wholeNumber="true"/>
+      </Property>
+      <Property name="activity">
+        <RequiredRule/>
+        <NumberRangeRule min="0.0" max="24.0" wholeNumber="false"/>
+      </Property>
+      <Property name="batteryLife">
+        <RequiredRule/>
+        <NumberRangeRule min="0" wholeNumber="true"/>
+      </Property>
+      <Property name="incubating">
+        <RequiredRule/>
+      </Property>
+      <Property name="daysSinceChange">
+        <RequiredRule/>
+        <NumberRangeRule min="0" wholeNumber="true"/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="cmShortList">
+    <Class targetClassName="NoraNetCmShortEntity">
+      <Property name="uhfId">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="999" wholeNumber="true"/>
+      </Property>
+      <Property name="activity">
+        <RequiredRule/>
+        <NumberRangeRule min="0.0" max="24.0" wholeNumber="false"/>
+      </Property>
+      <Property name="batteryLife">
+        <RequiredRule/>
+        <NumberRangeRule min="0" wholeNumber="true"/>
+      </Property>
+      <Property name="matingAge">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="255" wholeNumber="true"/>
+      </Property>
+      <Property name="cmHour">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="24" wholeNumber="true"/>
+      </Property>
+      <Property name="cmMinute">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="59" wholeNumber="true"/>
+      </Property>
+    </Class>
+  </Property>
+
+  <Property name="cmLongList">
+    <NoraNetCheckMateRule/>
+    <Class targetClassName="NoraNetCmLongEntity">
+      <Property name="uhfId">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="999" wholeNumber="true"/>
+      </Property>
+      <Property name="cmHour">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="24" wholeNumber="true"/>
+      </Property>
+      <Property name="cmMinute">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="59" wholeNumber="true"/>
+      </Property>
+      <Property name="lastCmHour">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="24" wholeNumber="true"/>
+      </Property>
+      <Property name="lastCmMinute">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="59" wholeNumber="true"/>
+      </Property>
+      <Property name="matingAge">
+        <RequiredRule/>
+        <NumberRangeRule min="0" max="255" wholeNumber="true"/>
+      </Property>
+      <Property name="cmFemaleList">
+        <Class targetClassName="NoraNetCmFemaleEntity">
+          <Property name="uhfId">
+            <RequiredRule/>
+            <NumberRangeRule min="0" max="999" wholeNumber="true"/>
+          </Property>
+          <Property name="startTimeHoursAgo">
+            <RequiredRule/>
+            <NumberRangeRule min="0" max="24" wholeNumber="true"/>
+          </Property>
+          <Property name="duration">
+            <RequiredRule/>
+            <NumberRangeRule min="0" wholeNumber="true"/>
+          </Property>
+          <Property name="quality">
+            <RequiredRule/>
+            <NumberRangeRule min="0" max="24" wholeNumber="true"/>
+          </Property>
+        </Class>
+      </Property>
+    </Class>
+  </Property>
+
+</Class>

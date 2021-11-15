@@ -1,0 +1,51 @@
+
+Backup
+
+1. Set PATH to contain Couchbase CLI tools if not done already
+
+set PATH=%PATH%;C:\Program Files\Couchbase\Server\bin
+export PATH=$PATH:/c/Program\ Files/Couchbase/Server/bin
+
+2. Create the backup somewhere locally
+
+cbbackup http://localhost:8091 D:/ATemp/backups -u Administrator -p <??password??>
+
+
+Restore
+-------
+
+From within the Couchbase admin console;
+
+3. From the "Buckets" page. Delete the bucket "kakapo-bird"
+
+4. From the "Buckets" page. Create the bucket (Add Bucket) with the following properties (TODO: command line for this)
+
+Bucket Name: kakapo-bird
+Memory: 1000 MB
+Replicas Enabled: false
+Flushed Enabled: false
+
+5. From the command line Restore the backup into the server
+
+cbrestore D:/ATemp/backups http://localhost:8091 -b kakapo-bird -B kakapo-bird -u Administrator -p <??password??>
+
+cbrestore backups http://localhost:8091 -b kakapo-bird -B kakapo-bird -u Administrator -p
+
+6. Rebuild the primary index
+
+[Linux]   cbq --script="BUILD INDEX ON \`kakapo-bird\` (\`#primary\`)" -u Administrator -p <??password??>
+[Windows] cbq --script="BUILD INDEX ON `kakapo-bird` (`#primary`)" -u Administrator -p <??password??>
+
+7. Monitor the indexes page
+
+...after a few seconds if you flip to the "Indexes" page you should see the #Primary change into a
+"Building" state and then eventually a "Ready" state
+
+Wait for the #Primary to rebuild.
+
+8. Restart the application server
+
+...after a few seconds if you flip to the "Indexes" page you should see the indexes change into a
+"Building" state and then eventually a "Ready" state
+
+

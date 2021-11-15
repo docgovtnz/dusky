@@ -1,0 +1,14 @@
+<ng-container *ngIf="swabdetailRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Swab Site</dt>
+        <dd>
+          <span class="data-tag">{{ swabdetailRevision.swabSite }}</span>
+        </dd>
+        <dt>Quantity</dt>
+        <dd>{{ swabdetailRevision.quantity }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

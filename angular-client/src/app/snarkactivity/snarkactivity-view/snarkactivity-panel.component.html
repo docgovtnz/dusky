@@ -1,0 +1,36 @@
+<ng-container *ngIf="snarkactivityRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6">
+      <dl class="data-group">
+        <dt>Location</dt>
+        <dd>
+          <app-location-name-label
+            [locationID]="snarkactivityRevision.locationID"
+          ></app-location-name-label>
+        </dd>
+        <dt>Observer</dt>
+        <dd>
+          <app-person-name-label
+            [personId]="snarkactivityRevision.observerPersonID"
+          ></app-person-name-label>
+        </dd>
+        <dt>Date</dt>
+        <dd>
+          {{ snarkactivityRevision.date | date: 'dd/MM/yyyy' }}
+        </dd>
+        <dt>Activity Type</dt>
+        <dd>
+          <span class="data-tag">
+            {{ snarkactivityRevision.activityType }}
+          </span>
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Comments" class="col-md-6">
+      <dl class="data-group">
+        <dt>Comments</dt>
+        <dd>{{ snarkactivityRevision.comments }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

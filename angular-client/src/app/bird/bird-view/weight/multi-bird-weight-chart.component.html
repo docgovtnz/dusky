@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <div class="row mt-2 mb-2" [formGroup]="searchForm">
+    <div class="col-10">
+      <div class="d-flex">
+        <div>
+          <legend>Age Range</legend>
+        </div>
+        <div>
+          <div class="form-group">
+            <div
+              class="input-group"
+              style="width: 120px !important; margin-left: 5px"
+            >
+              <select
+                class="custom-select"
+                id="dateRange"
+                formControlName="dateRange"
+              >
+                <option *ngFor="let c of dateRangeOptions2" [ngValue]="c.value">
+                  {{ c.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="pl-5">
+          <legend>Date Range</legend>
+        </div>
+        <div style="margin-left: 20px; margin-right: 5px">
+          <legend>From:</legend>
+        </div>
+        <div>
+          <div class="form-group" style="width: 180px !important">
+            <app-date-control
+              id="fromDate"
+              formControlName="fromDate"
+            ></app-date-control>
+            <app-message-display
+              [myFormControl]="searchForm.get('fromDate')"
+            ></app-message-display>
+          </div>
+        </div>
+        <div style="margin-left: 20px; margin-right: 5px">
+          <legend>To:</legend>
+        </div>
+        <div>
+          <div class="form-group pr-5" style="width: 220px !important">
+            <app-date-control
+              id="toDate"
+              formControlName="toDate"
+            ></app-date-control>
+            <app-message-display
+              [myFormControl]="searchForm.get('toDate')"
+            ></app-message-display>
+          </div>
+        </div>
+        <div class="btn-group pr-5" btnRadioGroup formControlName="graphType">
+          <label btnRadio="WEIGHT" class="btn btn-info" role="button"
+            >Weight</label
+          >
+          <label btnRadio="DELTA" class="btn btn-info" role="button"
+            >Delta</label
+          >
+        </div>
+
+        <div class="btn-group" btnRadioGroup formControlName="modelType">
+          <label btnRadio="RAW" class="btn btn-info" role="button">Raw</label>
+          <label btnRadio="MIN" class="btn btn-info" role="button">Min</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-info mr-3" (click)="selectAll()">
+        All
+      </button>
+      <button type="button" class="btn btn-info" (click)="unselectAll()">
+        None
+      </button>
+    </div>
+  </div>
+  <div class="row" style="height: 80vh">
+    <div class="col-10">
+      <canvas #multiBirdWeightCanvas></canvas>
+    </div>
+    <div class="col-2" style="overflow-y: scroll">
+      <div
+        class="d-flex align-items-center"
+        *ngFor="let legendItem of legendItems"
+        (click)="toggle(legendItem)"
+      >
+        <div class="pr-2">
+          <svg
+            height="0.8em"
+            width="1.5em"
+            *ngIf="legendItem.type === 0"
+            style="vertical-align: baseline"
+          >
+            <text
+              x="0em"
+              y="50%"
+              style="font-size: 45%"
+              fill="#cccccc"
+              textLength="100%"
+              lengthAdjust="spacingAndGlyphs"
+            >
+              NO
+            </text>
+            <text
+              x="0em"
+              y="100%"
+              style="font-size: 45%"
+              fill="#cccccc"
+              textLength="100%"
+              lengthAdjust="spacingAndGlyphs"
+            >
+              DATA
+            </text>
+          </svg>
+
+          <svg
+            height="0.8em"
+            width="1.5em"
+            *ngIf="legendItem.type === 1"
+            style="vertical-align: baseline"
+          >
+            <line
+              x1="0em"
+              y1="0.4em"
+              x2="1.5em"
+              y2="0.4em"
+              [style.stroke]="legendItem.borderColor"
+              [style.stroke-width]="legendItem.borderWidth"
+              [style.stroke-dasharray]="getStrokeDash(legendItem)"
+            />
+          </svg>
+
+          <svg
+            height="0.8em"
+            width="1.5em"
+            *ngIf="legendItem.type === 3"
+            style="vertical-align: baseline"
+          >
+            <rect
+              height="0.8em"
+              width="1.5em"
+              x="0em"
+              y="0em"
+              [style.fill]="legendItem.backgroundColor"
+              [style.stroke]="legendItem.borderColor"
+            ></rect>
+          </svg>
+        </div>
+        <div
+          [style.text-decoration]="
+            legendItem.hidden || legendItem.type === 0 ? 'line-through' : 'none'
+          "
+          [style.color]="
+            legendItem.hidden || legendItem.type === 0 ? '#CCCCCC' : '#000000'
+          "
+        >
+          {{ legendItem.label }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

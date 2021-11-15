@@ -1,0 +1,14 @@
+<ng-container *ngIf="chickhealthRevision">
+  <div class="row">
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-6">
+      <dl class="data-group">
+        <dt>Crop Status</dt>
+        <dd>
+          <span class="data-tag">{{ chickhealthRevision.cropStatus }}</span>
+        </dd>
+        <dt>Respiratory Rate</dt>
+        <dd>{{ chickhealthRevision.respiratoryRate }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

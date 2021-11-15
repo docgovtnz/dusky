@@ -1,0 +1,63 @@
+<section>
+  <app-banner title="Snark Activity">
+    <button
+      *appPermission="'SNARKACTIVITY_EDIT'"
+      class="btn btn-action"
+      (click)="onEdit()"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+    <button
+      *appPermission="'SNARKACTIVITY_DELETE'"
+      class="btn btn-action"
+      [disabled]="!isDeleteOk()"
+      (click)="deleteConfirmationPopup.show()"
+    >
+      <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+    </button>
+    <app-revision-list-view
+      [entity]="snarkactivityEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-snarkactivity-panel
+          [snarkactivityRevision]="revision"
+        ></app-snarkactivity-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <tabset #recordTabs>
+      <tab
+        *ngIf="revision?.trackAndBowlActivity"
+        [heading]="'Track and Bowl Activity'"
+      >
+        <app-trackandbowlactivity-panel
+          [trackandbowlactivityRevision]="revision.trackAndBowlActivity"
+        ></app-trackandbowlactivity-panel>
+      </tab>
+      <tab *ngIf="revision?.snarkRecordList" [heading]="'Snark Records'">
+        <app-snarkrecord-panel
+          *ngIf="revision?.snarkRecordList?.length > 0"
+          [snarkrecordList]="revision.snarkRecordList"
+        ></app-snarkrecord-panel>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Snark Activity'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

@@ -1,0 +1,18 @@
+<ng-container *ngIf="batterylifeRevision">
+  <div class="row">
+    <app-controlblock title="Battery Life" [noOffset]="true" class="col-md-6">
+      <dl class="data-group">
+        <dt>Battery Life</dt>
+        <dd>
+          {{
+            batterylifeRevision.batteryLife1 -
+              2 +
+              '' +
+              (batterylifeRevision.batteryLife2 - 2) +
+              ' weeks'
+          }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

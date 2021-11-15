@@ -1,0 +1,32 @@
+<ng-container *ngIf="embryomeasurementsRevision">
+  <div class="row">
+    <app-controlblock title="Embryo" class="col-md-6" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Head Length</dt>
+        <dd>
+          {{ embryomeasurementsRevision.headLengthInMms | addUnits: 'mm' }}
+        </dd>
+        <dt>Total Length, Straightened</dt>
+        <dd>
+          {{ embryomeasurementsRevision.totalLengthInMms | addUnits: 'mm' }}
+        </dd>
+        <dt>Length in Situ</dt>
+        <dd>{{ embryomeasurementsRevision.lengthInSitu | addUnits: 'mm' }}</dd>
+        <dt>Yolk Sac Membrane Diameter</dt>
+        <dd>
+          {{
+            embryomeasurementsRevision.yolkSacMembraneDiameterInMms
+              | addUnits: 'mm'
+          }}
+        </dd>
+        <dt>Estimated Age At Death</dt>
+        <dd>
+          {{
+            embryomeasurementsRevision.estimatedAgeAtDeathInDays
+              | addUnits: 'days'
+          }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

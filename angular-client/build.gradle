@@ -1,0 +1,11 @@
+
+plugins {
+    id "com.moowork.node" version "1.2.0"
+}
+
+
+
+task npmBuild(type: NpmTask) {
+    // install the express package only
+    args = ['run', 'build']
+}

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Mother Left</th>
+            <th scope="col">Mother Back</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!mothertripList">
+          <tr>
+            <td colspan="2">Loading...</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="mothertripList && mothertripList.length === 0">
+          <tr>
+            <td colspan="2">No data found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="mothertripList && mothertripList.length > 0">
+          <tr *ngFor="let item of mothertripList">
+            <td>
+              {{ item.motherLeft | date: 'dd/MM/yyyy HH:mm' }}
+            </td>
+            <td>
+              {{ item.motherBack | date: 'dd/MM/yyyy HH:mm' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-container *ngIf="mothertripsummaryRevision">
+    <app-controlblock title="Summary" class="col-md-4" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Total time off</dt>
+        <dd>{{ mothertripsummaryRevision.totalTimeOff | addUnits: 'min' }}</dd>
+        <dt>Number of times off</dt>
+        <dd>{{ mothertripsummaryRevision.numberOfTimesOff }}</dd>
+        <dt>Max time off</dt>
+        <dd>{{ mothertripsummaryRevision.maxTimeOff | addUnits: 'min' }}</dd>
+        <dt>First time off</dt>
+        <dd>
+          {{ mothertripsummaryRevision.firstTimeOff | date: 'dd/MM/yyyy' }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </ng-container>
+</div>

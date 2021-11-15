@@ -1,0 +1,20 @@
+<ng-container *ngIf="noranetRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-4">
+      <dl class="data-group">
+        <dt>Date</dt>
+        <dd>
+          {{ noranetRevision.activityDate | date: 'dd/MM/yyyy' }}
+        </dd>
+        <dt>Island</dt>
+        <dd>
+          {{ noranetRevision.island }}
+        </dd>
+        <dt>Station</dt>
+        <dd>
+          {{ noranetRevision.stationId }}
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

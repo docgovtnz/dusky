@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<roles>
+  <role name="Standard User" level="0">
+    <permission>AUTHENTICATED</permission>
+    <permission>PERSON_VIEW</permission>
+    <permission>LOCATION_VIEW</permission>
+    <permission>BIRD_VIEW</permission>
+    <permission>RECORD_VIEW</permission>
+    <permission>TRANSMITTER_VIEW</permission>
+    <permission>FEEDOUT_VIEW</permission>
+    <permission>SETTING_VIEW</permission>
+    <permission>TXMORTALITY_VIEW</permission>
+    <permission>LIFESTAGE_VIEW</permission>
+    <permission>ISLAND_VIEW</permission>
+    <permission>SNARKACTIVITY_VIEW</permission>
+    <permission>SNARKIMPORT_VIEW</permission>
+    <permission>NESTOBSERVATION_VIEW</permission>
+    <permission>NESTOBSERVATION_EDIT</permission>
+
+    <permission>CHECKSHEET_REPORT_VIEW</permission>
+    <permission>LATEST_WEIGHT_REPORT_VIEW</permission>
+
+    <permission>BIRD_VIEW</permission>
+    <permission>RECORD_EDIT</permission>
+    <permission>FEEDOUT_EDIT</permission>
+    <permission>FEEDOUT_DELETE</permission>
+    <permission>SNARKACTIVITY_EDIT</permission>
+    <permission>SNARKACTIVITY_DELETE</permission>
+    <permission>SNARKIMPORT_EDIT</permission>
+    <permission>SNARKIMPORT_DELETE</permission>
+    <permission>NESTOBSERVATION_EDIT</permission>
+    <permission>NESTOBSERVATION_DELETE</permission>
+    <permission>MATING_REPORT_VIEW</permission>
+    <permission>SAMPLE_VIEW</permission>
+    <permission>SAMPLE_EDIT</permission>
+    <permission>SAMPLE_DELETE</permission>
+    <permission>NORANET_VIEW</permission>
+  </role>
+
+  <role name="Data Replication" level="0"/>
+
+  <role name="Data Entry User" extends="Standard User" level="0"/>
+  <role name="Report Runner" extends="Standard User" level="0"/>
+  <role name="Public User" extends="Standard User" level="0"/>
+  <role name="Ad-hoc Reporter'" extends="Standard User" level="0"/>
+
+  <role name="AWS NoraNet User" level="0">
+    <permission>AUTHENTICATED</permission>
+    <permission>NORANET_PROCESS</permission>
+  </role>
+
+  <role name="Power User" level="1" extends="Standard User">
+    <permission>PASSWORD_RESET</permission>
+    <permission>PERSON_EDIT</permission>
+    <permission>LOCATION_EDIT</permission>
+    <permission>BIRD_EDIT</permission>
+    <permission>RECORD_DELETE</permission>
+    <permission>TRANSMITTER_EDIT</permission>
+    <permission>TRANSMITTER_DELETE</permission>
+    <permission>SETTING_EDIT</permission>
+    <permission>ISLAND_EDIT</permission>
+    <permission>NORANET_EDIT</permission>
+  </role>
+
+  <role name="System Admin" level="2" extends="Power User">
+    <permission>PERSON_DELETE</permission>
+    <permission>LOCATION_DELETE</permission>
+    <permission>BIRD_DELETE</permission>
+    <permission>SETTING_DELETE</permission>
+    <permission>TXMORTALITY_EDIT</permission>
+    <permission>TXMORTALITY_DELETE</permission>
+    <permission>LIFESTAGE_EDIT</permission>
+    <permission>LIFESTAGE_DELETE</permission>
+    <permission>ISLAND_DELETE</permission>
+    <permission>COUCHBASE_PASSWORD_VIEW</permission>
+    <permission>NORANET_DELETE</permission>
+    <permission>NORANET_ERRORS</permission>
+  </role>
+
+</roles>

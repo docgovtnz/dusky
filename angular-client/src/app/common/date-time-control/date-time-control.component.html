@@ -1,0 +1,50 @@
+<div class="input-group">
+  <ng-container *ngIf="!autofocus">
+    <input
+      [id]="id ? id + '_dateInput' : null"
+      class="form-control"
+      type="text"
+      #datePicker="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      style="min-width: 120px"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="datePicker.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date/Time Picker</span></span
+      >
+    </div>
+  </ng-container>
+  <ng-container *ngIf="autofocus">
+    <input
+      [id]="id ? id + '_dateInput' : null"
+      class="form-control"
+      type="text"
+      #datePicker="bsDatepicker"
+      bsDatepicker
+      [(ngModel)]="dateInputValue"
+      style="min-width: 120px"
+      [disabled]="disabled"
+      (keydown.tab)="onTab($event)"
+      appAutofocus
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="datePicker.toggle()"
+        ><fa-icon icon="calendar" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Date/Time Picker</span></span
+      >
+    </div>
+  </ng-container>
+  <input
+    [id]="id ? id + '_timeInput' : null"
+    class="form-control"
+    type="text"
+    [(ngModel)]="timeInputValue"
+    [disabled]="disabled || !dateInputValid"
+    (blur)="onTimeInputBlur()"
+    style="min-width: 80px"
+  />
+</div>

@@ -1,0 +1,17 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/buttons';
+
+$dusky-bird-age-padding: 0.1rem;
+$dusky-bird-age-font-size: $font-size-base * 0.7;
+
+button.btn-age-class {
+  @include button-size(
+    $dusky-bird-age-padding,
+    $dusky-bird-age-padding,
+    $dusky-bird-age-font-size,
+    $input-btn-line-height-sm,
+    $btn-border-radius-sm
+  );
+}

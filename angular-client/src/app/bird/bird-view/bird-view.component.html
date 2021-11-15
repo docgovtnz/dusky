@@ -1,0 +1,141 @@
+<div id="collapseBasic" [collapse]="isCollapsed">
+  <section>
+    <app-banner title="Bird">
+      <button
+        *appPermission="'BIRD_EDIT'"
+        class="btn btn-action"
+        (click)="onEdit()"
+      >
+        <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+      </button>
+      <button
+        *appPermission="'BIRD_DELETE'"
+        class="btn btn-action"
+        [disabled]="!isDeleteOk()"
+        (click)="deleteConfirmationPopup.show()"
+      >
+        <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+      </button>
+      <app-revision-list-view
+        [entity]="birdEntity"
+        (revisionEvent)="onRevisionEvent($event)"
+      ></app-revision-list-view>
+    </app-banner>
+  </section>
+
+  <section class="vertical-spacer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <app-bird-panel [birdRevision]="revision"> </app-bird-panel>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section>
+  <button
+    type="button"
+    class="btn btn-collapse"
+    (click)="isCollapsed = !isCollapsed"
+  >
+    <ng-container *ngIf="isCollapsed"
+      ><fa-icon icon="caret-down" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Expand</span></ng-container
+    >
+    <ng-container *ngIf="!isCollapsed"
+      ><fa-icon icon="caret-up" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Collapse</span></ng-container
+    >
+  </button>
+</section>
+
+<section>
+  <div class="container">
+    <tabset #birdTabs>
+      <tab [heading]="'Features'">
+        <div *ngIf="revision">
+          <app-birdfeature-panel
+            [birdfeatureList]="revision.birdFeatureList"
+          ></app-birdfeature-panel>
+        </div>
+      </tab>
+      <tab [heading]="'Weight'" active="true">
+        <div *ngIf="revision">
+          <app-weight-chart
+            [birdID]="birdEntity.id"
+            [dateHatched]="revision.dateHatched"
+            [dateDiscovered]="revision.discoveryDate"
+            [sex]="revision.sex"
+          ></app-weight-chart>
+        </div>
+      </tab>
+      <tab [heading]="'Egg Weight'">
+        <div *ngIf="revision">
+          <app-egg-weight-chart [birdID]="birdEntity.id"></app-egg-weight-chart>
+        </div>
+      </tab>
+      <tab [heading]="'Morphometrics'">
+        <div *ngIf="revision">
+          <app-morphometrics [birdID]="revision.id"></app-morphometrics>
+        </div>
+      </tab>
+      <tab [heading]="'Health & Sperm'">
+        <div>ToDo</div>
+      </tab>
+      <tab [heading]="'Location'">
+        <div *ngIf="birdEntity">
+          <app-bird-location-map
+            [birdID]="birdEntity.id"
+            [currentIsland]="birdEntity.currentIsland"
+          ></app-bird-location-map>
+        </div>
+      </tab>
+      <tab [heading]="'Transmitters'" [active]="txActive">
+        <div *ngIf="revision">
+          <app-transmitter-history
+            [birdId]="birdEntity.id"
+          ></app-transmitter-history>
+        </div>
+      </tab>
+      <tab [heading]="'Chips'" [active]="chipActive">
+        <div *ngIf="revision">
+          <app-chip-history [birdId]="birdEntity.id"></app-chip-history>
+        </div>
+      </tab>
+      <tab [heading]="'Bands'" [active]="bandActive">
+        <div *ngIf="revision">
+          <app-band-history [birdId]="birdEntity.id"></app-band-history>
+        </div>
+      </tab>
+      <tab *ngIf="revision?.eggMeasurements" [heading]="'Egg Measurements'">
+        <div>
+          <app-eggmeasurements-panel
+            [eggmeasurementsRevision]="revision.eggMeasurements"
+          ></app-eggmeasurements-panel>
+        </div>
+      </tab>
+      <tab
+        *ngIf="revision?.embryoMeasurements"
+        [heading]="'Embryo Measurements'"
+      >
+        <div>
+          <app-embryomeasurements-panel
+            [embryomeasurementsRevision]="revision.embryoMeasurements"
+          ></app-embryomeasurements-panel>
+        </div>
+      </tab>
+      <tab [heading]="'Comments'">
+        <app-comments-view [revision]="revision"></app-comments-view>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Bird'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

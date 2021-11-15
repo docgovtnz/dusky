@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="BirdEntity" context="Save">
+
+  <Property name="name">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="value">
+    <RequiredRule/>
+  </Property>
+
+</Class>

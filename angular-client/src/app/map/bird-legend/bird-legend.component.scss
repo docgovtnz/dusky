@@ -1,0 +1,16 @@
+.bird-color-square {
+  width: 20px;
+}
+
+.bird-legend-text {
+  font-size: 0.75rem;
+}
+
+.selected {
+  /* normal - no specific styling, but created the class so the code looks simpler */
+}
+
+.unselected {
+  font-style: italic;
+  color: #b8bac2;
+}

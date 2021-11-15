@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Microchip</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!chipHistory">
+          <tr>
+            <td colspan="2">Loading...</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="chipHistory && chipHistory.length === 0">
+          <tr>
+            <td colspan="2">No data found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="chipHistory && chipHistory.length > 0">
+          <tr *ngFor="let item of chipHistory">
+            <td>{{ item.microchip }}</td>
+            <td>{{ item.chipDateTime | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

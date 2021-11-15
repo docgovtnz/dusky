@@ -1,0 +1,45 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Lab Name</th>
+        <th scope="col">Case Number</th>
+        <th scope="col">Date Processed</th>
+        <th scope="col">Sperm Measure</th>
+        <th scope="col">Result</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!spermmeasureList">
+      <tr>
+        <td colspan="5">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="spermmeasureList && spermmeasureList.length === 0">
+      <tr>
+        <td colspan="5">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="spermmeasureList && spermmeasureList.length > 0">
+      <tr *ngFor="let item of spermmeasureList">
+        <td>
+          {{ item.labName }}
+        </td>
+        <td>
+          {{ item.caseNumber }}
+        </td>
+        <td>
+          {{ item.dateProcessed | date: 'dd/MM/yyyy' }}
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.spermMeasure }}</small>
+        </td>
+        <td>
+          {{ item.result }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

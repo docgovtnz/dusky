@@ -1,0 +1,20 @@
+<div
+  [ngClass]="{
+    banner: true,
+    'offset-controlblocks': !noOffset,
+    'with-spacer': withSpacer
+  }"
+>
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-md-5">
+        <h1 class="title">{{ title }}</h1>
+        <small class="subtitle" *ngIf="subtitle">{{ subtitle }}</small>
+      </div>
+      <div class="col-md-7 text-right position-relative">
+        <!-- .position-relative is to position the revision history dropdown -->
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

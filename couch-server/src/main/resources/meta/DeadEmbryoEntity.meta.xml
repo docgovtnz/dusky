@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="DeadEmbryoEntity">
+  <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+  <Property name="date" label="Date" javaType="Date" jsonType="Date"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="eggMeasurements" label="Egg Measurements" javaType="EggMeasurementsEntity"
+    jsonType="EggMeasurementsEntity">
+    <Class name="EggMeasurementsEntity">
+      <Property name="eggWeightBeforeFillingWithWater" label="Final Weight" javaType="Float" jsonType="number"/>
+      <Property name="germinalDiscDiameterInMms" label="Germinal Disc Diameter" javaType="Float"
+        jsonType="number"/>
+      <Property name="shellWasteWeightHatched" label="Shell Weight" javaType="Float" jsonType="number"/>
+      <Property name="dryShellWeightHatched" label="Dry Shell Weight (Hatched) (g)" javaType="Float" jsonType="number"/>
+      <Property name="dryShellWeightUnhatched" label="Dry Shell Weight (Unhatched) (g)" javaType="Float" jsonType="number"/>
+      <Property name="weightWithWaterInGrams" label="Weight With Water Filled Aircell"
+        javaType="Float" jsonType="number"/>
+      <Property name="shellThicknessInMms" label="Shell Thickness" javaType="Float"
+        jsonType="number"/>
+      <Property name="addled" label="Addled" javaType="Boolean" jsonType="boolean"/>
+      <Property name="yolkWeightInGrams" label="Yolk Weight" javaType="Float" jsonType="number"/>
+      <Property name="albumenWeightInGrams" label="Albumen Weight" javaType="Float" jsonType="number"/>
+      <Property name="eggLength" label="Length" javaType="Float" jsonType="number"/>
+      <Property name="eggWidth" label="Width" javaType="Float" jsonType="number"/>
+      <Property name="fwCoefficientX104" label="FW co efficient x10-4" javaType="Float" jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="eggWeightBeforeFillingWithWater"/>
+          <DisplayProperty name="germinalDiscDiameterInMms"/>
+          <DisplayProperty name="shellWasteWeightHatched"/>
+          <DisplayProperty name="dryShellWeightHatched"/>
+          <DisplayProperty name="dryShellWeightUnhatched"/>
+          <DisplayProperty name="weightWithWaterInGrams"/>
+          <DisplayProperty name="shellThicknessInMms"/>
+          <DisplayProperty name="addled"/>
+          <DisplayProperty name="yolkWeightInGrams"/>
+          <DisplayProperty name="albumenWeightInGrams"/>
+          <DisplayProperty name="eggLength"/>
+          <DisplayProperty name="eggWidth"/>
+          <DisplayProperty name="fwCoefficientX104" />
+          <DisplayProperty name="calculatedFreshWeight" />
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="embryoMeasurements" label="Embryo Measurements"
+    javaType="EmbryoMeasurementsEntity" jsonType="EmbryoMeasurementsEntity">
+    <Class name="EmbryoMeasurementsEntity">
+      <Property name="headLengthInMms" label="Head Length" javaType="Float" jsonType="number"/>
+      <Property name="totalLengthInMms" label="Total Length, Straightened (mm)" javaType="Float" jsonType="number"/>
+      <Property name="lengthInSitu" label="Length in Situ" javaType="Float" jsonType="number"/>
+      <Property name="yolkSacMembraneDiameterInMms" label="Yolk Sac Membrane Diameter"
+        javaType="Float" jsonType="number"/>
+      <Property name="estimatedAgeAtDeathInDays" label="Estimated Age At Death" javaType="Integer"
+        jsonType="number"/>
+      <DisplayModel layoutType="Panel_NEW">
+        <DisplayGroup>
+          <DisplayProperty name="headLengthInMms"/>
+          <DisplayProperty name="totalLengthInMms"/>
+          <DisplayProperty name="lengthInSitu"/>
+          <DisplayProperty name="yolkSacMembraneDiameterInMms"/>
+          <DisplayProperty name="estimatedAgeAtDeathInDays"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="observerList" label="Observer List" javaType="List&lt;ObserverEntity&gt;"
+    jsonType="ObserverEntity[]">
+    <Class name="ObserverEntity">
+      <Property name="personID" label="Person ID" javaType="String" jsonType="string"/>
+      <Property name="observerCapacity" label="Observer Capacity" javaType="String"
+        jsonType="string"/>
+      <Property name="observationRoles" label="Observation Roles" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="personID"/>
+          <DisplayProperty name="observerCapacity"/>
+          <DisplayProperty name="observationRoles"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="birdID"/>
+      <DisplayProperty name="date"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="observerList"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

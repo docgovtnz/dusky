@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="FledgedChickEntity">
+  <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+  <Property name="date" label="Date" javaType="Date" jsonType="Date"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="observerList" label="Observer List" javaType="List&lt;ObserverEntity&gt;"
+    jsonType="ObserverEntity[]">
+    <Class name="ObserverEntity">
+      <Property name="personID" label="Person ID" javaType="String" jsonType="string"/>
+      <Property name="observerCapacity" label="Observer Capacity" javaType="String"
+        jsonType="string"/>
+      <Property name="observationRoles" label="Observation Roles" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="personID"/>
+          <DisplayProperty name="observerCapacity"/>
+          <DisplayProperty name="observationRoles"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="birdID"/>
+      <DisplayProperty name="date"/>
+    </DisplayGroup>
+    <DisplayGroup>
+      <DisplayProperty name="observerList"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

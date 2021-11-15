@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="HatchEntity" context="Save">
+
+  <Property name="birdID">
+    <RequiredRule></RequiredRule>
+  </Property>
+  <Property name="hatchDate">
+    <RequiredRule></RequiredRule>
+  </Property>
+
+</Class>

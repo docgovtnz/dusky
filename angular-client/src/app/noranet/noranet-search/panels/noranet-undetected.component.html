@@ -1,0 +1,47 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Bird</th>
+        <th scope="col">UHF ID(s)</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!undetectedBirdsResponse">
+      <tr>
+        <td colspan="2">Search not yet executed.</td>
+      </tr>
+    </tbody>
+
+    <tbody
+      *ngIf="undetectedBirdsResponse && undetectedBirdsResponse?.length === 0"
+    >
+      <tr>
+        <td colspan="2">No search results found.</td>
+      </tr>
+    </tbody>
+
+    <tbody
+      *ngIf="undetectedBirdsResponse && undetectedBirdsResponse?.length > 0"
+    >
+      <tr
+        *ngFor="let item of undetectedBirdsResponse"
+        class="search-result-item"
+      >
+        <td>
+          <app-link-view
+            [linkUrl]="'/bird/' + item.birdID"
+            [label]="item.birdName"
+          ></app-link-view>
+        </td>
+        <td>
+          <span
+            class="mr-1"
+            *ngFor="let uhfId of item.uhfIdList; let isLast = last"
+            >{{ uhfId | number: '3.0-0' }}{{ isLast ? '' : ',' }}</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

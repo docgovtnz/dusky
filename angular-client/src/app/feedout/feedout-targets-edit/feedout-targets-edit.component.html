@@ -1,0 +1,26 @@
+<ng-container *ngFor="let target of targets; index as index; let last = last">
+  <!-- for some reason we need flex-nowrap here -->
+  <div class="input-group flex-nowrap">
+    <app-bird-name-id-select
+      [(birdID)]="target.birdID"
+    ></app-bird-name-id-select>
+    <div class="input-group-append">
+      <button class="btn btn-record" (click)="onDeleteClick(index, $event)">
+        <fa-icon icon="minus" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Remove</span>
+      </button>
+      <button *ngIf="last" class="btn btn-record" (click)="onAddClick($event)">
+        <fa-icon icon="plus" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Add</span>
+      </button>
+    </div>
+  </div>
+</ng-container>
+<button
+  *ngIf="!targets || targets.length === 0"
+  class="btn btn-record"
+  (click)="onAddClick($event)"
+>
+  <fa-icon icon="plus" aria-hidden="true"></fa-icon
+  ><span class="sr-only">Add</span>
+</button>

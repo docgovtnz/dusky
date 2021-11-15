@@ -1,0 +1,41 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="form-group">
+    <app-widget
+      [label]="'Tx Mortality'"
+      [propertyName]="'txMortalityId'"
+      [myFormControl]="myFormGroup.get('txMortalityId')"
+    >
+      <select
+        class="custom-select"
+        id="txMortalityId"
+        formControlName="txMortalityId"
+        (ngModelChange)="onMortalitySelected($event)"
+      >
+        <option></option>
+        <option *ngFor="let opt of mortalityList" [ngValue]="opt.id">
+          {{ opt.name }}
+        </option>
+      </select>
+    </app-widget>
+  </div>
+  <div class="form-group">
+    <label id="beatsMinLabel">Beats/Min</label>
+    <input
+      class="form-control"
+      value="{{ beatsMin }}"
+      id="beatsMin"
+      type="text"
+      disabled
+    />
+  </div>
+  <div class="form-group">
+    <label id="hoursTillMortLabel">Hours Till Mort</label>
+    <input
+      class="form-control"
+      value="{{ hoursTillMort }}"
+      id="hoursTillMort"
+      type="text"
+      disabled
+    />
+  </div>
+</form>

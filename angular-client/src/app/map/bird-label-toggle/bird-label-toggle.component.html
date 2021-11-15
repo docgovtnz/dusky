@@ -1,0 +1,67 @@
+<div class="d-flex flex-row">
+  <div class="mr-3">
+    <div class="form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="birdNameChkBx"
+        [(ngModel)]="displayBirdNames"
+        (change)="updateBirdLabels()"
+      />
+      <label
+        class="form-check-label"
+        style="white-space: nowrap"
+        for="birdNameChkBx"
+        >Bird name</label
+      >
+    </div>
+    <div class="form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="displayPathsChkBx"
+        [(ngModel)]="displayPaths"
+        (change)="updateBirdLabels()"
+      />
+      <label
+        class="form-check-label"
+        style="white-space: nowrap"
+        for="displayPathsChkBx"
+        >Display paths</label
+      >
+    </div>
+  </div>
+
+  <div class="mr-3">
+    <div class="form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="recordDateChkBx"
+        [(ngModel)]="displayRecordDate"
+        (change)="updateBirdLabels()"
+      />
+      <label
+        class="form-check-label"
+        style="white-space: nowrap"
+        for="recordDateChkBx"
+        >Record date</label
+      >
+    </div>
+    <div class="form-check align-text-top">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="recordTypeChkBx"
+        [(ngModel)]="displayRecordType"
+        (change)="updateBirdLabels()"
+      />
+      <label
+        class="form-check-label"
+        style="white-space: nowrap"
+        for="recordTypeChkBx"
+        >Record type</label
+      >
+    </div>
+  </div>
+</div>

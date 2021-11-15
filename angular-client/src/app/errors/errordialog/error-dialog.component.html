@@ -1,0 +1,56 @@
+<div
+  bsModal
+  #errorModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Error</h4>
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="onCloseErrorDialog()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ errorMessage }}
+        <hr />
+        <ng-container *ngIf="errorDetails !== null">
+          <button
+            type="button"
+            class="btn"
+            (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseEvent"
+          >
+            {{ isCollapsed ? 'Show' : 'Hide' }} Details
+          </button>
+          <div
+            id="collapseEvent"
+            class="card card-block card-header m-3"
+            [collapse]="isCollapsed"
+          >
+            <div class="well well-lg">{{ errorDetails }}</div>
+          </div>
+          <hr />
+        </ng-container>
+        <button
+          id="cancelDeleteBtn"
+          type="button"
+          (click)="onCloseErrorDialog()"
+          class="btn btn-default"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,200 @@
+<section>
+  <app-banner title="Where Are They" subtitle="Report"></app-banner>
+</section>
+
+<section class="vertical-spacer bg-light" *ngIf="reportLocationCriteria">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Location" class="col-md-4">
+            <div class="form-group">
+              <label for="island"> Island </label>
+              <app-type-ahead
+                id="island"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="reportLocationCriteria.island"
+                [autofocus]="true"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="checkDate"> Date to check </label>
+              <app-date-editor
+                id="checkDate"
+                [(dateValue)]="reportLocationCriteria.queryDate"
+              ></app-date-editor>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Age Class" class="col-md-4">
+            <div class="form-group">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showUnknown"
+                  [(ngModel)]="reportLocationCriteria.showUnknown"
+                />
+                <label for="showUnknown" class="form-check-label">
+                  Unknown
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showEgg"
+                  [(ngModel)]="reportLocationCriteria.showEgg"
+                />
+                <label class="form-check-label" for="showEgg"> Egg </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showChick"
+                  [(ngModel)]="reportLocationCriteria.showChick"
+                />
+                <label class="form-check-label" for="showChick"> Chick </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showJuvenile"
+                  [(ngModel)]="reportLocationCriteria.showJuvenile"
+                />
+                <label class="form-check-label" for="showJuvenile">
+                  Juvenile
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="showAdult"
+                  [(ngModel)]="reportLocationCriteria.showAdult"
+                />
+                <label class="form-check-label" for="showAdult"> Adult </label>
+              </div>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <tabset #locationReportTabs>
+      <tab id="summary" [heading]="'Summary'">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Island</th>
+                <th scope="col">Age Class</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Number</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="!summary">
+              <tr>
+                <td colspan="12">Search not yet executed.</td>
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="summary && summary.length === 0">
+              <tr>
+                <td colspan="12">No search results found.</td>
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="summary && summary.length > 0">
+              <tr
+                *ngFor="let item of summary"
+                (click)="onClick(item)"
+                class="search-result-item"
+              >
+                <td *ngIf="item.type === 'SUMMARY'">{{ item.island }}</td>
+                <td *ngIf="item.type === 'ISLAND_SUMMARY'">
+                  <strong>{{ item.island }}</strong>
+                </td>
+                <td *ngIf="item.type === 'TOTAL_SUMMARY'">
+                  <strong>TOTAL</strong>
+                </td>
+                <td>{{ item.ageClass }}</td>
+                <td>{{ item.sex }}</td>
+                <td *ngIf="item.type === 'SUMMARY'">{{ item.count }}</td>
+                <td *ngIf="item.type === 'ISLAND_SUMMARY'">
+                  <strong>{{ item.count }}</strong>
+                </td>
+                <td *ngIf="item.type === 'TOTAL_SUMMARY'">
+                  <strong>{{ item.count }}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </tab>
+
+      <tab
+        id="detail"
+        heading="Detail{{
+          detailFilter === '' ? ' - All' : ' - ' + detailFilter
+        }}"
+      >
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Island</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age Class</th>
+                <th scope="col">Sex</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="!summary">
+              <tr>
+                <td colspan="12">Search not yet executed.</td>
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="summary && summary.length === 0">
+              <tr>
+                <td colspan="12">No search results found.</td>
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="summary && summary.length > 0">
+              <tr
+                *ngFor="let item of results | filter: 'island':detailFilter"
+                (click)="onClick(item)"
+                class="search-result-item"
+              >
+                <td>{{ item.island }}</td>
+                <td>{{ item.birdName }}</td>
+                <td>{{ item.ageClass }}</td>
+                <td>{{ item.sex }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</section>

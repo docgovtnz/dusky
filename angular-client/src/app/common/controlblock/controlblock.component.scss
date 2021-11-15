@@ -1,0 +1,58 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/grid';
+
+.controlblock {
+  background-color: $dusky-light;
+
+  .card-header h2 {
+    margin: 0;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    font-weight: $font-weight-base;
+  }
+
+  &.with-spacer {
+    margin-bottom: $dusky-vertical-spacer;
+  }
+  @include media-breakpoint-up(md) {
+    &.offset-controlblocks {
+      height: calc(100% + #{$dusky-controlblock-offset});
+      margin-top: -$dusky-controlblock-offset;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    margin-bottom: $dusky-vertical-spacer;
+  }
+}
+
+:host ::ng-deep .controlblock {
+  dl.data-group {
+    // Adapting style from .form-row for reduced padding
+    // Using .form-row directly doesn't work as children aren't .col
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -$form-grid-gutter-width / 2;
+    margin-left: -$form-grid-gutter-width / 2;
+    margin-bottom: 0;
+    font-size: $font-size-sm;
+
+    dt {
+      @extend .col-sm-6;
+      @extend .col-lg-5;
+      font-weight: $font-weight-base;
+    }
+    dd {
+      @extend .col-sm-6;
+      @extend .col-lg-7;
+      font-weight: $font-weight-bold;
+    }
+    dt,
+    dd {
+      margin-bottom: map-get($spacers, 1);
+      padding-right: $form-grid-gutter-width / 2;
+      padding-left: $form-grid-gutter-width / 2;
+    }
+  }
+}

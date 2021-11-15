@@ -1,0 +1,134 @@
+<!-- [TODO] NB: The style revisions have not been tested as this component doesn't appear to be used -->
+<ng-container *ngIf="txactivityRevision">
+  <div class="row">
+    <app-controlblock
+      title="Triggers & Battery"
+      [noOffset]="true"
+      class="col-md-3"
+    >
+      <dl class="data-group">
+        <dt>Battery Life 1</dt>
+        <dd>
+          {{ txactivityRevision.batteryLife1 }}
+        </dd>
+        <dt>Battery Life 2</dt>
+        <dd>
+          {{ txactivityRevision.batteryLife2 }}
+        </dd>
+        <dt>Hair Trigger 1</dt>
+        <dd>
+          {{ txactivityRevision.hairTrigger1 }}
+        </dd>
+        <dt>Hair Trigger 2</dt>
+        <dd>
+          {{ txactivityRevision.hairTrigger2 }}
+        </dd>
+        <dt>Long Trigger 1</dt>
+        <dd>
+          {{ txactivityRevision.longTrigger1 }}
+        </dd>
+        <dt>Long Trigger 2</dt>
+        <dd>
+          {{ txactivityRevision.longTrigger2 }}
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Activity" [noOffset]="true" class="col-md-9">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-light">
+            <tr>
+              <td>&nbsp;</td>
+              <td colspan="2">Yesterday</td>
+              <td colspan="2">2 days ago</td>
+              <td colspan="2">3 days ago</td>
+              <td colspan="2">4 days ago</td>
+              <td colspan="2">5 days ago</td>
+              <td colspan="2">6 days ago</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Algorithm 1</td>
+              <td>
+                {{ txactivityRevision.alg1ActivityYesterday1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1ActivityYesterday2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity2DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity2DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity3DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity3DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity4DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity4DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity5DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity5DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity6DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg1Activity6DaysAgo2 }}
+              </td>
+            </tr>
+            <tr>
+              <td>Algorithm 2</td>
+              <td>
+                {{ txactivityRevision.alg2ActivityYesterday1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2ActivityYesterday2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity2DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity2DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity3DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity3DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity4DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity4DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity5DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity5DaysAgo2 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity6DaysAgo1 }}
+              </td>
+              <td>
+                {{ txactivityRevision.alg2Activity6DaysAgo2 }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-controlblock>
+  </div>
+</ng-container>

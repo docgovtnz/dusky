@@ -1,0 +1,296 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" [style.width.%]="12">Bird</th>
+            <th scope="col" [style.width.%]="5">Length (mm)</th>
+            <th scope="col" [style.width.%]="5">Width (mm)</th>
+            <th scope="col" [style.width.%]="5">Weight (g)</th>
+            <th scope="col" [style.width.%]="5">Candling Age Estimate</th>
+            <th scope="col" [style.width.%]="5">Temperature (°C)</th>
+            <th scope="col" [style.width.%]="5">Heart Rate (bpm)</th>
+            <th scope="col" [style.width.%]="5">Embryo Moving</th>
+            <th scope="col" [style.width.%]="12">Activity</th>
+            <th scope="col" [style.width.%]="31">Comments</th>
+            <th scope="col" [style.width.%]="10">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('birdID')">
+                <app-bird-name-id-select-control
+                  id="birdID"
+                  formControlName="birdID"
+                ></app-bird-name-id-select-control>
+              </app-cell-widget>
+              <span class="data-tag" *ngIf="item.get('ageClass').value">{{
+                item.get('ageClass').value
+              }}</span>
+              <span class="data-tag" *ngIf="item.get('milestone').value">{{
+                item.get('milestone').value
+              }}</span>
+              <span class="data-tag" *ngIf="item.get('mortality').value">{{
+                item.get('mortality').value
+              }}</span>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('lengthInMms')">
+                <input
+                  class="form-control"
+                  [id]="'lengthInMms_' + i"
+                  formControlName="lengthInMms"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('widthInMms')">
+                <input
+                  class="form-control"
+                  [id]="'widthInMms_' + i"
+                  formControlName="widthInMms"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('weightInGrams')">
+                <input
+                  class="form-control"
+                  [id]="'weightInGrams_' + i"
+                  formControlName="weightInGrams"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget
+                [myFormControl]="item.get('candlingAgeEstimateInDays')"
+              >
+                <input
+                  class="form-control"
+                  [id]="'candlingAgeEstimateInDays_' + i"
+                  formControlName="candlingAgeEstimateInDays"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('temperature')">
+                <input
+                  class="form-control"
+                  [id]="'temperature_' + i"
+                  formControlName="temperature"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('heartRate')">
+                <input
+                  class="form-control"
+                  [id]="'heartRate_' + i"
+                  formControlName="heartRate"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('embryoMoving')">
+                <select
+                  class="custom-select"
+                  [id]="'embryoMoving_' + i"
+                  formControlName="embryoMoving"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('YesNoOptions')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('activity')">
+                <select
+                  class="custom-select"
+                  [id]="'activity_' + i"
+                  formControlName="activity"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('NestEggActivity')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('comments')">
+                <input
+                  class="form-control"
+                  [id]="'comments_' + i"
+                  formControlName="comments"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button
+                *ngIf="
+                  showFertile(
+                    item.get('ageClass').value,
+                    item.get('milestone').value,
+                    item.get('mortality').value
+                  )
+                "
+                class="btn btn-record"
+                (click)="onFertile(i)"
+              >
+                Fertile
+              </button>
+              <button
+                *ngIf="
+                  showInfertile(
+                    item.get('ageClass').value,
+                    item.get('milestone').value,
+                    item.get('mortality').value
+                  )
+                "
+                class="btn btn-record"
+                (click)="onInfertile(i)"
+              >
+                Infertile
+              </button>
+              <button
+                *ngIf="
+                  showHatched(
+                    item.get('ageClass').value,
+                    item.get('milestone').value,
+                    item.get('mortality').value
+                  )
+                "
+                class="btn btn-record"
+                (click)="onHatched(i)"
+              >
+                Hatched
+              </button>
+              <button
+                *ngIf="
+                  showBirdDied(
+                    item.get('ageClass').value,
+                    item.get('milestone').value,
+                    item.get('mortality').value
+                  )
+                "
+                class="btn btn-record"
+                (click)="onBirdDied(i)"
+              >
+                Egg Died
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+
+<div
+  bsModal
+  #fertileEggModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-fertileegg-edit
+          (eggSaved)="onFertileEggSaved($event)"
+        ></app-fertileegg-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #infertileEggModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-infertileegg-edit
+          (eggSaved)="onInfertileEggSaved($event)"
+        ></app-infertileegg-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #hatchModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-hatch-edit (eggSaved)="onHatchSaved($event)"></app-hatch-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #deadEmbryoModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-deadembryo-edit
+          (eggSaved)="onDeadEmbryoSaved($event)"
+        ></app-deadembryo-edit>
+      </div>
+    </div>
+  </div>
+</div>

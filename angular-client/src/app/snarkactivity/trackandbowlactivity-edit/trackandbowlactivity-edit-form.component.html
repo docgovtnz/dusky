@@ -1,0 +1,193 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Track and Bowl" class="col-md-8" [noOffset]="true">
+      <div class="row">
+        <div class="form-group col-md-2">
+          <app-widget
+            [label]="'Track Activity'"
+            [propertyName]="'trackActivity'"
+            [myFormControl]="myFormGroup.get('trackActivity')"
+          >
+            <select
+              class="custom-select"
+              id="trackActivity"
+              formControlName="trackActivity"
+            >
+              <option
+                *ngFor="
+                  let opt of optionsService.getOptions('TrackActivityOptions')
+                    | async
+                "
+                [ngValue]="opt"
+              >
+                {{ opt }}
+              </option>
+            </select>
+          </app-widget>
+        </div>
+        <div class="form-group col-md-2">
+          <app-widget
+            [label]="'Sticks'"
+            [propertyName]="'sticks'"
+            [myFormControl]="myFormGroup.get('sticks')"
+          >
+            <select class="custom-select" id="sticks" formControlName="sticks">
+              <option
+                *ngFor="
+                  let opt of optionsService.getOptions('SticksOptions') | async
+                "
+                [ngValue]="opt"
+              >
+                {{ opt }}
+              </option>
+            </select>
+          </app-widget>
+        </div>
+        <div class="form-group col-md-2">
+          <app-widget
+            [label]="'Grubbing'"
+            [propertyName]="'grubbing'"
+            [myFormControl]="myFormGroup.get('grubbing')"
+          >
+            <select
+              class="custom-select"
+              id="grubbing"
+              formControlName="grubbing"
+            >
+              <option
+                *ngFor="
+                  let opt of optionsService.getOptions('GrubbingOptions')
+                    | async
+                "
+                [ngValue]="opt"
+              >
+                {{ opt }}
+              </option>
+            </select>
+          </app-widget>
+        </div>
+        <div class="form-group col-md-2">
+          <app-widget
+            [label]="'Fighting Sign'"
+            [propertyName]="'fightingSign'"
+            [myFormControl]="myFormGroup.get('fightingSign')"
+          >
+            <select
+              class="custom-select"
+              id="fightingSign"
+              formControlName="fightingSign"
+            >
+              <option
+                *ngFor="
+                  let opt of optionsService.getOptions('FightingSignOptions')
+                    | async
+                "
+                [ngValue]="opt"
+              >
+                {{ opt }}
+              </option>
+            </select>
+          </app-widget>
+        </div>
+        <div class="form-group col-md-2">
+          <app-widget
+            [label]="'Mating Sign'"
+            [propertyName]="'matingSign'"
+            [myFormControl]="myFormGroup.get('matingSign')"
+          >
+            <select
+              class="custom-select"
+              id="matingSign"
+              formControlName="matingSign"
+            >
+              <option
+                *ngFor="
+                  let opt of optionsService.getOptions('MatingSignOptions')
+                    | async
+                "
+                [ngValue]="opt"
+              >
+                {{ opt }}
+              </option>
+            </select>
+          </app-widget>
+        </div>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="VOR" class="col-md-2" [noOffset]="true">
+      <div class="form-group">
+        <app-widget
+          [label]="'Tape Used'"
+          [propertyName]="'tapeUsed'"
+          [myFormControl]="myFormGroup.get('tapeUsed')"
+        >
+          <select
+            class="custom-select"
+            id="tapeUsed"
+            formControlName="tapeUsed"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('TapeUsedOptions') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Detected" class="col-md-2" [noOffset]="true">
+      <div class="form-group">
+        <app-widget
+          [label]="'Boom'"
+          [propertyName]="'boom'"
+          [myFormControl]="myFormGroup.get('boom')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="boom"
+            formControlName="boom"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Ching'"
+          [propertyName]="'ching'"
+          [myFormControl]="myFormGroup.get('ching')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="ching"
+            formControlName="ching"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Skraak'"
+          [propertyName]="'skraak'"
+          [myFormControl]="myFormGroup.get('skraak')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="skraak"
+            formControlName="skraak"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

@@ -1,0 +1,160 @@
+<section>
+  <app-banner title="NoraNet: Birds"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="noranetCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Details" class="col-md-3">
+            <div class="form-group">
+              <label for="birdIDs"> Bird(s) </label>
+              <app-bird-id-select-multi
+                id="birdIDs"
+                [(selectedBirds)]="noranetCriteria.birdIDs"
+                [autofocus]="true"
+                (selectedBirdsChange)="onBirdSelectionChanged()"
+              ></app-bird-id-select-multi>
+            </div>
+            <div class="form-group">
+              <label for="uhfId"> UHF ID </label>
+              <input
+                class="form-control"
+                id="uhfId"
+                [(ngModel)]="noranetCriteria.uhfId"
+                type="number"
+              />
+            </div>
+            <div class="form-group">
+              <label for="island">
+                Island
+                <span class="text-danger"><strong>&nbsp;*</strong></span>
+              </label>
+              <app-type-ahead
+                id="island"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="noranetCriteria.island"
+              ></app-type-ahead>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Dates" class="col-md-3">
+            <div class="form-group">
+              <label for="fromActivityDate"> From Date </label>
+              <app-date-editor
+                id="fromActivityDate"
+                [editorCfg]="'WithPresets'"
+                [(dateValue)]="noranetCriteria.fromActivityDate"
+              ></app-date-editor>
+            </div>
+            <div class="form-group">
+              <label for="toActivityDate"> To Date </label>
+              <app-date-editor
+                id="toActivityDate"
+                [editorCfg]="'none'"
+                [(dateValue)]="noranetCriteria.toActivityDate"
+              ></app-date-editor>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Detection Type" class="col-md-3">
+            <div class="form-group">
+              <label for="dataType"> Type </label>
+              <select
+                class="custom-select"
+                id="dataType"
+                [(ngModel)]="noranetCriteria.dataType"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('DetectionOptions')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Display Options" class="col-md-3">
+            <div class="form-group">
+              <label for="display"> Display </label>
+              <select
+                class="custom-select"
+                id="display"
+                [(ngModel)]="noranetDisplayCriteria.display"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('DisplayOptions')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <!--
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!detectedBirdsPagedResponse || detectedBirdsPagedResponse.results?.length === 0"
+        >
+          Export
+        </button>
+        -->
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="row">
+      <div
+        *ngIf="noranetDisplayCriteria.display === 'All Birds'"
+        class="col-md-3"
+      >
+        <h2>Undetected Birds</h2>
+        <app-noranet-undetected-panel
+          [undetectedBirdsResponse]="undetectedBirdsResponse"
+          [noranetCriteria]="noranetCriteria"
+        ></app-noranet-undetected-panel>
+      </div>
+      <div
+        *ngIf="
+          noranetDisplayCriteria.display === 'All Birds' ||
+          noranetDisplayCriteria.display === 'Detected Birds'
+        "
+        [ngClass]="
+          noranetDisplayCriteria.display === 'All Birds'
+            ? 'col-md-9'
+            : 'col-md-12'
+        "
+      >
+        <h2>Detected Birds</h2>
+        <app-noranet-detected-panel
+          [pagedResponse]="detectedBirdsPagedResponse"
+          [noranetCriteria]="noranetCriteria"
+          (pageChanged)="onPageChanged($event)"
+        ></app-noranet-detected-panel>
+      </div>
+    </div>
+  </div>
+</section>

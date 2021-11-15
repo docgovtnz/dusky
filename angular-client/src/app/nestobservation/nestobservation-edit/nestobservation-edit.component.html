@@ -1,0 +1,108 @@
+<section>
+  <app-banner title="Nest Observation"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="myFormGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-nestobservation-edit-form
+          [myFormGroup]="myFormGroup"
+        ></app-nestobservation-edit-form>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="newBtn" (click)="onAddEgg()" [disabled]="!nestSelected">
+          Add Egg
+        </button>
+        <button
+          id="saveBtn"
+          [disabled]="myFormGroup && myFormGroup.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button id="cancelBtn" (click)="onCancel()">Cancel</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer" *ngIf="nestobservationEntity">
+  <div class="container">
+    <tabset>
+      <tab *ngIf="true" [heading]="'Observation Details'">
+        <!-- *ngIf="true" work around ordering behaviour of ngx bootstrap tabs -->
+        <ng-container *ngIf="nestobservationEntity">
+          <app-observationtimes-edit-form
+            [myFormGroup]="myFormGroup?.get('observationTimes')"
+          ></app-observationtimes-edit-form>
+        </ng-container>
+      </tab>
+      <tab
+        *ngIf="true"
+        [heading]="'Nest Chamber'"
+        [active]="!showEggs() && !showChicks()"
+      >
+        <!-- *ngIf="true" work around ordering behaviour of ngx bootstrap tabs -->
+        <ng-container *ngIf="nestobservationEntity">
+          <app-nestchamber-edit-form
+            [myFormGroup]="myFormGroup?.get('nestChamber')"
+          ></app-nestchamber-edit-form>
+        </ng-container>
+      </tab>
+      <tab
+        *ngIf="myFormGroup?.get('motherTripList')"
+        [heading]="'Mother Trips'"
+      >
+        <app-mothertrip-edit-form
+          [myFormArray]="myFormGroup?.get('motherTripList')"
+        ></app-mothertrip-edit-form>
+      </tab>
+      <tab *ngIf="showEggs()" [heading]="'Eggs'" [active]="showEggs()">
+        <app-nestegg-edit-form
+          [myFormArray]="myFormGroup?.get('nestEggList')"
+          (eggHatched)="onEggHatched($event)"
+        ></app-nestegg-edit-form>
+      </tab>
+      <tab
+        *ngIf="showChicks()"
+        [heading]="'Chicks'"
+        [active]="!showEggs() && showChicks()"
+      >
+        <app-nestchick-edit-form
+          [myFormArray]="myFormGroup?.get('nestChickList')"
+        ></app-nestchick-edit-form>
+      </tab>
+      <tab *ngIf="true" [heading]="'Comments'">
+        <!-- *ngIf="true" work around ordering behaviour of ngx bootstrap tabs -->
+        <ng-container *ngIf="nestobservationEntity">
+          <app-comments-edit
+            [entity]="nestobservationEntity"
+            field="comments"
+          ></app-comments-edit>
+        </ng-container>
+      </tab>
+    </tabset>
+  </div>
+</section>
+
+<div
+  bsModal
+  #newEggModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-newegg-edit (eggSaved)="onEggSaved($event)"></app-newegg-edit>
+      </div>
+    </div>
+  </div>
+</div>

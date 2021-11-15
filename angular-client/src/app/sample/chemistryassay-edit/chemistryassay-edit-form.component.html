@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-md-6">
+    <app-sampleresult-autofill
+      optionsListName="BloodChemistryStandardAssayOptions"
+      (autofillSubmitted)="addAutofill($event)"
+    ></app-sampleresult-autofill>
+  </div>
+</div>
+
+<form [formGroup]="myFormGroup" (keydown.enter)="$event.preventDefault()">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Lab Name</th>
+            <th scope="col">Case Number</th>
+            <th scope="col">Date Processed</th>
+            <th scope="col">Chemistry Assay</th>
+            <th scope="col">Result</th>
+            <th scope="col">Stats Exclude?</th>
+            <th></th>
+            <!-- empty column for edit buttons -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('labName')">
+                <input
+                  class="form-control"
+                  id="labName"
+                  formControlName="labName"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('caseNumber')">
+                <input
+                  class="form-control"
+                  id="caseNumber"
+                  formControlName="caseNumber"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('dateProcessed')">
+                <app-date-control
+                  id="dateProcessed"
+                  formControlName="dateProcessed"
+                  [editorCfg]="'none'"
+                ></app-date-control>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('chemistryAssay')">
+                <select
+                  class="custom-select"
+                  id="chemistryAssay"
+                  formControlName="chemistryAssay"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions(
+                        'ChemistryAssayOptions'
+                      ) | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('result')">
+                <input
+                  class="form-control"
+                  id="result"
+                  formControlName="result"
+                  type="text"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('statsExclude')">
+                <input
+                  class="form-check"
+                  id="statsExclude"
+                  formControlName="statsExclude"
+                  type="checkbox"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button class="btn btn-record" (click)="removeItem(i)">
+                <fa-icon icon="minus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Remove</span>
+              </button>
+              <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+              <button class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

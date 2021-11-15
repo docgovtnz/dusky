@@ -1,0 +1,285 @@
+<section>
+  <app-banner title="Transmitters"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="transmitterCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Transmitter" class="col-md-9">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="txId"> Tx Id </label>
+                  <input
+                    class="form-control"
+                    id="txId"
+                    [(ngModel)]="transmitterCriteria.txId"
+                    appAutofocus
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="txMortalityTypes"> Mort Type </label>
+                  <select
+                    class="custom-select"
+                    id="txMortalityTypes"
+                    [(ngModel)]="transmitterCriteria.txMortalityTypes"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('TxMortalityTypes')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="spareOnly"
+                      [(ngModel)]="transmitterCriteria.spareOnly"
+                    />
+                    <label class="form-check-label" for="spareOnly">
+                      Show Spare Transmitters Only
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="rigging"> Rigging </label>
+                  <select
+                    class="custom-select"
+                    id="rigging"
+                    [(ngModel)]="transmitterCriteria.rigging"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('RiggingList')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="showDecommissioned"
+                      [(ngModel)]="transmitterCriteria.showDecommissioned"
+                    />
+                    <label class="form-check-label" for="showDecommissioned">
+                      Show Decommissioned Transmitters
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="currentIsland"> Island </label>
+                  <app-type-ahead
+                    id="currentIsland"
+                    [optionType]="'IslandName'"
+                    [(selectedOption)]="transmitterCriteria.currentIsland"
+                  ></app-type-ahead>
+                </div>
+                <div class="form-group">
+                  <label for="channel"> Channel </label>
+                  <input
+                    class="form-control"
+                    id="channel"
+                    [(ngModel)]="transmitterCriteria.channel"
+                    type="number"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="uhfId"> UHF ID </label>
+                  <input
+                    class="form-control"
+                    id="uhfId"
+                    [(ngModel)]="transmitterCriteria.uhfId"
+                    type="number"
+                  />
+                </div>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Birds" class="col-md-3">
+            <div class="form-group">
+              <label for="birdID"> Bird </label>
+              <app-bird-name-id-select
+                id="birdID"
+                [(birdID)]="transmitterCriteria.birdID"
+                (birdIDChange)="doSearch()"
+                (keyup.enter)="prevent($event)"
+              ></app-bird-name-id-select>
+            </div>
+            <div class="form-group">
+              <label for="ageClass"> Age Class </label>
+              <select
+                class="custom-select"
+                id="ageClass"
+                [(ngModel)]="transmitterCriteria.ageClass"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('AgeClasses') | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="aliveOnly"
+                      [(ngModel)]="transmitterCriteria.aliveOnly"
+                    />
+                    <label class="form-check-label" for="aliveOnly">
+                      Alive Only
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="sex"> Sex </label>
+                  <select
+                    class="custom-select"
+                    id="sex"
+                    [(ngModel)]="transmitterCriteria.sex"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('SexOptions')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Tx Id</th>
+            <th scope="col">Status</th>
+            <th scope="col">Island</th>
+            <th scope="col">Channel</th>
+            <th scope="col">UHF ID</th>
+            <th scope="col">Mort Type</th>
+            <th scope="col">Bird</th>
+            <th scope="col">Life Expectancy</th>
+            <th scope="col">Rigging</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="12">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="12">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.txId }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.island }}</td>
+            <td>{{ item.channel }}</td>
+            <td>{{ item.uhfId | number: '3.0-0' }}</td>
+            <td>{{ item.mortType }}</td>
+            <td>
+              <app-link-view
+                [linkUrl]="'/bird/' + item.birdID"
+                [label]="item.birdName"
+              ></app-link-view>
+            </td>
+            <td>{{ item.lifeExpectancy }}</td>
+            <td>{{ item.rigging }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="transmitterCriteria.pageSize"
+          [(ngModel)]="transmitterCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

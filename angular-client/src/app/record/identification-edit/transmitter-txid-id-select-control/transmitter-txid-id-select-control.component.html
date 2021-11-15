@@ -1,0 +1,29 @@
+<input
+  *ngIf="!autofocus"
+  #typeahead
+  class="form-control border border-primary"
+  [typeahead]="optionList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  typeaheadOptionField="txId"
+  (typeaheadOnSelect)="onValueChange($event.item.id)"
+  [(ngModel)]="transmitterTxidSelected"
+  (blur)="onInputBlur()"
+  [disabled]="disabled"
+/>
+<input
+  *ngIf="autofocus"
+  #typeahead
+  class="form-control border border-primary"
+  [typeahead]="optionList"
+  [typeaheadScrollable]="true"
+  [typeaheadOptionsInScrollableView]="14"
+  [typeaheadOptionsLimit]="60"
+  typeaheadOptionField="txId"
+  (typeaheadOnSelect)="onValueChange($event.item.id)"
+  [(ngModel)]="transmitterTxidSelected"
+  (blur)="onInputBlur()"
+  [disabled]="disabled"
+  appAutofocus
+/>

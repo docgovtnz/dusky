@@ -1,0 +1,137 @@
+<section>
+  <app-banner title="Upgrade"></app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <ng-container *ngIf="serverMode !== 'Server'">
+      <div class="row">
+        <div class="col-md-10">
+          <app-controlblock title="Upgrade Laptop">
+            <ng-container *ngIf="fileMetaDataList && initialized">
+              <p>
+                <span *ngIf="cloudServerReachable">
+                  <span *ngIf="!upgradeRequired"
+                    >This version is up to date. You don't need to do
+                    anything.</span
+                  >
+
+                  <span *ngIf="upgradeRequired">
+                    <span
+                      >There is a new version available. You should download and
+                      upgrade to it.</span
+                    >
+
+                    <span *ngIf="downloadRequired">
+                      There are files missing or invalid. Please download them
+                      again.</span
+                    >
+
+                    <span *ngIf="!downloadRequired">
+                      <span>
+                        All files required for the next release are downloaded
+                        and correct.</span
+                      >
+                      <span>
+                        The upgrade is ready to be done. Please press the
+                        upgrade button.</span
+                      >
+                    </span>
+                  </span>
+                </span>
+
+                <span *ngIf="!cloudServerReachable"
+                  >Cloud server is not reachable. Upgrade service is not
+                  available at this time.</span
+                >
+              </p>
+
+              <dl class="data-group" *ngIf="cloudServerReachable">
+                <dt>Cloud Version</dt>
+                <dd>{{ fileMetaDataList.cloudVersion }}</dd>
+                <dt>Local Version</dt>
+                <dd>{{ fileMetaDataList.localVersion }}</dd>
+              </dl>
+
+              <div class="table-responsive">
+                <table
+                  class="table table-bordered table-striped table-sm"
+                  *ngIf="
+                    cloudServerReachable &&
+                    fileMetaDataList &&
+                    fileMetaDataList.list
+                  "
+                >
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>File</th>
+                      <th>Expected Checksum</th>
+                      <th>Local Checksum</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let file of fileMetaDataList.list">
+                      <td>{{ file.name }}</td>
+                      <td>{{ file.expectedChecksum }}</td>
+                      <td>{{ file.localChecksum }}</td>
+                      <td>{{ file.status }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ng-container>
+          </app-controlblock>
+        </div>
+        <app-buttonblock class="col-md-2">
+          <button id="resetBtn" (click)="onReset()">Reset</button>
+          <button
+            id="downloadBtn"
+            [disabled]="!cloudServerReachable"
+            (click)="onDownload()"
+          >
+            Download
+          </button>
+          <button
+            id="upgradeBtn"
+            (click)="onUpgrade()"
+            [disabled]="!cloudServerReachable || !upgradeEnabled"
+          >
+            Upgrade
+          </button>
+          <!--<button id="restartCheckBtn" class="btn btn-info btn-block "
+                  (click)="onRestartCheck()">Restart
+          </button>-->
+        </app-buttonblock>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="serverMode === 'Server'">
+      <div class="row">
+        <app-controlblock title="Upgrade Unavailable" class="col-md-6">
+          <p>Upgrade only available for Laptop environments.</p>
+        </app-controlblock>
+      </div>
+    </ng-container>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <alert
+      [dismissible]="true"
+      [type]="getAlertType()"
+      (onClosed)="onClosed()"
+      *ngIf="upgradeResult"
+    >
+      <h5>Upgrade Result</h5>
+      <ul>
+        <li>{{ upgradeResult.result }}</li>
+      </ul>
+      <img
+        *ngIf="getAlertType() === 'success'"
+        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+    </alert>
+  </div>
+</section>

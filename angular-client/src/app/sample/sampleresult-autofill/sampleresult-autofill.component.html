@@ -1,0 +1,79 @@
+<form (ngSubmit)="onSubmit()" #autofillForm="ngForm">
+  <app-controlblock
+    title="Sample Autofill"
+    [noOffset]="true"
+    [withSpacer]="true"
+  >
+    <div class="form-row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="labName">Lab Name</label>
+          <input
+            class="form-control"
+            id="labName"
+            type="text"
+            [(ngModel)]="sampleResultAutofill.labName"
+            name="labName"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="caseNumber">Case Number</label>
+          <input
+            class="form-control"
+            id="caseNumber"
+            type="text"
+            [(ngModel)]="sampleResultAutofill.caseNumber"
+            name="caseNumber"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="dateProcessed">Date Processed</label>
+          <div class="input-group">
+            <input
+              id="dateProcessed"
+              class="form-control"
+              type="text"
+              #datePicker="bsDatepicker"
+              bsDatepicker
+              [(ngModel)]="sampleResultAutofill.dateProcessed"
+              name="dateProcessed"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text" (click)="datePicker.toggle()">
+                <fa-icon icon="calendar" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Date Picker</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="standardAssayOption"> Standard Assays </label>
+      <select
+        class="custom-select"
+        id="standardAssayOption"
+        [ngModel]="standardAssayOption"
+        name="standardAssayOption"
+        (ngModelChange)="onStandardAssayOptionChange($event)"
+        required
+      >
+        <option *ngFor="let opt of optionList" [ngValue]="opt">
+          {{ opt }}
+        </option>
+      </select>
+    </div>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="!autofillForm.form.valid"
+    >
+      Add to table
+    </button>
+  </app-controlblock>
+</form>

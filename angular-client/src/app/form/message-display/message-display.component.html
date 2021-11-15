@@ -1,0 +1,12 @@
+<div
+  *ngIf="
+    myFormControl &&
+    myFormControl.invalid &&
+    (myFormControl.dirty || myFormControl.touched)
+  "
+  class="text-danger"
+>
+  <!--{{myFormControl.errors | json}}-->
+
+  <div *ngFor="let errorMsg of getErrorMessages()">{{ errorMsg }}</div>
+</div>

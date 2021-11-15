@@ -1,0 +1,50 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <app-controlblock title="Status" [noOffset]="true">
+    <div class="form-group">
+      <app-widget
+        [label]="'Health Status'"
+        [propertyName]="'healthStatus'"
+        [myFormControl]="myFormGroup.get('healthStatus')"
+      >
+        <select
+          class="custom-select"
+          id="healthStatus"
+          formControlName="healthStatus"
+        >
+          <option
+            *ngFor="
+              let opt of optionsService.getOptions('HealthStatusOptions')
+                | async
+            "
+            [ngValue]="opt"
+          >
+            {{ opt }}
+          </option>
+        </select>
+      </app-widget>
+    </div>
+    <div class="form-group">
+      <app-widget
+        [label]="'Booming Intensity'"
+        [propertyName]="'boomingIntensity'"
+        [myFormControl]="myFormGroup.get('boomingIntensity')"
+      >
+        <select
+          class="custom-select"
+          id="boomingIntensity"
+          formControlName="boomingIntensity"
+        >
+          <option
+            *ngFor="
+              let opt of optionsService.getOptions('BoomingIntensityOptions')
+                | async
+            "
+            [ngValue]="opt"
+          >
+            {{ opt }}
+          </option>
+        </select>
+      </app-widget>
+    </div>
+  </app-controlblock>
+</form>

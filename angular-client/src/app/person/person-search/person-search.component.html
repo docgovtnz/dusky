@@ -1,0 +1,179 @@
+<section>
+  <app-banner title="People"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="personCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Person" class="col-md-4">
+            <div class="form-group">
+              <label for="name"> Name </label>
+              <app-type-ahead
+                id="name"
+                [optionType]="'User'"
+                [(selectedOption)]="personCriteria.name"
+                [autofocus]="true"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="activeOnly"> Only Display Active Users </label>
+              <input
+                class="form-check"
+                type="checkbox"
+                id="activeOnly"
+                [(ngModel)]="personCriteria.activeOnly"
+              />
+            </div>
+            <div class="form-group">
+              <label for="accountOnly"> Show People With Accounts </label>
+              <input
+                class="form-check"
+                type="checkbox"
+                id="accountOnly"
+                [(ngModel)]="personCriteria.accountOnly"
+              />
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Permissions" class="col-md-4">
+            <div class="form-group">
+              <label for="currentCapacity"> Current Capacity </label>
+              <select
+                class="custom-select"
+                id="currentCapacity"
+                [(ngModel)]="personCriteria.currentCapacity"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions(
+                      'PersonCapacityOptions'
+                    ) | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="personRole"> Access Level </label>
+              <select
+                class="custom-select"
+                id="personRole"
+                [(ngModel)]="personCriteria.personRole"
+                (change)="onSearch()"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('PersonRoleOptions')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Account</th>
+            <th scope="col">Expired</th>
+            <th scope="col">Current Capacity</th>
+            <th scope="col">Access Level</th>
+            <th scope="col">Expiry Date</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="12">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="12">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.name }}</td>
+            <td>{{ item.phoneNumber }}</td>
+            <td>
+              <ng-container *ngIf="item.hasAccount"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Has account</span></ng-container
+              >
+            </td>
+            <td>
+              <app-expired-date-tick
+                [date]="item.accountExpiry"
+              ></app-expired-date-tick>
+            </td>
+            <td>{{ item.currentCapacity }}</td>
+            <td>{{ item.personRole }}</td>
+            <td>{{ item.accountExpiry | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="personCriteria.pageSize"
+          [(ngModel)]="personCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

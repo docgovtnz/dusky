@@ -1,0 +1,113 @@
+<ng-container *ngIf="recordRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-3">
+      <dl class="data-group">
+        <dt>Bird</dt>
+        <dd>
+          <app-bird-name-label
+            [birdID]="recordRevision.birdID"
+          ></app-bird-name-label>
+        </dd>
+        <dt>Island</dt>
+        <dd>
+          {{ recordRevision.island }}
+        </dd>
+        <dt>Mapping Method</dt>
+        <dd>
+          <span class="data-tag">{{ recordRevision.mappingMethod }}</span>
+        </dd>
+        <dt *ngIf="recordRevision?.recordType != 'Triangulation'">
+          Signal Received From Location
+        </dt>
+        <dd *ngIf="recordRevision?.recordType != 'Triangulation'">
+          <app-location-name-label
+            [locationID]="recordRevision.signalRcvdLocation"
+          ></app-location-name-label>
+        </dd>
+        <dt>Bird Location</dt>
+        <dd>
+          <app-location-name-label
+            [locationID]="recordRevision.locationID"
+          ></app-location-name-label>
+        </dd>
+        <dt>Easting</dt>
+        <dd>
+          {{ recordRevision.easting }}
+        </dd>
+        <dt>Northing</dt>
+        <dd>
+          {{ recordRevision.northing }}
+        </dd>
+        <dt *ngIf="recordRevision?.recordType == 'Triangulation'">
+          Magnetic Declination
+        </dt>
+        <dd *ngIf="recordRevision?.recordType == 'Triangulation'">
+          {{ recordRevision.magneticDeclination | addUnits: '°' }}
+        </dd>
+        <dt *ngIf="recordRevision?.recordType == 'Triangulation'">
+          Declination Year
+        </dt>
+        <dd *ngIf="recordRevision?.recordType == 'Triangulation'">
+          {{ recordRevision.magneticDeclinationAsOfYear }}
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Event" class="col-md-3">
+      <dl class="data-group">
+        <dt>Date Time</dt>
+        <dd>{{ recordRevision.dateTime | date: 'dd/MM/yyyy HH:mm' }}</dd>
+        <dt>Activity</dt>
+        <dd>
+          <span class="data-tag">{{ recordRevision.activity }}</span>
+        </dd>
+        <dt>Reason</dt>
+        <dd>
+          <span class="data-tag">{{ recordRevision.reason }}</span>
+        </dd>
+        <dt>Sub Reason</dt>
+        <dd>
+          <span class="data-tag">{{ recordRevision.subReason }}</span>
+        </dd>
+        <dt>Significant Event</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="significantEvent"
+            [(ngModel)]="recordRevision.significantEvent"
+          />
+        </dd>
+        <dt>Errol</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="errol"
+            [(ngModel)]="recordRevision.errol"
+          />
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Observers" class="col-md-6">
+      <dl class="data-group">
+        <dt>Observer List</dt>
+        <dd>
+          <app-observer-view
+            [observers]="recordRevision.observerList"
+          ></app-observer-view>
+        </dd>
+        <ng-container *ngIf="nestObservation">
+          <dt>Nest Observation</dt>
+          <dd>
+            <app-link-view
+              [label]="nestObservation.dateTime | date: 'dd/MM/yyyy HH:mm'"
+              [linkUrl]="'/nestobservation/' + nestObservation.id"
+            ></app-link-view>
+          </dd>
+        </ng-container>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

@@ -1,0 +1,24 @@
+<ng-container *ngIf="islandRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6">
+      <dl class="data-group">
+        <dt>Name</dt>
+        <dd>{{ islandRevision.name }}</dd>
+        <dt>ID</dt>
+        <dd>{{ islandRevision.islandId }}</dd>
+        <dt>Lower easting</dt>
+        <dd>{{ islandRevision.lowerEasting }}</dd>
+        <dt>Lower northing</dt>
+        <dd>{{ islandRevision.lowerNorthing }}</dd>
+        <dt>Upper easting</dt>
+        <dd>{{ islandRevision.upperEasting }}</dd>
+        <dt>Upper northing</dt>
+        <dd>{{ islandRevision.upperNorthing }}</dd>
+        <dt>Magnetic Declination</dt>
+        <dd>{{ islandRevision.magneticDeclination }}</dd>
+        <dt>Magnetic Declination As Of Year</dt>
+        <dd>{{ islandRevision.magneticDeclinationAsOfYear }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

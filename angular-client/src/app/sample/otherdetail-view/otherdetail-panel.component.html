@@ -1,0 +1,18 @@
+<ng-container *ngIf="otherdetailRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6" [noOffset]="true">
+      <dl class="data-group">
+        <dt>Type</dt>
+        <dd>
+          {{ otherdetailRevision.type }}
+        </dd>
+        <dt>Amount</dt>
+        <dd>{{ otherdetailRevision.amount }}</dd>
+        <dt>Units</dt>
+        <dd>
+          <span class="data-tag">{{ otherdetailRevision.units }}</span>
+        </dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

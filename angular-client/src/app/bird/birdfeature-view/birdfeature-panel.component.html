@@ -1,0 +1,33 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Body part</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!birdfeatureList">
+      <tr>
+        <td colspan="2">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="birdfeatureList && birdfeatureList.length === 0">
+      <tr>
+        <td colspan="2">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="birdfeatureList && birdfeatureList.length > 0">
+      <tr *ngFor="let item of birdfeatureList">
+        <td>
+          <span class="data-tag">{{ item.bodyPart }}</span>
+        </td>
+        <td>
+          {{ item.description }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

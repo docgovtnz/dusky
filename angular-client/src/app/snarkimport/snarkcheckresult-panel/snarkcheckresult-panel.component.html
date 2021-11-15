@@ -1,0 +1,115 @@
+<div>
+  <span *ngIf="loading">Loading...</span>
+
+  <section *ngIf="snarkCheckResult?.mysteryWeightList?.length > 0">
+    <h2>Mystery Weights</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm mb-2">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Weight (kg)</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of snarkCheckResult.mysteryWeightList">
+            <td>
+              {{ item.weight }}
+            </td>
+            <td>
+              {{ item.dateTime | date: 'dd/MM/yyyy HH:mm' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div *ngIf="snarkCheckResult && !loading">
+    <h2>Snark File Summary</h2>
+  </div>
+
+  <section>
+    <div *ngIf="snarkCheckResult?.existingImport">
+      <alert type="danger">This file has already been imported</alert>
+    </div>
+
+    <div *ngIf="snarkCheckResult?.someBirdsNotFound">
+      <alert type="warning">
+        Unique Bird matches were not found for some UHF IDs. Snark Import will
+        not create records for these entries.<br />
+        If a bird has changed ID recently, ensure Snark and ID Change records
+        are entered chronologically.
+      </alert>
+    </div>
+  </section>
+
+  <section *ngIf="snarkCheckResult && !loading">
+    <app-controlblock
+      title="Evening: {{ evening.date | date: 'dd/MM/yyy' }}"
+      [noOffset]="true"
+      [withSpacer]="true"
+      *ngFor="let evening of snarkCheckResult.eveningList"
+    >
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm mb-3 bg-white">
+          <thead class="thead-light">
+            <tr>
+              <th>Include</th>
+              <th>Record Type</th>
+              <th>Time</th>
+              <th>UHF ID</th>
+              <th>Bird Detected</th>
+              <th>Weight</th>
+              <th>Quality</th>
+              <th>Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let record of evening.snarkRecordList"
+              [ngClass]="{
+                exclude: !record.include && record.recordType != 'Lock',
+                duplicate: record.possibleBirdList.length > 1,
+                lockRecord: record.recordType === 'Lock'
+              }"
+            >
+              <td>
+                <input
+                  class="form-check"
+                  type="checkbox"
+                  [(ngModel)]="record['include']"
+                  [disabled]="record.recordType === 'Lock'"
+                />
+              </td>
+              <td *ngIf="record.recordType === 'Lock'">Lock / Unlock Fail</td>
+              <td *ngIf="record.recordType !== 'Lock'">
+                {{ record.recordType }}
+              </td>
+              <td>{{ record.dateTime | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ record.uhfId }}</td>
+              <td>
+                <!-- Provide a selector if more than one possible bird -->
+                <app-bird-select
+                  *ngIf="record.possibleBirdList.length > 1"
+                  [birdIDList]="record.possibleBirdList"
+                  [birdID]="record['birdID']"
+                  (birdIDChange)="record['birdID'] = $event"
+                ></app-bird-select>
+
+                <app-bird-name-label
+                  *ngIf="record.possibleBirdList.length <= 1"
+                  [birdID]="record.birdID"
+                ></app-bird-name-label>
+              </td>
+              <td>{{ record.weight | addUnits: 'kg' }}</td>
+              <td>{{ record.weightQuality }}</td>
+              <td>{{ record.lockCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-controlblock>
+  </section>
+</div>

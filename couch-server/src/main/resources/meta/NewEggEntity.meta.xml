@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="NewEggEntity">
+  <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+  <Property name="clutchOrder" label="Clutch Order" javaType="Integer" jsonType="number"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="eggName" label="Egg Name" javaType="String" jsonType="string"/>
+  <Property name="fwCoefficientX10P4" label="Fresh Weight Coefficient (x10^4)"
+    javaType="Float" jsonType="number"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="layDate" label="Lay Date" javaType="Date" jsonType="Date"/>
+  <Property name="layDateIsEstimate" label="Lay Date Is Estimate" javaType="Boolean"
+    jsonType="boolean"/>
+  <Property name="eggLength" label="Length" javaType="Float" jsonType="number"/>
+  <Property name="locationID" label="Location" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="mother" label="Mother" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="eggWidth" label="Width" javaType="Float" jsonType="number"/>
+  <Property name="observerList" label="Observer List" javaType="List&lt;ObserverEntity&gt;"
+    jsonType="ObserverEntity[]">
+    <Class name="ObserverEntity">
+      <Property name="personID" label="Person ID" javaType="String" jsonType="string"/>
+      <Property name="observerCapacity" label="Observer Capacity" javaType="String"
+        jsonType="string"/>
+      <Property name="observationRoles" label="Observation Roles" javaType="List&lt;String&gt;"
+        jsonType="string[]"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="personID"/>
+          <DisplayProperty name="observerCapacity"/>
+          <DisplayProperty name="observationRoles"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="mother"/>
+      <DisplayProperty name="locationID"/>
+      <DisplayProperty name="eggName"/>
+      <DisplayProperty name="layDate"/>
+      <DisplayProperty name="layDateIsEstimate"/>
+      <DisplayProperty name="eggLength"/>
+      <DisplayProperty name="eggWidth"/>
+      <DisplayProperty name="fwCoefficientX10P4"/>
+      <DisplayProperty name="clutchOrder"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

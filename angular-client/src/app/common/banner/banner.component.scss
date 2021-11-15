@@ -1,0 +1,27 @@
+@import 'bootstrap/scss/functions';
+@import 'src/assets/styles/variables';
+@import 'bootstrap/scss/mixins';
+
+.banner {
+  background-color: $dusky-dark;
+  padding: map-get($spacers, 3) 0;
+  color: $white;
+
+  .title {
+    margin: 0;
+  }
+  .subtitle {
+    margin-top: map-get($spacers, 1);
+    margin-bottom: 0;
+    font-style: italic;
+    color: $gray-200;
+  }
+  &.with-spacer {
+    margin-bottom: $dusky-vertical-spacer;
+  }
+  @include media-breakpoint-up(md) {
+    &.offset-controlblocks {
+      padding-bottom: $dusky-controlblock-offset;
+    }
+  }
+}

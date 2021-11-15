@@ -1,0 +1,52 @@
+<section>
+  <app-banner title="Person">
+    <button
+      *ngIf="resetPasswordCheck"
+      class="btn btn-action"
+      (click)="onResetPassword()"
+    >
+      <fa-icon icon="fingerprint" aria-hidden="true"></fa-icon>Reset Password
+    </button>
+    <button
+      *appPermission="'PERSON_EDIT'"
+      class="btn btn-action"
+      (click)="onEdit()"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+    <button
+      *appPermission="'PERSON_DELETE'"
+      class="btn btn-action"
+      [disabled]="!isDeleteOk()"
+      (click)="deleteConfirmationPopup.show()"
+    >
+      <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+    </button>
+    <app-revision-list-view
+      [entity]="personEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-person-panel [personRevision]="revision"></app-person-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-reset-password
+  #resetPasswordComponent
+  (resetPasswordEvent)="onResetPasswordEvent()"
+></app-reset-password>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Person'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

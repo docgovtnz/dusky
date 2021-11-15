@@ -1,0 +1,16 @@
+<ng-container *ngIf="healthstatusRevision">
+  <app-controlblock title="Status" [noOffset]="true">
+    <dl class="data-group">
+      <dt>Health Status</dt>
+      <dd>
+        <span class="data-tag">{{ healthstatusRevision.healthStatus }}</span>
+      </dd>
+      <dt>Booming Intensity</dt>
+      <dd>
+        <span class="data-tag">{{
+          healthstatusRevision.boomingIntensity
+        }}</span>
+      </dd>
+    </dl>
+  </app-controlblock>
+</ng-container>

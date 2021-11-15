@@ -1,0 +1,160 @@
+{
+  "currentVersion": 10.5,
+  "serviceDescription": "A Generic Map of New Zealand, Maximum scale 1:8000000 Min scale 1:1128\n",
+  "mapName": "Layers",
+  "description": "",
+  "copyrightText": "Land Information New Zealand, Eagle Technology ",
+  "supportsDynamicLayers": false,
+  "layers": [
+    {
+      "id": 0,
+      "name": "Background",
+      "parentLayerId": -1,
+      "defaultVisibility": true,
+      "subLayerIds": null,
+      "minScale": 1155584,
+      "maxScale": 0
+    }
+  ],
+  "tables": [],
+  "spatialReference": {
+    "wkid": 2193,
+    "latestWkid": 2193
+  },
+  "singleFusedMapCache": true,
+  "tileInfo": {
+    "rows": 512,
+    "cols": 512,
+    "dpi": 96,
+    "format": "JPEG",
+    "compressionQuality": 90,
+    "origin": {
+      "x": -4020900,
+      "y": 19998100
+    },
+    "spatialReference": {
+      "wkid": 2193,
+      "latestWkid": 2193
+    },
+    "lods": [
+      {
+        "level": 0,
+        "resolution": 4891.96981024998,
+        "scale": 1.8489297737236E7
+      },
+      {
+        "level": 1,
+        "resolution": 2445.98490512499,
+        "scale": 9244648.868618
+      },
+      {
+        "level": 2,
+        "resolution": 1222.992452562495,
+        "scale": 4622324.434309
+      },
+      {
+        "level": 3,
+        "resolution": 611.4962262813797,
+        "scale": 2311162.217155
+      },
+      {
+        "level": 4,
+        "resolution": 305.74811314055756,
+        "scale": 1155581.108577
+      },
+      {
+        "level": 5,
+        "resolution": 152.87405657041106,
+        "scale": 577790.554289
+      },
+      {
+        "level": 6,
+        "resolution": 76.43702828507324,
+        "scale": 288895.277144
+      },
+      {
+        "level": 7,
+        "resolution": 38.21851414253662,
+        "scale": 144447.638572
+      },
+      {
+        "level": 8,
+        "resolution": 19.10925707126831,
+        "scale": 72223.819286
+      },
+      {
+        "level": 9,
+        "resolution": 9.554628535634155,
+        "scale": 36111.909643
+      },
+      {
+        "level": 10,
+        "resolution": 4.77731426794937,
+        "scale": 18055.954822
+      },
+      {
+        "level": 11,
+        "resolution": 2.388657133974685,
+        "scale": 9027.977411
+      },
+      {
+        "level": 12,
+        "resolution": 1.1943285668550503,
+        "scale": 4513.988705
+      },
+      {
+        "level": 13,
+        "resolution": 0.5971642835598172,
+        "scale": 2256.994353
+      },
+      {
+        "level": 14,
+        "resolution": 0.29858214164761665,
+        "scale": 1128.497176
+      }
+    ]
+  },
+  "initialExtent": {
+    "xmin": 1340120.882436377,
+    "ymin": 6607793.259626014,
+    "xmax": 2039672.5653021242,
+    "ymax": 6798580.082225764,
+    "spatialReference": {
+      "wkid": 2193,
+      "latestWkid": 2193
+    }
+  },
+  "fullExtent": {
+    "xmin": -2955028.6109631048,
+    "ymin": 2909464.0830770284,
+    "xmax": 6334822.0587016065,
+    "ymax": 7307344.942491761,
+    "spatialReference": {
+      "wkid": 2193,
+      "latestWkid": 2193
+    }
+  },
+  "minScale": 1.8489297737236E7,
+  "maxScale": 1128.497176,
+  "units": "esriMeters",
+  "supportedImageFormatTypes": "PNG32,PNG24,PNG,JPG,DIB,TIFF,EMF,PS,PDF,GIF,SVG,SVGZ,BMP",
+  "documentInfo": {
+    "Title": "A Grey Canvas Map of New Zealand",
+    "Author": "Aaron khor",
+    "Comments": "A Grey Canvas Map of New Zealand, Maximum scale 1:8,000,000 Min scale 1:2,257",
+    "Subject": "A Grey Canvas Map of New Zealand",
+    "Category": "",
+    "AntialiasingMode": "Best",
+    "TextAntialiasingMode": "Force",
+    "Keywords": "\"Community\",\"Basemap\",\"New Zealand\",\"NZ\""
+  },
+  "capabilities": "Map,Query,Data",
+  "supportedQueryFormats": "JSON, AMF, geoJSON",
+  "exportTilesAllowed": true,
+  "maxExportTilesCount": 100000,
+  "supportsDatumTransformation": true,
+  "maxRecordCount": 1000,
+  "maxImageHeight": 4096,
+  "maxImageWidth": 4096,
+  "supportedExtensions": ""
+}

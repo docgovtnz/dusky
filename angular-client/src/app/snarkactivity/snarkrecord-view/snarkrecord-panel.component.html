@@ -1,0 +1,56 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Bird</th>
+        <th scope="col">Bird cert</th>
+        <th scope="col">Arrive Date Time</th>
+        <th scope="col">Depart Date Time</th>
+        <th scope="col">Mating</th>
+        <th scope="col">Record</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="!snarkrecordList">
+      <tr>
+        <td colspan="12">Loading...</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="snarkrecordList && snarkrecordList.length === 0">
+      <tr>
+        <td colspan="12">No data found.</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="snarkrecordList && snarkrecordList.length > 0">
+      <tr *ngFor="let item of snarkrecordList">
+        <td>
+          <app-bird-name-label [birdID]="item.birdID"></app-bird-name-label>
+        </td>
+        <td>
+          <small class="badge badge-primary">{{ item.birdCert }}</small>
+        </td>
+        <td>
+          {{ item.arriveDateTime | date: 'HH:mm' }}
+        </td>
+        <td>
+          {{ item.departDateTime | date: 'HH:mm' }}
+        </td>
+        <td>
+          <ng-container *ngIf="item.mating"
+            ><fa-icon icon="check" aria-hidden="true"></fa-icon
+            ><span class="sr-only">True</span></ng-container
+          >
+        </td>
+        <td>
+          <app-link-view
+            *ngIf="item.recordID"
+            [linkUrl]="'/record/' + item.recordID"
+            [label]="'View'"
+          ></app-link-view>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

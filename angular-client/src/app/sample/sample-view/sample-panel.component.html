@@ -1,0 +1,83 @@
+<ng-container *ngIf="sampleRevision">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-3">
+      <dl class="data-group">
+        <dt>Sample ID</dt>
+        <dd>{{ sampleRevision.sampleName }}</dd>
+        <dt>Bird</dt>
+        <dd>
+          <app-bird-name-label
+            [birdID]="sampleRevision.birdID"
+          ></app-bird-name-label>
+        </dd>
+        <dt>Collection Date</dt>
+        <dd>
+          <ng-container *ngIf="!recordID">
+            {{ sampleRevision.collectionDate | date: 'dd/MM/yyyy HH:mm' }}
+          </ng-container>
+          <ng-container *ngIf="recordID">
+            <a routerLink="/record/{{ recordID }}">{{
+              sampleRevision.collectionDate | date: 'dd/MM/yyyy HH:mm'
+            }}</a>
+          </ng-container>
+        </dd>
+        <dt>Sample Category</dt>
+        <dd>{{ sampleRevision.sampleCategory }}</dd>
+        <dt>Sample Type</dt>
+        <dd>{{ sampleRevision.sampleType }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Details" class="col-md-3">
+      <dl class="data-group">
+        <dt>Collection Island</dt>
+        <dd>{{ sampleRevision.collectionIsland }}</dd>
+        <dt>Collection Location</dt>
+        <dd>
+          <app-location-name-label
+            [locationID]="sampleRevision.collectionLocationID"
+          ></app-location-name-label>
+        </dd>
+        <dt>Sample Taken By</dt>
+        <dd>
+          <app-person-name-label
+            [personId]="sampleRevision.sampleTakenBy"
+          ></app-person-name-label>
+        </dd>
+        <dt>Reason for Sample</dt>
+        <dd>{{ sampleRevision.reasonForSample }}</dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Storage" class="col-md-3">
+      <dl class="data-group">
+        <dt>Storage Medium</dt>
+        <dd>
+          <span class="data-tag">{{ sampleRevision.storageMedium }}</span>
+        </dd>
+        <dt>Container</dt>
+        <dd>
+          <span class="data-tag">{{ sampleRevision.container }}</span>
+        </dd>
+        <dt>Storage Conditions</dt>
+        <dd>
+          <span class="data-tag">{{ sampleRevision.storageConditions }}</span>
+        </dd>
+        <dt>Archived</dt>
+        <dd>
+          <input
+            class="form-check"
+            type="checkbox"
+            disabled
+            id="archived"
+            [(ngModel)]="sampleRevision.archived"
+          />
+        </dd>
+      </dl>
+    </app-controlblock>
+    <app-controlblock title="Location" class="col-md-3">
+      <dl class="data-group">
+        <dt>Island</dt>
+        <dd>{{ sampleRevision.currentIsland }}</dd>
+      </dl>
+    </app-controlblock>
+  </div>
+</ng-container>

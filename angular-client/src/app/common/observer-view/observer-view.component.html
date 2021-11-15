@@ -1,0 +1,23 @@
+<span *ngIf="!observers || observers.length === 0">None</span>
+
+<div *ngIf="observers && observers.length > 0">
+  <div *ngFor="let nextObserver of observers">
+    <span class="mr-2">
+      <app-person-name-label
+        [personId]="nextObserver.personID"
+      ></app-person-name-label
+      ><span
+        ><small
+          >&nbsp;<span *ngIf="nextObserver.observerCapacity"
+            >({{ nextObserver.observerCapacity }})</span
+          ></small
+        ></span
+      >
+    </span>
+    <span
+      class="badge badge-secondary mr-2"
+      *ngFor="let tag of nextObserver.observationRoles"
+      >{{ tag }}</span
+    >
+  </div>
+</div>

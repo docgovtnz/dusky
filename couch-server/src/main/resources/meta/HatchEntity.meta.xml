@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="HatchEntity">
+  <Property name="birdID" label="Bird" javaType="String" jsonType="string"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="hatchDate" label="Hatch Date" javaType="Date" jsonType="Date"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="birdID"/>
+      <DisplayProperty name="hatchDate"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+

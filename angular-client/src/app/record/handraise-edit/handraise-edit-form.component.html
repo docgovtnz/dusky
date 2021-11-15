@@ -1,0 +1,196 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock
+      title="Hand Feed"
+      [noOffset]="true"
+      class="col-md-4"
+      [withSpacer]="true"
+    >
+      <div class="form-group">
+        <app-widget
+          [label]="'Crop Status'"
+          [propertyName]="'cropStatus'"
+          [myFormControl]="myFormGroup.get('cropStatus')"
+        >
+          <select
+            class="custom-select"
+            id="cropStatus"
+            formControlName="cropStatus"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('CropStatus') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Volume Fed (ml)'"
+          [propertyName]="'amountFed'"
+          [myFormControl]="myFormGroup.get('amountFed')"
+        >
+          <input
+            class="form-control"
+            id="amountFed"
+            formControlName="amountFed"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Percent Solids (%)'"
+          [propertyName]="'percentSolids'"
+          [myFormControl]="myFormGroup.get('percentSolids')"
+        >
+          <input
+            class="form-control"
+            id="percentSolids"
+            formControlName="percentSolids"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Number of Feeds'"
+          [propertyName]="'numberOfFeeds'"
+          [myFormControl]="myFormGroup.get('numberOfFeeds')"
+        >
+          <input
+            class="form-control"
+            id="numberOfFeeds"
+            formControlName="numberOfFeeds"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Relative Humidity (%)'"
+          [propertyName]="'relativeHumidity'"
+          [myFormControl]="myFormGroup.get('relativeHumidity')"
+        >
+          <input
+            class="form-control"
+            id="relativeHumidity"
+            formControlName="relativeHumidity"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Hand-Feeding Formula'"
+          [propertyName]="'handRearingFormula'"
+          [myFormControl]="myFormGroup.get('handRearingFormula')"
+        >
+          <select
+            class="custom-select"
+            id="handRearingFormula"
+            formControlName="handRearingFormula"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('HandRearingFormula')
+                  | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Details" [noOffset]="true" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Largest Meal (ml)'"
+          [propertyName]="'largestMeal'"
+          [myFormControl]="myFormGroup.get('largestMeal')"
+        >
+          <input
+            class="form-control"
+            id="largestMeal"
+            formControlName="largestMeal"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Dietary Fibre (%)'"
+          [propertyName]="'dietaryFibre'"
+          [myFormControl]="myFormGroup.get('dietaryFibre')"
+        >
+          <input
+            class="form-control"
+            id="dietaryFibre"
+            formControlName="dietaryFibre"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Temperature (°C)'"
+          [propertyName]="'temp'"
+          [myFormControl]="myFormGroup.get('temp')"
+        >
+          <input
+            class="form-control"
+            id="temp"
+            formControlName="temp"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Brooder Type'"
+          [propertyName]="'brooderType'"
+          [myFormControl]="myFormGroup.get('brooderType')"
+        >
+          <select
+            class="custom-select"
+            id="brooderType"
+            formControlName="brooderType"
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('BrooderTypes') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Medication" [noOffset]="true" class="col-md-4">
+      <div class="form-group">
+        <app-widget
+          [label]="'Medication'"
+          [propertyName]="'medication'"
+          [myFormControl]="myFormGroup.get('medication')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="medication"
+            formControlName="medication"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

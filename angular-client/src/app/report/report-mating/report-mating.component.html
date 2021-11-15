@@ -1,0 +1,141 @@
+<section>
+  <app-banner title="Mating Report" subtitle="Report"></app-banner>
+</section>
+
+<app-server-message-display
+  [validationMessages]="messages"
+></app-server-message-display>
+
+<section class="vertical-spacer bg-light" *ngIf="matingreportCriteria">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Details" class="col-md-4">
+            <div class="form-group">
+              <label for="island"> Island </label>
+              <app-type-ahead
+                id="island"
+                [optionType]="'IslandName'"
+                [(selectedOption)]="matingreportCriteria.island"
+              ></app-type-ahead>
+            </div>
+            <div class="form-group">
+              <label for="year"> Year </label>
+              <input id="year" class="form-control" [(ngModel)]="year" />
+            </div>
+            <div class="form-row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="fromDate">
+                    First Date
+                    <span class="text-danger"><strong>&nbsp;*</strong></span>
+                  </label>
+                  <app-date-editor
+                    id="fromDate"
+                    [editorCfg]="'none'"
+                    [(dateValue)]="fromDate"
+                  ></app-date-editor>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="toDate">
+                    Last Date
+                    <span class="text-danger"><strong>&nbsp;*</strong></span>
+                  </label>
+                  <app-date-editor
+                    id="toDate"
+                    [editorCfg]="'none'"
+                    [(dateValue)]="toDate"
+                  ></app-date-editor>
+                </div>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Event" class="col-md-4">
+            <div class="form-group">
+              <label for="birdID"> Bird </label>
+              <app-bird-name-id-select
+                id="birdID"
+                [(birdID)]="matingreportCriteria.birdID"
+                [autofocus]="true"
+              ></app-bird-name-id-select>
+            </div>
+            <div class="form-group">
+              <label for="minimumQuality"> Quality </label>
+              <input
+                id="minimumQuality"
+                class="form-control"
+                [(ngModel)]="matingreportCriteria.minimumQuality"
+              />
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!report || report.length === 0"
+        >
+          Export
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <ng-container *ngIf="!report"> Report not yet executed. </ng-container>
+    <ng-container *ngIf="report">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Date/Time</th>
+              <th scope="col">Island</th>
+              <th scope="col">Female</th>
+              <!--<th scope="col">Female Mating Count</th>-->
+              <th scope="col">Male</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Quality</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="report.length === 0">
+            <tr>
+              <td [attr.colspan]="7">No results.</td>
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="report.length > 0">
+            <tr *ngFor="let item of report">
+              <td>{{ item.dateTime | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ item.island }}</td>
+              <td>
+                <app-link-view
+                  [linkUrl]="'/bird/' + item.femaleBirdID"
+                  [label]="item.femaleBirdName"
+                ></app-link-view>
+              </td>
+              <!-- Female Mating count switched off until it can be implemented properly see: KD-136 -->
+              <!--<td>{{ item.femaleMatingCount }}</td>-->
+              <td>
+                <app-link-view
+                  [linkUrl]="'/bird/' + item.maleBirdID"
+                  [label]="item.maleBirdName"
+                ></app-link-view>
+              </td>
+              <td>{{ item.duration }}</td>
+              <td>{{ item.quality }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</section>

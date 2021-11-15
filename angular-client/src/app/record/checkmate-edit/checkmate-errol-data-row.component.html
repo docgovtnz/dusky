@@ -1,0 +1,38 @@
+<ng-container [formGroup]="myFormGroup">
+  <td>
+    <input class="form-control" formControlName="femaleTx" type="number" />
+  </td>
+  <td>
+    <app-bird-name-label
+      *ngIf="currentBirdId"
+      [birdID]="currentBirdId"
+    ></app-bird-name-label>
+    <input type="hidden" formControlName="birdId" />
+  </td>
+  <td>
+    <app-date-time-control
+      id="dateTime{{ index }}"
+      formControlName="time"
+      [editorCfg]="'none'"
+    ></app-date-time-control>
+  </td>
+  <td>
+    <input class="form-control" formControlName="duration" type="number" />
+  </td>
+  <td>
+    <input class="form-control" formControlName="quality" type="number" />
+  </td>
+  <td>
+    <input class="form-control" formControlName="errolLoc" type="number" />
+  </td>
+  <td>
+    <button class="btn btn-record" (click)="removeItem(index)">
+      <fa-icon icon="minus" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Remove</span>
+    </button>
+    <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+      <fa-icon icon="plus" aria-hidden="true"></fa-icon
+      ><span class="sr-only">Add</span>
+    </button>
+  </td>
+</ng-container>

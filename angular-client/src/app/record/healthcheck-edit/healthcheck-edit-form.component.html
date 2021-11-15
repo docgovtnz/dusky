@@ -1,0 +1,848 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <app-controlblock title="Health Check" [noOffset]="true">
+    <app-birdfeature-panel
+      [birdfeatureList]="birdEntity?.birdFeatureList"
+    ></app-birdfeature-panel>
+    <div class="row no-gutters">
+      <div class="col-md-1 offset-md-2 text-center">
+        <label>Not Checked</label>
+      </div>
+      <div class="col-md-1 text-center">
+        <label>Okay</label>
+      </div>
+      <div class="col-md-1 text-center">
+        <label>Not Okay</label>
+      </div>
+      <div class="col-md-1 text-center">
+        <label>Existing Issue</label>
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <label>New Notes</label>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="eyes"> Eyes </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="eyes"
+          type="radio"
+          [value]="0"
+          name="eyes"
+          formControlName="eyes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="eyes_1"
+          type="radio"
+          [value]="1"
+          name="eyes"
+          formControlName="eyes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="eyes_2"
+          type="radio"
+          [value]="2"
+          name="eyes"
+          formControlName="eyes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="eyes_4"
+          type="radio"
+          [value]="4"
+          name="eyes"
+          formControlName="eyes"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="eyesNotes"
+          formControlName="eyesNotes"
+        />
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="ears"> Ears </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="ears_0"
+          type="radio"
+          [value]="0"
+          name="ears"
+          formControlName="ears"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="ears_1"
+          type="radio"
+          [value]="1"
+          name="ears"
+          formControlName="ears"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="ears_2"
+          type="radio"
+          [value]="2"
+          name="ears"
+          formControlName="ears"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="ears_4"
+          type="radio"
+          [value]="4"
+          name="ears"
+          formControlName="ears"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="earsNotes"
+          formControlName="earsNotes"
+        />
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="cereAndNostrils"> Cere & nostrils </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cereAndNostrils_0"
+          type="radio"
+          [value]="0"
+          name="cereAndNostrils"
+          formControlName="cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cereAndNostrils_1"
+          type="radio"
+          [value]="1"
+          name="cereAndNostrils"
+          formControlName="cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cereAndNostrils_2"
+          type="radio"
+          [value]="2"
+          name="cereAndNostrils"
+          formControlName="cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cereAndNostrils_4"
+          type="radio"
+          [value]="4"
+          name="cereAndNostrils"
+          formControlName="cereAndNostrils"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="cereNotes"
+          formControlName="cereNotes"
+        />
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="bill"> Bill </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="bill_0"
+          type="radio"
+          [value]="0"
+          name="bill"
+          formControlName="bill"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="bill_1"
+          type="radio"
+          [value]="1"
+          name="bill"
+          formControlName="bill"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="bill_2"
+          type="radio"
+          [value]="2"
+          name="bill"
+          formControlName="bill"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="bill_4"
+          type="radio"
+          [value]="4"
+          name="bill"
+          formControlName="bill"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="billNotes"
+          formControlName="billNotes"
+        />
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="patagia"> Patagia </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="patagia_0"
+          type="radio"
+          [value]="0"
+          name="patagia"
+          formControlName="patagia"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="patagia_1"
+          type="radio"
+          [value]="1"
+          name="patagia"
+          formControlName="patagia"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="patagia_2"
+          type="radio"
+          [value]="2"
+          name="patagia"
+          formControlName="patagia"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="patagia_4"
+          type="radio"
+          [value]="4"
+          name="patagia"
+          formControlName="patagia"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="patagiaNotes"
+          formControlName="patagiaNotes"
+        />
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="wings"> Wings </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="wings_0"
+          type="radio"
+          [value]="0"
+          name="wings"
+          formControlName="wings"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="wings_1"
+          type="radio"
+          [value]="1"
+          name="wings"
+          formControlName="wings"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="wings_2"
+          type="radio"
+          [value]="2"
+          name="wings"
+          formControlName="wings"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="wings_4"
+          type="radio"
+          [value]="4"
+          name="wings"
+          formControlName="wings"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="wingsNotes"
+          formControlName="wingsNotes"
+        />
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="back"> Back </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="back_0"
+          type="radio"
+          [value]="0"
+          name="back"
+          formControlName="back"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="back_1"
+          type="radio"
+          [value]="1"
+          name="back"
+          formControlName="back"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="back_2"
+          type="radio"
+          [value]="2"
+          name="back"
+          formControlName="back"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="back_4"
+          type="radio"
+          [value]="4"
+          name="back"
+          formControlName="back"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="backNotes"
+          formControlName="backNotes"
+        />
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="chest"> Chest </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="chest_0"
+          type="radio"
+          [value]="0"
+          name="chest"
+          formControlName="chest"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="chest_1"
+          type="radio"
+          [value]="1"
+          name="chest"
+          formControlName="chest"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="chest_2"
+          type="radio"
+          [value]="2"
+          name="chest"
+          formControlName="chest"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="chest_4"
+          type="radio"
+          [value]="4"
+          name="chest"
+          formControlName="chest"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="chestNotes"
+          formControlName="chestNotes"
+        />
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="cloaca"> Cloaca </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cloaca_0"
+          type="radio"
+          [value]="0"
+          name="cloaca"
+          formControlName="cloaca"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cloaca_1"
+          type="radio"
+          [value]="1"
+          name="cloaca"
+          formControlName="cloaca"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cloaca_2"
+          type="radio"
+          [value]="2"
+          name="cloaca"
+          formControlName="cloaca"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="cloaca_4"
+          type="radio"
+          [value]="4"
+          name="cloaca"
+          formControlName="cloaca"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <div class="row no-gutters">
+          <label for="cloacaScore" class="col-md-2 col-form-label text-right"
+            >Score</label
+          >
+          <div class="col-md-2">
+            <input
+              id="cloacaScore"
+              class="form-control"
+              type="number"
+              formControlName="cloacaScore"
+            />
+          </div>
+          <div class="col-md-8">
+            <input
+              id="cloacaNotes"
+              class="form-control"
+              type="text"
+              formControlName="cloacaNotes"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="vent"> Vent </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="vent_0"
+          type="radio"
+          [value]="0"
+          name="vent"
+          formControlName="vent"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="vent_1"
+          type="radio"
+          [value]="1"
+          name="vent"
+          formControlName="vent"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="vent_2"
+          type="radio"
+          [value]="2"
+          name="vent"
+          formControlName="vent"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="vent_4"
+          type="radio"
+          [value]="4"
+          name="vent"
+          formControlName="vent"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <div class="row no-gutters">
+          <label for="ventScore" class="col-md-2 col-form-label text-right"
+            >Score</label
+          >
+          <div class="col-md-2">
+            <input
+              id="ventScore"
+              class="form-control"
+              type="number"
+              formControlName="ventScore"
+            />
+          </div>
+          <div class="col-md-8">
+            <input
+              id="ventNotes"
+              class="form-control"
+              type="text"
+              formControlName="ventNotes"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="legs"> Legs </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="legs_0"
+          type="radio"
+          [value]="0"
+          name="legs"
+          formControlName="legs"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="legs_1"
+          type="radio"
+          [value]="1"
+          name="legs"
+          formControlName="legs"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="legs_2"
+          type="radio"
+          [value]="2"
+          name="legs"
+          formControlName="legs"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="legs_4"
+          type="radio"
+          [value]="4"
+          name="legs"
+          formControlName="legs"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="legsNotes"
+          formControlName="legsNotes"
+        />
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="feetAndToes"> Feet & Toes </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="feetAndToes_0"
+          type="radio"
+          [value]="0"
+          name="feetAndToes"
+          formControlName="feetAndToes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="feetAndToes_1"
+          type="radio"
+          [value]="1"
+          name="feetAndToes"
+          formControlName="feetAndToes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="feetAndToes_2"
+          type="radio"
+          [value]="2"
+          name="feetAndToes"
+          formControlName="feetAndToes"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="feetAndToes_4"
+          type="radio"
+          [value]="4"
+          name="feetAndToes"
+          formControlName="feetAndToes"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="feetNotes"
+          formControlName="feetNotes"
+        />
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="plumage"> Plumage </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="plumage_0"
+          type="radio"
+          [value]="0"
+          name="plumage"
+          formControlName="plumage"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="plumage_1"
+          type="radio"
+          [value]="1"
+          name="plumage"
+          formControlName="plumage"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="plumage_2"
+          type="radio"
+          [value]="2"
+          name="plumage"
+          formControlName="plumage"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="plumage_4"
+          type="radio"
+          [value]="4"
+          name="plumage"
+          formControlName="plumage"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="plumageNotes"
+          formControlName="plumageNotes"
+        />
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="transmitter"> Transmitter Fit </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="transmitter_0"
+          type="radio"
+          [value]="0"
+          name="transmitter"
+          formControlName="transmitter"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="transmitter_1"
+          type="radio"
+          [value]="1"
+          name="transmitter"
+          formControlName="transmitter"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="transmitter_2"
+          type="radio"
+          [value]="2"
+          name="transmitter"
+          formControlName="transmitter"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="transmitter_4"
+          type="radio"
+          [value]="4"
+          name="transmitter"
+          formControlName="transmitter"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <input
+          class="form-control"
+          id="transmitterNotes"
+          formControlName="transmitterNotes"
+        />
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="microchip"> Microchip </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="microchip_0"
+          type="radio"
+          [value]="0"
+          name="microchip"
+          formControlName="microchip"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="microchip_1"
+          type="radio"
+          [value]="1"
+          name="microchip"
+          formControlName="microchip"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="microchip_2"
+          type="radio"
+          [value]="2"
+          name="microchip"
+          formControlName="microchip"
+        />
+      </div>
+      <div class="col-md-1 text-center">
+        <input
+          id="microchip_4"
+          type="radio"
+          [value]="4"
+          name="microchip"
+          formControlName="microchip"
+        />
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <div class="row no-gutters">
+          <label
+            for="microchipNumber"
+            class="col-md-2 col-form-label text-right"
+            >Number</label
+          >
+          <div class="col-md-2">
+            <input
+              id="microchipNumber"
+              class="form-control"
+              type="text"
+              formControlName="microchipNumber"
+            />
+          </div>
+          <div class="col-md-8">
+            <input
+              id="microchipNotes"
+              class="form-control"
+              type="text"
+              formControlName="microchipNotes"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <label for="inMoult"> In Moult </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input id="inMoult" formControlName="inMoult" type="checkbox" />
+      </div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-5 offset-md-1">&nbsp;</div>
+    </div>
+    <div
+      *ngIf="
+        (birdEntity && birdEntity.sex === 'Female') ||
+        myFormGroup.get('broodPatch').value
+      "
+      class="row no-gutters"
+    >
+      <div class="col-md-2">
+        <label for="broodPatch"> Brood Patch </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input id="broodPatch" formControlName="broodPatch" type="checkbox" />
+      </div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-5 offset-md-1">&nbsp;</div>
+    </div>
+    <div
+      *ngIf="
+        (birdEntity && birdEntity.sex === 'Male') ||
+        myFormGroup.get('boomSac').value
+      "
+      class="row no-gutters"
+    >
+      <div class="col-md-2">
+        <label for="boomSac"> Boom Sac </label>
+      </div>
+      <div class="col-md-1 text-center">
+        <input id="boomSac" formControlName="boomSac" type="checkbox" />
+      </div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-5 offset-md-1">&nbsp;</div>
+    </div>
+  </app-controlblock>
+</form>

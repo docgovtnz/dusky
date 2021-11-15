@@ -1,0 +1,30 @@
+<div [formGroup]="myFormGroup">
+  <div class="form-group">
+    <label for="{{ control1Name }}">{{ label }}</label>
+    <div class="form-row">
+      <div class="col-md-6">
+        <input
+          class="form-control"
+          id="{{ control1Name }}"
+          formControlName="{{ control1Name }}"
+          type="number"
+        />
+        <app-message-display
+          [myFormControl]="myFormGroup.get(control1Name)"
+        ></app-message-display>
+      </div>
+      <div class="col-md-6">
+        <label class="sr-only" for="{{ control2Name }}">{{ label }} 2</label>
+        <input
+          class="form-control"
+          id="{{ control2Name }}"
+          formControlName="{{ control2Name }}"
+          type="number"
+        />
+        <app-message-display
+          [myFormControl]="myFormGroup.get(control2Name)"
+        ></app-message-display>
+      </div>
+    </div>
+  </div>
+</div>

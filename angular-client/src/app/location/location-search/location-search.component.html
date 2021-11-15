@@ -1,0 +1,182 @@
+<section>
+  <app-banner title="Locations"></app-banner>
+</section>
+
+<section
+  class="vertical-spacer bg-light"
+  *ngIf="locationCriteria"
+  (keyup.enter)="onSearch()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <app-controlblock title="Locations" class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="locationIDs"> Locations </label>
+                  <app-location-id-select-multi
+                    id="locationIDs"
+                    [(selectedLocations)]="locationCriteria.locationIDs"
+                    [autofocus]="true"
+                    (selectedLocationsChange)="onLocationSelectionChanged()"
+                  ></app-location-id-select-multi>
+                </div>
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="activeOnly"
+                      [(ngModel)]="locationCriteria.activeOnly"
+                    />
+                    <label class="form-check-label" for="activeOnly">
+                      Show Active Locations Only
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="island"> Island </label>
+                  <app-type-ahead
+                    id="island"
+                    [optionType]="'IslandName'"
+                    [(selectedOption)]="locationCriteria.island"
+                  ></app-type-ahead>
+                </div>
+                <div class="form-group">
+                  <label for="locationType"> Location Type </label>
+                  <select
+                    class="custom-select"
+                    id="locationType"
+                    [(ngModel)]="locationCriteria.locationType"
+                    (change)="onSearch()"
+                  >
+                    <option
+                      *ngFor="
+                        let opt of optionsService.getOptions('LocationTypes')
+                          | async
+                      "
+                      [ngValue]="opt"
+                    >
+                      {{ opt }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </app-controlblock>
+          <app-controlblock title="Bird" class="col-md-3">
+            <div class="form-group">
+              <label for="birdID"> Target Bird </label>
+              <app-bird-name-id-select
+                id="birdID"
+                [(birdID)]="locationCriteria.birdID"
+                (birdIDChange)="doSearch()"
+                (keyup.enter)="prevent($event)"
+              ></app-bird-name-id-select>
+            </div>
+          </app-controlblock>
+        </div>
+      </div>
+      <app-buttonblock class="col-md-2">
+        <button id="searchBtn" (click)="onSearch()">Search</button>
+        <button
+          id="exportBtn"
+          (click)="onExport()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Export
+        </button>
+        <button
+          id="mapBtn"
+          (click)="onMap()"
+          [disabled]="!pagedResponse || pagedResponse.results.length === 0"
+        >
+          Map
+        </button>
+        <button id="resetBtn" (click)="onClear()">Reset</button>
+      </app-buttonblock>
+    </div>
+  </div>
+</section>
+
+<section class="vertical-spacer">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Location Name</th>
+            <th scope="col">Island</th>
+            <th scope="col">Location Type</th>
+            <th scope="col">Easting</th>
+            <th scope="col">Northing</th>
+            <th scope="col">Bird</th>
+            <th scope="col">Active</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!pagedResponse">
+          <tr>
+            <td colspan="12">Search not yet executed.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length === 0">
+          <tr>
+            <td colspan="12">No search results found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pagedResponse && pagedResponse.results.length > 0">
+          <tr
+            *ngFor="let item of pagedResponse.results"
+            (click)="onClick(item, $event)"
+            class="search-result-item"
+          >
+            <td>{{ item.locationName }}</td>
+            <td>{{ item.island }}</td>
+            <td>{{ item.locationType }}</td>
+            <td>{{ item.easting }}</td>
+            <td>{{ item.northing }}</td>
+            <td>
+              <app-bird-name-label [birdID]="item.birdID"></app-bird-name-label>
+            </td>
+            <td>
+              <ng-container *ngIf="item.active"
+                ><fa-icon icon="check" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Active</span></ng-container
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <pagination
+          *ngIf="pagedResponse && pagedResponse.results.length > 0"
+          [boundaryLinks]="true"
+          [maxSize]="5"
+          [itemsPerPage]="locationCriteria.pageSize"
+          [(ngModel)]="locationCriteria.pageNumber"
+          [totalItems]="pagedResponse.total"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </pagination>
+      </div>
+      <div
+        *ngIf="pagedResponse && pagedResponse.results.length > 0"
+        class="col-6 result-count"
+      >
+        Showing {{ pagedResponse.firstResult | number }} to
+        {{ pagedResponse.lastResult | number }} of
+        {{ pagedResponse.total | number }} results
+      </div>
+    </div>
+  </div>
+</section>

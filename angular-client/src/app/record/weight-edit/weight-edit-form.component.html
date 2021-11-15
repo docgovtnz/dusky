@@ -1,0 +1,36 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <app-controlblock title="Weight" [noOffset]="true" [withSpacer]="true">
+    <div class="form-group">
+      <app-widget
+        [label]="'Method'"
+        [propertyName]="'method'"
+        [myFormControl]="myFormGroup.get('method')"
+      >
+        <select class="custom-select" id="method" formControlName="method">
+          <option
+            *ngFor="
+              let opt of optionsService.getOptions('WeightMethodSelect') | async
+            "
+            [ngValue]="opt"
+          >
+            {{ opt }}
+          </option>
+        </select>
+      </app-widget>
+    </div>
+    <div class="form-group">
+      <app-widget
+        [label]="'Weight (kg)'"
+        [propertyName]="'weight'"
+        [myFormControl]="myFormGroup.get('weight')"
+      >
+        <input
+          class="form-control"
+          id="weight"
+          formControlName="weight"
+          type="number"
+        />
+      </app-widget>
+    </div>
+  </app-controlblock>
+</form>

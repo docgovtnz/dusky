@@ -1,0 +1,64 @@
+<div
+  bsModal
+  #selectRecordTypeModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Select Record Type</h4>
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="onCancelSelectRecordType()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="recordType"> Record Type </label>
+          <select
+            class="custom-select"
+            id="recordType"
+            [(ngModel)]="recordType"
+            appAutofocus
+          >
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('RecordTypeSelect') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </div>
+        <hr />
+        <div class="text-right">
+          <button
+            id="confirmSelectRecordTypeBtn"
+            type="button"
+            (click)="onConfirmSelectRecordType()"
+            class="btn btn-success mr-1"
+          >
+            Select
+          </button>
+          <button
+            id="cancelSelectRecordTypeBtn"
+            type="button"
+            (click)="onCancelSelectRecordType()"
+            class="btn btn-default"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

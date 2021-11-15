@@ -1,0 +1,43 @@
+<section>
+  <app-banner title="Tx Mortality">
+    <button
+      id="editBtn"
+      class="btn btn-action"
+      (click)="onEdit()"
+      [disabled]="!isAuthorized"
+    >
+      <fa-icon icon="pen" aria-hidden="true"></fa-icon>Edit
+    </button>
+    <button
+      id="deleteBtn"
+      class="btn btn-action"
+      [disabled]="!isDeleteOk() || !isAuthorized"
+      (click)="deleteConfirmationPopup.show()"
+    >
+      <fa-icon icon="trash" aria-hidden="true"></fa-icon>Delete
+    </button>
+    <app-revision-list-view
+      [entity]="txmortalityEntity"
+      (revisionEvent)="onRevisionEvent($event)"
+    ></app-revision-list-view>
+  </app-banner>
+</section>
+
+<section class="vertical-spacer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <app-txmortality-panel
+          [txmortalityRevision]="revision"
+        ></app-txmortality-panel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-delete-confirmation-popup
+  #deleteConfirmationPopup
+  [entityName]="'Tx Mortality'"
+  [deleteOk]="isDeleteOk()"
+  (confirmation)="onDelete()"
+></app-delete-confirmation-popup>

@@ -1,0 +1,32 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-3">
+      <div class="form-group">
+        <!-- TODO: add date -->
+        <app-widget
+          [label]="'Island'"
+          [propertyName]="'island'"
+          [myFormControl]="myFormGroup.get('island')"
+        >
+          <app-type-ahead-control
+            id="island"
+            formControlName="island"
+            [optionType]="'IslandName'"
+          ></app-type-ahead-control>
+        </app-widget>
+        <app-widget
+          [label]="'Station'"
+          [propertyName]="'stationId'"
+          [myFormControl]="myFormGroup.get('stationId')"
+        >
+          <app-type-ahead-control
+            id="stationId"
+            formControlName="stationId"
+            [optionType]="'Stations'"
+          ></app-type-ahead-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

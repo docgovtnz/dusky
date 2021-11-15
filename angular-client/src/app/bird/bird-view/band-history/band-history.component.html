@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Band</th>
+            <th scope="col">Date</th>
+            <th scope="col">Leg</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!bandHistory">
+          <tr>
+            <td colspan="3">Loading...</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="bandHistory && bandHistory.length === 0">
+          <tr>
+            <td colspan="3">No data found.</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="bandHistory && bandHistory.length > 0">
+          <tr *ngFor="let item of bandHistory">
+            <td>{{ item.newBandNumber }}</td>
+            <td>{{ item.bandDateTime | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ item.leg }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

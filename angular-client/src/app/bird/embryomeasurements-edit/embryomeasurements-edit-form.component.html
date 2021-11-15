@@ -1,0 +1,77 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <app-controlblock title="Details" [noOffset]="true">
+    <div class="form-row row-cols-md-2 row-cols-sm-1">
+      <div class="col form-group">
+        <app-widget
+          [label]="'Head Length (mm)'"
+          [propertyName]="'headLengthInMms'"
+          [myFormControl]="myFormGroup.get('headLengthInMms')"
+        >
+          <input
+            class="form-control"
+            id="headLengthInMms"
+            formControlName="headLengthInMms"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Total Length, Straightened (mm)'"
+          [propertyName]="'totalLengthInMms'"
+          [myFormControl]="myFormGroup.get('totalLengthInMms')"
+        >
+          <input
+            class="form-control"
+            id="totalLengthInMms"
+            formControlName="totalLengthInMms"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Length in Situ (mm)'"
+          [propertyName]="'lengthInSitu'"
+          [myFormControl]="myFormGroup.get('lengthInSitu')"
+        >
+          <input
+            class="form-control"
+            id="lengthInSitu"
+            formControlName="lengthInSitu"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Yolk Sac Membrane Diameter (mm)'"
+          [propertyName]="'yolkSacMembraneDiameterInMms'"
+          [myFormControl]="myFormGroup.get('yolkSacMembraneDiameterInMms')"
+        >
+          <input
+            class="form-control"
+            id="yolkSacMembraneDiameterInMms"
+            formControlName="yolkSacMembraneDiameterInMms"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="col form-group">
+        <app-widget
+          [label]="'Estimated Age At Death (days)'"
+          [propertyName]="'estimatedAgeAtDeathInDays'"
+          [myFormControl]="myFormGroup.get('estimatedAgeAtDeathInDays')"
+        >
+          <input
+            class="form-control"
+            id="estimatedAgeAtDeathInDays"
+            formControlName="estimatedAgeAtDeathInDays"
+            type="number"
+          />
+        </app-widget>
+      </div>
+    </div>
+  </app-controlblock>
+</form>

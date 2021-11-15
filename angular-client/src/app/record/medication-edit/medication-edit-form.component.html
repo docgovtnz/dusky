@@ -1,0 +1,187 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup">
+  <div [formArrayName]="myFormArrayName">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Drug</th>
+            <th scope="col">Conc.</th>
+            <th scope="col">Conc. unit</th>
+            <th scope="col">Dose rate</th>
+            <th scope="col">Dose unit</th>
+            <th scope="col">Drug route</th>
+            <th scope="col">Times per day</th>
+            <th scope="col">Day no.</th>
+            <th scope="col">Course length</th>
+            <th></th>
+            <!-- empty column for edit buttons -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let item of myFormArray.controls; index as i; last as last"
+          >
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('drug')">
+                <select class="custom-select" id="drug" formControlName="drug">
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('DrugNames') | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('concentrationValue')">
+                <input
+                  class="form-control"
+                  id="concentrationValue"
+                  formControlName="concentrationValue"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('concentrationUnits')">
+                <select
+                  class="custom-select"
+                  id="concentrationUnits"
+                  formControlName="concentrationUnits"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('DrugConcentrations')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('doseRateValue')">
+                <input
+                  class="form-control"
+                  id="doseRateValue"
+                  formControlName="doseRateValue"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('doseRateUnits')">
+                <select
+                  class="custom-select"
+                  id="doseRateUnits"
+                  formControlName="doseRateUnits"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('DrugDoseRates')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('route')">
+                <select
+                  class="custom-select"
+                  id="route"
+                  formControlName="route"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('DrugRoutes') | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('timesPerDay')">
+                <select
+                  class="custom-select"
+                  id="timesPerDay"
+                  formControlName="timesPerDay"
+                >
+                  <option
+                    *ngFor="
+                      let opt of optionsService.getOptions('DrugTimesPerDay')
+                        | async
+                    "
+                    [ngValue]="opt"
+                  >
+                    {{ opt }}
+                  </option>
+                </select>
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('dayNumber')">
+                <input
+                  class="form-control"
+                  id="dayNumber"
+                  formControlName="dayNumber"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td [formGroupName]="i">
+              <app-cell-widget [myFormControl]="item.get('courseLength')">
+                <input
+                  class="form-control"
+                  id="courseLength"
+                  formControlName="courseLength"
+                  type="number"
+                />
+              </app-cell-widget>
+            </td>
+            <td>
+              <button class="btn btn-record" (click)="removeItem(i)">
+                <fa-icon icon="minus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Remove</span>
+              </button>
+              <button *ngIf="last" class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="myFormArray.controls.length === 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+              <button class="btn btn-record" (click)="addItem()">
+                <fa-icon icon="plus" aria-hidden="true"></fa-icon
+                ><span class="sr-only">Add</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

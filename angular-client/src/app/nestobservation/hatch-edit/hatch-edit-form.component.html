@@ -1,0 +1,32 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-12">
+      <div class="form-group">
+        <app-widget
+          [label]="'Bird'"
+          [propertyName]="'birdID'"
+          [myFormControl]="myFormGroup.get('birdID')"
+        >
+          <app-bird-name-id-select-control
+            id="birdID"
+            formControlName="birdID"
+            [autofocus]="true"
+          ></app-bird-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Hatch Date'"
+          [propertyName]="'hatchDate'"
+          [myFormControl]="myFormGroup.get('hatchDate')"
+        >
+          <app-date-time-control
+            id="hatchDate"
+            formControlName="hatchDate"
+            [mandatoryTime]="true"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

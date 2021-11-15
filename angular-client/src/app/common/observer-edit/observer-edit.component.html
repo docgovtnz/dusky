@@ -1,0 +1,98 @@
+<!-- New Form layout -->
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div [formArrayName]="myFormArrayName" class="form-row">
+    <div
+      class="col-md-12"
+      *ngIf="myFormArray && myFormArray.controls.length === 0"
+    >
+      <span class="mr-3">No observers yet.</span>
+      <button class="btn btn-record" (click)="onAddObserver()">
+        <fa-icon icon="plus" aria-hidden="true"></fa-icon
+        ><span class="sr-only">Add</span>
+      </button>
+    </div>
+
+    <div
+      class="col-md-12"
+      *ngIf="myFormArray && myFormArray.controls.length > 0"
+    >
+      <div
+        class="form-row mb-1"
+        *ngFor="let item of myFormArray.controls; index as i; last as last"
+        [attr.data-index]="i"
+      >
+        <ng-container [formGroupName]="i">
+          <div class="col-md">
+            <app-cell-widget [myFormControl]="item.get('personID')">
+              <app-person-name-id-select-control
+                formControlName="personID"
+              ></app-person-name-id-select-control>
+            </app-cell-widget>
+          </div>
+
+          <div class="col-md">
+            <select
+              class="custom-select"
+              id="personRole_{{ i }}"
+              (change)="
+                onSelectObserverRole(item, $event.target.value, $event.target)
+              "
+              (focus)="checkRoles(item)"
+            >
+              <option [value]="'XXX'">Add roles...</option>
+              <option *ngFor="let opt of observerRoles | async" [ngValue]="opt">
+                {{ opt }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-auto text-nowrap text-right">
+            <button class="btn btn-record" (click)="onRemoveObserver(i)">
+              <fa-icon icon="minus" aria-hidden="true"></fa-icon
+              ><span class="sr-only">Remove</span>
+            </button>
+          </div>
+
+          <div class="col-md-12">
+            <span
+              class="badge badge-primary mr-3"
+              *ngIf="item.get('observerCapacity').value"
+              >{{ item.get('observerCapacity').value }}</span
+            >
+            <ng-container *ngIf="item.get('observationRoles').value">
+              <span
+                class="badge badge-secondary mr-1"
+                *ngFor="
+                  let tag of item.get('observationRoles').value;
+                  index as tagIdx
+                "
+                [attr.data-index]="tagIdx"
+              >
+                {{ tag }}
+                <a
+                  href="#"
+                  class="bg-secondary text-light"
+                  (click)="onRemoveTagAction(item, tagIdx)"
+                >
+                  <fa-icon icon="times" aria-hidden="true"></fa-icon
+                  ><span class="sr-only">Remove</span>
+                </a>
+              </span>
+            </ng-container>
+          </div>
+
+          <div class="col-md-12 text-nowrap text-right mt-1">
+            <button
+              class="btn btn-record"
+              (click)="onAddObserver()"
+              *ngIf="last"
+            >
+              <fa-icon icon="plus" aria-hidden="true"></fa-icon
+              ><span class="sr-only">Add</span>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form>

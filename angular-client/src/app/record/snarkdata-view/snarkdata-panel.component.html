@@ -1,0 +1,10 @@
+<ng-container *ngIf="snarkdataRevision">
+  <app-controlblock title="Snark" [noOffset]="true">
+    <dl class="data-group">
+      <dt>Arrival Time</dt>
+      <dd>{{ snarkdataRevision.arriveDateTime | date: 'HH:mm' }}</dd>
+      <dt>Departure Time</dt>
+      <dd>{{ snarkdataRevision.departDateTime | date: 'HH:mm' }}</dd>
+    </dl>
+  </app-controlblock>
+</ng-container>

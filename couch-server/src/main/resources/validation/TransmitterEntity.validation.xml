@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class targetClassName="TransmitterEntity" context="Save">
+
+  <Property name="txId">
+    <RequiredRule/>
+    <TransmitterUniqueTxIdRule/>
+  </Property>
+
+  <Property name="rigging">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="status">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="island">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="txMortalityId">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="lifeExpectancy">
+    <RequiredRule/>
+  </Property>
+
+  <Property name="txId">
+    <TransmitterUhfIdRule/>
+  </Property>
+
+</Class>

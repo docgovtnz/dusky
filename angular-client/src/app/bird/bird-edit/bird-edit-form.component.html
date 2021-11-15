@@ -1,0 +1,450 @@
+<form [formGroup]="myFormGroup" *ngIf="myFormGroup">
+  <div class="row">
+    <app-controlblock title="Details" class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <app-widget
+              [label]="'House Name'"
+              [propertyName]="'birdName'"
+              [myFormControl]="myFormGroup.get('birdName')"
+            >
+              <input
+                class="form-control"
+                id="birdName"
+                formControlName="birdName"
+                type="text"
+                appAutofocus
+              />
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'House ID'"
+              [propertyName]="'houseID'"
+              [myFormControl]="myFormGroup.get('houseID')"
+            >
+              <input
+                class="form-control"
+                id="houseID"
+                formControlName="houseID"
+                type="text"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Stud Book Number'"
+              [propertyName]="'studbookno'"
+              [myFormControl]="myFormGroup.get('studbookno')"
+            >
+              <input
+                class="form-control"
+                id="studbookno"
+                formControlName="studbookno"
+                type="number"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'GAN'"
+              [propertyName]="'gan'"
+              [myFormControl]="myFormGroup.get('gan')"
+            >
+              <input
+                class="form-control"
+                id="gan"
+                formControlName="gan"
+                type="text"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Current Island'"
+              [propertyName]="'currentIsland'"
+              [myFormControl]="myFormGroup.get('currentIsland')"
+            >
+              <app-type-ahead-control
+                id="currentIsland"
+                formControlName="currentIsland"
+                [optionType]="'IslandName'"
+              ></app-type-ahead-control>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Current Location'"
+              [propertyName]="'currentLocationID'"
+              [myFormControl]="myFormGroup.get('currentLocationID')"
+            >
+              <app-location-name-id-select-control
+                id="currentLocationID"
+                formControlName="currentLocationID"
+              ></app-location-name-id-select-control>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Transmitter group'"
+              [propertyName]="'transmitterGroup'"
+              [myFormControl]="myFormGroup.get('transmitterGroup')"
+            >
+              <input
+                class="form-control"
+                id="transmitterGroup"
+                formControlName="transmitterGroup"
+                type="text"
+              />
+            </app-widget>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <app-widget
+              [label]="'Sex'"
+              [propertyName]="'sex'"
+              [myFormControl]="myFormGroup.get('sex')"
+            >
+              <select class="custom-select" id="sex" formControlName="sex">
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('SexOptions') | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Plumage colour'"
+              [propertyName]="'plumageColour'"
+              [myFormControl]="myFormGroup.get('plumageColour')"
+            >
+              <select
+                class="custom-select"
+                id="plumageColour"
+                formControlName="plumageColour"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('PlumageColourOptions')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Leg colour'"
+              [propertyName]="'legColour'"
+              [myFormControl]="myFormGroup.get('legColour')"
+            >
+              <select
+                class="custom-select"
+                id="legColour"
+                formControlName="legColour"
+              >
+                <option
+                  *ngFor="
+                    let opt of optionsService.getOptions('LegColourOptions')
+                      | async
+                  "
+                  [ngValue]="opt"
+                >
+                  {{ opt }}
+                </option>
+              </select>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Mother'"
+              [propertyName]="'mother'"
+              [myFormControl]="myFormGroup.get('mother')"
+            >
+              <app-bird-name-id-select-control
+                id="mother"
+                formControlName="mother"
+              ></app-bird-name-id-select-control>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Father'"
+              [propertyName]="'father'"
+              [myFormControl]="myFormGroup.get('father')"
+            >
+              <app-bird-name-id-select-control
+                id="father"
+                formControlName="father"
+              ></app-bird-name-id-select-control>
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Definite father'"
+              [propertyName]="'definiteFather'"
+              [myFormControl]="myFormGroup.get('definiteFather')"
+              [isCheckBox]="true"
+              class="form-check"
+            >
+              <input
+                class="form-check-input"
+                id="definiteFather"
+                formControlName="definiteFather"
+                type="checkbox"
+              />
+            </app-widget>
+          </div>
+          <div class="form-group">
+            <app-widget
+              [label]="'Nest mother'"
+              [propertyName]="'nestMother'"
+              [myFormControl]="myFormGroup.get('nestMother')"
+            >
+              <app-bird-name-id-select-control
+                id="nestMother"
+                formControlName="nestMother"
+              ></app-bird-name-id-select-control>
+            </app-widget>
+          </div>
+        </div>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Egg Details" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Egg Name'"
+          [propertyName]="'eggName'"
+          [myFormControl]="myFormGroup.get('eggName')"
+        >
+          <input
+            class="form-control"
+            id="eggName"
+            formControlName="eggName"
+            type="text"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Lay Island'"
+          [propertyName]="'layIsland'"
+          [myFormControl]="myFormGroup.get('layIsland')"
+        >
+          <app-type-ahead-control
+            id="layIsland"
+            formControlName="layIsland"
+            [optionType]="'IslandName'"
+          ></app-type-ahead-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Lay Year'"
+          [propertyName]="'layYear'"
+          [myFormControl]="myFormGroup.get('layYear')"
+        >
+          <input
+            class="form-control"
+            id="layYear"
+            formControlName="layYear"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Lay Location'"
+          [propertyName]="'layLocationID'"
+          [myFormControl]="myFormGroup.get('layLocationID')"
+        >
+          <app-location-name-id-select-control
+            id="layLocationID"
+            formControlName="layLocationID"
+          ></app-location-name-id-select-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Clutch'"
+          [propertyName]="'clutch'"
+          [myFormControl]="myFormGroup.get('clutch')"
+        >
+          <input
+            class="form-control"
+            id="clutch"
+            maxlength="1"
+            formControlName="clutch"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Clutch Order'"
+          [propertyName]="'clutchOrder'"
+          [myFormControl]="myFormGroup.get('clutchOrder')"
+        >
+          <input
+            class="form-control"
+            id="clutchOrder"
+            formControlName="clutchOrder"
+            type="number"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Viable'"
+          [propertyName]="'viable'"
+          [myFormControl]="myFormGroup.get('viable')"
+        >
+          <select class="custom-select" id="viable" formControlName="viable">
+            <option
+              *ngFor="
+                let opt of optionsService.getOptions('ViableOptions') | async
+              "
+              [ngValue]="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Fertility Confirmed by Microscopy'"
+          [propertyName]="'fertilityConfirmed'"
+          [myFormControl]="myFormGroup.get('fertilityConfirmed')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="fertilityConfirmed"
+            formControlName="fertilityConfirmed"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+    </app-controlblock>
+    <app-controlblock title="Milestones" class="col-md-3">
+      <div class="form-group">
+        <app-widget
+          [label]="'Alive'"
+          [propertyName]="'alive'"
+          [myFormControl]="myFormGroup.get('alive')"
+          [isCheckBox]="true"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            id="alive"
+            formControlName="alive"
+            type="checkbox"
+          />
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Date Laid'"
+          [propertyName]="'dateLaid'"
+          [myFormControl]="myFormGroup.get('dateLaid')"
+        >
+          <app-date-time-control
+            id="dateLaid"
+            formControlName="dateLaid"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Date Hatched'"
+          [propertyName]="'dateHatched'"
+          [myFormControl]="myFormGroup.get('dateHatched')"
+        >
+          <app-date-time-control
+            id="dateHatched"
+            formControlName="dateHatched"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Date Fledged'"
+          [propertyName]="'dateFledged'"
+          [myFormControl]="myFormGroup.get('dateFledged')"
+        >
+          <app-date-time-control
+            id="dateFledged"
+            formControlName="dateFledged"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Date Weaned'"
+          [propertyName]="'dateWeaned'"
+          [myFormControl]="myFormGroup.get('dateWeaned')"
+        >
+          <app-date-time-control
+            id="dateWeaned"
+            formControlName="dateWeaned"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Date Independent'"
+          [propertyName]="'dateIndependent'"
+          [myFormControl]="myFormGroup.get('dateIndependent')"
+        >
+          <app-date-time-control
+            id="dateIndependent"
+            formControlName="dateIndependent"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Discovery date'"
+          [propertyName]="'discoveryDate'"
+          [myFormControl]="myFormGroup.get('discoveryDate')"
+        >
+          <app-date-time-control
+            id="discoveryDate"
+            formControlName="discoveryDate"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+      <div class="form-group">
+        <app-widget
+          [label]="'Demise'"
+          [propertyName]="'demise'"
+          [myFormControl]="myFormGroup.get('demise')"
+        >
+          <app-date-time-control
+            id="demise"
+            formControlName="demise"
+            [mandatoryTime]="false"
+          ></app-date-time-control>
+        </app-widget>
+      </div>
+    </app-controlblock>
+  </div>
+</form>

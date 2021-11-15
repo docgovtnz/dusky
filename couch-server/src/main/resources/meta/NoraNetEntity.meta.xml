@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Class name="NoraNetEntity">
+  <Property name="activityDate" label="Activity Date" javaType="Date" jsonType="Date"/>
+  <Property name="batteryVolts" label="Battery Volts" javaType="Integer" jsonType="number"/>
+  <Property name="dataVersion" label="Data Version" javaType="Integer" jsonType="number"/>
+  <Property name="docType" label="Document Type" javaType="String" jsonType="string"/>
+  <Property name="fileDate" label="File Date" javaType="Date" jsonType="Date"/>
+  <Property name="id" label="Document Id" javaType="String" jsonType="string"/>
+  <Property name="island" label="Island" javaType="String" jsonType="string"/>
+  <Property name="locationCode" label="Location Code" javaType="Integer" jsonType="number"/>
+  <Property name="modifiedByPersonId" label="Modified By PersonId" javaType="String"
+    jsonType="string"/>
+  <Property name="modifiedTime" label="Modified Time" javaType="Date" jsonType="Date"/>
+  <Property name="recordCounts" label="Record Counts" javaType="String" jsonType="string"/>
+  <Property name="revision" label="Revision" javaType="String" jsonType="string"/>
+  <Property name="stationId" label="Station" javaType="String" jsonType="string"/>
+  <Property name="detectionList" label="Detection List"
+    javaType="List&lt;NoraNetDetectionEntity&gt;" jsonType="NoraNetDetectionEntity[]">
+    <Class name="NoraNetDetectionEntity">
+      <Property name="activity" label="Activity" javaType="Float" jsonType="number"/>
+      <Property name="birdList" label="Bird(s)" javaType="List&lt;NoraNetBirdEntity&gt;"
+        jsonType="NoraNetBirdEntity[]">
+      </Property>
+      <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+      <Property name="category" label="Category" javaType="String" jsonType="string"/>
+      <Property name="peakTwitch" label="Peak Twitch" javaType="Integer" jsonType="number"/>
+      <Property name="pulseCount" label="Pulse Count" javaType="Integer" jsonType="number"/>
+      <Property name="uhfId" label="Uhf Id" javaType="Integer" jsonType="number"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdList"/>
+          <DisplayProperty name="birdID"/>
+          <DisplayProperty name="uhfId"/>
+          <DisplayProperty name="activity"/>
+          <DisplayProperty name="pulseCount"/>
+          <DisplayProperty name="peakTwitch"/>
+          <DisplayProperty name="category"/>
+          <DisplayProperty name="comments"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="standardList" label="Standard List"
+    javaType="List&lt;NoraNetStandardEntity&gt;" jsonType="NoraNetStandardEntity[]">
+    <Class name="NoraNetStandardEntity">
+      <Property name="activity" label="Activity" javaType="Float" jsonType="number"/>
+      <Property name="batteryLife" label="Battery Life (weeks)" javaType="Integer" jsonType="number"/>
+      <Property name="birdList" label="Bird(s)" javaType="List&lt;NoraNetBirdEntity&gt;"
+        jsonType="NoraNetBirdEntity[]">
+      </Property>
+      <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+      <Property name="uhfId" label="Uhf Id" javaType="Integer" jsonType="number"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdList"/>
+          <DisplayProperty name="birdID"/>
+          <DisplayProperty name="uhfId"/>
+          <DisplayProperty name="activity"/>
+          <DisplayProperty name="batteryLife"/>
+          <DisplayProperty name="comments"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="eggTimerList" label="Egg Timer List"
+    javaType="List&lt;NoraNetEggTimerEntity&gt;" jsonType="NoraNetEggTimerEntity[]">
+    <Class name="NoraNetEggTimerEntity">
+      <Property name="activity" label="Activity" javaType="Float" jsonType="number"/>
+      <Property name="batteryLife" label="Battery Life (weeks)" javaType="Integer" jsonType="number"/>
+      <Property name="birdList" label="Bird(s)" javaType="List&lt;NoraNetBirdEntity&gt;"
+        jsonType="NoraNetBirdEntity[]">
+      </Property>
+      <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+      <Property name="daysSinceChange" label="Days Since Change" javaType="Integer" jsonType="number"/>
+      <Property name="incubating" label="Incubating" javaType="Boolean" jsonType="boolean"/>
+      <Property name="uhfId" label="Uhf Id" javaType="Integer" jsonType="number"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdList"/>
+          <DisplayProperty name="birdID"/>
+          <DisplayProperty name="uhfId"/>
+          <DisplayProperty name="activity"/>
+          <DisplayProperty name="batteryLife"/>
+          <DisplayProperty name="incubating"/>
+          <DisplayProperty name="daysSinceChange"/>
+          <DisplayProperty name="comments"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="cmShortList" label="Check Mate Short List"
+    javaType="List&lt;NoraNetCmShortEntity&gt;" jsonType="NoraNetCmShortEntity[]">
+    <Class name="NoraNetCmShortEntity">
+      <Property name="activity" label="Activity" javaType="Float" jsonType="number"/>
+      <Property name="batteryLife" label="Battery Life (weeks)" javaType="Integer" jsonType="number"/>
+      <Property name="birdList" label="Bird(s)" javaType="List&lt;NoraNetBirdEntity&gt;"
+        jsonType="NoraNetBirdEntity[]">
+      </Property>
+      <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+      <Property name="cmHour" label="CM Hour" javaType="Integer" jsonType="number"/>
+      <Property name="cmMinute" label="CM Minute" javaType="Integer" jsonType="number"/>
+      <Property name="matingAge" label="Mating Age" javaType="Integer" jsonType="number"/>
+      <Property name="uhfId" label="Uhf Id" javaType="Integer" jsonType="number"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdList"/>
+          <DisplayProperty name="birdID"/>
+          <DisplayProperty name="uhfId"/>
+          <DisplayProperty name="activity"/>
+          <DisplayProperty name="batteryLife"/>
+          <DisplayProperty name="matingAge"/>
+          <DisplayProperty name="cmHour"/>
+          <DisplayProperty name="cmMinute"/>
+          <DisplayProperty name="comments"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="cmLongList" label="Check Mate Long List"
+    javaType="List&lt;NoraNetCmLongEntity&gt;" jsonType="NoraNetCmLongEntity[]">
+    <Class name="NoraNetCmLongEntity">
+      <Property name="birdList" label="Bird(s)" javaType="List&lt;NoraNetBirdEntity&gt;"
+        jsonType="NoraNetBirdEntity[]">
+      </Property>
+      <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+      <Property name="cmHour" label="CM Hour" javaType="Integer" jsonType="number"/>
+      <Property name="cmMinute" label="CM Minute" javaType="Integer" jsonType="number"/>
+      <Property name="lastCmHour" label="Last CM Hour" javaType="Integer" jsonType="number"/>
+      <Property name="lastCmMinute" label="Last CM Minute" javaType="Integer" jsonType="number"/>
+      <Property name="matingAge" label="Mating Age" javaType="Integer" jsonType="number"/>
+      <Property name="uhfId" label="Uhf Id" javaType="Integer" jsonType="number"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <Property name="cmFemaleList" label="Check Mate Female List"
+        javaType="List&lt;NoraNetCmFemaleEntity&gt;" jsonType="NoraNetCmFemaleEntity[]">
+        <Class name="NoraNetCmFemaleEntity">
+          <Property name="birdList" label="Bird(s)" javaType="List&lt;NoraNetBirdEntity&gt;"
+            jsonType="NoraNetBirdEntity[]">
+          </Property>
+          <Property name="birdID" label="Bird ID" javaType="String" jsonType="string"/>
+          <Property name="duration" label="Duration" javaType="Integer" jsonType="number"/>
+          <Property name="quality" label="Quality" javaType="Integer" jsonType="number"/>
+          <Property name="startTimeHoursAgo" label="Start Time Hours Ago" javaType="Integer" jsonType="number"/>
+          <Property name="uhfId" label="Uhf Id" javaType="Integer" jsonType="number"/>
+          <DisplayModel layoutType="Table">
+            <DisplayGroup>
+              <DisplayProperty name="birdList"/>
+              <DisplayProperty name="birdID"/>
+              <DisplayProperty name="uhfId"/>
+              <DisplayProperty name="startTimeHoursAgo"/>
+              <DisplayProperty name="duration"/>
+              <DisplayProperty name="quality"/>
+            </DisplayGroup>
+          </DisplayModel>
+       </Class>
+      </Property>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="birdList"/>
+          <DisplayProperty name="uhfId"/>
+          <DisplayProperty name="matingAge"/>
+          <DisplayProperty name="cmHour"/>
+          <DisplayProperty name="cmMinute"/>
+          <DisplayProperty name="lastCmHour"/>
+          <DisplayProperty name="lastCmMinute"/>
+          <DisplayProperty name="comments"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <Property name="weightList" label="Weight List"
+    javaType="List&lt;NoraNetWeightEntity&gt;" jsonType="NoraNetWeightEntity[]">
+    <Class name="NoraNetWeightEntity">
+      <Property name="weightBin" label="Weight Bin" javaType="Integer" jsonType="number"/>
+      <Property name="binCount" label="Bin Count" javaType="Integer" jsonType="number"/>
+      <Property name="maxQuality" label="Maximum Quality" jjavaType="Integer" jsonType="number"/>
+      <Property name="comments" label="Comments" javaType="String" jsonType="string"/>
+      <DisplayModel layoutType="Table">
+        <DisplayGroup>
+          <DisplayProperty name="weightBin"/>
+          <DisplayProperty name="binCount"/>
+          <DisplayProperty name="maxQuality"/>
+          <DisplayProperty name="comments"/>
+        </DisplayGroup>
+      </DisplayModel>
+    </Class>
+  </Property>
+  <DisplayModel layoutType="Panel_NEW">
+    <DisplayGroup>
+      <DisplayProperty name="island"/>
+      <DisplayProperty name="stationId"/>
+      <DisplayProperty name="activityDate"/>
+      <DisplayProperty name="batteryVolts"/>
+    </DisplayGroup>
+  </DisplayModel>
+</Class>
+
+
